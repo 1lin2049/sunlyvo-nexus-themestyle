@@ -1,0 +1,25 @@
+/**
+ * SunLyvo Nexus — Reset
+ *
+ * @package SunLyvo_Nexus
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol { margin: 0; }
+
+ul[class], ol[class] { list-style: none; padding: 0; }
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+
+input, button, textarea, select { font: inherit; color: inherit; }
+
+button { background: none; border: none; cursor: pointer; padding: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+table { border-collapse: collapse; border-spacing: 0; width: 100%; }
+
+:focus-visible { outline: 2px solid var(--slv-color-primary, #0066ff); outline-offset: 2px; }

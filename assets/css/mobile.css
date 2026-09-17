@@ -1,0 +1,38 @@
+/**
+ * SunLyvo Nexus — Mobile
+ *
+ * 仅使用 4 档断点契约：1024px / 900px / 640px / 375px。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+@media (max-width: 1024px) {
+    :root {
+        --slv-container-pad: var(--slv-space-3);
+        --slv-layout-sidebar-width: 220px;
+    }
+    .slv-layout--sidebar-left,
+    .slv-layout--sidebar-right { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+    .slv-layout--custom { max-width: 90vw; }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --slv-font-size-3xl: 32px;
+        --slv-font-size-4xl: 40px;
+        --slv-layout-sidebar-width: 100%;
+    }
+    .slv-layout--custom { max-width: 95vw; }
+    .slv-header { --slv-header-height: 56px; }
+}
+
+@media (max-width: 375px) {
+    :root {
+        --slv-container-pad: var(--slv-space-2);
+        --slv-font-size-2xl: 24px;
+        --slv-font-size-3xl: 28px;
+    }
+}

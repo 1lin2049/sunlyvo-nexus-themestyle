@@ -1,0 +1,142 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "settings": {
+        "appearanceTools": true,
+        "useRootPaddingAwareAlignments": true,
+        "layout": {
+            "contentSize": "820px",
+            "wideSize": "1200px"
+        },
+        "color": {
+            "custom": false,
+            "customDuotone": false,
+            "defaultPalette": false,
+            "defaultGradients": false,
+            "palette": [
+                { "slug": "seed-blue-1", "color": "#e6f0ff", "name": "品牌蓝 1" },
+                { "slug": "seed-blue-2", "color": "#cce0ff", "name": "品牌蓝 2" },
+                { "slug": "seed-blue-3", "color": "#99c2ff", "name": "品牌蓝 3" },
+                { "slug": "seed-blue-4", "color": "#66a3ff", "name": "品牌蓝 4" },
+                { "slug": "seed-blue-5", "color": "#3385ff", "name": "品牌蓝 5" },
+                { "slug": "seed-blue-6", "color": "#0066ff", "name": "品牌主色" },
+                { "slug": "seed-blue-7", "color": "#0052cc", "name": "品牌深色" },
+                { "slug": "seed-blue-8", "color": "#003d99", "name": "品牌暗色" },
+                { "slug": "seed-blue-9", "color": "#002966", "name": "品牌极暗" },
+                { "slug": "seed-blue-10", "color": "#001433", "name": "品牌最深" },
+
+                { "slug": "seed-green-6", "color": "#00a854", "name": "成功" },
+                { "slug": "seed-orange-6", "color": "#fa8c16", "name": "警告" },
+                { "slug": "seed-red-6", "color": "#f5222d", "name": "错误" },
+                { "slug": "seed-purple-6", "color": "#722ed1", "name": "知识付费" },
+
+                { "slug": "seed-neutral-0", "color": "#ffffff", "name": "纯白" },
+                { "slug": "seed-neutral-1", "color": "#fafafa", "name": "极浅灰" },
+                { "slug": "seed-neutral-2", "color": "#f5f5f5", "name": "浅灰" },
+                { "slug": "seed-neutral-3", "color": "#e8e8e8", "name": "分割线" },
+                { "slug": "seed-neutral-4", "color": "#d9d9d9", "name": "边框" },
+                { "slug": "seed-neutral-5", "color": "#bfbfbf", "name": "禁用" },
+                { "slug": "seed-neutral-6", "color": "#8c8c8c", "name": "次文字" },
+                { "slug": "seed-neutral-7", "color": "#595959", "name": "辅助文字" },
+                { "slug": "seed-neutral-8", "color": "#262626", "name": "主文字" },
+                { "slug": "seed-neutral-9", "color": "#141414", "name": "极深文字" },
+
+                { "slug": "seed-code-orange", "color": "#d19a66", "name": "代码橙" },
+                { "slug": "seed-code-blue", "color": "#61afef", "name": "代码蓝" },
+                { "slug": "seed-code-purple", "color": "#c678dd", "name": "代码紫" },
+                { "slug": "seed-diff-p", "color": "#98c379", "name": "新增" },
+                { "slug": "seed-diff-m", "color": "#e06c75", "name": "删除" }
+            ]
+        },
+        "typography": {
+            "customFontSize": false,
+            "defaultFontSizes": false,
+            "fluid": true,
+            "fontFamilies": [
+                {
+                    "fontFamily": "'Inter', 'PingFang SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                    "slug": "primary",
+                    "name": "主字体"
+                },
+                {
+                    "fontFamily": "'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace",
+                    "slug": "mono",
+                    "name": "等宽字体"
+                }
+            ],
+            "fontSizes": [
+                { "slug": "xs",      "size": "12px", "name": "极小" },
+                { "slug": "small",   "size": "14px", "name": "小" },
+                { "slug": "medium",  "size": "16px", "name": "中" },
+                { "slug": "large",   "size": "20px", "name": "大" },
+                { "slug": "x-large", "size": "24px", "name": "特大" },
+                { "slug": "2x-large","size": "32px", "name": "超大" },
+                { "slug": "3x-large","size": "40px", "name": "巨大" },
+                { "slug": "4x-large","size": "56px", "name": "特巨" }
+            ]
+        },
+        "spacing": {
+            "customSpacingSize": false,
+            "defaultSpacingSizes": false,
+            "units": [ "px", "rem", "%", "vw" ],
+            "spacingSizes": [
+                { "slug": "10", "size": "4px",   "name": "1" },
+                { "slug": "20", "size": "8px",   "name": "2" },
+                { "slug": "30", "size": "12px",  "name": "3" },
+                { "slug": "40", "size": "16px",  "name": "4" },
+                { "slug": "50", "size": "24px",  "name": "6" },
+                { "slug": "60", "size": "32px",  "name": "8" },
+                { "slug": "70", "size": "48px",  "name": "12" },
+                { "slug": "80", "size": "64px",  "name": "16" },
+                { "slug": "90", "size": "96px",  "name": "24" },
+                { "slug": "100","size": "128px", "name": "32" }
+            ]
+        },
+        "border": {
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true
+        },
+        "shadow": {
+            "defaultPresets": false,
+            "presets": [
+                { "slug": "sm", "name": "小", "shadow": "0 1px 2px 0 rgba(0,0,0,0.04)" },
+                { "slug": "md", "name": "中", "shadow": "0 4px 12px 0 rgba(0,0,0,0.06)" },
+                { "slug": "lg", "name": "大", "shadow": "0 12px 32px 0 rgba(0,0,0,0.08)" }
+            ]
+        }
+    },
+    "styles": {
+        "color": {
+            "background": "var(--wp--preset--color--seed-neutral-0)",
+            "text": "var(--wp--preset--color--seed-neutral-8)"
+        },
+        "typography": {
+            "fontFamily": "var(--wp--preset--font-family--primary)",
+            "fontSize": "var(--wp--preset--font-size--medium)",
+            "lineHeight": "1.6"
+        },
+        "spacing": {
+            "blockGap": "var(--wp--preset--spacing--50)",
+            "padding": {
+                "top": "0",
+                "bottom": "0",
+                "left": "var(--wp--preset--spacing--40)",
+                "right": "var(--wp--preset--spacing--40)"
+            }
+        },
+        "elements": {
+            "link": {
+                "color": { "text": "var(--wp--preset--color--seed-blue-6)" },
+                ":hover": { "color": { "text": "var(--wp--preset--color--seed-blue-7)" } }
+            },
+            "h1": { "typography": { "fontSize": "var(--wp--preset--font-size--3x-large)", "fontWeight": "700", "lineHeight": "1.2" } },
+            "h2": { "typography": { "fontSize": "var(--wp--preset--font-size--2x-large)", "fontWeight": "700", "lineHeight": "1.25" } },
+            "h3": { "typography": { "fontSize": "var(--wp--preset--font-size--x-large)", "fontWeight": "600", "lineHeight": "1.3" } },
+            "h4": { "typography": { "fontSize": "var(--wp--preset--font-size--large)", "fontWeight": "600", "lineHeight": "1.4" } },
+            "h5": { "typography": { "fontSize": "var(--wp--preset--font-size--medium)", "fontWeight": "600" } },
+            "h6": { "typography": { "fontSize": "var(--wp--preset--font-size--small)", "fontWeight": "600" } }
+        }
+    }
+}

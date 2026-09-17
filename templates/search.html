@@ -1,0 +1,32 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="wp-block-group slv-layout slv-layout--wide">
+    <!-- wp:search {"label":"搜索","showLabel":false,"placeholder":"输入关键词...","buttonText":"搜索"} /-->
+
+    <!-- wp:query {"queryId":3,"query":{"perPage":10,"postType":"any","order":"desc","orderBy":"relevance"},"layout":{"type":"default"}} -->
+    <div class="wp-block-query">
+        <!-- wp:post-template -->
+            <!-- wp:group {"className":"slv-card"} -->
+            <div class="wp-block-group slv-card">
+                <!-- wp:post-title {"level":2,"isLink":true} /-->
+                <!-- wp:post-excerpt {"excerptLength":40} /-->
+            </div>
+            <!-- /wp:group -->
+        <!-- /wp:post-template -->
+
+        <!-- wp:query-no-results -->
+            <!-- wp:paragraph -->
+            <p>没有找到相关内容，请尝试其他关键词。</p>
+            <!-- /wp:paragraph -->
+        <!-- /wp:query-no-results -->
+
+        <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
+            <!-- wp:query-pagination-previous /-->
+            <!-- wp:query-pagination-numbers /-->
+            <!-- wp:query-pagination-next /-->
+        <!-- /wp:query-pagination -->
+    </div>
+    <!-- /wp:query -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

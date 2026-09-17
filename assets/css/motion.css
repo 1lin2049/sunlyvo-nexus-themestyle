@@ -1,0 +1,24 @@
+/**
+ * SunLyvo Nexus — Motion
+ *
+ * 4 档时长 + 4 档缓动。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+@keyframes slv-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes slv-slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slv-scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.slv-animate-fade-in  { animation: slv-fade-in  var(--slv-duration-normal) var(--slv-ease-natural); }
+.slv-animate-slide-up { animation: slv-slide-up var(--slv-duration-enter)  var(--slv-ease-spring); }
+.slv-animate-scale-in { animation: slv-scale-in var(--slv-duration-normal) var(--slv-ease-spring); }

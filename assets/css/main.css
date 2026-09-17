@@ -1,0 +1,81 @@
+/**
+ * SunLyvo Nexus — Main
+ *
+ * @package SunLyvo_Nexus
+ */
+
+body {
+    font-family: var(--slv-font-family-base);
+    font-size: var(--slv-font-size-md);
+    line-height: var(--slv-seed-leading-normal);
+    color: var(--slv-color-text-primary);
+    background: var(--slv-color-bg-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 布局系统 */
+.slv-layout { display: grid; gap: var(--slv-space-6); }
+.slv-layout--fullscreen      { width: 100vw; }
+.slv-layout--wide            { max-width: calc(var(--slv-layout-wide) + var(--slv-space-8)); margin-inline: auto; }
+.slv-layout--narrow          { max-width: calc(var(--slv-layout-content) + var(--slv-space-8)); margin-inline: auto; }
+.slv-layout--sidebar-left    { grid-template-columns: var(--slv-layout-sidebar-width) 1fr; }
+.slv-layout--sidebar-right   { grid-template-columns: 1fr var(--slv-layout-sidebar-width); }
+.slv-layout--custom          { max-width: calc(var(--slv-custom-width, 60vw) + var(--slv-space-8)); margin-inline: auto; }
+
+/* Header */
+.slv-header {
+    position: sticky; top: 0; z-index: 100;
+    height: var(--slv-header-height);
+    background: var(--slv-header-bg);
+    border-bottom: var(--slv-header-border);
+}
+.slv-header__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 100%; max-width: var(--slv-layout-wide);
+    margin-inline: auto; padding-inline: var(--slv-space-4);
+}
+
+/* Footer */
+.slv-footer {
+    margin-top: var(--slv-space-16);
+    padding: var(--slv-space-12) 0;
+    background: var(--slv-footer-bg);
+    border-top: var(--slv-footer-border);
+    color: var(--slv-color-text-secondary);
+}
+
+/* 正文排版 */
+.slv-prose {
+    max-width: var(--slv-layout-content);
+    font-size: var(--slv-font-size-md);
+    line-height: var(--slv-seed-leading-relaxed);
+}
+.slv-prose h2,
+.slv-prose h3,
+.slv-prose h4 { margin-top: var(--slv-space-8); margin-bottom: var(--slv-space-4); }
+.slv-prose p  { margin-bottom: var(--slv-space-4); }
+.slv-prose ul,
+.slv-prose ol { margin-bottom: var(--slv-space-4); padding-left: var(--slv-space-6); }
+.slv-prose code {
+    padding: 2px 6px;
+    background: var(--slv-color-bg-muted);
+    border-radius: var(--slv-radius-sm);
+    font-family: var(--slv-font-family-mono);
+    font-size: 0.9em;
+}
+.slv-prose pre {
+    padding: var(--slv-space-4);
+    background: var(--slv-seed-neutral-9);
+    color: var(--slv-seed-neutral-1);
+    border-radius: var(--slv-radius-md);
+    overflow-x: auto;
+    margin-bottom: var(--slv-space-4);
+}
+.slv-prose pre code { background: transparent; padding: 0; color: inherit; }
+.slv-prose blockquote {
+    padding: var(--slv-space-3) var(--slv-space-4);
+    border-left: 4px solid var(--slv-color-primary);
+    background: var(--slv-color-bg-subtle);
+    margin-bottom: var(--slv-space-4);
+}

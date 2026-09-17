@@ -1,0 +1,275 @@
+/**
+ * SunLyvo Nexus — Design Tokens
+ *
+ * 五层架构：Seed → Map → Alias → Component → State
+ * 只有 Seed 层允许硬编码（在 theme.json 中定义）。
+ * 本文件定义 Map / Alias / Component / State 四层。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+:root {
+    /* ═══════════════════════════════════════════════════════
+       第 1 层：Seed 层（引用 theme.json 的 CSS 变量）
+       只有此处允许硬编码，其余层只能引用。
+       ═══════════════════════════════════════════════════════ */
+    --slv-seed-blue-1:  #e6f0ff;
+    --slv-seed-blue-2:  #cce0ff;
+    --slv-seed-blue-3:  #99c2ff;
+    --slv-seed-blue-4:  #66a3ff;
+    --slv-seed-blue-5:  #3385ff;
+    --slv-seed-blue-6:  #0066ff;
+    --slv-seed-blue-7:  #0052cc;
+    --slv-seed-blue-8:  #003d99;
+    --slv-seed-blue-9:  #002966;
+    --slv-seed-blue-10: #001433;
+
+    --slv-seed-green-6:  #00a854;
+    --slv-seed-orange-6: #fa8c16;
+    --slv-seed-red-6:    #f5222d;
+    --slv-seed-purple-6: #722ed1;
+
+    --slv-seed-neutral-0: #ffffff;
+    --slv-seed-neutral-1: #fafafa;
+    --slv-seed-neutral-2: #f5f5f5;
+    --slv-seed-neutral-3: #e8e8e8;
+    --slv-seed-neutral-4: #d9d9d9;
+    --slv-seed-neutral-5: #bfbfbf;
+    --slv-seed-neutral-6: #8c8c8c;
+    --slv-seed-neutral-7: #595959;
+    --slv-seed-neutral-8: #262626;
+    --slv-seed-neutral-9: #141414;
+
+    --slv-seed-code-orange: #d19a66;
+    --slv-seed-code-blue:   #61afef;
+    --slv-seed-code-purple: #c678dd;
+    --slv-seed-diff-p:      #98c379;
+    --slv-seed-diff-m:      #e06c75;
+
+    /* 间距 Seed（4px 网格） */
+    --slv-seed-space-1:  4px;
+    --slv-seed-space-2:  8px;
+    --slv-seed-space-3:  12px;
+    --slv-seed-space-4:  16px;
+    --slv-seed-space-6:  24px;
+    --slv-seed-space-8:  32px;
+    --slv-seed-space-12: 48px;
+    --slv-seed-space-16: 64px;
+    --slv-seed-space-24: 96px;
+    --slv-seed-space-32: 128px;
+
+    /* 字号 Seed */
+    --slv-seed-font-xs:      12px;
+    --slv-seed-font-sm:      14px;
+    --slv-seed-font-md:      16px;
+    --slv-seed-font-lg:      20px;
+    --slv-seed-font-xl:      24px;
+    --slv-seed-font-2xl:     32px;
+    --slv-seed-font-3xl:     40px;
+    --slv-seed-font-4xl:     56px;
+
+    /* 圆角 Seed */
+    --slv-seed-radius-sm: 4px;
+    --slv-seed-radius-md: 8px;
+    --slv-seed-radius-lg: 12px;
+    --slv-seed-radius-xl: 16px;
+    --slv-seed-radius-full: 9999px;
+
+    /* 字重 Seed */
+    --slv-seed-weight-regular: 400;
+    --slv-seed-weight-medium:  500;
+    --slv-seed-weight-semibold: 600;
+    --slv-seed-weight-bold:    700;
+
+    /* 行高 Seed */
+    --slv-seed-leading-tight:  1.2;
+    --slv-seed-leading-snug:   1.4;
+    --slv-seed-leading-normal: 1.6;
+    --slv-seed-leading-relaxed: 1.8;
+
+    /* ═══════════════════════════════════════════════════════
+       第 2 层：Map 层（派生计算，只做派生，不引入新值）
+       ═══════════════════════════════════════════════════════ */
+    --slv-map-blue-hover:  color-mix(in srgb, var(--slv-seed-blue-6) 90%, black);
+    --slv-map-blue-active: color-mix(in srgb, var(--slv-seed-blue-6) 80%, black);
+    --slv-map-blue-subtle: color-mix(in srgb, var(--slv-seed-blue-6) 8%, white);
+    --slv-map-blue-ring:   color-mix(in srgb, var(--slv-seed-blue-6) 30%, transparent);
+
+    --slv-map-neutral-hover:  color-mix(in srgb, var(--slv-seed-neutral-2) 60%, transparent);
+    --slv-map-neutral-active: color-mix(in srgb, var(--slv-seed-neutral-3) 80%, transparent);
+
+    --slv-map-space-half: calc(var(--slv-seed-space-1) / 2);
+
+    /* ═══════════════════════════════════════════════════════
+       第 3 层：Alias 层（语义别名，只做语义映射）
+       ═══════════════════════════════════════════════════════ */
+    /* 颜色语义 */
+    --slv-color-primary:        var(--slv-seed-blue-6);
+    --slv-color-primary-hover:  var(--slv-map-blue-hover);
+    --slv-color-primary-active: var(--slv-map-blue-active);
+    --slv-color-primary-subtle: var(--slv-map-blue-subtle);
+    --slv-color-success: var(--slv-seed-green-6);
+    --slv-color-warning: var(--slv-seed-orange-6);
+    --slv-color-danger:  var(--slv-seed-red-6);
+    --slv-color-info:    var(--slv-seed-blue-6);
+    --slv-color-knowledge: var(--slv-seed-purple-6);
+
+    --slv-color-text-primary:   var(--slv-seed-neutral-8);
+    --slv-color-text-secondary: var(--slv-seed-neutral-7);
+    --slv-color-text-tertiary:  var(--slv-seed-neutral-6);
+    --slv-color-text-quaternary:var(--slv-seed-neutral-5);
+    --slv-color-text-inverse:   var(--slv-seed-neutral-0);
+
+    --slv-color-bg-base:     var(--slv-seed-neutral-0);
+    --slv-color-bg-subtle:   var(--slv-seed-neutral-1);
+    --slv-color-bg-muted:    var(--slv-seed-neutral-2);
+    --slv-color-bg-elevated: var(--slv-seed-neutral-0);
+
+    --slv-color-border-base:    var(--slv-seed-neutral-3);
+    --slv-color-border-strong:  var(--slv-seed-neutral-4);
+    --slv-color-border-subtle:  var(--slv-seed-neutral-2);
+
+    /* 代码高亮 */
+    --slv-color-code-orange: var(--slv-seed-code-orange);
+    --slv-color-code-blue:   var(--slv-seed-code-blue);
+    --slv-color-code-purple: var(--slv-seed-code-purple);
+    --slv-color-diff-p:      var(--slv-seed-diff-p);
+    --slv-color-diff-m:      var(--slv-seed-diff-m);
+
+    /* 字体语义 */
+    --slv-font-family-base: 'Inter', 'PingFang SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --slv-font-family-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+    /* 字号语义 */
+    --slv-font-size-xs:  var(--slv-seed-font-xs);
+    --slv-font-size-sm:  var(--slv-seed-font-sm);
+    --slv-font-size-md:  var(--slv-seed-font-md);
+    --slv-font-size-lg:  var(--slv-seed-font-lg);
+    --slv-font-size-xl:  var(--slv-seed-font-xl);
+    --slv-font-size-2xl: var(--slv-seed-font-2xl);
+    --slv-font-size-3xl: var(--slv-seed-font-3xl);
+    --slv-font-size-4xl: var(--slv-seed-font-4xl);
+
+    /* 间距语义 */
+    --slv-space-1:  var(--slv-seed-space-1);
+    --slv-space-2:  var(--slv-seed-space-2);
+    --slv-space-3:  var(--slv-seed-space-3);
+    --slv-space-4:  var(--slv-seed-space-4);
+    --slv-space-6:  var(--slv-seed-space-6);
+    --slv-space-8:  var(--slv-seed-space-8);
+    --slv-space-12: var(--slv-seed-space-12);
+    --slv-space-16: var(--slv-seed-space-16);
+    --slv-space-24: var(--slv-seed-space-24);
+    --slv-space-32: var(--slv-seed-space-32);
+
+    /* 圆角语义 */
+    --slv-radius-sm:   var(--slv-seed-radius-sm);
+    --slv-radius-md:   var(--slv-seed-radius-md);
+    --slv-radius-lg:   var(--slv-seed-radius-lg);
+    --slv-radius-xl:   var(--slv-seed-radius-xl);
+    --slv-radius-full: var(--slv-seed-radius-full);
+
+    /* 阴影语义 */
+    --slv-shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.04);
+    --slv-shadow-md: 0 4px 12px 0 rgba(0,0,0,0.06);
+    --slv-shadow-lg: 0 12px 32px 0 rgba(0,0,0,0.08);
+
+    /* 动效语义 */
+    --slv-duration-fast:   150ms;
+    --slv-duration-normal: 200ms;
+    --slv-duration-slow:   300ms;
+    --slv-duration-enter:  400ms;
+    --slv-ease-in:      cubic-bezier(0.4, 0, 1, 1);
+    --slv-ease-out:     cubic-bezier(0, 0, 0.2, 1);
+    --slv-ease-natural: cubic-bezier(0.4, 0, 0.2, 1);
+    --slv-ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* 布局语义 */
+    --slv-layout-content: 820px;
+    --slv-layout-wide:    1200px;
+    --slv-layout-sidebar-width: 260px;
+
+    /* 断点契约（仅 4 档，禁止新增） */
+    --slv-bp-tablet-landscape: 1024px;
+    --slv-bp-tablet-portrait:  900px;
+    --slv-bp-mobile:           640px;
+    --slv-bp-mobile-small:     375px;
+
+    /* ═══════════════════════════════════════════════════════
+       第 4 层：Component 层（组件专用，只消费 Alias）
+       ═══════════════════════════════════════════════════════ */
+    /* Button */
+    --slv-button-padding-y: var(--slv-space-2);
+    --slv-button-padding-x: var(--slv-space-4);
+    --slv-button-radius:    var(--slv-radius-md);
+    --slv-button-font-weight: var(--slv-seed-weight-medium);
+    --slv-button-bg:        var(--slv-color-primary);
+    --slv-button-color:     var(--slv-color-text-inverse);
+    --slv-button-border:    1px solid transparent;
+
+    /* Card */
+    --slv-card-bg:     var(--slv-color-bg-elevated);
+    --slv-card-border: 1px solid var(--slv-color-border-base);
+    --slv-card-radius: var(--slv-radius-lg);
+    --slv-card-padding: var(--slv-space-6);
+    --slv-card-shadow: var(--slv-shadow-sm);
+
+    /* Input */
+    --slv-input-bg:        var(--slv-color-bg-base);
+    --slv-input-border:    1px solid var(--slv-color-border-strong);
+    --slv-input-radius:    var(--slv-radius-md);
+    --slv-input-padding-y: var(--slv-space-2);
+    --slv-input-padding-x: var(--slv-space-3);
+
+    /* Link */
+    --slv-link-color: var(--slv-color-primary);
+
+    /* Badge */
+    --slv-badge-padding-y: var(--slv-map-space-half);
+    --slv-badge-padding-x: var(--slv-space-2);
+    --slv-badge-radius:    var(--slv-radius-sm);
+    --slv-badge-font-size: var(--slv-font-size-xs);
+
+    /* Container */
+    --slv-container-max:  var(--slv-layout-wide);
+    --slv-container-pad:  var(--slv-space-4);
+
+    /* Header */
+    --slv-header-height:   64px;
+    --slv-header-bg:       var(--slv-color-bg-base);
+    --slv-header-border:   1px solid var(--slv-color-border-base);
+
+    /* Footer */
+    --slv-footer-bg:     var(--slv-color-bg-subtle);
+    --slv-footer-border: 1px solid var(--slv-color-border-base);
+
+    /* ═══════════════════════════════════════════════════════
+       第 5 层：State 层（状态变体，只消费 Component）
+       ═══════════════════════════════════════════════════════ */
+    --slv-button-bg-hover:    var(--slv-color-primary-hover);
+    --slv-button-bg-active:   var(--slv-color-primary-active);
+    --slv-button-bg-disabled: color-mix(in srgb, var(--slv-color-primary) 40%, white);
+    --slv-button-ring-focus:  0 0 0 3px var(--slv-map-blue-ring);
+
+    --slv-card-shadow-hover: var(--slv-shadow-md);
+
+    --slv-input-border-focus: 1px solid var(--slv-color-primary);
+    --slv-input-ring-focus:   0 0 0 3px var(--slv-map-blue-ring);
+}
+
+/* 深色模式 State 覆盖 */
+:root[data-theme="dark"] {
+    --slv-color-bg-base:     var(--slv-seed-neutral-9);
+    --slv-color-bg-subtle:   #1f1f1f;
+    --slv-color-bg-muted:    #2a2a2a;
+    --slv-color-bg-elevated: #1f1f1f;
+
+    --slv-color-text-primary:    #e6e6e6;
+    --slv-color-text-secondary:  #bfbfbf;
+    --slv-color-text-tertiary:   #8c8c8c;
+    --slv-color-text-quaternary: #595959;
+
+    --slv-color-border-base:   #303030;
+    --slv-color-border-strong: #404040;
+    --slv-color-border-subtle: #262626;
+}

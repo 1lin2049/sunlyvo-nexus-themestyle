@@ -1,0 +1,227 @@
+/**
+ * SunLyvo Nexus — Reader 子系统
+ *
+ * reader 环境专用，禁止与 main.css / motion.css / mobile.css 混用。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+.slv-reader {
+    max-width: var(--slv-layout-content);
+    margin-inline: auto;
+    padding: var(--slv-space-8) var(--slv-space-4);
+    font-family: var(--slv-font-family-base);
+    color: var(--slv-color-text-primary);
+    background: var(--slv-color-bg-base);
+}
+
+.slv-reader__header {
+    margin-bottom: var(--slv-space-8);
+    padding-bottom: var(--slv-space-6);
+    border-bottom: 1px solid var(--slv-color-border-base);
+}
+
+.slv-reader__title {
+    font-size: var(--slv-font-size-3xl);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: var(--slv-space-3);
+}
+
+.slv-reader__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--slv-space-3);
+    color: var(--slv-color-text-tertiary);
+    font-size: var(--slv-font-size-sm);
+}
+
+.slv-reader__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--slv-space-1);
+}
+
+.slv-reader__content {
+    font-size: var(--slv-font-size-lg);
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+}
+
+.slv-reader__content > * + * { margin-top: var(--slv-space-4); }
+.slv-reader__content h2 { margin-top: var(--slv-space-12); margin-bottom: var(--slv-space-3); font-size: var(--slv-font-size-2xl); scroll-margin-top: 80px; }
+.slv-reader__content h3 { margin-top: var(--slv-space-8);  margin-bottom: var(--slv-space-3); font-size: var(--slv-font-size-xl);  scroll-margin-top: 80px; }
+.slv-reader__content h4 { margin-top: var(--slv-space-6);  margin-bottom: var(--slv-space-2); font-size: var(--slv-font-size-lg);  scroll-margin-top: 80px; }
+.slv-reader__content p  { margin-bottom: var(--slv-space-4); }
+.slv-reader__content ul,
+.slv-reader__content ol { padding-left: var(--slv-space-6); margin-bottom: var(--slv-space-4); }
+.slv-reader__content li { margin-bottom: var(--slv-space-1); }
+.slv-reader__content a { color: var(--slv-color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.slv-reader__content img { border-radius: var(--slv-radius-md); }
+.slv-reader__content blockquote {
+    padding: var(--slv-space-3) var(--slv-space-4);
+    border-left: 4px solid var(--slv-color-primary);
+    background: var(--slv-color-bg-subtle);
+    border-radius: 0 var(--slv-radius-md) var(--slv-radius-md) 0;
+    color: var(--slv-color-text-secondary);
+}
+.slv-reader__content code {
+    padding: 2px 6px;
+    background: var(--slv-color-bg-muted);
+    border-radius: var(--slv-radius-sm);
+    font-family: var(--slv-font-family-mono);
+    font-size: 0.9em;
+}
+.slv-reader__content pre {
+    padding: var(--slv-space-4);
+    background: var(--slv-seed-neutral-9);
+    color: var(--slv-seed-neutral-1);
+    border-radius: var(--slv-radius-md);
+    overflow-x: auto;
+}
+.slv-reader__content pre code { background: transparent; padding: 0; color: inherit; }
+
+/* ─── TOC ─────────────────────────────────────────────── */
+.slv-toc {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    font-size: var(--slv-font-size-sm);
+    padding: var(--slv-space-3);
+    background: var(--slv-color-bg-subtle);
+    border: 1px solid var(--slv-color-border-base);
+    border-radius: var(--slv-radius-md);
+}
+.slv-toc:focus { outline: 2px solid var(--slv-color-primary); outline-offset: 2px; }
+
+.slv-toc__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--slv-space-2);
+    padding-bottom: var(--slv-space-2);
+    border-bottom: 1px solid var(--slv-color-border-base);
+}
+.slv-toc__title {
+    font-weight: 600;
+    color: var(--slv-color-text-primary);
+}
+.slv-toc__toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: var(--slv-space-1);
+    border-radius: var(--slv-radius-sm);
+    color: var(--slv-color-text-secondary);
+    transition: transform var(--slv-duration-fast) var(--slv-ease-natural);
+}
+.slv-toc__toggle[aria-expanded="false"] { transform: rotate(-90deg); }
+
+.slv-toc__body { padding-top: var(--slv-space-1); }
+.slv-toc__list { list-style: none; padding: 0; margin: 0; }
+.slv-toc__list .slv-toc__list { padding-left: var(--slv-space-4); }
+.slv-toc__item { margin: 0; }
+.slv-toc__link {
+    display: block;
+    padding: 4px var(--slv-space-2);
+    color: var(--slv-color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--slv-radius-sm);
+    border-left: 2px solid transparent;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural),
+                background var(--slv-duration-fast) var(--slv-ease-natural),
+                border-color var(--slv-duration-fast) var(--slv-ease-natural);
+    font-size: var(--slv-font-size-sm);
+    line-height: 1.5;
+}
+.slv-toc__link:hover {
+    color: var(--slv-color-primary);
+    background: var(--slv-color-primary-subtle);
+}
+.slv-toc__item--active > .slv-toc__link,
+.slv-toc__link.is-active {
+    color: var(--slv-color-primary);
+    border-left-color: var(--slv-color-primary);
+    font-weight: 600;
+    background: var(--slv-color-primary-subtle);
+}
+.slv-toc__item--h3 > .slv-toc__link { font-size: 13px; padding-left: var(--slv-space-2); }
+.slv-toc__item--h4 > .slv-toc__link { font-size: 12px; padding-left: var(--slv-space-2); color: var(--slv-color-text-tertiary); }
+
+.slv-toc__item.is-collapsed > .slv-toc__list { display: none; }
+
+/* 移动端 FAB 与抽屉 */
+.slv-toc__fab {
+    display: none;
+    position: fixed;
+    right: var(--slv-space-4);
+    bottom: var(--slv-space-6);
+    width: 48px; height: 48px;
+    border-radius: var(--slv-radius-full);
+    background: var(--slv-color-primary);
+    color: var(--slv-color-text-inverse);
+    border: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    z-index: 900;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.slv-toc__drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+}
+.slv-toc__drawer.is-open { display: block; }
+.slv-toc__drawer-mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+.slv-toc__drawer-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(80vw, 360px);
+    background: var(--slv-color-bg-base);
+    padding: var(--slv-space-4);
+    overflow-y: auto;
+    box-shadow: -8px 0 24px rgba(0,0,0,0.1);
+    animation: slv-drawer-in var(--slv-duration-normal) var(--slv-ease-natural);
+}
+.slv-toc__drawer-close {
+    position: absolute;
+    top: var(--slv-space-3);
+    right: var(--slv-space-3);
+    width: 32px; height: 32px;
+    border-radius: var(--slv-radius-full);
+    background: var(--slv-color-bg-muted);
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--slv-color-text-secondary);
+}
+
+@keyframes slv-drawer-in {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+}
+
+/* 阅读进度条 */
+.slv-reader-progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: transparent;
+    z-index: 100;
+    pointer-events: none;
+}
+.slv-reader-progress__bar {
+    height: 100%;
+    width: 0;
+    background: var(--slv-color-primary);
+    transition: width 100ms linear;
+}

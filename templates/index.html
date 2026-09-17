@@ -1,0 +1,37 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="wp-block-group slv-layout slv-layout--wide" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/hero"} /-->
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/feature-grid"} /-->
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/stats"} /-->
+
+    <!-- wp:group {"tagName":"section","layout":{"type":"constrained"}} -->
+    <section class="wp-block-group">
+        <!-- wp:heading {"level":2} -->
+        <h2 class="wp-block-heading">最新内容</h2>
+        <!-- /wp:heading -->
+
+        <!-- wp:query {"queryId":1,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date"},"layout":{"type":"grid","columnCount":3}} -->
+        <div class="wp-block-query">
+            <!-- wp:post-template -->
+                <!-- wp:group {"className":"slv-card"} -->
+                <div class="wp-block-group slv-card">
+                    <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9"} /-->
+                    <!-- wp:post-title {"level":3,"isLink":true} /-->
+                    <!-- wp:post-excerpt {"excerptLength":20} /-->
+                    <!-- wp:post-date {"format":"Y-m-d"} /-->
+                </div>
+                <!-- /wp:group -->
+            <!-- /wp:post-template -->
+        </div>
+        <!-- /wp:query -->
+    </section>
+    <!-- /wp:group -->
+
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/testimonial"} /-->
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/pricing-table"} /-->
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/faq"} /-->
+    <!-- wp:pattern {"slug":"sunlyvo-nexus/cta"} /-->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

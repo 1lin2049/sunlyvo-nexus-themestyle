@@ -1,0 +1,109 @@
+/**
+ * SunLyvo Nexus — Components
+ *
+ * 业务 CSS 只消费 Component 和 State 层。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+/* ─── Button ──────────────────────────────────────────── */
+.slv-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--slv-space-2);
+    padding: var(--slv-button-padding-y) var(--slv-button-padding-x);
+    background: var(--slv-button-bg);
+    color: var(--slv-button-color);
+    border: var(--slv-button-border);
+    border-radius: var(--slv-button-radius);
+    font-weight: var(--slv-button-font-weight);
+    font-size: var(--slv-font-size-md);
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+        background var(--slv-duration-fast) var(--slv-ease-natural),
+        box-shadow var(--slv-duration-fast) var(--slv-ease-natural);
+}
+.slv-button:hover  { background: var(--slv-button-bg-hover); }
+.slv-button:active { background: var(--slv-button-bg-active); }
+.slv-button:disabled {
+    background: var(--slv-button-bg-disabled);
+    cursor: not-allowed;
+}
+.slv-button:focus-visible { box-shadow: var(--slv-button-ring-focus); outline: none; }
+
+.slv-button--secondary {
+    --slv-button-bg: var(--slv-color-bg-base);
+    --slv-button-color: var(--slv-color-text-primary);
+    --slv-button-border: 1px solid var(--slv-color-border-strong);
+    --slv-button-bg-hover: var(--slv-color-bg-muted);
+    --slv-button-bg-active: var(--slv-color-bg-subtle);
+}
+
+.slv-button--ghost {
+    --slv-button-bg: transparent;
+    --slv-button-color: var(--slv-color-primary);
+    --slv-button-bg-hover: var(--slv-color-primary-subtle);
+    --slv-button-bg-active: var(--slv-map-blue-subtle);
+}
+
+/* ─── Card ────────────────────────────────────────────── */
+.slv-card {
+    background: var(--slv-card-bg);
+    border: var(--slv-card-border);
+    border-radius: var(--slv-card-radius);
+    padding: var(--slv-card-padding);
+    box-shadow: var(--slv-card-shadow);
+    transition: box-shadow var(--slv-duration-normal) var(--slv-ease-natural);
+}
+.slv-card:hover { box-shadow: var(--slv-card-shadow-hover); }
+
+/* ─── Input ───────────────────────────────────────────── */
+.slv-input {
+    width: 100%;
+    padding: var(--slv-input-padding-y) var(--slv-input-padding-x);
+    background: var(--slv-input-bg);
+    border: var(--slv-input-border);
+    border-radius: var(--slv-input-radius);
+    font-size: var(--slv-font-size-md);
+    transition: border-color var(--slv-duration-fast) var(--slv-ease-natural);
+}
+.slv-input:focus {
+    border: var(--slv-input-border-focus);
+    box-shadow: var(--slv-input-ring-focus);
+    outline: none;
+}
+
+/* ─── Badge ───────────────────────────────────────────── */
+.slv-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--slv-badge-padding-y) var(--slv-badge-padding-x);
+    border-radius: var(--slv-badge-radius);
+    font-size: var(--slv-badge-font-size);
+    font-weight: var(--slv-seed-weight-medium);
+    background: var(--slv-color-primary-subtle);
+    color: var(--slv-color-primary);
+}
+.slv-badge--knowledge {
+    background: color-mix(in srgb, var(--slv-color-knowledge) 10%, white);
+    color: var(--slv-color-knowledge);
+}
+
+/* ─── Container ───────────────────────────────────────── */
+.slv-container {
+    max-width: var(--slv-container-max);
+    margin-inline: auto;
+    padding-inline: var(--slv-container-pad);
+}
+.slv-container--narrow { max-width: var(--slv-layout-content); }
+.slv-container--full   { max-width: 100vw; }
+
+/* ─── Link ────────────────────────────────────────────── */
+.slv-link {
+    color: var(--slv-link-color);
+    text-decoration: none;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural);
+}
+.slv-link:hover { text-decoration: underline; }

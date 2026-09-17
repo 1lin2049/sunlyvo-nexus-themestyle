@@ -1,0 +1,57 @@
+/**
+ * SunLyvo Nexus — Industrial Nexus 工业机械风格
+ *
+ * @package SunLyvo_Nexus
+ */
+
+:root[data-style="industrial"] {
+    /* Seed 层（唯一允许硬编码） */
+    --slv-style-seed-primary:   #1e3a5f;
+    --slv-style-seed-secondary: #f59e0b;
+    --slv-style-seed-bg:        #f8f9fa;
+    --slv-style-seed-text:      #1a1a1a;
+
+    /* Map 层（派生） */
+    --slv-style-map-primary-hover: color-mix(in srgb, var(--slv-style-seed-primary) 90%, black);
+
+    /* Alias 层（语义） */
+    --slv-style-color-primary:   var(--slv-style-seed-primary);
+    --slv-style-color-secondary: var(--slv-style-seed-secondary);
+    --slv-style-color-bg:        var(--slv-style-seed-bg);
+    --slv-style-color-text:      var(--slv-style-seed-text);
+
+    /* Component 层 */
+    --slv-style-font: 'Roboto Condensed', 'Noto Sans SC', sans-serif;
+    --slv-style-font-size: 15px;
+    --slv-style-line-height: 1.6;
+    --slv-style-radius: 4px;
+    --slv-style-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    --slv-style-border: 1px solid #d1d5db;
+    --slv-style-container: 1280px;
+
+    /* State 层 */
+    --slv-button-radius: var(--slv-style-radius);
+    --slv-button-bg: var(--slv-style-color-primary);
+    --slv-button-bg-hover: var(--slv-style-map-primary-hover);
+
+    /* 覆盖全局 Token */
+    --slv-color-primary: var(--slv-style-color-primary);
+    --slv-color-bg-base: var(--slv-style-color-bg);
+    --slv-color-text-primary: var(--slv-style-color-text);
+    --slv-font-family-base: var(--slv-style-font);
+    --slv-font-size-md: var(--slv-style-font-size);
+    --slv-layout-wide: var(--slv-style-container);
+    --slv-radius-md: var(--slv-style-radius);
+}
+
+/* 工业风格专属样式 */
+:root[data-style="industrial"] .slv-button {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+:root[data-style="industrial"] .slv-card {
+    border: var(--slv-style-border);
+    box-shadow: var(--slv-style-shadow);
+}
