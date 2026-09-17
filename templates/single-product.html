@@ -2,9 +2,11 @@
 
 <main class="slv-product-detail">
 
-    <!-- 面包屑 -->
-    <div class="slv-product-detail__breadcrumb-wrap">
-        <div class="slv-product-detail__container">
+    <!-- ═══ 面包屑 ═══ -->
+    <!-- wp:group {"className":"slv-product-detail__breadcrumb-wrap","layout":{"type":"default"}} -->
+    <div class="wp-block-group slv-product-detail__breadcrumb-wrap">
+        <!-- wp:group {"className":"slv-product-detail__container","layout":{"type":"default"}} -->
+        <div class="wp-block-group slv-product-detail__container">
             <nav class="slv-breadcrumb" aria-label="面包屑">
                 <a href="/">首页</a>
                 <span aria-hidden="true">/</span>
@@ -13,12 +15,17 @@
                 <span class="slv-breadcrumb__current"></span>
             </nav>
         </div>
+        <!-- /wp:group -->
     </div>
+    <!-- /wp:group -->
 
-    <!-- 主体：左图册 + 右信息 -->
-    <div class="slv-product-detail__body">
-        <div class="slv-product-detail__container">
-            <div class="slv-product-detail__grid">
+    <!-- ═══ 主体：左图册 + 右信息 ═══ -->
+    <!-- wp:group {"className":"slv-product-detail__body","layout":{"type":"default"}} -->
+    <div class="wp-block-group slv-product-detail__body">
+        <!-- wp:group {"className":"slv-product-detail__container","layout":{"type":"default"}} -->
+        <div class="wp-block-group slv-product-detail__container">
+            <!-- wp:group {"className":"slv-product-detail__grid","layout":{"type":"default"}} -->
+            <div class="wp-block-group slv-product-detail__grid">
 
                 <!-- 左：图册 -->
                 <div class="slv-product-gallery" data-slv-gallery>
@@ -28,21 +35,17 @@
                             <span class="slv-product-card__badge slv-product-card__badge--hot">热销</span>
                         </div>
                     </div>
-                    <div class="slv-product-gallery__thumbs" data-slv-gallery-thumbs>
-                        <!-- 缩略图由 JS 从 featured image + gallery 提取 -->
-                    </div>
+                    <div class="slv-product-gallery__thumbs" data-slv-gallery-thumbs></div>
                 </div>
 
                 <!-- 右：商品信息 -->
                 <div class="slv-product-info">
 
-                    <!-- 分类 + 标题 -->
                     <div class="slv-product-info__meta">
                         <!-- wp:post-terms {"term":"product_cat","separator":" / "} /-->
                     </div>
                     <!-- wp:post-title {"level":1,"className":"slv-product-info__title"} /-->
 
-                    <!-- 评分 -->
                     <div class="slv-product-info__rating">
                         <div class="slv-stars">
                             <svg class="slv-icon slv-icon--filled" width="16" height="16"><use href="#slv-icon-star"></use></svg>
@@ -54,7 +57,6 @@
                         <span class="slv-product-info__rating-text">4.9 · 128 条评价</span>
                     </div>
 
-                    <!-- 价格 -->
                     <div class="slv-product-info__price-wrap">
                         <div class="slv-product-info__price" data-slv-price>
                             <span class="slv-product-info__currency">¥</span>
@@ -66,10 +68,8 @@
                         </div>
                     </div>
 
-                    <!-- 简述 -->
                     <!-- wp:post-excerpt {"className":"slv-product-info__excerpt","excerptLength":40} /-->
 
-                    <!-- 规格/属性 -->
                     <div class="slv-product-info__specs">
                         <div class="slv-product-info__spec">
                             <span class="slv-product-info__spec-label">SKU</span>
@@ -89,7 +89,6 @@
                         </div>
                     </div>
 
-                    <!-- 数量 + 加购 -->
                     <div class="slv-product-info__actions">
                         <div class="slv-quantity">
                             <button type="button" class="slv-quantity__btn" data-slv-qty-minus aria-label="减少">
@@ -109,13 +108,11 @@
                         </button>
                     </div>
 
-                    <!-- 询盘（B2B 场景） -->
                     <button type="button" class="slv-product-info__inquiry" data-slv-open-inquiry>
                         <svg class="slv-icon" width="18" height="18" aria-hidden="true"><use href="#slv-icon-file-text"></use></svg>
                         批量采购？发送询盘
                     </button>
 
-                    <!-- 保障 -->
                     <div class="slv-product-info__trust">
                         <div class="slv-product-info__trust-item">
                             <svg class="slv-icon" width="20" height="20" aria-hidden="true"><use href="#slv-icon-shield-check"></use></svg>
@@ -133,12 +130,17 @@
 
                 </div>
             </div>
+            <!-- /wp:group -->
         </div>
+        <!-- /wp:group -->
     </div>
+    <!-- /wp:group -->
 
-    <!-- Tab 区：描述 / 规格 / 评价 / FAQ -->
-    <div class="slv-product-tabs">
-        <div class="slv-product-detail__container">
+    <!-- ═══ Tab 区 ═══ -->
+    <!-- wp:group {"className":"slv-product-tabs","layout":{"type":"default"}} -->
+    <div class="wp-block-group slv-product-tabs">
+        <!-- wp:group {"className":"slv-product-detail__container","layout":{"type":"default"}} -->
+        <div class="wp-block-group slv-product-detail__container">
             <div class="slv-product-tabs__nav" role="tablist">
                 <button type="button" role="tab" class="slv-product-tabs__tab is-active" data-slv-tab="desc" aria-selected="true">商品描述</button>
                 <button type="button" role="tab" class="slv-product-tabs__tab" data-slv-tab="specs" aria-selected="false">规格参数</button>
@@ -178,7 +180,6 @@
                         <div class="slv-product-reviews__count">共 128 条评价</div>
                     </div>
                     <div class="slv-product-reviews__list">
-                        <!-- 占位评价 -->
                         <div class="slv-review">
                             <div class="slv-review__head">
                                 <div class="slv-review__avatar">李</div>
@@ -219,28 +220,53 @@
                 </div>
             </div>
         </div>
+        <!-- /wp:group -->
     </div>
+    <!-- /wp:group -->
 
-    <!-- 相关商品 -->
-    <div class="slv-related-products">
-        <div class="slv-product-detail__container">
-            <h2 class="slv-section__title">相关商品</h2>
-            <div class="slv-related-products__grid">
-                <!-- wp:query {"queryId":11,"query":{"perPage":4,"postType":"product","order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"grid","columnCount":4}} -->
+    <!-- ═══ 相关商品（关键：用 wp:group 包裹，layout=default） ═══ -->
+    <!-- wp:group {"className":"slv-related-products","layout":{"type":"default"},"metadata":{"name":"相关商品"}} -->
+    <div class="wp-block-group slv-related-products">
+        <!-- wp:group {"className":"slv-product-detail__container","layout":{"type":"default"}} -->
+        <div class="wp-block-group slv-product-detail__container">
+            <!-- wp:heading {"level":2,"className":"slv-section__title"} -->
+            <h2 class="wp-block-heading slv-section__title">相关商品</h2>
+            <!-- /wp:heading -->
+
+            <!-- wp:group {"className":"slv-related-products__grid","layout":{"type":"default"}} -->
+            <div class="wp-block-group slv-related-products__grid">
+                <!-- wp:query {"queryId":11,"query":{"perPage":4,"postType":"product","order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
                 <div class="wp-block-query">
                     <!-- wp:post-template -->
-                        <!-- wp:group {"className":"slv-product-card"} -->
+                        <!-- wp:group {"className":"slv-product-card","layout":{"type":"default"}} -->
                         <div class="wp-block-group slv-product-card">
-                            <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
-                            <!-- wp:post-title {"level":3,"isLink":true} /-->
+                            <!-- wp:group {"className":"slv-product-card__media","layout":{"type":"default"}} -->
+                            <div class="wp-block-group slv-product-card__media">
+                                <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
+                            </div>
+                            <!-- /wp:group -->
+                            <!-- wp:group {"className":"slv-product-card__body","layout":{"type":"default"}} -->
+                            <div class="wp-block-group slv-product-card__body">
+                                <!-- wp:post-title {"level":3,"isLink":true} /-->
+                                <!-- wp:post-excerpt {"excerptLength":12} /-->
+                            </div>
+                            <!-- /wp:group -->
                         </div>
                         <!-- /wp:group -->
                     <!-- /wp:post-template -->
+                    <!-- wp:query-no-results -->
+                        <!-- wp:paragraph {"align":"center","className":"slv-related-products__empty"} -->
+                        <p class="has-text-align-center slv-related-products__empty">暂无相关商品</p>
+                        <!-- /wp:paragraph -->
+                    <!-- /wp:query-no-results -->
                 </div>
                 <!-- /wp:query -->
             </div>
+            <!-- /wp:group -->
         </div>
+        <!-- /wp:group -->
     </div>
+    <!-- /wp:group -->
 
 </main>
 

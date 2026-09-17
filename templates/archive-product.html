@@ -2,7 +2,7 @@
 
 <main class="slv-product-list">
 
-    <!-- 页面头 -->
+    <!-- ═══ 页面头 ═══ -->
     <section class="slv-page-hero">
         <div class="slv-page-hero__inner">
             <nav class="slv-breadcrumb" aria-label="面包屑">
@@ -15,10 +15,10 @@
         </div>
     </section>
 
-    <!-- 主体：左筛选 + 右网格 -->
+    <!-- ═══ 主体：左筛选 + 右网格 ═══ -->
     <div class="slv-product-list__body">
 
-        <!-- 筛选栏（移动端为抽屉） -->
+        <!-- 筛选栏 -->
         <aside class="slv-product-filter" data-slv-filter>
             <div class="slv-product-filter__header">
                 <h2 class="slv-product-filter__title">筛选</h2>
@@ -111,7 +111,7 @@
             </div>
         </aside>
 
-        <!-- 商品网格区 -->
+        <!-- 主内容 -->
         <div class="slv-product-list__main">
 
             <!-- 工具条 -->
@@ -143,14 +143,15 @@
                 </div>
             </div>
 
-            <!-- 商品网格（由 WP 查询填充） -->
-            <div class="slv-product-grid" data-slv-product-grid>
-                <!-- wp:query {"queryId":10,"query":{"perPage":12,"postType":"product","order":"desc","orderBy":"date","inherit":false},"layout":{"type":"grid","columnCount":3}} -->
+            <!-- ═══ 商品网格（关键：用 wp:group 包裹，layout=default） ═══ -->
+            <!-- wp:group {"className":"slv-product-grid","layout":{"type":"default"},"metadata":{"name":"商品网格"}} -->
+            <div class="wp-block-group slv-product-grid" data-slv-product-grid>
+                <!-- wp:query {"queryId":10,"query":{"perPage":12,"postType":"product","order":"desc","orderBy":"date","inherit":false},"layout":{"type":"default"}} -->
                 <div class="wp-block-query">
                     <!-- wp:post-template -->
-                        <!-- wp:group {"className":"slv-product-card"} -->
+                        <!-- wp:group {"className":"slv-product-card","layout":{"type":"default"}} -->
                         <div class="wp-block-group slv-product-card">
-                            <!-- wp:group {"className":"slv-product-card__media"} -->
+                            <!-- wp:group {"className":"slv-product-card__media","layout":{"type":"default"}} -->
                             <div class="wp-block-group slv-product-card__media">
                                 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
                                 <!-- wp:html -->
@@ -160,7 +161,7 @@
                                 <!-- /wp:html -->
                             </div>
                             <!-- /wp:group -->
-                            <!-- wp:group {"className":"slv-product-card__body"} -->
+                            <!-- wp:group {"className":"slv-product-card__body","layout":{"type":"default"}} -->
                             <div class="wp-block-group slv-product-card__body">
                                 <!-- wp:post-title {"level":3,"isLink":true} /-->
                                 <!-- wp:post-excerpt {"excerptLength":16} /-->
@@ -177,26 +178,26 @@
                         </div>
                         <!-- /wp:group -->
                     <!-- /wp:post-template -->
+                    <!-- wp:query-no-results -->
+                        <!-- wp:paragraph {"align":"center","className":"slv-product-empty"} -->
+                        <p class="has-text-align-center slv-product-empty">没有找到匹配的商品，尝试清空筛选条件或更换关键词。</p>
+                        <!-- /wp:paragraph -->
+                    <!-- /wp:query-no-results -->
                 </div>
                 <!-- /wp:query -->
             </div>
+            <!-- /wp:group -->
 
-            <!-- 空状态（由 JS 自动显示/隐藏） -->
-            <div class="slv-product-empty" data-slv-product-empty hidden></div>
-                <svg class="slv-icon slv-icon--48" width="48" height="48" aria-hidden="true"><use href="#slv-icon-package"></use></svg>
-                <h3>没有找到匹配的商品</h3>
-                <p>尝试清空筛选条件或更换关键词</p>
-                <button type="button" class="slv-button" data-slv-filter-clear>清空筛选</button>
-            </div>
-
-            <!-- 分页（WP 分页块） -->
-            <nav class="slv-pagination">
+            <!-- ═══ 分页 ═══ -->
+            <!-- wp:group {"className":"slv-pagination","layout":{"type":"default"}} -->
+            <nav class="wp-block-group slv-pagination">
                 <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
                     <!-- wp:query-pagination-previous /-->
                     <!-- wp:query-pagination-numbers /-->
                     <!-- wp:query-pagination-next /-->
                 <!-- /wp:query-pagination -->
             </nav>
+            <!-- /wp:group -->
 
         </div>
     </div>

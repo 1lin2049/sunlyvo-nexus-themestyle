@@ -4,18 +4,19 @@
  * @package SunLyvo_Nexus
  */
 
-.slv-product-detail { padding-bottom: 80px; }
+.slv-product-detail { padding-bottom: 0; }
 .slv-product-detail__container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .slv-product-detail__breadcrumb-wrap {
-    padding: 20px 0;
+    padding: 20px 0 !important;
     border-bottom: 1px solid var(--slv-color-border-subtle);
     margin-bottom: 40px;
 }
+.slv-product-detail__body { padding: 0; }
 
 /* ═══ 主体网格 ═══ */
 .slv-product-detail__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     gap: 64px;
     margin-bottom: 80px;
     align-items: start;
@@ -35,6 +36,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 .slv-product-gallery__badges {
     position: absolute;
@@ -59,7 +61,7 @@
     cursor: pointer;
     transition: border-color 150ms;
 }
-.slv-product-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.slv-product-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .slv-product-gallery__thumb.is-active,
 .slv-product-gallery__thumb:hover { border-color: var(--slv-color-primary); }
 
@@ -72,19 +74,16 @@
     margin-bottom: 8px;
     letter-spacing: 0.02em;
 }
-.slv-product-info__meta a {
-    color: inherit;
-    text-decoration: none;
-}
+.slv-product-info__meta a { color: inherit; text-decoration: none; }
 .slv-product-info__meta a:hover { text-decoration: underline; }
 
 .slv-product-info__title {
-    font-size: clamp(24px, 3vw, 32px);
+    font-size: clamp(24px, 3vw, 32px) !important;
     font-weight: 800;
-    line-height: 1.3;
+    line-height: 1.3 !important;
     letter-spacing: -0.01em;
     color: var(--slv-color-text-primary);
-    margin: 0 0 16px;
+    margin: 0 0 16px !important;
 }
 
 .slv-product-info__rating {
@@ -93,10 +92,7 @@
     gap: 10px;
     margin-bottom: 24px;
 }
-.slv-product-info__rating-text {
-    font-size: 14px;
-    color: var(--slv-color-text-tertiary);
-}
+.slv-product-info__rating-text { font-size: 14px; color: var(--slv-color-text-tertiary); }
 
 .slv-product-info__price-wrap {
     display: flex;
@@ -123,10 +119,10 @@
 .slv-product-info__compare-label { font-size: 13px; margin-right: 4px; }
 
 .slv-product-info__excerpt {
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
     color: var(--slv-color-text-secondary);
-    margin: 0 0 24px;
+    margin: 0 0 24px !important;
 }
 
 .slv-product-info__specs {
@@ -138,19 +134,9 @@
     border-radius: var(--slv-radius-md);
     margin-bottom: 24px;
 }
-.slv-product-info__spec {
-    display: flex;
-    gap: 8px;
-    font-size: 14px;
-}
-.slv-product-info__spec-label {
-    color: var(--slv-color-text-tertiary);
-    flex-shrink: 0;
-}
-.slv-product-info__spec-value {
-    color: var(--slv-color-text-primary);
-    font-weight: 500;
-}
+.slv-product-info__spec { display: flex; gap: 8px; font-size: 14px; }
+.slv-product-info__spec-label { color: var(--slv-color-text-tertiary); flex-shrink: 0; }
+.slv-product-info__spec-value { color: var(--slv-color-text-primary); font-weight: 500; }
 .slv-product-info__spec-value--stock { color: var(--slv-color-success); }
 
 .slv-product-info__actions {
@@ -235,12 +221,13 @@
 .slv-product-info__trust-item .slv-icon { color: var(--slv-color-success); }
 
 /* ═══ Tab 区 ═══ */
-.slv-product-tabs { margin-bottom: 80px; }
+.slv-product-tabs { margin-bottom: 0; padding: 0; }
 .slv-product-tabs__nav {
-    display: flex;
+    display: flex !important;
     gap: 32px;
     border-bottom: 1px solid var(--slv-color-border-base);
     margin-bottom: 32px;
+    padding: 0 !important;
 }
 .slv-product-tabs__tab {
     padding: 14px 0;
@@ -278,10 +265,7 @@
 .slv-product-reviews__score { font-size: 64px; font-weight: 800; color: var(--slv-color-primary); line-height: 1; }
 .slv-product-reviews__count { font-size: 14px; color: var(--slv-color-text-tertiary); margin-top: 8px; }
 
-.slv-review {
-    padding: 24px 0;
-    border-bottom: 1px solid var(--slv-color-border-subtle);
-}
+.slv-review { padding: 24px 0; border-bottom: 1px solid var(--slv-color-border-subtle); }
 .slv-review__head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .slv-review__avatar {
     display: flex;
@@ -300,7 +284,26 @@
 .slv-review__date { font-size: 13px; color: var(--slv-color-text-quaternary); }
 .slv-review__content { font-size: 15px; line-height: 1.7; color: var(--slv-color-text-secondary); margin: 0; }
 
-/* ═══ 相关商品 ═══ */
+/* ═══ 相关商品 —— 完全由本文件控制 ═══ */
+.slv-related-products {
+    padding: 64px 0 !important;
+    background: var(--slv-color-bg-subtle);
+    border-top: 1px solid var(--slv-color-border-base);
+    margin: 0 !important;
+}
+.slv-related-products .slv-section__title {
+    margin: 0 0 32px !important;
+}
+.slv-related-products__grid {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.slv-related-products__grid > .wp-block-query {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 .slv-related-products__grid .wp-block-post-template {
     display: grid !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -309,7 +312,88 @@
     padding: 0 !important;
     margin: 0 !important;
 }
-.slv-related-products__grid .wp-block-post-template > li { min-width: 0 !important; }
+.slv-related-products__grid .wp-block-post-template > li {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    list-style: none !important;
+}
+
+.slv-related-products__grid .slv-product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    background: var(--slv-color-bg-base);
+    border: 1px solid var(--slv-color-border-base);
+    border-radius: var(--slv-radius-lg);
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition: transform 300ms var(--slv-ease-spring), box-shadow 300ms ease;
+}
+.slv-related-products__grid .slv-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+.slv-related-products__grid .slv-product-card__media {
+    position: relative;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.slv-related-products__grid .slv-product-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.slv-related-products__grid .slv-product-card__body {
+    padding: 16px !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    min-width: 0;
+}
+.slv-related-products__grid .slv-product-card__body h3 {
+    font-size: 15px !important;
+    font-weight: 700;
+    line-height: 1.4 !important;
+    margin: 0 0 6px !important;
+    word-break: normal;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.slv-related-products__grid .slv-product-card__body h3 a {
+    color: var(--slv-color-text-primary);
+    text-decoration: none;
+}
+.slv-related-products__grid .slv-product-card__body h3 a:hover {
+    color: var(--slv-color-primary);
+}
+.slv-related-products__grid .slv-product-card__body p {
+    font-size: 13px !important;
+    color: var(--slv-color-text-secondary);
+    margin: 0 !important;
+    line-height: 1.5 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+.slv-related-products__empty {
+    grid-column: 1 / -1;
+    padding: 40px 0 !important;
+    color: var(--slv-color-text-tertiary);
+    font-size: 15px;
+    text-align: center;
+}
 
 /* ═══ 询盘弹窗 ═══ */
 .slv-inquiry-modal { position: fixed; inset: 0; z-index: 1300; display: flex; align-items: center; justify-content: center; }
@@ -370,13 +454,13 @@
 
 /* ═══ 响应式 ═══ */
 @media (max-width: 1024px) {
-    .slv-product-detail__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .slv-product-detail__grid { grid-template-columns: minmax(0, 1fr) !important; gap: 32px; }
     .slv-product-gallery { position: static; }
     .slv-related-products__grid .wp-block-post-template { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
 }
 @media (max-width: 640px) {
     .slv-product-detail__container { padding: 0 16px; }
-    .slv-product-detail__breadcrumb-wrap { padding: 12px 0; margin-bottom: 24px; }
+    .slv-product-detail__breadcrumb-wrap { padding: 12px 0 !important; margin-bottom: 24px; }
     .slv-product-detail__grid { gap: 24px; margin-bottom: 40px; }
     .slv-product-info__specs { grid-template-columns: minmax(0, 1fr); }
     .slv-product-tabs__nav { gap: 20px; overflow-x: auto; }

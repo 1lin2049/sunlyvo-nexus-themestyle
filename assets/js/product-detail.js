@@ -163,7 +163,7 @@
         }
     }
 
-    /* ═══ 从 REST API 加载商品元数据（SKU/库存/MOQ/HS）═══ */
+    /* ═══ 从 REST API 加载商品元数据 ═══ */
     function loadProductMeta() {
         if (!productId) return;
         var cfg = window.SLV_CONFIG || {};

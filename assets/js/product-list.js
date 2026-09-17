@@ -41,7 +41,6 @@
             });
         });
 
-        // 恢复上次选择
         try {
             var saved = localStorage.getItem('slv_pl_view');
             if (saved === 'list' || saved === 'grid') {
@@ -57,8 +56,6 @@
         if (!select) return;
         select.addEventListener('change', function () {
             state.sort = select.value;
-            // TODO: 调用 REST API 重新拉取
-            // fetchProducts();
         });
     }
 
@@ -68,7 +65,6 @@
             cb.addEventListener('change', function () {
                 state.categories = Array.from(document.querySelectorAll('input[name="category"]:checked'))
                     .map(function (el) { return el.value; });
-                // TODO: fetchProducts();
             });
         });
     }
@@ -86,7 +82,6 @@
                     state.tags.push(tag);
                     btn.classList.add('is-active');
                 }
-                // TODO: fetchProducts();
             });
         });
     }
@@ -100,7 +95,6 @@
             var max = document.querySelector('input[name="max_price"]');
             state.minPrice = min ? min.value : null;
             state.maxPrice = max ? max.value : null;
-            // TODO: fetchProducts();
         });
     }
 
@@ -109,7 +103,6 @@
         document.querySelectorAll('input[name="rating"]').forEach(function (radio) {
             radio.addEventListener('change', function () {
                 state.rating = radio.value;
-                // TODO: fetchProducts();
             });
         });
     }
@@ -131,8 +124,6 @@
                 var max = document.querySelector('input[name="max_price"]');
                 if (min) min.value = '';
                 if (max) max.value = '';
-
-                // TODO: fetchProducts();
             });
         });
     }
@@ -148,7 +139,6 @@
             document.body.style.overflow = 'hidden';
         });
 
-        // 点击遮罩关闭
         drawer.addEventListener('click', function (e) {
             if (e.target === drawer) {
                 drawer.classList.remove('is-open');
@@ -156,7 +146,6 @@
             }
         });
 
-        // ESC 关闭
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
                 drawer.classList.remove('is-open');
@@ -165,13 +154,12 @@
         });
     }
 
-    /* ═══ 加入购物车（占位） ═══ */
+    /* ═══ 加入购物车 ═══ */
     function initAddToCart() {
         document.querySelectorAll('.slv-product-card__add').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                // TODO: 调用 /wp-json/slv/v1/cart/items
                 if (window.SLV_TOAST) window.SLV_TOAST('已加入购物车');
             });
         });
@@ -193,27 +181,6 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
-        init(
-            /* ═══ 自动显示空状态 ═══ */
-            function initEmptyState() {
-                var grid = document.querySelector('[data-slv-product-grid]');
-                var empty = document.querySelector('[data-slv-product-empty]');
-                if (!grid || !empty) return;
-
-                var cards = grid.querySelectorAll('.slv-product-card');
-                if (cards.length === 0) {
-                    empty.innerHTML =
-                        '<svg class="slv-icon slv-icon--48" width="48" height="48" aria-hidden="true"><use href="#slv-icon-package"></use></svg>' +
-                        '<h3>没有找到匹配的商品</h3>' +
-                        '<p>尝试清空筛选条件或更换关键词</p>' +
-                        '<button type="button" class="slv-button" data-slv-filter-clear>清空筛选</button>';
-                    empty.hidden = false;
-                    // 重新绑定清空按钮
-                    empty.querySelector('[data-slv-filter-clear]').addEventListener('click', function () {
-                        document.querySelectorAll('[data-slv-filter-clear]').forEach(function (b) { b.click(); });
-                    });
-                }
-            }
-            );
+        init();
     }
 })();
