@@ -64,6 +64,29 @@ function slv_enqueue_assets(): void {
         wp_enqueue_style( 'slv-mobile', "{$css}/mobile.css", [ 'slv-main' ], slv_asset_version( 'css/mobile.css' ) );
         wp_enqueue_script( 'slv-main',  "{$js}/main.js", [], slv_asset_version( 'js/main.js' ), true );
     }
+
+    // 首页专属资源
+    if ( is_front_page() ) {
+        $home_css = SLV_THEME_DIR . '/assets/css/home.css';
+        if ( file_exists( $home_css ) ) {
+            wp_enqueue_style(
+                'slv-home',
+                "{$css}/home.css",
+                [ 'slv-main' ],
+                (string) filemtime( $home_css )
+            );
+        }
+        $home_js = SLV_THEME_DIR . '/assets/js/home.js';
+        if ( file_exists( $home_js ) ) {
+            wp_enqueue_script(
+                'slv-home',
+                "{$js}/home.js",
+                [ 'slv-main' ],
+                (string) filemtime( $home_js ),
+                true
+            );
+        }
+    }
 }
 add_action( 'wp_enqueue_scripts', 'slv_enqueue_assets' );
 
