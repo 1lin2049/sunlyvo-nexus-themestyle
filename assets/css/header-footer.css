@@ -1,0 +1,336 @@
+/**
+ * SunLyvo Nexus — Header & Footer 完整样式
+ *
+ * @package SunLyvo_Nexus
+ */
+
+/* ═══════════════ HEADER ═══════════════ */
+.slv-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--slv-color-bg-base);
+    border-bottom: 1px solid var(--slv-color-border-base);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.slv-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.slv-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.slv-header__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--slv-color-text-primary);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+}
+
+.slv-header__nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.slv-header__nav a {
+    padding: 8px 14px;
+    color: var(--slv-color-text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: var(--slv-radius-md);
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural),
+                background var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-header__nav a:hover {
+    color: var(--slv-color-primary);
+    background: var(--slv-color-primary-subtle);
+}
+
+.slv-header__tools {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.slv-header__icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: var(--slv-radius-md);
+    background: transparent;
+    color: var(--slv-color-text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural),
+                background var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-header__icon-btn:hover {
+    color: var(--slv-color-text-primary);
+    background: var(--slv-color-bg-muted);
+}
+
+.slv-header__cart-count {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--slv-color-danger);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 999px;
+    border: 2px solid var(--slv-color-bg-base);
+}
+
+/* 深色模式切换的图标状态 */
+.slv-theme-toggle__icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.slv-theme-toggle[data-mode="light"] .slv-theme-toggle__icon--light,
+.slv-theme-toggle[data-mode="auto"] .slv-theme-toggle__icon--light {
+    display: inline-flex;
+}
+.slv-theme-toggle[data-mode="dark"] .slv-theme-toggle__icon--dark {
+    display: inline-flex;
+}
+
+/* 移动端菜单 */
+@media (max-width: 1024px) {
+    .slv-header__nav {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .slv-header__inner {
+        padding: 0 16px;
+        height: 56px;
+    }
+    .slv-header__title {
+        font-size: 16px;
+    }
+    .slv-header__icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* ═══════════════ FOOTER ═══════════════ */
+.slv-footer {
+    background: var(--slv-color-bg-subtle);
+    border-top: 1px solid var(--slv-color-border-base);
+    padding: 64px 24px 24px;
+    color: var(--slv-color-text-secondary);
+}
+
+.slv-footer__cols {
+    max-width: 1200px;
+    margin: 0 auto 48px;
+    gap: 48px !important;
+}
+
+.slv-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.slv-footer__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--slv-color-text-primary);
+}
+
+.slv-footer__desc {
+    color: var(--slv-color-text-tertiary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.slv-footer__social {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.slv-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--slv-radius-md);
+    background: var(--slv-color-bg-base);
+    color: var(--slv-color-text-secondary);
+    text-decoration: none;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural),
+                background var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-footer__social-link:hover {
+    color: var(--slv-color-primary);
+    background: var(--slv-color-primary-subtle);
+}
+
+.slv-footer__heading {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--slv-color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.slv-footer__list {
+    list-style: none;
+    padding: 0 !important;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.slv-footer__list li {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.slv-footer__list a {
+    color: var(--slv-color-text-secondary);
+    text-decoration: none;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-footer__list a:hover {
+    color: var(--slv-color-primary);
+}
+
+.slv-footer__subscribe {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--slv-color-border-strong);
+    border-radius: var(--slv-radius-md);
+    overflow: hidden;
+    background: var(--slv-color-bg-base);
+    margin-top: 8px;
+}
+
+.slv-footer__subscribe input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 14px;
+    background: transparent;
+    font-size: 14px;
+    color: var(--slv-color-text-primary);
+    min-width: 0;
+    font-family: inherit;
+}
+
+.slv-footer__subscribe input::placeholder {
+    color: var(--slv-color-text-quaternary);
+}
+
+.slv-footer__subscribe button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    background: var(--slv-color-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-footer__subscribe button:hover {
+    background: var(--slv-color-primary-hover);
+}
+
+.slv-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--slv-color-border-base);
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.slv-footer__copyright {
+    margin: 0;
+    font-size: 13px;
+    color: var(--slv-color-text-tertiary);
+}
+
+.slv-footer__legal {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--slv-color-text-tertiary);
+}
+
+.slv-footer__legal a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-footer__legal a:hover {
+    color: var(--slv-color-primary);
+}
+
+.slv-footer__legal span {
+    color: var(--slv-color-text-quaternary);
+}
+
+@media (max-width: 900px) {
+    .slv-footer__cols {
+        gap: 32px !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .slv-footer {
+        padding: 40px 16px 16px;
+    }
+    .slv-footer__cols {
+        gap: 24px !important;
+    }
+    .slv-footer__bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}

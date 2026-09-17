@@ -42,9 +42,10 @@ $slv_core_files = [
     'inc/layout.php',
     'inc/enqueue.php',
     'inc/helpers.php',
-    'inc/helpers-icon.php',   // ← 新增
+    'inc/helpers-icon.php',
     'inc/security.php',
-    'inc/performance.php',  // 即使不存在也不会致命
+    'inc/performance.php',
+    'inc/admin-bar.php',   // ← 新增这一行
 ];
 
 foreach ( $slv_core_files as $slv_file ) {

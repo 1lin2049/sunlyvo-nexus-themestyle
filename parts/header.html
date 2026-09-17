@@ -1,22 +1,44 @@
-<!-- wp:group {"tagName":"div","className":"slv-header","layout":{"type":"constrained","contentSize":"1200px"}} -->
-<div class="wp-block-group slv-header">
-    <!-- wp:group {"className":"slv-header__inner","layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center"}} -->
+<!-- wp:group {"tagName":"header","className":"slv-header","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<header class="wp-block-group slv-header">
+    <!-- wp:group {"className":"slv-header__inner","layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center","flexWrap":"nowrap"}} -->
     <div class="wp-block-group slv-header__inner">
-        <!-- wp:group {"layout":{"type":"flex","verticalAlignment":"center"}} -->
-        <div class="wp-block-group">
+
+        <!-- 品牌区 -->
+        <!-- wp:group {"className":"slv-header__brand","layout":{"type":"flex","verticalAlignment":"center","flexWrap":"nowrap"}} -->
+        <div class="wp-block-group slv-header__brand">
             <!-- wp:site-logo {"width":32} /-->
-            <!-- wp:site-title {"level":0} /-->
+            <!-- wp:site-title {"level":0,"className":"slv-header__title"} /-->
         </div>
         <!-- /wp:group -->
 
-        <!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"center"}} /-->
+        <!-- 主导航 -->
+        <!-- wp:navigation {"className":"slv-header__nav","overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"center","flexWrap":"nowrap"}} /-->
 
-        <!-- wp:group {"layout":{"type":"flex","verticalAlignment":"center"}} -->
-        <div class="wp-block-group">
-            <!-- wp:search {"label":"搜索","showLabel":false,"buttonText":"搜索","buttonUseIcon":true} /-->
+        <!-- 工具区 -->
+        <!-- wp:html -->
+        <div class="slv-header__tools">
+            <button type="button" class="slv-header__icon-btn" aria-label="搜索" data-slv-open-search>
+                <svg class="slv-icon slv-icon--20" width="20" height="20" aria-hidden="true"><use href="#slv-icon-search"></use></svg>
+            </button>
+            <button type="button" class="slv-header__icon-btn slv-theme-toggle" aria-label="切换深色模式" data-slv-theme-toggle data-mode="auto">
+                <span class="slv-theme-toggle__icon slv-theme-toggle__icon--light">
+                    <svg class="slv-icon slv-icon--20" width="20" height="20" aria-hidden="true"><use href="#slv-icon-lightbulb"></use></svg>
+                </span>
+                <span class="slv-theme-toggle__icon slv-theme-toggle__icon--dark">
+                    <svg class="slv-icon slv-icon--20" width="20" height="20" aria-hidden="true"><use href="#slv-icon-eye"></use></svg>
+                </span>
+            </button>
+            <a href="/cart/" class="slv-header__icon-btn slv-header__cart" aria-label="购物车">
+                <svg class="slv-icon slv-icon--20" width="20" height="20" aria-hidden="true"><use href="#slv-icon-cart"></use></svg>
+                <span class="slv-header__cart-count" data-slv-cart-count hidden>0</span>
+            </a>
+            <a href="/my-account/" class="slv-header__icon-btn" aria-label="用户中心">
+                <svg class="slv-icon slv-icon--20" width="20" height="20" aria-hidden="true"><use href="#slv-icon-robot"></use></svg>
+            </a>
         </div>
-        <!-- /wp:group -->
+        <!-- /wp:html -->
+
     </div>
     <!-- /wp:group -->
-</div>
+</header>
 <!-- /wp:group -->
