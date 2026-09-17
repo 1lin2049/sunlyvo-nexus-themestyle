@@ -107,3 +107,31 @@
     transition: color var(--slv-duration-fast) var(--slv-ease-natural);
 }
 .slv-link:hover { text-decoration: underline; }
+
+.slv-theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border: none;
+    border-radius: var(--slv-radius-md);
+    background: transparent;
+    color: var(--slv-color-text-secondary);
+    cursor: pointer;
+    transition: background 150ms, color 150ms;
+}
+.slv-theme-toggle:hover {
+    background: var(--slv-color-bg-muted);
+    color: var(--slv-color-text-primary);
+}
+.slv-theme-toggle__icon {
+    display: none;
+}
+.slv-theme-toggle[data-mode="light"] .slv-theme-toggle__icon--light,
+.slv-theme-toggle[data-mode="auto"]  .slv-theme-toggle__icon--light {
+    display: block;
+}
+.slv-theme-toggle[data-mode="dark"] .slv-theme-toggle__icon--dark {
+    display: block;
+}

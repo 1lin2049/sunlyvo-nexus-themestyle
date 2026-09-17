@@ -1,6 +1,6 @@
 <?php
 /**
- * SunLyvo Nexus — 前端风格切换按钮
+ * SunLyvo Nexus — 深色模式切换（用户级）
  *
  * @package SunLyvo_Nexus
  * @since 1.0.0
@@ -15,54 +15,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 class SLV_Style_Switcher {
 
     /**
-     * 渲染切换按钮。
-     *
-     * @since 1.0.0
+     * 渲染深色模式切换按钮。
      */
     public static function render(): void {
-        $current = SLV_Style_Resolver::resolve();
-        $styles  = SLV_Style_Registry::all();
+        $mode = SLV_Style_Resolver::resolve_theme_mode();
         ?>
-        <div class="slv-style-switcher">
-            <button type="button"
-                    class="slv-style-switcher__toggle"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    aria-label="<?php esc_attr_e( '切换风格', 'sunlyvo-nexus' ); ?>">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6">
-                    <circle cx="9" cy="9" r="7"/>
-                    <path d="M9 2v14M2 9h14"/>
-                </svg>
-            </button>
-            <div class="slv-style-switcher__panel" hidden>
-                <div class="slv-style-switcher__group-label"><?php esc_html_e( '基础', 'sunlyvo-nexus' ); ?></div>
-                <?php foreach ( $styles as $slug => $s ) :
-                    if ( 'base' !== $s['group'] ) continue; ?>
-                    <button type="button" class="slv-style-switcher__item <?php echo $slug === $current ? 'is-active' : ''; ?>"
-                            data-style="<?php echo esc_attr( $slug ); ?>">
-                        <?php echo esc_html( $s['label'] ); ?>
-                    </button>
-                <?php endforeach; ?>
-
-                <div class="slv-style-switcher__group-label"><?php esc_html_e( '行业', 'sunlyvo-nexus' ); ?></div>
-                <?php foreach ( $styles as $slug => $s ) :
-                    if ( 'industry' !== $s['group'] ) continue; ?>
-                    <button type="button" class="slv-style-switcher__item <?php echo $slug === $current ? 'is-active' : ''; ?>"
-                            data-style="<?php echo esc_attr( $slug ); ?>">
-                        <?php echo esc_html( $s['label'] ); ?>
-                    </button>
-                <?php endforeach; ?>
-
-                <div class="slv-style-switcher__group-label"><?php esc_html_e( '辅助', 'sunlyvo-nexus' ); ?></div>
-                <?php foreach ( $styles as $slug => $s ) :
-                    if ( 'aux' !== $s['group'] ) continue; ?>
-                    <button type="button" class="slv-style-switcher__item <?php echo $slug === $current ? 'is-active' : ''; ?>"
-                            data-style="<?php echo esc_attr( $slug ); ?>">
-                        <?php echo esc_html( $s['label'] ); ?>
-                    </button>
-                <?php endforeach; ?>
-            </div>
-        </div>
+        <button type="button"
+                class="slv-theme-toggle"
+                data-mode="<?php echo esc_attr( $mode ); ?>"
+                aria-label="<?php esc_attr_e( '切换深色模式', 'sunlyvo-nexus' ); ?>">
+            <span class="slv-theme-toggle__icon slv-theme-toggle__icon--light">
+                <?php slv_icon( 'lightbulb', 18 ); ?>
+            </span>
+            <span class="slv-theme-toggle__icon slv-theme-toggle__icon--dark">
+                <?php slv_icon( 'eye', 18 ); ?>
+            </span>
+        </button>
         <?php
     }
 }

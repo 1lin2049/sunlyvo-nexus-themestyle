@@ -42,6 +42,7 @@ $slv_core_files = [
     'inc/layout.php',
     'inc/enqueue.php',
     'inc/helpers.php',
+    'inc/helpers-icon.php',   // ← 新增
     'inc/security.php',
     'inc/performance.php',  // 即使不存在也不会致命
 ];

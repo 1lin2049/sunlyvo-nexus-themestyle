@@ -1,34 +1,33 @@
 /**
- * SunLyvo Nexus — Brand 品牌默认风格
+ * SunLyvo Nexus — Brand 风格（官方默认）
  *
  * @package SunLyvo_Nexus
  */
 
-:root[data-style="brand"] {
-    --slv-style-seed-primary:   #0066ff;
-    --slv-style-seed-secondary: #00a854;
-    --slv-style-seed-bg:        #ffffff;
-    --slv-style-seed-text:      #262626;
+:root[data-style="brand"],
+:root:not([data-style]) {
+    /* Seed 层 —— 重申 brand 兜底（与 tokens.css 一致，便于阅读） */
+    --slv-seed-blue-6:    #0066ff;
+    --slv-seed-neutral-0: #ffffff;
+    --slv-seed-neutral-1: #fafafa;
+    --slv-seed-neutral-8: #262626;
+    --slv-seed-space-2:   8px;
+    --slv-seed-space-4:   16px;
+    --slv-seed-space-6:   24px;
+    --slv-seed-font-md:   16px;
+    --slv-seed-radius-md: 8px;
+    --slv-seed-radius-lg: 12px;
 
-    --slv-style-color-primary:   var(--slv-style-seed-primary);
-    --slv-style-color-secondary: var(--slv-style-seed-secondary);
-    --slv-style-color-bg:        var(--slv-style-seed-bg);
-    --slv-style-color-text:      var(--slv-style-seed-text);
+    /* Component 层 —— 结构定义 */
+    --slv-button-padding-y:      8px;
+    --slv-button-padding-x:      16px;
+    --slv-button-radius:         8px;
+    --slv-button-font-weight:    500;
+    --slv-button-text-transform: none;
 
-    --slv-style-font: 'Inter', 'PingFang SC', 'Source Han Sans SC', sans-serif;
-    --slv-style-font-size: 16px;
-    --slv-style-line-height: 1.6;
-    --slv-style-radius: 8px;
-    --slv-style-shadow: 0 1px 2px rgba(0,0,0,0.04);
-    --slv-style-border: 1px solid #e8e8e8;
-    --slv-style-container: 1200px;
-    --slv-style-spacing: 8px;
+    --slv-card-radius:  12px;
+    --slv-card-padding: 24px;
+    --slv-card-shadow:  0 1px 2px 0 rgba(0,0,0,0.04);
 
-    --slv-color-primary: var(--slv-style-color-primary);
-    --slv-color-bg-base: var(--slv-style-color-bg);
-    --slv-color-text-primary: var(--slv-style-color-text);
-    --slv-font-family-base: var(--slv-style-font);
-    --slv-font-size-md: var(--slv-style-font-size);
-    --slv-layout-wide: var(--slv-style-container);
-    --slv-radius-md: var(--slv-style-radius);
+    --slv-input-radius: 8px;
 }

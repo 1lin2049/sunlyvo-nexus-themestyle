@@ -36,6 +36,7 @@ function slv_asset_version( string $relative ): string {
  * @since 1.0.0
  */
 function slv_enqueue_assets(): void {
+    wp_enqueue_style( 'slv-icons', "{$css}/icons.css", [ 'slv-tokens' ], slv_asset_version( 'css/icons.css' ) );
     $css = SLV_ASSETS_URL . '/css';
     $js  = SLV_ASSETS_URL . '/js';
 

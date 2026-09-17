@@ -1,28 +1,39 @@
-:root[data-style="dark"] {
-    --slv-style-seed-primary:   #3385ff;
-    --slv-style-seed-secondary: #00a854;
-    --slv-style-seed-bg:        #141414;
-    --slv-style-seed-text:      #e6e6e6;
+/**
+ * SunLyvo Nexus — 深色模式（用户级）
+ *
+ * 用户可通过 data-theme 切换，不影响 data-style。
+ *
+ * @package SunLyvo_Nexus
+ */
 
-    --slv-style-color-primary:   var(--slv-style-seed-primary);
-    --slv-style-color-secondary: var(--slv-style-seed-secondary);
-    --slv-style-color-bg:        var(--slv-style-seed-bg);
-    --slv-style-color-text:      var(--slv-style-seed-text);
+:root[data-theme="dark"] {
+    color-scheme: dark;
 
-    --slv-style-font: 'Inter', 'PingFang SC', sans-serif;
-    --slv-style-font-size: 16px;
-    --slv-style-line-height: 1.6;
-    --slv-style-radius: 8px;
-    --slv-style-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    --slv-style-border: 1px solid #303030;
-    --slv-style-container: 1200px;
+    --slv-color-bg-base:     #0a0a0a;
+    --slv-color-bg-subtle:   #141414;
+    --slv-color-bg-muted:    #1f1f1f;
+    --slv-color-bg-elevated: #1a1a1a;
 
-    --slv-color-primary: var(--slv-style-color-primary);
-    --slv-color-bg-base: var(--slv-style-color-bg);
-    --slv-color-text-primary: var(--slv-style-color-text);
-    --slv-color-border-base: #303030;
-    --slv-font-family-base: var(--slv-style-font);
-    --slv-font-size-md: var(--slv-style-font-size);
-    --slv-layout-wide: var(--slv-style-container);
-    --slv-radius-md: var(--slv-style-radius);
+    --slv-color-text-primary:    #ebebeb;
+    --slv-color-text-secondary:  #b8b8b8;
+    --slv-color-text-tertiary:   #808080;
+    --slv-color-text-quaternary: #595959;
+    --slv-color-text-inverse:    #0a0a0a;
+
+    --slv-color-border-base:   #2a2a2a;
+    --slv-color-border-strong: #3a3a3a;
+    --slv-color-border-subtle: #1f1f1f;
+
+    --slv-color-primary:        #4d94ff;
+    --slv-color-primary-hover:  #66a3ff;
+    --slv-color-primary-active: #3385ff;
+
+    --slv-shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.4);
+    --slv-shadow-md: 0 4px 12px 0 rgba(0,0,0,0.5);
+    --slv-shadow-lg: 0 12px 32px 0 rgba(0,0,0,0.6);
+
+    /* 深色模式下让图片不刺眼 */
+    img:not([src$=".svg"]):not([class*="no-dim"]) {
+        filter: brightness(0.9) contrast(1.05);
+    }
 }
