@@ -1,46 +1,53 @@
 /**
  * SunLyvo Nexus — Header 交互
  *
+ * 主题切换为两态：light ↔ dark。
+ * 首次访问跟随系统偏好，用户点击一次后永久固定。
+ *
  * @package SunLyvo_Nexus
  */
 (function () {
     'use strict';
 
-    /* ═══ 深色模式切换（三态：light / dark / auto）═══ */
+    /* ═══ 深色模式切换（两态：light / dark）═══ */
+    var THEME_KEY = 'slv_theme';
+
     function getStoredTheme() {
-        try { return localStorage.getItem('slv_theme') || 'auto'; } catch (e) { return 'auto'; }
-    }
-    function setStoredTheme(mode) {
-        try { localStorage.setItem('slv_theme', mode); } catch (e) {}
-    }
-    function applyTheme(mode) {
-        var eff = mode;
-        if (mode === 'auto') {
-            eff = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        try {
+            var v = localStorage.getItem(THEME_KEY);
+            return v === 'light' || v === 'dark' ? v : null;
+        } catch (e) {
+            return null;
         }
-        document.documentElement.setAttribute('data-theme', eff);
-        document.documentElement.setAttribute('data-theme-mode', mode);
     }
-    function nextTheme(current) {
-        return current === 'light' ? 'dark' : (current === 'dark' ? 'auto' : 'light');
+
+    function setStoredTheme(mode) {
+        try { localStorage.setItem(THEME_KEY, mode); } catch (e) {}
+    }
+
+    function applyTheme(mode) {
+        document.documentElement.setAttribute('data-theme', mode);
+    }
+
+    function getInitialTheme() {
+        var stored = getStoredTheme();
+        if (stored) return stored;
+        // 首次访问：跟随系统偏好
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
     function initThemeToggle() {
-        var stored = getStoredTheme();
-        applyTheme(stored);
+        var current = getInitialTheme();
+        applyTheme(current);
 
         document.querySelectorAll('[data-slv-theme-toggle]').forEach(function (btn) {
-            btn.dataset.mode = stored;
+            btn.dataset.mode = current;
             btn.addEventListener('click', function () {
-                var next = nextTheme(btn.dataset.mode);
-                btn.dataset.mode = next;
-                setStoredTheme(next);
-                applyTheme(next);
+                current = current === 'dark' ? 'light' : 'dark';
+                btn.dataset.mode = current;
+                setStoredTheme(current);
+                applyTheme(current);
             });
-        });
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
-            if (getStoredTheme() === 'auto') applyTheme('auto');
         });
     }
 
