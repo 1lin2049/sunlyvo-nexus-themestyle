@@ -193,6 +193,27 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
-        init();
+        init(
+            /* ═══ 自动显示空状态 ═══ */
+            function initEmptyState() {
+                var grid = document.querySelector('[data-slv-product-grid]');
+                var empty = document.querySelector('[data-slv-product-empty]');
+                if (!grid || !empty) return;
+
+                var cards = grid.querySelectorAll('.slv-product-card');
+                if (cards.length === 0) {
+                    empty.innerHTML =
+                        '<svg class="slv-icon slv-icon--48" width="48" height="48" aria-hidden="true"><use href="#slv-icon-package"></use></svg>' +
+                        '<h3>没有找到匹配的商品</h3>' +
+                        '<p>尝试清空筛选条件或更换关键词</p>' +
+                        '<button type="button" class="slv-button" data-slv-filter-clear>清空筛选</button>';
+                    empty.hidden = false;
+                    // 重新绑定清空按钮
+                    empty.querySelector('[data-slv-filter-clear]').addEventListener('click', function () {
+                        document.querySelectorAll('[data-slv-filter-clear]').forEach(function (b) { b.click(); });
+                    });
+                }
+            }
+            );
     }
 })();

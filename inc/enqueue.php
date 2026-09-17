@@ -89,6 +89,37 @@ function slv_enqueue_assets(): void {
                 wp_enqueue_script( 'slv-product-list', "{$js}/product-list.js", [ 'slv-main' ], (string) filemtime( $pl_js ), true );
             }
         }
+
+        // 商品详情页专属
+        if ( is_singular( 'product' ) ) {
+            $pd_css = SLV_THEME_DIR . '/assets/css/product-detail.css';
+            if ( file_exists( $pd_css ) ) {
+                wp_enqueue_style( 'slv-product-detail', "{$css}/product-detail.css", [ 'slv-main' ], (string) filemtime( $pd_css ) );
+            }
+            $pd_js = SLV_THEME_DIR . '/assets/js/product-detail.js';
+            if ( file_exists( $pd_js ) ) {
+                wp_enqueue_script( 'slv-product-detail', "{$js}/product-detail.js", [ 'slv-main' ], (string) filemtime( $pd_js ), true );
+            }
+        }
+
+        // React 嵌页：购物车
+        if ( is_page_template( 'page-templates/page-cart.php' ) ) {
+            $react_dist = SLV_THEME_URL . '/assets/js/react/dist';
+            wp_enqueue_script( 'slv-react-cart', "{$react_dist}/cart.js", [], SLV_VERSION, true );
+            wp_enqueue_style( 'slv-react-cart-css', "{$react_dist}/cart.css", [], SLV_VERSION );
+        }
+        // React 嵌页：结账
+        if ( is_page_template( 'page-templates/page-checkout.php' ) ) {
+            $react_dist = SLV_THEME_URL . '/assets/js/react/dist';
+            wp_enqueue_script( 'slv-react-checkout', "{$react_dist}/checkout.js", [], SLV_VERSION, true );
+            wp_enqueue_style( 'slv-react-checkout-css', "{$react_dist}/checkout.css", [], SLV_VERSION );
+        }
+        // React 嵌页：用户中心
+        if ( is_page_template( 'page-templates/page-account.php' ) ) {
+            $react_dist = SLV_THEME_URL . '/assets/js/react/dist';
+            wp_enqueue_script( 'slv-react-account', "{$react_dist}/account.js", [], SLV_VERSION, true );
+            wp_enqueue_style( 'slv-react-account-css', "{$react_dist}/account.css", [], SLV_VERSION );
+        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'slv_enqueue_assets' );
