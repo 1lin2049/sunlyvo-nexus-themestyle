@@ -65,7 +65,7 @@ class SLV_Repair_Page {
                             <td><?php echo $m['loaded'] ? '✅' : '❌'; ?></td>
                             <td><strong><?php echo esc_html( $m['name'] ); ?></strong></td>
                             <td><code><?php echo esc_html( $m['symbol'] ); ?></code></td>
-                            <td><code><?php echo esc_html( $m['path'] ); ?></code> <?php echo $m['file_exists'] ? '✅' : '<span style="color:#f5222d">文件缺失</span>'; ?></td>
+                            <td><code><?php echo esc_html( $m['path'] ); ?></code> <?php echo $m['file_exists'] ? '✅' : '<span style="color:#fa8c16">文件不在预期位置</span>'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -78,7 +78,8 @@ class SLV_Repair_Page {
                     <tr><td>重写规则（llms）</td><td><?php echo $diag['rewrite']['llms'] ? '✅' : '❌'; ?></td></tr>
                     <tr><td>加密密钥</td><td><?php echo esc_html( $diag['encryption']['source'] ); ?></td></tr>
                     <tr><td>私有目录保护</td><td><?php echo $diag['private_dir'] ? '✅' : '❌'; ?></td></tr>
-                    <tr><td>HTTPS</td><td><?php echo $diag['https'] ? '✅' : '⚠️ 未启用'; ?></td></tr>
+                    <tr><td>对象缓存</td><td><?php echo $diag['object_cache'] ? '✅ 已启用' : '⚠️ 未启用（建议在 性能 页开启）'; ?></td></tr>
+                    <tr><td>HTTPS</td><td><?php echo $diag['https'] ? '✅ 已启用' : '⚠️ 未启用（本地/内网可忽略）'; ?></td></tr>
                     <tr><td>主题</td><td><?php echo esc_html( $diag['theme'] ); ?></td></tr>
                 </tbody>
             </table>
@@ -95,12 +96,60 @@ class SLV_Repair_Page {
 
     private static function diagnose(): array {
         $modules = [
-            [ 'name' => 'SEO',  'symbol' => 'slv_seo_output_meta',           'path' => 'inc/modules/seo/module.php',      'loaded' => function_exists( 'slv_seo_output_meta' ) ],
-            [ 'name' => 'GEO',  'symbol' => 'slv_geo_generate_llms',          'path' => 'inc/modules/seo/geo/llms-txt.php', 'loaded' => function_exists( 'slv_geo_generate_llms' ) ],
-            [ 'name' => 'AEO',  'symbol' => 'slv_aeo_build_faqpage_schema',   'path' => 'inc/modules/seo/aeo/faq-schema.php','loaded' => function_exists( 'slv_aeo_build_faqpage_schema' ) ],
-            [ 'name' => 'Reader','symbol'=> 'slv_reader_is_environment',      'path' => 'inc/modules/reader/module.php',    'loaded' => function_exists( 'slv_reader_is_environment' ) ],
-            [ 'name' => 'Settings','symbol'=>'SLV_Encryption_Manager',        'path' => 'inc/modules/settings/module.php',  'loaded' => class_exists( 'SLV_Encryption_Manager' ) ],
-            [ 'name' => 'Security','symbol'=>'slv_login_rate_limit',          'path' => 'inc/modules/security/module.php',  'loaded' => function_exists( 'slv_login_rate_limit' ) ],
+            [
+                'name'        => 'SEO',
+                'symbol'      => 'slv_seo_output_meta',
+                'path'        => 'inc/modules/seo/module.php',
+                'loaded'      => function_exists( 'slv_seo_output_meta' ),
+            ],
+            [
+                'name'        => 'GEO',
+                'symbol'      => 'slv_geo_generate_llms',
+                'path'        => 'inc/modules/geo/llms-txt.php',
+                'loaded'      => function_exists( 'slv_geo_generate_llms' ),
+            ],
+            [
+                'name'        => 'AEO',
+                'symbol'      => 'slv_aeo_build_faqpage_schema',
+                'path'        => 'inc/modules/aeo/faq-schema.php',
+                'loaded'      => function_exists( 'slv_aeo_build_faqpage_schema' ),
+            ],
+            [
+                'name'        => 'Reader',
+                'symbol'      => 'slv_reader_is_environment',
+                'path'        => 'inc/modules/reader/module.php',
+                'loaded'      => function_exists( 'slv_reader_is_environment' ),
+            ],
+            [
+                'name'        => 'Settings',
+                'symbol'      => 'SLV_Encryption_Manager',
+                'path'        => 'inc/modules/settings/module.php',
+                'loaded'      => class_exists( 'SLV_Encryption_Manager' ),
+            ],
+            [
+                'name'        => 'Security',
+                'symbol'      => 'slv_login_rate_limit',
+                'path'        => 'inc/security.php',
+                'loaded'      => function_exists( 'slv_login_rate_limit' ),
+            ],
+            [
+                'name'        => 'Performance',
+                'symbol'      => 'SLV_Performance_Settings',
+                'path'        => 'inc/modules/performance/module.php',
+                'loaded'      => class_exists( 'SLV_Performance_Settings' ),
+            ],
+            [
+                'name'        => 'Demo',
+                'symbol'      => 'SLV_Demo_Seeder',
+                'path'        => 'inc/modules/demo/module.php',
+                'loaded'      => class_exists( 'SLV_Demo_Seeder' ),
+            ],
+            [
+                'name'        => 'QA',
+                'symbol'      => 'SLV_QA_Runner',
+                'path'        => 'inc/modules/qa/module.php',
+                'loaded'      => class_exists( 'SLV_QA_Runner' ),
+            ],
         ];
 
         foreach ( $modules as &$m ) {
@@ -113,7 +162,7 @@ class SLV_Repair_Page {
         $has_llms    = false;
         foreach ( (array) $rewrite as $pattern => $query ) {
             if ( str_contains( $pattern, 'slv-sitemap' ) ) $has_sitemap = true;
-            if ( str_contains( $pattern, 'llms' ) ) $has_llms = true;
+            if ( str_contains( $pattern, 'llms' ) )         $has_llms    = true;
         }
 
         $upload = wp_upload_dir();
@@ -135,6 +184,7 @@ class SLV_Repair_Page {
             'rewrite'      => [ 'sitemap' => $has_sitemap, 'llms' => $has_llms ],
             'encryption'   => [ 'source' => $encryption_source ],
             'private_dir'  => $private_dir,
+            'object_cache' => file_exists( WP_CONTENT_DIR . '/object-cache.php' ),
             'https'        => is_ssl() || str_starts_with( home_url(), 'https://' ),
             'theme'        => wp_get_theme()->get( 'Name' ) . ' ' . wp_get_theme()->get( 'Version' ),
         ];
@@ -143,22 +193,18 @@ class SLV_Repair_Page {
     private static function do_repair(): array {
         $messages = [];
 
-        // 1. 刷新重写规则
         flush_rewrite_rules( true );
         $messages[] = '✅ 重写规则已刷新';
 
-        // 2. 生成密钥
         if ( class_exists( 'SLV_Encryption_Manager' ) ) {
             SLV_Encryption_Manager::get_key();
             $messages[] = '✅ 加密密钥已就绪：' . SLV_Encryption_Manager::get_source();
         }
 
-        // 3. 保护私有目录
         if ( function_exists( 'slv_protect_private_uploads' ) ) {
             slv_protect_private_uploads();
             $messages[] = '✅ 私有目录已保护';
         } else {
-            // 手动执行
             $upload = wp_upload_dir();
             $dir = $upload['basedir'] . '/slv-private';
             if ( ! file_exists( $dir ) ) {
@@ -173,16 +219,8 @@ class SLV_Repair_Page {
             $messages[] = '✅ 私有目录已保护';
         }
 
-        // 4. 清理缓存
         wp_cache_flush();
         $messages[] = '✅ 对象缓存已清理';
-
-        // 5. 检查 SEO 模块
-        if ( ! function_exists( 'slv_seo_output_meta' ) ) {
-            $messages[] = '❌ SEO 模块仍未加载 — 请检查 inc/modules/seo/ 目录结构';
-        } else {
-            $messages[] = '✅ SEO 模块已加载';
-        }
 
         return $messages;
     }

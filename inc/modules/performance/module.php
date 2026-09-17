@@ -31,9 +31,9 @@ foreach ( $slv_perf_files as $slv_rel ) {
 
 unset( $slv_perf_dir, $slv_perf_files, $slv_rel, $slv_file );
 
-// 注册后台子菜单
+// 注册后台子菜单（必须用 admin_menu 钩子）
 add_action( 'admin_menu', static function () {
     if ( class_exists( 'SLV_Performance_Settings' ) ) {
         SLV_Performance_Settings::register_menu();
     }
-} );
+}, 11 );

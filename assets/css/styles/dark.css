@@ -1,0 +1,28 @@
+:root[data-style="dark"] {
+    --slv-style-seed-primary:   #3385ff;
+    --slv-style-seed-secondary: #00a854;
+    --slv-style-seed-bg:        #141414;
+    --slv-style-seed-text:      #e6e6e6;
+
+    --slv-style-color-primary:   var(--slv-style-seed-primary);
+    --slv-style-color-secondary: var(--slv-style-seed-secondary);
+    --slv-style-color-bg:        var(--slv-style-seed-bg);
+    --slv-style-color-text:      var(--slv-style-seed-text);
+
+    --slv-style-font: 'Inter', 'PingFang SC', sans-serif;
+    --slv-style-font-size: 16px;
+    --slv-style-line-height: 1.6;
+    --slv-style-radius: 8px;
+    --slv-style-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    --slv-style-border: 1px solid #303030;
+    --slv-style-container: 1200px;
+
+    --slv-color-primary: var(--slv-style-color-primary);
+    --slv-color-bg-base: var(--slv-style-color-bg);
+    --slv-color-text-primary: var(--slv-style-color-text);
+    --slv-color-border-base: #303030;
+    --slv-font-family-base: var(--slv-style-font);
+    --slv-font-size-md: var(--slv-style-font-size);
+    --slv-layout-wide: var(--slv-style-container);
+    --slv-radius-md: var(--slv-style-radius);
+}

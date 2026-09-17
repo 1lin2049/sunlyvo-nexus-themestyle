@@ -1,0 +1,31 @@
+:root[data-style="medical"] {
+    --slv-style-seed-primary:   #0ea5e9;
+    --slv-style-seed-secondary: #14b8a6;
+    --slv-style-seed-bg:        #ffffff;
+    --slv-style-seed-text:      #0c4a6e;
+
+    --slv-style-color-primary:   var(--slv-style-seed-primary);
+    --slv-style-color-secondary: var(--slv-style-seed-secondary);
+    --slv-style-color-bg:        var(--slv-style-seed-bg);
+    --slv-style-color-text:      var(--slv-style-seed-text);
+
+    --slv-style-font: 'Open Sans', 'Noto Sans SC', sans-serif;
+    --slv-style-font-size: 16px;
+    --slv-style-line-height: 1.8;
+    --slv-style-radius: 8px;
+    --slv-style-shadow: 0 2px 8px rgba(14,165,233,0.1);
+    --slv-style-border: 1px solid #e0f2fe;
+    --slv-style-container: 1200px;
+
+    --slv-color-primary: var(--slv-style-color-primary);
+    --slv-color-bg-base: var(--slv-style-color-bg);
+    --slv-color-text-primary: var(--slv-style-color-text);
+    --slv-font-family-base: var(--slv-style-font);
+    --slv-font-size-md: var(--slv-style-font-size);
+    --slv-layout-wide: var(--slv-style-container);
+    --slv-radius-md: var(--slv-style-radius);
+}
+:root[data-style="medical"] .slv-card {
+    border: var(--slv-style-border);
+    box-shadow: none;
+}

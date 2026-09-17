@@ -1,0 +1,41 @@
+{
+    "name": "sunlyvo-nexus-admin",
+    "version": "1.0.0",
+    "private": true,
+    "description": "SunLyvo Nexus 中后台管理端",
+    "scripts": {
+        "dev": "max dev",
+        "build": "max build",
+        "postinstall": "max setup",
+        "setup": "max setup",
+        "start": "npm run dev",
+        "test": "max test",
+        "tsc": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^6.3.2",
+        "@ant-design/pro-components": "^3.0.0",
+        "@ant-design/x": "^2.0.0",
+        "@ant-design/web3": "^1.0.0",
+        "@umijs/max": "^4.6.51",
+        "antd": "^6.6.2",
+        "antd-style": "^4.0.0",
+        "classnames": "^2.3.2",
+        "dayjs": "^1.11.13",
+        "lodash": "^4.17.21",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "zustand": "^5.0.0"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.17.14",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "^5.6.0"
+    },
+    "engines": {
+        "node": ">=20.0.0",
+        "pnpm": ">=9.0.0"
+    }
+}

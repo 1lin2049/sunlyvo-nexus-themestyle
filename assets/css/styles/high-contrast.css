@@ -1,0 +1,34 @@
+:root[data-style="high-contrast"] {
+    --slv-style-seed-primary:   #000000;
+    --slv-style-seed-secondary: #ffff00;
+    --slv-style-seed-bg:        #ffffff;
+    --slv-style-seed-text:      #000000;
+
+    --slv-style-color-primary:   var(--slv-style-seed-primary);
+    --slv-style-color-secondary: var(--slv-style-seed-secondary);
+    --slv-style-color-bg:        var(--slv-style-seed-bg);
+    --slv-style-color-text:      var(--slv-style-seed-text);
+
+    --slv-style-font: system-ui, sans-serif;
+    --slv-style-font-size: 18px;
+    --slv-style-line-height: 1.8;
+    --slv-style-radius: 0;
+    --slv-style-shadow: none;
+    --slv-style-border: 2px solid #000000;
+    --slv-style-container: 1200px;
+
+    --slv-color-primary: var(--slv-style-color-primary);
+    --slv-color-bg-base: var(--slv-style-color-bg);
+    --slv-color-text-primary: var(--slv-style-color-text);
+    --slv-font-family-base: var(--slv-style-font);
+    --slv-font-size-md: var(--slv-style-font-size);
+    --slv-layout-wide: var(--slv-style-container);
+    --slv-radius-md: var(--slv-style-radius);
+}
+:root[data-style="high-contrast"] .slv-button {
+    border: 3px solid #000;
+    font-weight: 700;
+}
+:root[data-style="high-contrast"] a {
+    text-decoration: underline;
+}
