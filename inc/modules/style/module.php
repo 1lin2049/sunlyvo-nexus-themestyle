@@ -12,28 +12,48 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$slv_style_dir = __DIR__;
-foreach ( [ 'class-style-registry.php', 'class-style-resolver.php', 'class-style-switcher.php' ] as $f ) {
-    if ( file_exists( $slv_style_dir . '/' . $f ) ) {
-        require_once $slv_style_dir . '/' . $f;
+$slv_style_dir   = __DIR__;
+$slv_style_files = [
+    'class-style-registry.php',
+    'class-style-resolver.php',
+    'class-style-switcher.php',
+    'rest-api.php',   // ← 必须加载，负责 /styles 和 /user/style 路由
+];
+
+foreach ( $slv_style_files as $slv_rel ) {
+    $slv_file = $slv_style_dir . '/' . $slv_rel;
+    if ( file_exists( $slv_file ) ) {
+        require_once $slv_file;
+    } elseif ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log( "[SunLyvo Nexus] Style module missing: {$slv_rel}" );
     }
 }
 
+unset( $slv_style_dir, $slv_style_files, $slv_rel, $slv_file );
+
 // ── 输出 data-style 到 html 元素
 add_action( 'wp_head', static function () {
+    if ( ! class_exists( 'SLV_Style_Resolver' ) ) {
+        return;
+    }
     $style = SLV_Style_Resolver::resolve();
     echo '<script>(function(){document.documentElement.dataset.style=' . wp_json_encode( $style ) . ';})();</script>' . "\n";
 }, 1 );
 
 // ── body_class 加风格类
 add_filter( 'body_class', static function ( array $classes ): array {
-    $classes[] = 'slv-style-' . SLV_Style_Resolver::resolve();
+    if ( class_exists( 'SLV_Style_Resolver' ) ) {
+        $classes[] = 'slv-style-' . SLV_Style_Resolver::resolve();
+    }
     return $classes;
 } );
 
 // ── 加载对应风格 CSS
 add_action( 'wp_enqueue_scripts', static function () {
-    $style = SLV_Style_Resolver::resolve();
+    if ( ! class_exists( 'SLV_Style_Resolver' ) || ! class_exists( 'SLV_Style_Registry' ) ) {
+        return;
+    }
+    $style  = SLV_Style_Resolver::resolve();
     $styles = SLV_Style_Registry::all();
     if ( ! isset( $styles[ $style ] ) ) {
         return;
@@ -50,25 +70,12 @@ add_action( 'wp_enqueue_scripts', static function () {
     }
 }, 20 );
 
-// ── REST：保存用户偏好
-add_action( 'rest_api_init', static function () {
-    register_rest_route( SLV_REST_NAMESPACE, '/user/style', [
-        'methods'             => 'POST',
-        'callback'            => static function ( WP_REST_Request $req ) {
-            $user_id = get_current_user_id();
-            if ( ! $user_id ) {
-                return new WP_REST_Response( [ 'success' => false, 'reason' => 'not_logged_in' ], 401 );
-            }
-            $style = sanitize_key( (string) $req['style'] );
-            $ok = SLV_Style_Resolver::save_user_preference( $user_id, $style );
-            return new WP_REST_Response( [ 'success' => $ok ], $ok ? 200 : 400 );
-        },
-        'permission_callback' => static fn() => is_user_logged_in(),
-    ] );
-} );
-
 // ── Customizer
 add_action( 'customize_register', static function ( $wp_customize ) {
+    if ( ! class_exists( 'SLV_Style_Registry' ) ) {
+        return;
+    }
+
     $wp_customize->add_section( 'slv_style', [
         'title'    => __( '行业风格', 'sunlyvo-nexus' ),
         'priority' => 20,
