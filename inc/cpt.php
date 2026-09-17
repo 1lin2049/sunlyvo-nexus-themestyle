@@ -5,6 +5,8 @@
  * 注册 18+ 种自定义内容类型。
  * 严格遵循：slv_ 前缀、sunlyvo-nexus 文本域、REST 支持、能力映射。
  *
+ * 每个 CPT 必须包含完整的 13 个 labels，否则后台菜单会显示"写文章"。
+ *
  * @package SunLyvo_Nexus
  * @since 1.0.0
  */
@@ -16,26 +18,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * 生成标准 labels 数组。
+ *
+ * @since 1.0.0
+ * @param string $singular 单数名称（如"商品"）。
+ * @param string $plural   复数名称（如"商品"）。
+ * @return array
+ */
+function slv_build_labels( string $singular, string $plural ): array {
+    return [
+        'name'                  => $plural,
+        'singular_name'         => $singular,
+        'menu_name'             => $plural,
+        'all_items'             => sprintf( '全部%s', $plural ),
+        'add_new'               => '新建',
+        'add_new_item'          => sprintf( '新建%s', $singular ),
+        'edit_item'             => sprintf( '编辑%s', $singular ),
+        'new_item'              => sprintf( '新%s', $singular ),
+        'view_item'             => sprintf( '查看%s', $singular ),
+        'view_items'            => sprintf( '查看%s', $plural ),
+        'search_items'          => sprintf( '搜索%s', $plural ),
+        'not_found'             => sprintf( '未找到%s', $plural ),
+        'not_found_in_trash'    => sprintf( '回收站中未找到%s', $plural ),
+        'archives'              => sprintf( '%s归档', $plural ),
+        'attributes'            => sprintf( '%s属性', $plural ),
+        'insert_into_item'      => sprintf( '插入到%s', $singular ),
+        'uploaded_to_this_item' => sprintf( '上传到此%s', $singular ),
+        'featured_image'        => '特色图片',
+        'set_featured_image'    => '设置特色图片',
+        'remove_featured_image' => '移除特色图片',
+        'use_featured_image'    => '使用特色图片',
+        'filter_items_list'     => sprintf( '筛选%s列表', $plural ),
+        'items_list_navigation' => sprintf( '%s列表导航', $plural ),
+        'items_list'            => sprintf( '%s列表', $plural ),
+    ];
+}
+
+/**
  * 注册所有自定义内容类型。
  *
  * @since 1.0.0
  */
 function slv_register_post_types(): void {
 
-    // ─── 1. product（商品）─────────────────────────────────
+    // ─── 1. product（商品）
     register_post_type( 'product', [
-        'labels' => [
-            'name'          => __( '商品', 'sunlyvo-nexus' ),
-            'singular_name' => __( '商品', 'sunlyvo-nexus' ),
-            'add_new'       => __( '新建商品', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建商品', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑商品', 'sunlyvo-nexus' ),
-            'new_item'      => __( '新商品', 'sunlyvo-nexus' ),
-            'view_item'     => __( '查看商品', 'sunlyvo-nexus' ),
-            'search_items'  => __( '搜索商品', 'sunlyvo-nexus' ),
-            'not_found'     => __( '未找到商品', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '商品', 'sunlyvo-nexus' ),
-        ],
+        'labels'             => slv_build_labels( '商品', '商品' ),
         'public'             => true,
         'show_in_rest'       => true,
         'rest_base'          => 'products',
@@ -49,15 +77,9 @@ function slv_register_post_types(): void {
         'menu_position'      => 20,
     ] );
 
-    // ─── 2. collection（合集）──────────────────────────────
+    // ─── 2. collection（合集）
     register_post_type( 'collection', [
-        'labels' => [
-            'name'          => __( '合集', 'sunlyvo-nexus' ),
-            'singular_name' => __( '合集', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建合集', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑合集', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '合集', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '合集', '合集' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'collections',
@@ -71,15 +93,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 21,
     ] );
 
-    // ─── 3. chapter（章节，合集内）─────────────────────────
+    // ─── 3. chapter（章节）
     register_post_type( 'chapter', [
-        'labels' => [
-            'name'          => __( '章节', 'sunlyvo-nexus' ),
-            'singular_name' => __( '章节', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建章节', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑章节', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '章节', 'sunlyvo-nexus' ),
-        ],
+        'labels'             => slv_build_labels( '章节', '章节' ),
         'public'             => true,
         'show_in_rest'       => true,
         'rest_base'          => 'chapters',
@@ -93,15 +109,9 @@ function slv_register_post_types(): void {
         'menu_position'      => 22,
     ] );
 
-    // ─── 4. wiki（百科词条）────────────────────────────────
+    // ─── 4. wiki（百科词条）
     register_post_type( 'wiki', [
-        'labels' => [
-            'name'          => __( '百科', 'sunlyvo-nexus' ),
-            'singular_name' => __( '百科词条', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建词条', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑词条', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '百科', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '词条', '百科' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'wiki',
@@ -115,15 +125,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 23,
     ] );
 
-    // ─── 5. faq（常见问题）─────────────────────────────────
+    // ─── 5. faq（常见问题）
     register_post_type( 'faq', [
-        'labels' => [
-            'name'          => __( 'FAQ', 'sunlyvo-nexus' ),
-            'singular_name' => __( 'FAQ', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建 FAQ', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑 FAQ', 'sunlyvo-nexus' ),
-            'menu_name'     => __( 'FAQ', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( 'FAQ', 'FAQ' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'faq',
@@ -137,15 +141,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 24,
     ] );
 
-    // ─── 6. document（文库）───────────────────────────────
+    // ─── 6. document（文库）
     register_post_type( 'document', [
-        'labels' => [
-            'name'          => __( '文库', 'sunlyvo-nexus' ),
-            'singular_name' => __( '文档', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建文档', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑文档', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '文库', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '文档', '文库' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'documents',
@@ -159,15 +157,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 25,
     ] );
 
-    // ─── 7. video（视频）──────────────────────────────────
+    // ─── 7. video（视频）
     register_post_type( 'video', [
-        'labels' => [
-            'name'          => __( '视频', 'sunlyvo-nexus' ),
-            'singular_name' => __( '视频', 'sunlyvo-nexus' ),
-            'add_new_item'  => __( '新建视频', 'sunlyvo-nexus' ),
-            'edit_item'     => __( '编辑视频', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '视频', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '视频', '视频' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'videos',
@@ -181,13 +173,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 26,
     ] );
 
-    // ─── 8. audio（音频）──────────────────────────────────
+    // ─── 8. audio（音频）
     register_post_type( 'audio', [
-        'labels' => [
-            'name'          => __( '音频', 'sunlyvo-nexus' ),
-            'singular_name' => __( '音频', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '音频', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '音频', '音频' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'audios',
@@ -201,13 +189,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 27,
     ] );
 
-    // ─── 9. course（课程）─────────────────────────────────
+    // ─── 9. course（课程）
     register_post_type( 'course', [
-        'labels' => [
-            'name'          => __( '课程', 'sunlyvo-nexus' ),
-            'singular_name' => __( '课程', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '课程', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '课程', '课程' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'courses',
@@ -221,13 +205,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 28,
     ] );
 
-    // ─── 10. live（直播）──────────────────────────────────
+    // ─── 10. live（直播）
     register_post_type( 'live', [
-        'labels' => [
-            'name'          => __( '直播', 'sunlyvo-nexus' ),
-            'singular_name' => __( '直播', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '直播', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '直播', '直播' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'lives',
@@ -240,13 +220,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 29,
     ] );
 
-    // ─── 11. topic（论坛话题）─────────────────────────────
+    // ─── 11. topic（论坛话题）
     register_post_type( 'topic', [
-        'labels' => [
-            'name'          => __( '话题', 'sunlyvo-nexus' ),
-            'singular_name' => __( '话题', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '论坛', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '话题', '论坛' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'topics',
@@ -260,13 +236,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 30,
     ] );
 
-    // ─── 12. group（圈子）─────────────────────────────────
+    // ─── 12. group（圈子）
     register_post_type( 'group', [
-        'labels' => [
-            'name'          => __( '圈子', 'sunlyvo-nexus' ),
-            'singular_name' => __( '圈子', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '圈子', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '圈子', '圈子' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'groups',
@@ -280,13 +252,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 31,
     ] );
 
-    // ─── 13. moment（朋友圈动态）──────────────────────────
+    // ─── 13. moment（朋友圈动态）
     register_post_type( 'moment', [
-        'labels' => [
-            'name'          => __( '动态', 'sunlyvo-nexus' ),
-            'singular_name' => __( '动态', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '朋友圈', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '动态', '朋友圈' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'moments',
@@ -299,13 +267,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 32,
     ] );
 
-    // ─── 14. gallery（图集）───────────────────────────────
+    // ─── 14. gallery（图集）
     register_post_type( 'gallery', [
-        'labels' => [
-            'name'          => __( '图集', 'sunlyvo-nexus' ),
-            'singular_name' => __( '图集', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '图集', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '图集', '图集' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'galleries',
@@ -318,13 +282,9 @@ function slv_register_post_types(): void {
         'menu_position'   => 33,
     ] );
 
-    // ─── 15. service（服务）───────────────────────────────
+    // ─── 15. service（服务）
     register_post_type( 'service', [
-        'labels' => [
-            'name'          => __( '服务', 'sunlyvo-nexus' ),
-            'singular_name' => __( '服务', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '服务', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '服务', '服务' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'services',
@@ -337,51 +297,39 @@ function slv_register_post_types(): void {
         'menu_position'   => 34,
     ] );
 
-    // ─── 16. company（企业）───────────────────────────────
+    // ─── 16. company（企业）
     register_post_type( 'company', [
-        'labels' => [
-            'name'          => __( '企业', 'sunlyvo-nexus' ),
-            'singular_name' => __( '企业', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '企业', 'sunlyvo-nexus' ),
-        ],
-        'public'             => false,
-        'show_ui'            => true,
-        'show_in_rest'       => true,
-        'rest_base'          => 'companies',
-        'has_archive'        => false,
-        'menu_icon'          => 'dashicons-building',
-        'supports'           => [ 'title', 'custom-fields' ],
-        'capability_type'    => 'post',
-        'map_meta_cap'       => true,
-        'menu_position'      => 35,
+        'labels'          => slv_build_labels( '企业', '企业' ),
+        'public'          => false,
+        'show_ui'         => true,
+        'show_in_rest'    => true,
+        'rest_base'       => 'companies',
+        'has_archive'     => false,
+        'menu_icon'       => 'dashicons-building',
+        'supports'        => [ 'title', 'custom-fields' ],
+        'capability_type' => 'post',
+        'map_meta_cap'    => true,
+        'menu_position'   => 35,
     ] );
 
-    // ─── 17. inquiry（询盘）───────────────────────────────
+    // ─── 17. inquiry（询盘）
     register_post_type( 'inquiry', [
-        'labels' => [
-            'name'          => __( '询盘', 'sunlyvo-nexus' ),
-            'singular_name' => __( '询盘', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '询盘', 'sunlyvo-nexus' ),
-        ],
-        'public'             => false,
-        'show_ui'            => true,
-        'show_in_rest'       => true,
-        'rest_base'          => 'inquiries',
-        'has_archive'        => false,
-        'menu_icon'          => 'dashicons-email-alt',
-        'supports'           => [ 'title', 'editor', 'custom-fields' ],
-        'capability_type'    => 'post',
-        'map_meta_cap'       => true,
-        'menu_position'      => 36,
+        'labels'          => slv_build_labels( '询盘', '询盘' ),
+        'public'          => false,
+        'show_ui'         => true,
+        'show_in_rest'    => true,
+        'rest_base'       => 'inquiries',
+        'has_archive'     => false,
+        'menu_icon'       => 'dashicons-email-alt',
+        'supports'        => [ 'title', 'editor', 'custom-fields' ],
+        'capability_type' => 'post',
+        'map_meta_cap'    => true,
+        'menu_position'   => 36,
     ] );
 
-    // ─── 18. campaign（训练营）────────────────────────────
+    // ─── 18. campaign（训练营）
     register_post_type( 'campaign', [
-        'labels' => [
-            'name'          => __( '训练营', 'sunlyvo-nexus' ),
-            'singular_name' => __( '训练营', 'sunlyvo-nexus' ),
-            'menu_name'     => __( '训练营', 'sunlyvo-nexus' ),
-        ],
+        'labels'          => slv_build_labels( '训练营', '训练营' ),
         'public'          => true,
         'show_in_rest'    => true,
         'rest_base'       => 'campaigns',
@@ -403,29 +351,17 @@ add_action( 'init', 'slv_register_post_types', 5 );
  */
 function slv_register_post_meta(): void {
     $meta_fields = [
-        // 商品
         'product'    => [ '_slv_wholesale_price', '_slv_moq', '_slv_hs_code', '_slv_sku', '_slv_lead_time', '_slv_vendor_id' ],
-        // 合集
         'collection' => [ '_slv_collection_type', '_slv_collection_price', '_slv_is_free', '_slv_member_only', '_slv_total_items' ],
-        // 章节
         'chapter'    => [ '_slv_collection_id', '_slv_chapter_order', '_slv_is_free_preview' ],
-        // 百科
         'wiki'       => [ '_slv_wiki_definition', '_slv_wiki_aliases', '_slv_wiki_infobox' ],
-        // FAQ
         'faq'        => [ '_slv_faq_question', '_slv_faq_answer_short' ],
-        // 视频
         'video'      => [ '_slv_mux_asset_id', '_slv_mux_playback_id', '_slv_duration' ],
-        // 直播
         'live'       => [ '_slv_mux_live_id', '_slv_stream_key' ],
-        // 课程
         'course'     => [ '_slv_course_duration', '_slv_lesson_count' ],
-        // 企业
         'company'    => [ '_slv_company_vat', '_slv_company_credit_limit', '_slv_company_status' ],
-        // 训练营
         'campaign'   => [ '_slv_campaign_start', '_slv_campaign_end', '_slv_campaign_capacity' ],
-        // 询盘
         'inquiry'    => [ '_slv_inquiry_product_id', '_slv_inquiry_company', '_slv_inquiry_status' ],
-        // 通用 SEO
     ];
 
     foreach ( $meta_fields as $post_type => $keys ) {
@@ -451,7 +387,9 @@ add_action( 'init', 'slv_register_post_meta', 6 );
  */
 function slv_flush_rewrite_on_activation(): void {
     slv_register_post_types();
-    slv_register_taxonomies();
+    if ( function_exists( 'slv_register_taxonomies' ) ) {
+        slv_register_taxonomies();
+    }
     flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'slv_flush_rewrite_on_activation' );
