@@ -1,0 +1,49 @@
+/**
+ * SunLyvo Nexus — Sticky Header 修复
+ *
+ * 用 overflow-x: clip 替代 overflow-x: hidden，
+ * 后者会破坏 position: sticky。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+html,
+body {
+    /* 用 clip 替代 hidden，兼容现代浏览器 */
+    overflow-x: hidden;   /* 旧浏览器兜底 */
+    overflow-x: clip;     /* 现代浏览器优先 */
+}
+
+/* 确保祖先元素不阻碍 sticky */
+body > div,
+body > div > div,
+.wp-site-blocks,
+.wp-block-template-part,
+main,
+.slv-home {
+    overflow: visible;
+}
+
+/* 防止横向溢出的替代方案：给媒体元素限宽 */
+img,
+video,
+iframe,
+svg,
+table,
+pre {
+    max-width: 100%;
+}
+
+/* Header 自身 sticky 定位（兜底重申） */
+.slv-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* 兼容：如果浏览器不支持 clip，退回 hidden */
+@supports not (overflow: clip) {
+    html, body {
+        overflow-x: hidden;
+    }
+}

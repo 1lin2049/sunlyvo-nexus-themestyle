@@ -60,6 +60,12 @@ function slv_enqueue_assets(): void {
         wp_enqueue_script( 'slv-header', "{$js}/header.js", [], slv_asset_version( 'js/header.js' ), true );
         wp_enqueue_script( 'slv-main',   "{$js}/main.js",   [ 'slv-header' ], slv_asset_version( 'js/main.js' ), true );
 
+        // Sticky Header 修复
+        $sticky_css = SLV_THEME_DIR . '/assets/css/sticky-fix.css';
+        if ( file_exists( $sticky_css ) ) {
+            wp_enqueue_style( 'slv-sticky-fix', "{$css}/sticky-fix.css", [ 'slv-main' ], (string) filemtime( $sticky_css ) );
+        }
+
         // 首页专属资源
         if ( is_front_page() ) {
             $home_css = SLV_THEME_DIR . '/assets/css/home.css';
@@ -69,6 +75,18 @@ function slv_enqueue_assets(): void {
             $home_js = SLV_THEME_DIR . '/assets/js/home.js';
             if ( file_exists( $home_js ) ) {
                 wp_enqueue_script( 'slv-home', "{$js}/home.js", [ 'slv-main' ], (string) filemtime( $home_js ), true );
+            }
+        }
+
+        // 商品列表页专属
+        if ( is_post_type_archive( 'product' ) || is_tax( [ 'product_cat', 'product_tag' ] ) ) {
+            $pl_css = SLV_THEME_DIR . '/assets/css/product-list.css';
+            if ( file_exists( $pl_css ) ) {
+                wp_enqueue_style( 'slv-product-list', "{$css}/product-list.css", [ 'slv-main' ], (string) filemtime( $pl_css ) );
+            }
+            $pl_js = SLV_THEME_DIR . '/assets/js/product-list.js';
+            if ( file_exists( $pl_js ) ) {
+                wp_enqueue_script( 'slv-product-list', "{$js}/product-list.js", [ 'slv-main' ], (string) filemtime( $pl_js ), true );
             }
         }
     }
