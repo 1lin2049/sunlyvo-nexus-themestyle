@@ -13,6 +13,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * 图标清单（与 assets/icons/lucide/ 保持同步）。
+ *
+ * @since 1.0.0
+ * @return array
+ */
+function slv_icon_manifest(): array {
+    return [
+        'arrow-right', 'arrow-left', 'chevron-down', 'chevron-up',
+        'chevron-right', 'chevron-left', 'menu', 'x', 'search',
+        'external-link',
+        'user', 'user-circle', 'log-in', 'log-out', 'settings', 'bell',
+        'sun', 'moon', 'sun-moon',
+        'shopping-cart', 'credit-card', 'truck', 'shield-check',
+        'tag', 'gift', 'package', 'store',
+        'check', 'plus', 'minus', 'trash-2', 'pencil', 'copy',
+        'share-2', 'download', 'upload', 'filter', 'list',
+        'star', 'heart', 'info', 'triangle-alert', 'circle-check',
+        'circle-x', 'circle-alert',
+        'book-open', 'bookmark', 'quote', 'link', 'clock', 'eye',
+        'file-text', 'image', 'video', 'music',
+        'chart-line', 'chart-bar', 'trending-up', 'trending-down',
+        'activity', 'gauge',
+        'map-pin', 'globe', 'navigation',
+        'sparkles', 'bot', 'brain', 'lightbulb',
+        'twitter', 'linkedin', 'github', 'facebook', 'youtube',
+        'instagram', 'rss',
+    ];
+}
+
+/**
+ * 校验图标名是否合法。
+ *
+ * @since 1.0.0
+ */
+function slv_is_valid_icon( string $name ): bool {
+    $name = preg_replace( '/^slv-icon-/', '', $name );
+    return in_array( $name, slv_icon_manifest(), true );
+}
+
+/**
  * 渲染图标。
  *
  * @since 1.0.0
@@ -27,12 +67,15 @@ function slv_icon( string $name, int $size = 16, string $class = '', string $lab
     }
 
     $name = preg_replace( '/^slv-icon-/', '', $name );
-    $id   = 'slv-icon-' . $name;
+
+    if ( ! slv_is_valid_icon( $name ) && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log( "[SunLyvo Nexus] 图标名不在清单中：{$name}" );
+    }
+
+    $id = 'slv-icon-' . $name;
 
     $classes = 'slv-icon';
-    if ( $size && ! in_array( $size, [ 16, 20, 24, 32 ], true ) ) {
-        $classes .= ' slv-icon--' . $size;
-    } elseif ( $size ) {
+    if ( $size ) {
         $classes .= ' slv-icon--' . $size;
     }
     if ( $class ) {
@@ -48,13 +91,13 @@ function slv_icon( string $name, int $size = 16, string $class = '', string $lab
         esc_attr( $classes ),
         $size,
         $size,
-        $aria,  // 已 esc
+        $aria,
         esc_attr( $id )
     );
 }
 
 /**
- * 返回图标 HTML 字符串（用于拼接）。
+ * 返回图标 HTML 字符串。
  *
  * @since 1.0.0
  */

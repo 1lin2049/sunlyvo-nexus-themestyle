@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    // ═══ 深色模式切换 ═══
+    /* ═══ 深色模式切换（三态：light / dark / auto）═══ */
     function getStoredTheme() {
         try { return localStorage.getItem('slv_theme') || 'auto'; } catch (e) { return 'auto'; }
     }
@@ -44,7 +44,7 @@
         });
     }
 
-    // ═══ 购物车角标 ═══
+    /* ═══ 购物车角标 ═══ */
     function updateCartCount() {
         var el = document.querySelector('[data-slv-cart-count]');
         if (!el) return;
@@ -64,17 +64,16 @@
             .catch(function () {});
     }
 
-    // ═══ 搜索按钮（占位，展开搜索框待后续实现） ═══
+    /* ═══ 搜索按钮 ═══ */
     function initSearch() {
         document.querySelectorAll('[data-slv-open-search]').forEach(function (btn) {
             btn.addEventListener('click', function () {
-                // TODO: 展开搜索面板
                 window.location.href = '/?s=';
             });
         });
     }
 
-    // ═══ 订阅表单 ═══
+    /* ═══ 订阅表单 ═══ */
     function initSubscribe() {
         document.querySelectorAll('[data-slv-subscribe]').forEach(function (form) {
             form.addEventListener('submit', function (e) {

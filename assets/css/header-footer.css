@@ -109,19 +109,15 @@
     border: 2px solid var(--slv-color-bg-base);
 }
 
-/* 深色模式切换的图标状态 */
+/* 深色模式切换的图标状态 —— 三态：sun / moon / sun-moon */
 .slv-theme-toggle__icon {
     display: none;
     align-items: center;
     justify-content: center;
 }
-.slv-theme-toggle[data-mode="light"] .slv-theme-toggle__icon--light,
-.slv-theme-toggle[data-mode="auto"] .slv-theme-toggle__icon--light {
-    display: inline-flex;
-}
-.slv-theme-toggle[data-mode="dark"] .slv-theme-toggle__icon--dark {
-    display: inline-flex;
-}
+.slv-theme-toggle[data-mode="light"] .slv-theme-toggle__icon--light { display: inline-flex; }
+.slv-theme-toggle[data-mode="dark"]  .slv-theme-toggle__icon--dark  { display: inline-flex; }
+.slv-theme-toggle[data-mode="auto"]  .slv-theme-toggle__icon--auto  { display: inline-flex; }
 
 /* 移动端菜单 */
 @media (max-width: 1024px) {
