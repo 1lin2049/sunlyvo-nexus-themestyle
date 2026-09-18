@@ -1,0 +1,13 @@
+{
+    "slug": "dark",
+    "name": "深色模式",
+    "description": "",
+    "version": "1.0.0",
+    "author": "李咏燊",
+    "group": "base",
+    "user_switchable": true,
+    "admin_switchable": true,
+    "supports": {
+        "overrides": ["tokens", "components", "layout", "blocks"]
+    }
+}

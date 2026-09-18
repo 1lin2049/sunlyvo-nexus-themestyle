@@ -1,0 +1,13 @@
+{
+    "slug": "industrial",
+    "name": "工业机械",
+    "description": "",
+    "version": "1.0.0",
+    "author": "李咏燊",
+    "group": "industry",
+    "user_switchable": false,
+    "admin_switchable": true,
+    "supports": {
+        "overrides": ["tokens", "components", "layout", "blocks"]
+    }
+}

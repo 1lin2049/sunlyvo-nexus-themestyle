@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, InputNumber, Empty, App, Space, Typography, Card } from 'antd';
+import { Table, Button, InputNumber, Empty, App, Space, Typography, Card, Spin } from 'antd';
 import { DeleteOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import { getCartItems, updateCartItem, removeCartItem } from '../shared/api';
+import { getCartItems, updateCartItem, removeCartItem, type CartItem } from '../shared/api';
 
 const { Title } = Typography;
 
 export default function CartPage() {
     const { message } = App.useApp();
-    const [items, setItems] = useState<any[]>([]);
+    const [items, setItems] = useState<CartItem[]>([]);
     const [loading, setLoading] = useState(true);
 
     const load = async () => {
@@ -25,14 +25,22 @@ export default function CartPage() {
     useEffect(() => { load(); }, []);
 
     const update = async (id: number, qty: number) => {
-        await updateCartItem(id, qty);
-        load();
+        try {
+            await updateCartItem(id, qty);
+            load();
+        } catch {
+            message.error('更新失败');
+        }
     };
 
     const remove = async (id: number) => {
-        await removeCartItem(id);
-        message.success('已移除');
-        load();
+        try {
+            await removeCartItem(id);
+            message.success('已移除');
+            load();
+        } catch {
+            message.error('移除失败');
+        }
     };
 
     const total = items.reduce((s, i) => s + (i.subtotal || 0), 0);
@@ -45,7 +53,7 @@ export default function CartPage() {
         },
         {
             title: '数量', key: 'qty',
-            render: (_: any, r: any) => (
+            render: (_: unknown, r: CartItem) => (
                 <InputNumber min={1} value={r.quantity}
                     onChange={(v) => update(r.id, Number(v))} />
             ),
@@ -56,7 +64,7 @@ export default function CartPage() {
         },
         {
             title: '操作', key: 'op',
-            render: (_: any, r: any) => (
+            render: (_: unknown, r: CartItem) => (
                 <Button type="text" danger icon={<DeleteOutlined />} onClick={() => remove(r.id)} />
             ),
         },
@@ -65,15 +73,24 @@ export default function CartPage() {
     return (
         <Card>
             <Title level={3}><ShoppingCartOutlined /> 购物车</Title>
-            {items.length === 0 && !loading ? (
+            {loading ? (
+                <div style={{ textAlign: 'center', padding: 60 }}><Spin size="large" /></div>
+            ) : items.length === 0 ? (
                 <Empty description="购物车为空" />
             ) : (
                 <>
-                    <Table rowKey="id" columns={columns} dataSource={items} loading={loading} pagination={false} />
+                    <Table rowKey="id" columns={columns} dataSource={items} pagination={false} />
                     <div style={{ marginTop: 24, textAlign: 'right' }}>
                         <Space size="large">
-                            <span>合计：<strong style={{ fontSize: 24, color: '#0066ff' }}>¥ {total.toFixed(2)}</strong></span>
-                            <Button type="primary" size="large" href="/checkout/">去结算</Button>
+                            <span>
+                                合计：
+                                <strong style={{ fontSize: 24, color: '#0066ff' }}>
+                                    ¥ {total.toFixed(2)}
+                                </strong>
+                            </span>
+                            <Button type="primary" size="large" href="/checkout/">
+                                去结算
+                            </Button>
                         </Space>
                     </div>
                 </>

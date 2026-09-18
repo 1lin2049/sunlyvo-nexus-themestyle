@@ -28,7 +28,6 @@
                 </button>
             </div>
 
-            <!-- 分类 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>分类</span>
@@ -43,7 +42,6 @@
                 </div>
             </div>
 
-            <!-- 价格 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>价格</span>
@@ -59,7 +57,6 @@
                 </div>
             </div>
 
-            <!-- 标签 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>标签</span>
@@ -75,7 +72,6 @@
                 </div>
             </div>
 
-            <!-- 评分 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>评分</span>
@@ -121,7 +117,7 @@
                         <svg class="slv-icon" width="18" height="18" aria-hidden="true"><use href="#slv-icon-filter"></use></svg>
                         筛选
                     </button>
-                    <span class="slv-product-toolbar__count">共 <strong data-slv-total>12</strong> 件商品</span>
+                    <span class="slv-product-toolbar__count">共 <strong data-slv-total>—</strong> 件商品</span>
                 </div>
                 <div class="slv-product-toolbar__right">
                     <select class="slv-product-toolbar__sort" data-slv-sort aria-label="排序">
@@ -143,10 +139,10 @@
                 </div>
             </div>
 
-            <!-- ═══ 商品网格（关键：用 wp:group 包裹，layout=default） ═══ -->
+            <!-- ═══ 商品网格：使用 inherit:true 继承主查询 ═══ -->
             <!-- wp:group {"className":"slv-product-grid","layout":{"type":"default"},"metadata":{"name":"商品网格"}} -->
             <div class="wp-block-group slv-product-grid" data-slv-product-grid>
-                <!-- wp:query {"queryId":10,"query":{"perPage":12,"postType":"product","order":"desc","orderBy":"date","inherit":false},"layout":{"type":"default"}} -->
+                <!-- wp:query {"queryId":10,"query":{"inherit":true},"layout":{"type":"default"}} -->
                 <div class="wp-block-query">
                     <!-- wp:post-template -->
                         <!-- wp:group {"className":"slv-product-card","layout":{"type":"default"}} -->

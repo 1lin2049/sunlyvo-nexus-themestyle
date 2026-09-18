@@ -7,8 +7,12 @@ import CheckoutPage from '../pages/CheckoutPage';
 const mount = document.getElementById('slv-react-checkout');
 if (mount) {
     ReactDOM.createRoot(mount).render(
-        <ConfigProvider locale={zhCN}>
-            <AntdApp><CheckoutPage /></AntdApp>
-        </ConfigProvider>
+        <React.StrictMode>
+            <ConfigProvider locale={zhCN} theme={{ token: { colorPrimary: '#0066ff' } }}>
+                <AntdApp>
+                    <CheckoutPage />
+                </AntdApp>
+            </ConfigProvider>
+        </React.StrictMode>
     );
 }

@@ -45,7 +45,9 @@ $slv_core_files = [
     'inc/helpers-icon.php',
     'inc/security.php',
     'inc/performance.php',
-    'inc/admin-bar.php',   // ← 新增这一行
+    'inc/admin-bar.php',
+    'inc/react-mounts.php',
+    'inc/template-loader.php',   // ← 新增
 ];
 
 foreach ( $slv_core_files as $slv_file ) {
@@ -66,7 +68,7 @@ $slv_modules = [
     'warehouse', 'store-profile', 'sync', 'seo', 'ai', 'acp',
     'analytics', 'reader', 'comments', 'security', 'performance',
     'demo', 'qa', 'settings',
-    'style',   // ← 新增
+    'template',   // ← 新增
 ];
 
 foreach ( $slv_modules as $slv_module ) {

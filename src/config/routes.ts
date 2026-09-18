@@ -27,7 +27,7 @@ export default [
             { name: '订单', path: '/platform/orders', component: './platform/orders' },
             { name: '商品', path: '/platform/products', component: './platform/products' },
             { name: '服务配置', path: '/platform/settings', component: './platform/settings' },
-            { name: '风格管理', path: '/platform/style', component: './platform/style' },
+            { name: '模板管理', path: '/platform/template', component: './platform/template' },
         ],
     },
     {

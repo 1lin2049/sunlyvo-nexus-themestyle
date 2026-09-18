@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import { Steps, Form, Input, Button, Card, Result, App, Space } from 'antd';
-import { getCartItems, addCartItem } from '../shared/api';
+import { Steps, Form, Input, Button, Card, Result, App, Space, Radio } from 'antd';
+import { createOrder, type CheckoutData } from '../shared/api';
 
 export default function CheckoutPage() {
     const { message } = App.useApp();
     const [step, setStep] = useState(0);
     const [done, setDone] = useState(false);
+    const [orderId, setOrderId] = useState<number | null>(null);
     const [form] = Form.useForm();
 
     const submit = async () => {
         try {
             const values = await form.validateFields();
-            const cfg = (window as any).SLV_CONFIG || {};
-            const res = await fetch(cfg.restUrl + '/checkout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': cfg.nonce },
-                body: JSON.stringify(values),
-            });
-            const data = await res.json();
-            if (data.success) {
+            setStep(1);
+            const res = await createOrder(values as CheckoutData);
+            if (res.success && res.order_id) {
+                setOrderId(res.order_id);
+                setStep(2);
                 setDone(true);
             } else {
-                message.error(data.error || '下单失败');
+                message.error(res.error || '下单失败');
+                setStep(0);
             }
         } catch {
-            message.error('请检查表单');
+            message.error('请检查表单填写');
+            setStep(0);
         }
     };
 
@@ -33,7 +33,7 @@ export default function CheckoutPage() {
             <Result
                 status="success"
                 title="订单提交成功"
-                subTitle="我们已收到您的订单，稍后会有邮件通知"
+                subTitle={`订单号：${orderId}，我们会尽快为您处理`}
                 extra={[
                     <Button type="primary" key="home" href="/">返回首页</Button>,
                     <Button key="orders" href="/my-account/">查看订单</Button>,
@@ -44,22 +44,34 @@ export default function CheckoutPage() {
 
     return (
         <Card>
-            <Steps current={step} style={{ marginBottom: 32 }}
-                items={[{ title: '收货信息' }, { title: '支付方式' }, { title: '完成' }]} />
-            <Form form={form} layout="vertical">
-                <Form.Item name="name" label="姓名" rules={[{ required: true }]}>
-                    <Input placeholder="请输入姓名" />
+            <Steps
+                current={step}
+                style={{ marginBottom: 32 }}
+                items={[{ title: '填写信息' }, { title: '提交中' }, { title: '完成' }]}
+            />
+            <Form form={form} layout="vertical" style={{ maxWidth: 500 }}>
+                <Form.Item name="name" label="姓名" rules={[{ required: true, message: '请输入姓名' }]}>
+                    <Input placeholder="请输入姓名" size="large" />
                 </Form.Item>
-                <Form.Item name="email" label="邮箱" rules={[{ required: true, type: 'email' }]}>
-                    <Input placeholder="your@email.com" />
+                <Form.Item name="email" label="邮箱" rules={[{ required: true, type: 'email', message: '请输入有效邮箱' }]}>
+                    <Input placeholder="your@email.com" size="large" />
                 </Form.Item>
                 <Form.Item name="phone" label="电话">
-                    <Input />
+                    <Input placeholder="选填" size="large" />
                 </Form.Item>
-                <Form.Item name="address" label="收货地址" rules={[{ required: true }]}>
-                    <Input.TextArea rows={3} />
+                <Form.Item name="address" label="收货地址" rules={[{ required: true, message: '请输入收货地址' }]}>
+                    <Input.TextArea rows={3} placeholder="省 / 市 / 区 / 详细地址" />
                 </Form.Item>
-                <Button type="primary" size="large" block onClick={submit}>
+                <Form.Item name="payment_method" label="支付方式" initialValue="stripe">
+                    <Radio.Group>
+                        <Space direction="vertical">
+                            <Radio value="stripe">Stripe（信用卡）</Radio>
+                            <Radio value="wechat">微信支付</Radio>
+                            <Radio value="alipay">支付宝</Radio>
+                        </Space>
+                    </Radio.Group>
+                </Form.Item>
+                <Button type="primary" size="large" block onClick={submit} loading={step === 1}>
                     提交订单
                 </Button>
             </Form>

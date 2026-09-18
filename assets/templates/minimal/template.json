@@ -1,0 +1,13 @@
+{
+    "slug": "minimal",
+    "name": "极简",
+    "description": "",
+    "version": "1.0.0",
+    "author": "李咏燊",
+    "group": "aux",
+    "user_switchable": false,
+    "admin_switchable": true,
+    "supports": {
+        "overrides": ["tokens", "components", "layout", "blocks"]
+    }
+}

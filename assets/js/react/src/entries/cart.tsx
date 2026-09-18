@@ -7,8 +7,12 @@ import CartPage from '../pages/CartPage';
 const mount = document.getElementById('slv-react-cart');
 if (mount) {
     ReactDOM.createRoot(mount).render(
-        <ConfigProvider locale={zhCN}>
-            <AntdApp><CartPage /></AntdApp>
-        </ConfigProvider>
+        <React.StrictMode>
+            <ConfigProvider locale={zhCN} theme={{ token: { colorPrimary: '#0066ff' } }}>
+                <AntdApp>
+                    <CartPage />
+                </AntdApp>
+            </ConfigProvider>
+        </React.StrictMode>
     );
 }
