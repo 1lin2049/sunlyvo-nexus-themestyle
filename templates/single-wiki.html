@@ -1,0 +1,61 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="slv-single-wiki">
+    <!-- ═══ Hero：定义卡 ═══ -->
+    <!-- wp:group {"className":"slv-wiki-hero","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-wiki-hero">
+        <!-- wp:post-terms {"term":"wiki_cat","className":"slv-wiki-hero__cat"} /-->
+        <!-- wp:post-title {"level":1,"className":"slv-wiki-hero__title"} /-->
+        
+        <!-- 定义卡 -->
+        <div class="slv-wiki-definition">
+            <div class="slv-wiki-definition__label">定义</div>
+            <div class="slv-wiki-definition__text" data-slv-wiki-definition></div>
+        </div>
+
+        <!-- 信息框 -->
+        <div class="slv-wiki-infobox" data-slv-wiki-infobox hidden></div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- ═══ 主体：TOC + 内容 ═══ -->
+    <!-- wp:group {"className":"slv-wiki-body","layout":{"type":"constrained","contentSize":"1200px"}} -->
+    <div class="wp-block-group slv-wiki-body">
+        <div class="slv-wiki-body__grid">
+            <aside class="slv-wiki-body__toc">
+                <div class="slv-toc" data-slv-toc></div>
+            </aside>
+            <article class="slv-wiki-body__main">
+                <!-- wp:post-content {"className":"slv-prose slv-reader__content"} /-->
+
+                <!-- 别名 -->
+                <div class="slv-wiki-aliases">
+                    <span class="slv-wiki-aliases__label">别名：</span>
+                    <span class="slv-wiki-aliases__text" data-slv-wiki-aliases></span>
+                </div>
+            </article>
+        </div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- ═══ 相关词条 ═══ -->
+    <!-- wp:group {"className":"slv-related-wiki","layout":{"type":"constrained","contentSize":"1200px"}} -->
+    <div class="wp-block-group slv-related-wiki">
+        <h2 class="slv-section__title">相关词条</h2>
+        <!-- wp:query {"queryId":21,"query":{"perPage":4,"postType":"wiki","order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
+        <div class="wp-block-query">
+            <!-- wp:post-template -->
+                <!-- wp:group {"className":"slv-wiki-card","layout":{"type":"default"}} -->
+                <div class="wp-block-group slv-wiki-card">
+                    <!-- wp:post-title {"level":3,"isLink":true} /-->
+                    <!-- wp:post-excerpt {"excerptLength":20} /-->
+                </div>
+                <!-- /wp:group -->
+            <!-- /wp:post-template -->
+        </div>
+        <!-- /wp:query -->
+    </div>
+    <!-- /wp:group -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

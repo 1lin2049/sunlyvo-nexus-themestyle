@@ -91,6 +91,24 @@ function slv_enqueue_assets(): void {
                 wp_enqueue_script( 'slv-product-detail', "{$js}/product-detail.js", [ 'slv-main' ], (string) filemtime( $pd_js ), true );
             }
         }
+
+        // 单篇类型专属 CSS
+        if ( is_singular( 'post' ) ) {
+            $f = SLV_THEME_DIR . '/assets/css/single-post.css';
+            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-post', "{$css}/single-post.css", [ 'slv-main' ], (string) filemtime( $f ) );
+        }
+        if ( is_singular( 'wiki' ) ) {
+            $f = SLV_THEME_DIR . '/assets/css/single-wiki.css';
+            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-wiki', "{$css}/single-wiki.css", [ 'slv-main' ], (string) filemtime( $f ) );
+        }
+        if ( is_singular( 'faq' ) ) {
+            $f = SLV_THEME_DIR . '/assets/css/single-faq.css';
+            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-faq', "{$css}/single-faq.css", [ 'slv-main' ], (string) filemtime( $f ) );
+        }
+        if ( is_singular( 'collection' ) ) {
+            $f = SLV_THEME_DIR . '/assets/css/single-collection.css';
+            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-collection', "{$css}/single-collection.css", [ 'slv-main' ], (string) filemtime( $f ) );
+        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'slv_enqueue_assets' );

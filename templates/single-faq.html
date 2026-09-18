@@ -1,0 +1,57 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="slv-single-faq">
+    <!-- Hero -->
+    <!-- wp:group {"className":"slv-faq-hero","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-faq-hero">
+        <!-- wp:post-terms {"term":"faq_cat","className":"slv-faq-hero__cat"} /-->
+        <div class="slv-faq-hero__icon">?</div>
+        <!-- wp:post-title {"level":1,"className":"slv-faq-hero__title"} /-->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- 答案卡片 -->
+    <!-- wp:group {"className":"slv-faq-answer-wrap","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-faq-answer-wrap">
+        <div class="slv-faq-answer">
+            <div class="slv-faq-answer__label">答案</div>
+            <div class="slv-faq-answer__content">
+                <!-- wp:post-content {"className":"slv-prose slv-faq-answer__content"} /-->
+            </div>
+        </div>
+
+        <!-- 行动按钮 -->
+        <div class="slv-faq-actions">
+            <button type="button" class="slv-button slv-button--secondary" data-slv-copy-faq>
+                <svg class="slv-icon" width="16" height="16"><use href="#slv-icon-copy"></use></svg>
+                复制答案
+            </button>
+            <button type="button" class="slv-button slv-button--secondary" data-slv-share-faq>
+                <svg class="slv-icon" width="16" height="16"><use href="#slv-icon-share"></use></svg>
+                分享
+            </button>
+        </div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- 相关 FAQ -->
+    <!-- wp:group {"className":"slv-related-faq","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-related-faq">
+        <h2 class="slv-section__title">相关问题</h2>
+        <!-- wp:query {"queryId":22,"query":{"perPage":5,"postType":"faq","order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
+        <div class="wp-block-query">
+            <!-- wp:post-template -->
+                <!-- wp:group {"className":"slv-faq-related-item","layout":{"type":"default"}} -->
+                <div class="wp-block-group slv-faq-related-item">
+                    <span class="slv-faq-related-item__icon">Q</span>
+                    <!-- wp:post-title {"level":3,"isLink":true} /-->
+                </div>
+                <!-- /wp:group -->
+            <!-- /wp:post-template -->
+        </div>
+        <!-- /wp:query -->
+    </div>
+    <!-- /wp:group -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

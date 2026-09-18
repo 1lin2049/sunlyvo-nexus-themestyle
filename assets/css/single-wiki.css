@@ -1,0 +1,125 @@
+/**
+ * SunLyvo Nexus — 百科词条页
+ */
+
+.slv-single-wiki { padding-bottom: 80px; }
+
+.slv-wiki-hero {
+    padding: 64px 24px 32px;
+    max-width: 820px;
+    margin: 0 auto;
+}
+.slv-wiki-hero__cat {
+    display: inline-block;
+    padding: 4px 12px;
+    background: color-mix(in srgb, var(--slv-color-knowledge) 10%, white);
+    color: var(--slv-color-knowledge);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+.slv-wiki-hero__title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    color: var(--slv-color-text-primary);
+}
+
+.slv-wiki-definition {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background: linear-gradient(135deg, #f0f5ff, #faf5ff);
+    border-left: 4px solid var(--slv-color-knowledge);
+    border-radius: 0 var(--slv-radius-lg) var(--slv-radius-lg) 0;
+}
+.slv-wiki-definition__label {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    background: var(--slv-color-knowledge);
+    color: #fff;
+    border-radius: var(--slv-radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    height: fit-content;
+}
+.slv-wiki-definition__text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--slv-color-text-primary);
+    font-weight: 500;
+}
+
+.slv-wiki-infobox {
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--slv-color-bg-subtle);
+    border: 1px solid var(--slv-color-border-base);
+    border-radius: var(--slv-radius-lg);
+    font-size: 14px;
+}
+.slv-wiki-infobox__row { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--slv-color-border-subtle); }
+.slv-wiki-infobox__row:last-child { border-bottom: none; }
+.slv-wiki-infobox__label { color: var(--slv-color-text-tertiary); min-width: 100px; }
+.slv-wiki-infobox__value { color: var(--slv-color-text-primary); flex: 1; }
+
+.slv-wiki-body { padding: 48px 24px 64px; }
+.slv-wiki-body__grid {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+.slv-wiki-body__toc { position: sticky; top: 88px; }
+.slv-wiki-body__main { min-width: 0; }
+
+.slv-wiki-aliases {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--slv-color-border-subtle);
+    font-size: 14px;
+}
+.slv-wiki-aliases__label { color: var(--slv-color-text-tertiary); }
+
+.slv-related-wiki { padding: 0 24px 64px; max-width: 1200px; margin: 0 auto; }
+.slv-related-wiki .slv-section__title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+.slv-related-wiki .wp-block-post-template {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.slv-wiki-card {
+    padding: 20px;
+    background: var(--slv-color-bg-base);
+    border: 1px solid var(--slv-color-border-base);
+    border-radius: var(--slv-radius-lg);
+    transition: all 200ms;
+}
+.slv-wiki-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--slv-color-knowledge);
+    box-shadow: 0 8px 24px rgba(114,46,209,0.1);
+}
+.slv-wiki-card h3 { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
+.slv-wiki-card h3 a { color: var(--slv-color-text-primary); text-decoration: none; }
+.slv-wiki-card p { font-size: 13px; line-height: 1.5; color: var(--slv-color-text-secondary); margin: 0; }
+
+@media (max-width: 1024px) {
+    .slv-wiki-body__grid { grid-template-columns: minmax(0, 1fr); }
+    .slv-wiki-body__toc { position: static; }
+    .slv-related-wiki .wp-block-post-template { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 640px) {
+    .slv-wiki-hero { padding: 40px 16px 24px; }
+    .slv-wiki-definition { flex-direction: column; gap: 8px; padding: 16px; }
+    .slv-wiki-body { padding: 32px 16px; }
+    .slv-related-wiki .wp-block-post-template { grid-template-columns: minmax(0, 1fr) !important; }
+}

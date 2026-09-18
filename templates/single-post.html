@@ -1,0 +1,88 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="slv-single-post">
+    <!-- ═══ Hero 区域 ═══ -->
+    <!-- wp:group {"className":"slv-single-hero","layout":{"type":"constrained"}} -->
+    <div class="wp-block-group slv-single-hero">
+        <div class="slv-single-hero__inner">
+            <!-- wp:post-terms {"term":"category","className":"slv-single-hero__cat"} /-->
+            <!-- wp:post-title {"level":1,"className":"slv-single-hero__title"} /-->
+            <!-- wp:post-excerpt {"className":"slv-single-hero__excerpt"} /-->
+            <div class="slv-single-hero__meta">
+                <!-- wp:post-author-name {"isLink":true,"className":"slv-single-hero__author"} /-->
+                <span class="slv-single-hero__dot"></span>
+                <!-- wp:post-date {"format":"Y-m-d","className":"slv-single-hero__date"} /-->
+                <span class="slv-single-hero__dot"></span>
+                <span class="slv-single-hero__reading-time" data-slv-reading-time></span>
+            </div>
+        </div>
+        <!-- wp:post-featured-image {"aspectRatio":"21/9","className":"slv-single-hero__image"} /-->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- ═══ 主体：TOC + 内容 ═══ -->
+    <!-- wp:group {"className":"slv-single-body","layout":{"type":"constrained","contentSize":"1200px"}} -->
+    <div class="wp-block-group slv-single-body">
+        <div class="slv-single-body__grid">
+            <!-- 侧栏 TOC -->
+            <aside class="slv-single-body__toc">
+                <div class="slv-toc" data-slv-toc></div>
+            </aside>
+
+            <!-- 正文 -->
+            <article class="slv-single-body__main">
+                <!-- wp:post-content {"className":"slv-prose slv-reader__content"} /-->
+
+                <!-- 标签 -->
+                <!-- wp:post-terms {"term":"post_tag","className":"slv-single-body__tags"} /-->
+
+                <!-- 分享 -->
+                <div class="slv-single-body__share" data-slv-reader-share></div>
+            </article>
+        </div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- ═══ 作者卡 ═══ -->
+    <!-- wp:group {"className":"slv-author-box","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-author-box">
+        <div class="slv-author-box__avatar">
+            <!-- wp:avatar {"size":80} /-->
+        </div>
+        <div class="slv-author-box__info">
+            <div class="slv-author-box__name"><!-- wp:post-author-name {"isLink":true} /--></div>
+            <div class="slv-author-box__bio"><!-- wp:post-author-biography /--></div>
+        </div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- ═══ 相关文章 ═══ -->
+    <!-- wp:group {"className":"slv-related-posts","layout":{"type":"constrained","contentSize":"1200px"}} -->
+    <div class="wp-block-group slv-related-posts">
+        <h2 class="slv-section__title">相关阅读</h2>
+        <!-- wp:query {"queryId":20,"query":{"perPage":3,"postType":"post","order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
+        <div class="wp-block-query">
+            <!-- wp:post-template -->
+                <!-- wp:group {"className":"slv-related-card","layout":{"type":"default"}} -->
+                <div class="wp-block-group slv-related-card">
+                    <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9"} /-->
+                    <!-- wp:post-terms {"term":"category","className":"slv-related-card__cat"} /-->
+                    <!-- wp:post-title {"level":3,"isLink":true} /-->
+                    <!-- wp:post-date {"format":"Y-m-d","className":"slv-related-card__date"} /-->
+                </div>
+                <!-- /wp:group -->
+            <!-- /wp:post-template -->
+        </div>
+        <!-- /wp:query -->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- ═══ 评论 ═══ -->
+    <!-- wp:group {"className":"slv-single-comments","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-single-comments">
+        <!-- wp:comments /-->
+    </div>
+    <!-- /wp:group -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

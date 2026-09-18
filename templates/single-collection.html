@@ -1,0 +1,66 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="slv-single-collection">
+    <!-- Hero -->
+    <!-- wp:group {"className":"slv-collection-hero","layout":{"type":"constrained","contentSize":"1200px"}} -->
+    <div class="wp-block-group slv-collection-hero">
+        <div class="slv-collection-hero__grid">
+            <div class="slv-collection-hero__media">
+                <!-- wp:post-featured-image {"aspectRatio":"3/4"} /-->
+                <div class="slv-collection-hero__badge" data-slv-collection-type></div>
+            </div>
+            <div class="slv-collection-hero__info">
+                <!-- wp:post-terms {"term":"collection_cat","className":"slv-collection-hero__cat"} /-->
+                <!-- wp:post-title {"level":1,"className":"slv-collection-hero__title"} /-->
+                <!-- wp:post-excerpt {"className":"slv-collection-hero__excerpt"} /-->
+
+                <div class="slv-collection-hero__meta">
+                    <div class="slv-collection-hero__stat">
+                        <div class="slv-collection-hero__stat-value" data-slv-total-items>—</div>
+                        <div class="slv-collection-hero__stat-label">章节数</div>
+                    </div>
+                    <div class="slv-collection-hero__stat">
+                        <div class="slv-collection-hero__stat-value" data-slv-free-items>—</div>
+                        <div class="slv-collection-hero__stat-label">免费试读</div>
+                    </div>
+                    <div class="slv-collection-hero__stat">
+                        <div class="slv-collection-hero__stat-value" data-slv-author-name>—</div>
+                        <div class="slv-collection-hero__stat-label">作者</div>
+                    </div>
+                </div>
+
+                <div class="slv-collection-hero__price" data-slv-collection-price>
+                    <span class="slv-collection-hero__currency">¥</span>
+                    <span class="slv-collection-hero__amount">—</span>
+                </div>
+
+                <div class="slv-collection-hero__actions">
+                    <button type="button" class="slv-button slv-button--lg slv-button--block" data-slv-buy-collection>
+                        立即解锁
+                    </button>
+                    <button type="button" class="slv-button slv-button--lg slv-button--secondary slv-button--block" data-slv-preview-collection>
+                        免费试读
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- 章节目录 -->
+    <!-- wp:group {"className":"slv-collection-chapters","layout":{"type":"constrained","contentSize":"1200px"}} -->
+    <div class="wp-block-group slv-collection-chapters">
+        <h2 class="slv-section__title">目录</h2>
+        <div class="slv-chapter-list" data-slv-chapter-list></div>
+    </div>
+    <!-- /wp:group -->
+
+    <!-- 内容正文 -->
+    <!-- wp:group {"className":"slv-collection-content","layout":{"type":"constrained","contentSize":"820px"}} -->
+    <div class="wp-block-group slv-collection-content">
+        <!-- wp:post-content {"className":"slv-prose"} /-->
+    </div>
+    <!-- /wp:group -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->
