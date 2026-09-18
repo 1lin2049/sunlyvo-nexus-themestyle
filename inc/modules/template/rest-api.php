@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'rest_api_init', static function () {
 
-    // GET /templates
+    /* ─── GET /templates ─── */
     register_rest_route( SLV_REST_NAMESPACE, '/templates', [
         'methods'             => 'GET',
         'callback'            => static function (): WP_REST_Response {
@@ -48,28 +48,42 @@ add_action( 'rest_api_init', static function () {
         'permission_callback' => '__return_true',
     ] );
 
-    // POST /user/theme（用户级深色模式）
+    /* ─── GET + POST /user/theme ─── */
     register_rest_route( SLV_REST_NAMESPACE, '/user/theme', [
-        'methods'             => 'POST',
-        'callback'            => static function ( WP_REST_Request $req ): WP_REST_Response {
-            if ( ! class_exists( 'SLV_Template_Resolver' ) ) {
-                return new WP_REST_Response( [ 'success' => false ], 500 );
-            }
-            $user_id = get_current_user_id();
-            if ( ! $user_id ) {
-                return new WP_REST_Response( [ 'success' => false, 'reason' => 'not_logged_in' ], 401 );
-            }
-            $mode = sanitize_key( (string) $req['mode'] );
-            $ok   = SLV_Template_Resolver::save_user_theme_mode( $user_id, $mode );
-            return new WP_REST_Response( [ 'success' => $ok ], $ok ? 200 : 400 );
-        },
-        'permission_callback' => static fn() => is_user_logged_in(),
-        'args'                => [
-            'mode' => [ 'required' => true, 'validate_callback' => static fn( $v ) => is_string( $v ) ],
+        [
+            'methods'             => 'GET',
+            'callback'            => static function (): WP_REST_Response {
+                if ( ! class_exists( 'SLV_Template_Resolver' ) ) {
+                    return new WP_REST_Response( [ 'mode' => 'auto' ], 200 );
+                }
+                return new WP_REST_Response( [
+                    'mode' => SLV_Template_Resolver::resolve_theme_mode(),
+                ], 200 );
+            },
+            'permission_callback' => '__return_true',
+        ],
+        [
+            'methods'             => 'POST',
+            'callback'            => static function ( WP_REST_Request $req ): WP_REST_Response {
+                if ( ! class_exists( 'SLV_Template_Resolver' ) ) {
+                    return new WP_REST_Response( [ 'success' => false ], 500 );
+                }
+                $user_id = get_current_user_id();
+                if ( ! $user_id ) {
+                    return new WP_REST_Response( [ 'success' => false, 'reason' => 'not_logged_in' ], 401 );
+                }
+                $mode = sanitize_key( (string) $req['mode'] );
+                $ok   = SLV_Template_Resolver::save_user_theme_mode( $user_id, $mode );
+                return new WP_REST_Response( [ 'success' => $ok ], $ok ? 200 : 400 );
+            },
+            'permission_callback' => static fn() => is_user_logged_in(),
+            'args'                => [
+                'mode' => [ 'required' => true, 'validate_callback' => static fn( $v ) => is_string( $v ) ],
+            ],
         ],
     ] );
 
-    // POST /site/template（管理员设置全站默认）
+    /* ─── POST /site/template ─── */
     register_rest_route( SLV_REST_NAMESPACE, '/site/template', [
         'methods'             => 'POST',
         'callback'            => static function ( WP_REST_Request $req ): WP_REST_Response {
@@ -90,7 +104,7 @@ add_action( 'rest_api_init', static function () {
         ],
     ] );
 
-    // POST /store/{id}/template
+    /* ─── POST /store/{id}/template ─── */
     register_rest_route( SLV_REST_NAMESPACE, '/store/(?P<id>\d+)/template', [
         'methods'             => 'POST',
         'callback'            => static function ( WP_REST_Request $req ): WP_REST_Response {

@@ -5,9 +5,7 @@
     "description": "SunLyvo Nexus 中台管理端",
     "scripts": {
         "dev": "max dev",
-        "build": "max build",
-        "build:subdomain": "cross-env UMI_ENV=production.subdomain max build",
-        "build:subdir": "cross-env UMI_ENV=production.subdir max build",
+        "build": "cross-env NODE_ENV=production max build",
         "postinstall": "max setup",
         "setup": "max setup",
         "tsc": "tsc --noEmit"
@@ -15,10 +13,8 @@
     "dependencies": {
         "@ant-design/icons": "^6.3.4",
         "@ant-design/pro-components": "3.1.14-7",
-        "@ant-design/x": "^2.0.0",
         "@umijs/max": "^4.6.51",
         "antd": "^6.6.4",
-        "antd-style": "^4.0.0",
         "dayjs": "^1.11.13",
         "react": "^19.3.0",
         "react-dom": "^19.3.0"

@@ -48,7 +48,7 @@ $slv_core_files = [
     'inc/admin-bar.php',
     'inc/react-mounts.php',
     'inc/template-loader.php',
-    'inc/modules/template/class-template-config-writer.php',   // ← 新增
+    'inc/modules/template/class-template-config-writer.php',
 ];
 
 foreach ( $slv_core_files as $slv_file ) {

@@ -1,9 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConfigProvider, App as AntdApp, Spin } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history } from '@umijs/max';
+
+interface SLVAdminConfig {
+    apiBase: string;
+    adminUrl: string;
+    homeUrl: string;
+    locale: string;
+}
+
+declare global {
+    interface Window {
+        SLV_ADMIN_CONFIG?: SLVAdminConfig;
+    }
+}
 
 export const layout: RunTimeLayoutConfig = () => {
     return {
@@ -14,32 +26,24 @@ export const layout: RunTimeLayoutConfig = () => {
         fixedHeader: true,
         contentStyle: { padding: 24 },
         menu: { locale: false },
-        onPageChange: () => {
-            // 未登录跳转（可选）
-            const isLogin = window.location.pathname.includes('/user/login');
-            if (!isLogin && !window.SLV_ADMIN_CONFIG) {
-                // config 未加载，等待
-            }
-        },
     };
 };
 
 const Root: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [ready, setReady] = React.useState(false);
-    const [locale, setLocale] = React.useState(zhCN);
+    const [ready, setReady] = useState(false);
+    const [locale, setLocale] = useState(zhCN);
 
     useEffect(() => {
-        // 等待 config.js 加载
-        const checkConfig = () => {
+        const check = () => {
             if (window.SLV_ADMIN_CONFIG) {
                 const lang = window.SLV_ADMIN_CONFIG.locale || 'zh-CN';
                 setLocale(lang.startsWith('en') ? enUS : zhCN);
                 setReady(true);
             } else {
-                setTimeout(checkConfig, 50);
+                setTimeout(check, 50);
             }
         };
-        checkConfig();
+        check();
     }, []);
 
     if (!ready) {

@@ -2,16 +2,7 @@ import React from 'react';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { App } from 'antd';
-
-const getBasePath = (): string => {
-    if (typeof window !== 'undefined' && window.SLV_ADMIN_CONFIG?.adminUrl) {
-        try {
-            return new URL(window.SLV_ADMIN_CONFIG.adminUrl).pathname;
-        } catch { /* ignore */ }
-    }
-    const match = window.location.pathname.match(/^(\/[^/]*\/)/);
-    return match ? match[1] : '/';
-};
+import { getBasePath } from '@/services/api';
 
 export default () => {
     const { message } = App.useApp();
