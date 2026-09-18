@@ -115,6 +115,8 @@ function slv_enqueue_inline_config(): void {
             'url'         => $post_id ? get_permalink( $post_id ) : home_url(),
             'author'      => $post_id ? get_the_author_meta( 'display_name', (int) get_post_field( 'post_author', $post_id ) ) : '',
             'publishedAt' => $post_id ? get_the_date( 'c', $post_id ) : '',
+        'adminUrl'  => esc_url_raw( get_option( 'slv_admin_url', home_url( '/admin/' ) ) ),
+        'adminMode' => get_option( 'slv_admin_deploy_mode', 'subdir' ),
         ],
     ];
 

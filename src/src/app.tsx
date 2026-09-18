@@ -1,7 +1,6 @@
+import React from 'react';
 import { ConfigProvider, App as AntdApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
-import { useDensity } from '@/hooks/useDensity';
-import { SLV_THEMES } from '@/config/theme';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 
 export const layout: RunTimeLayoutConfig = () => {
@@ -12,18 +11,17 @@ export const layout: RunTimeLayoutConfig = () => {
         fixSiderbar: true,
         fixedHeader: true,
         contentStyle: { padding: 24 },
+        menu: { locale: false },
     };
 };
 
 export function rootContainer(container: React.ReactNode) {
-    return <Root>{container}</Root>;
-}
-
-const Root: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [density] = useDensity();
     return (
-        <ConfigProvider theme={SLV_THEMES[density]} locale={zhCN}>
-            <AntdApp>{children}</AntdApp>
+        <ConfigProvider
+            locale={zhCN}
+            theme={{ token: { colorPrimary: '#0066ff', borderRadius: 8 } }}
+        >
+            <AntdApp>{container}</AntdApp>
         </ConfigProvider>
     );
-};
+}

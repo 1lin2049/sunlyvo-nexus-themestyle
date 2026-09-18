@@ -68,7 +68,7 @@ $slv_modules = [
     'warehouse', 'store-profile', 'sync', 'seo', 'ai', 'acp',
     'analytics', 'reader', 'comments', 'security', 'performance',
     'demo', 'qa', 'settings',
-    'template',   // ← 新增
+    'template', 'setup',
 ];
 
 foreach ( $slv_modules as $slv_module ) {
