@@ -55,7 +55,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 9
+        "register": 10
       },
       "enableBy": "register",
       "type": "preset",
@@ -68,7 +68,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 7
       },
       "enableBy": "register",
       "type": "preset",
@@ -85,7 +85,7 @@
             0
           ]
         },
-        "register": 3
+        "register": 6
       },
       "enableBy": "register",
       "type": "plugin",
@@ -99,10 +99,10 @@
       "time": {
         "hooks": {
           "onStart": [
-            3
+            4
           ]
         },
-        "register": 3
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -116,7 +116,7 @@
       "time": {
         "hooks": {
           "modifyRoutes": [
-            0
+            1
           ]
         },
         "register": 1
@@ -132,7 +132,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -146,10 +146,10 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            18
+            186
           ]
         },
-        "register": 41
+        "register": 47
       },
       "enableBy": "register",
       "type": "plugin",
@@ -162,7 +162,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -179,7 +179,7 @@
             0
           ],
           "onCheck": [
-            1
+            0
           ]
         },
         "register": 2
@@ -229,7 +229,7 @@
             0
           ]
         },
-        "register": 10
+        "register": 19
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1081,7 +1081,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1095,10 +1095,10 @@
       "time": {
         "hooks": {
           "onStart": [
-            0
+            1
           ]
         },
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1124,7 +1124,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 193
+        "register": 511
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1137,7 +1137,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 47
+        "register": 58
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1150,7 +1150,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 17
+        "register": 22
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1167,7 +1167,7 @@
             0
           ]
         },
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1180,7 +1180,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1206,7 +1206,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 50
+        "register": 86
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/mock/mock.js",
@@ -1218,7 +1218,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1231,7 +1231,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/okam/okam.js",
@@ -1243,7 +1243,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1256,7 +1256,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1285,7 +1285,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 3
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1298,7 +1298,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 3
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1311,7 +1311,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1324,7 +1324,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1337,7 +1337,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1363,7 +1363,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1376,7 +1376,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/routeProps/routeProps.js",
@@ -1414,7 +1414,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 4
+        "register": 3
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1427,7 +1427,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 4
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1453,7 +1453,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 15
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/apiRoute/apiRoute.js",
@@ -1465,7 +1465,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 38
+        "register": 384
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1478,7 +1478,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/test/test.js",
@@ -1490,7 +1490,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 15
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/clickToComponent/clickToComponent.js",
@@ -1502,7 +1502,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1295
+        "register": 2908
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1528,7 +1528,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/webpack/webpack.js",
@@ -1582,7 +1582,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1611,16 +1611,16 @@
             0
           ],
           "modifyAppData": [
-            0
+            1
           ],
           "onCheck": [
             0
           ],
           "onStart": [
-            2
+            19
           ]
         },
-        "register": 1
+        "register": 11
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/utoopack/utoopack.js",
@@ -1632,7 +1632,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 5
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/hmrGuardian/hmrGuardian.js",
@@ -1644,7 +1644,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 56
+        "register": 264
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/features/routePreloadOnLoad/routePreloadOnLoad.js",
@@ -1656,7 +1656,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1682,7 +1682,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 57
+        "register": 202
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1695,7 +1695,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 42
+        "register": 133
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+preset-umi@4.7.18_@types+node@22.20.3_@types+react@19.3.0_jiti@2.7.0_lightningcs_6e23d6876c6ed6225fdf53a1e52d03ac/node_modules/@umijs/preset-umi/dist/commands/dev/dev.js",
@@ -1720,7 +1720,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1733,7 +1733,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1759,7 +1759,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1772,7 +1772,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 4
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1798,7 +1798,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1811,7 +1811,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 4
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1889,7 +1889,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1941,7 +1941,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 6
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1954,7 +1954,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 19
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1967,7 +1967,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1980,7 +1980,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 4
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2017,7 +2017,7 @@
             0
           ]
         },
-        "register": 10
+        "register": 42
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+plugins@4.7.18_@babel+core@7.29.7_supports-color@8.1.1__@types+react-dom@19.3.0__9866d59e553e6d39f061c0f8312c4139/node_modules/@umijs/plugins/dist/antd.js",
@@ -2042,7 +2042,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2061,13 +2061,13 @@
             0
           ],
           "addLayouts": [
-            1
+            0
           ],
           "modifyAppData": [
-            1
+            0
           ]
         },
-        "register": 3
+        "register": 14
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2080,7 +2080,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 13
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2093,7 +2093,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 10
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2106,7 +2106,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 4
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2119,7 +2119,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 3
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2132,7 +2132,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2145,7 +2145,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 4
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+plugins@4.7.18_@babel+core@7.29.7_supports-color@8.1.1__@types+react-dom@19.3.0__9866d59e553e6d39f061c0f8312c4139/node_modules/@umijs/plugins/dist/qiankun/master.js",
@@ -2157,7 +2157,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 5
       },
       "type": "plugin",
       "path": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/node_modules/.pnpm/@umijs+plugins@4.7.18_@babel+core@7.29.7_supports-color@8.1.1__@types+react-dom@19.3.0__9866d59e553e6d39f061c0f8312c4139/node_modules/@umijs/plugins/dist/qiankun/slave.js",
@@ -2182,7 +2182,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2195,7 +2195,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 6
+        "register": 0
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2208,7 +2208,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2252,10 +2252,10 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            0
+            1
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2272,7 +2272,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2285,7 +2285,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -3472,7 +3472,7 @@
       "parentId": "2",
       "id": "3",
       "absPath": "/user/login",
-      "__content": "import React from 'react';\nimport { LoginForm, ProFormText } from '@ant-design/pro-components';\nimport { UserOutlined, LockOutlined } from '@ant-design/icons';\nimport { App } from 'antd';\nimport { post } from '@/services/api';\n\nexport default () => {\n    const { message } = App.useApp();\n\n    return (\n        <div\n            style={{\n                display: 'flex',\n                alignItems: 'center',\n                justifyContent: 'center',\n                minHeight: '100vh',\n                background: 'linear-gradient(135deg, #f0f5ff, #e6f0ff)',\n            }}\n        >\n            <LoginForm\n                title=\"SunLyvo Nexus\"\n                subTitle=\"内容电商管理后台\"\n                onFinish={async (values) => {\n                    try {\n                        // 使用 WordPress 默认登录\n                        const form = new FormData();\n                        form.append('log', values.username);\n                        form.append('pwd', values.password);\n                        form.append('wp-submit', 'Log In');\n                        form.append('redirect_to', '/admin/');\n                        form.append('testcookie', '1');\n\n                        const res = await fetch('/wp-login.php', {\n                            method: 'POST',\n                            body: form,\n                            credentials: 'include',\n                        });\n                        if (res.ok || res.redirected) {\n                            message.success('登录成功');\n                            window.location.href = '/admin/';\n                        } else {\n                            message.error('用户名或密码错误');\n                        }\n                    } catch {\n                        message.error('登录失败');\n                    }\n                }}\n            >\n                <ProFormText\n                    name=\"username\"\n                    fieldProps={{ size: 'large', prefix: <UserOutlined /> }}\n                    placeholder=\"用户名\"\n                    rules={[{ required: true, message: '请输入用户名' }]}\n                />\n                <ProFormText.Password\n                    name=\"password\"\n                    fieldProps={{ size: 'large', prefix: <LockOutlined /> }}\n                    placeholder=\"密码\"\n                    rules={[{ required: true, message: '请输入密码' }]}\n                />\n            </LoginForm>\n        </div>\n    );\n};",
+      "__content": "import React from 'react';\nimport { LoginForm, ProFormText } from '@ant-design/pro-components';\nimport { UserOutlined, LockOutlined } from '@ant-design/icons';\nimport { App } from 'antd';\n\nconst getBasePath = (): string => {\n    if (typeof window !== 'undefined' && window.SLV_ADMIN_CONFIG?.adminUrl) {\n        try {\n            return new URL(window.SLV_ADMIN_CONFIG.adminUrl).pathname;\n        } catch { /* ignore */ }\n    }\n    const match = window.location.pathname.match(/^(\\/[^/]*\\/)/);\n    return match ? match[1] : '/';\n};\n\nexport default () => {\n    const { message } = App.useApp();\n    const basePath = getBasePath();\n\n    return (\n        <div\n            style={{\n                display: 'flex',\n                alignItems: 'center',\n                justifyContent: 'center',\n                minHeight: '100vh',\n                background: 'linear-gradient(135deg, #f0f5ff, #e6f0ff)',\n            }}\n        >\n            <LoginForm\n                title=\"SunLyvo Nexus\"\n                subTitle=\"内容电商管理后台\"\n                onFinish={async (values) => {\n                    try {\n                        const form = new FormData();\n                        form.append('log', values.username);\n                        form.append('pwd', values.password);\n                        form.append('wp-submit', 'Log In');\n                        form.append('redirect_to', basePath);\n                        form.append('testcookie', '1');\n\n                        const res = await fetch('/wp-login.php', {\n                            method: 'POST',\n                            body: form,\n                            credentials: 'include',\n                        });\n                        if (res.ok || res.redirected) {\n                            message.success('登录成功');\n                            window.location.href = basePath;\n                        } else {\n                            message.error('用户名或密码错误');\n                        }\n                    } catch {\n                        message.error('登录失败');\n                    }\n                }}\n            >\n                <ProFormText\n                    name=\"username\"\n                    fieldProps={{ size: 'large', prefix: <UserOutlined /> }}\n                    placeholder=\"用户名\"\n                    rules={[{ required: true, message: '请输入用户名' }]}\n                />\n                <ProFormText.Password\n                    name=\"password\"\n                    fieldProps={{ size: 'large', prefix: <LockOutlined /> }}\n                    placeholder=\"密码\"\n                    rules={[{ required: true, message: '请输入密码' }]}\n                />\n            </LoginForm>\n        </div>\n    );\n};",
       "__isJSFile": true,
       "__absFile": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/src/pages/user/login/index.tsx"
     },
@@ -3484,7 +3484,7 @@
       "parentId": "ant-design-pro-layout",
       "id": "4",
       "absPath": "/dashboard",
-      "__content": "import React from 'react';\nimport { PageContainer, ProCard, StatisticCard } from '@ant-design/pro-components';\nimport { Row, Col, Button } from 'antd';\n\nconst { Statistic } = StatisticCard;\n\nexport default () => {\n    return (\n        <PageContainer title=\"仪表盘\" subTitle=\"SunLyvo Nexus 平台概览\">\n            <Row gutter={16}>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"商品总数\" value={5} />\n                    </ProCard>\n                </Col>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"订单总数\" value={0} />\n                    </ProCard>\n                </Col>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"用户总数\" value={1} />\n                    </ProCard>\n                </Col>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"今日收入\" value={0} prefix=\"¥\" />\n                    </ProCard>\n                </Col>\n            </Row>\n\n            <ProCard title=\"快速操作\" style={{ marginTop: 16 }}>\n                <Button type=\"primary\" href=\"/admin/platform/template\" style={{ marginRight: 12 }}>\n                    模板管理\n                </Button>\n                <Button href=\"/admin/platform/settings\" style={{ marginRight: 12 }}>\n                    服务配置\n                </Button>\n                <Button href=\"/admin/platform/users\">用户管理</Button>\n            </ProCard>\n        </PageContainer>\n    );\n};",
+      "__content": "import React from 'react';\nimport { PageContainer, ProCard, StatisticCard } from '@ant-design/pro-components';\nimport { Row, Col, Button } from 'antd';\nimport { Link } from '@umijs/max';\n\nconst { Statistic } = StatisticCard;\n\nexport default () => {\n    return (\n        <PageContainer title=\"仪表盘\" subTitle=\"SunLyvo Nexus 平台概览\">\n            <Row gutter={16}>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"商品总数\" value={5} />\n                    </ProCard>\n                </Col>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"订单总数\" value={0} />\n                    </ProCard>\n                </Col>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"用户总数\" value={1} />\n                    </ProCard>\n                </Col>\n                <Col span={6}>\n                    <ProCard>\n                        <Statistic title=\"今日收入\" value={0} prefix=\"¥\" />\n                    </ProCard>\n                </Col>\n            </Row>\n\n            <ProCard title=\"快速操作\" style={{ marginTop: 16 }}>\n                <Link to=\"/platform/template\">\n                    <Button type=\"primary\" style={{ marginRight: 12 }}>模板管理</Button>\n                </Link>\n                <Link to=\"/platform/settings\">\n                    <Button style={{ marginRight: 12 }}>服务配置</Button>\n                </Link>\n                <Link to=\"/platform/users\">\n                    <Button>用户管理</Button>\n                </Link>\n            </ProCard>\n        </PageContainer>\n    );\n};",
       "__isJSFile": true,
       "__absFile": "/opt/1panel/www/sites/sunlyvo.com/index/wp-content/themes/sunlyvo-nexus/src/src/pages/platform/dashboard/index.tsx"
     },

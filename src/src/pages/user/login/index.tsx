@@ -2,10 +2,20 @@ import React from 'react';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { App } from 'antd';
-import { post } from '@/services/api';
+
+const getBasePath = (): string => {
+    if (typeof window !== 'undefined' && window.SLV_ADMIN_CONFIG?.adminUrl) {
+        try {
+            return new URL(window.SLV_ADMIN_CONFIG.adminUrl).pathname;
+        } catch { /* ignore */ }
+    }
+    const match = window.location.pathname.match(/^(\/[^/]*\/)/);
+    return match ? match[1] : '/';
+};
 
 export default () => {
     const { message } = App.useApp();
+    const basePath = getBasePath();
 
     return (
         <div
@@ -22,12 +32,11 @@ export default () => {
                 subTitle="内容电商管理后台"
                 onFinish={async (values) => {
                     try {
-                        // 使用 WordPress 默认登录
                         const form = new FormData();
                         form.append('log', values.username);
                         form.append('pwd', values.password);
                         form.append('wp-submit', 'Log In');
-                        form.append('redirect_to', '/admin/');
+                        form.append('redirect_to', basePath);
                         form.append('testcookie', '1');
 
                         const res = await fetch('/wp-login.php', {
@@ -37,7 +46,7 @@ export default () => {
                         });
                         if (res.ok || res.redirected) {
                             message.success('登录成功');
-                            window.location.href = '/admin/';
+                            window.location.href = basePath;
                         } else {
                             message.error('用户名或密码错误');
                         }

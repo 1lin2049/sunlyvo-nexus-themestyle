@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageContainer, ProCard, StatisticCard } from '@ant-design/pro-components';
 import { Row, Col, Button } from 'antd';
+import { Link } from '@umijs/max';
 
 const { Statistic } = StatisticCard;
 
@@ -31,13 +32,15 @@ export default () => {
             </Row>
 
             <ProCard title="快速操作" style={{ marginTop: 16 }}>
-                <Button type="primary" href="/admin/platform/template" style={{ marginRight: 12 }}>
-                    模板管理
-                </Button>
-                <Button href="/admin/platform/settings" style={{ marginRight: 12 }}>
-                    服务配置
-                </Button>
-                <Button href="/admin/platform/users">用户管理</Button>
+                <Link to="/platform/template">
+                    <Button type="primary" style={{ marginRight: 12 }}>模板管理</Button>
+                </Link>
+                <Link to="/platform/settings">
+                    <Button style={{ marginRight: 12 }}>服务配置</Button>
+                </Link>
+                <Link to="/platform/users">
+                    <Button>用户管理</Button>
+                </Link>
             </ProCard>
         </PageContainer>
     );

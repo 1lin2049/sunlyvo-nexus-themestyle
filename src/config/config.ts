@@ -2,19 +2,14 @@ import { defineConfig } from '@umijs/max';
 import routes from './routes';
 
 const publicPath = process.env.PUBLIC_PATH || '/';
-const apiBase = process.env.API_BASE || '/wp-json/slv/v1';
 
 export default defineConfig({
     title: 'SunLyvo Nexus',
-    favicons: ['/favicon.ico'],
+    favicons: [`${publicPath}favicon.ico`],
 
     antd: {
         theme: {
-            token: {
-                colorPrimary: '#0066ff',
-                borderRadius: 8,
-                fontSize: 14,
-            },
+            token: { colorPrimary: '#0066ff', borderRadius: 8, fontSize: 14 },
         },
     },
 
@@ -38,7 +33,6 @@ export default defineConfig({
     },
 
     routes,
-
     npmClient: 'pnpm',
     utoopack: {},
     hash: true,
@@ -47,18 +41,22 @@ export default defineConfig({
     base: publicPath,
     outputPath: 'dist',
 
-    proxy: {
+    // proxy 目标也从环境变量读
+    proxy: process.env.WP_PROXY_TARGET ? {
         '/wp-json': {
-            target: 'http://sunlyvo.com',
+            target: process.env.WP_PROXY_TARGET,
             changeOrigin: true,
         },
-    },
+        '/wp-login.php': {
+            target: process.env.WP_PROXY_TARGET,
+            changeOrigin: true,
+        },
+    } : undefined,
 
-    theme: {
-        'root-entry-name': 'variable',
-    },
+    theme: { 'root-entry-name': 'variable' },
 
-    define: {
-        'process.env.API_BASE': apiBase,
-    },
+    // 注入 HTML 占位符，供 config.js 动态填值
+    headScripts: [
+        { src: `${publicPath}config.js` },
+    ],
 });
