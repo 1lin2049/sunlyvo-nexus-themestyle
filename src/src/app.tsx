@@ -9,6 +9,8 @@ interface SLVAdminConfig {
     adminUrl: string;
     homeUrl: string;
     locale: string;
+    logoUrl: string;
+    siteName: string;
 }
 
 declare global {
@@ -17,10 +19,15 @@ declare global {
     }
 }
 
+function getConfig(): SLVAdminConfig | undefined {
+    return (window as any).SLV_ADMIN_CONFIG;
+}
+
 export const layout: RunTimeLayoutConfig = () => {
+    const cfg = getConfig();
     return {
-        title: 'SunLyvo Nexus',
-        logo: '/logo.svg',
+        title: cfg?.siteName || 'SunLyvo Nexus',
+        logo: cfg?.logoUrl || undefined,
         layout: 'side',
         fixSiderbar: true,
         fixedHeader: true,
@@ -34,13 +41,18 @@ const Root: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [locale, setLocale] = useState(zhCN);
 
     useEffect(() => {
+        let attempts = 0;
         const check = () => {
-            if (window.SLV_ADMIN_CONFIG) {
-                const lang = window.SLV_ADMIN_CONFIG.locale || 'zh-CN';
+            attempts++;
+            const cfg = getConfig();
+            if (cfg) {
+                const lang = cfg.locale || 'zh-CN';
                 setLocale(lang.startsWith('en') ? enUS : zhCN);
                 setReady(true);
-            } else {
+            } else if (attempts < 40) {
                 setTimeout(check, 50);
+            } else {
+                setReady(true);
             }
         };
         check();

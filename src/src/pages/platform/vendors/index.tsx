@@ -3,7 +3,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { Card, Empty } from 'antd';
 
 export default () => (
-    <PageContainer title="商户管理">
-        <Card><Empty description="商户管理功能开发中" /></Card>
+    <PageContainer title="管理">
+        <Card><Empty description="功能开发中" /></Card>
     </PageContainer>
 );
