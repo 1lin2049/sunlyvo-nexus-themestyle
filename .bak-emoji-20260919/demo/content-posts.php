@@ -422,11 +422,11 @@ HTML,
 <table>
 <thead><tr><th>层</th><th>职责</th><th>允许硬编码</th></tr></thead>
 <tbody>
-<tr><td>Seed</td><td>原始值定义</td><td> 唯一允许</td></tr>
-<tr><td>Map</td><td>派生计算（color-mix / calc）</td><td></td></tr>
-<tr><td>Alias</td><td>语义别名</td><td></td></tr>
-<tr><td>Component</td><td>组件专用</td><td></td></tr>
-<tr><td>State</td><td>状态变体（hover / active / disabled / focus）</td><td></td></tr>
+<tr><td>Seed</td><td>原始值定义</td><td>✅ 唯一允许</td></tr>
+<tr><td>Map</td><td>派生计算（color-mix / calc）</td><td>❌</td></tr>
+<tr><td>Alias</td><td>语义别名</td><td>❌</td></tr>
+<tr><td>Component</td><td>组件专用</td><td>❌</td></tr>
+<tr><td>State</td><td>状态变体（hover / active / disabled / focus）</td><td>❌</td></tr>
 </tbody>
 </table>
 

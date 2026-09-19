@@ -1,0 +1,176 @@
+/**
+ * SunLyvo Nexus — Reader Extras
+ *
+ * 位置记忆、复制/引用/分享、二维码、续读提示、打印。
+ *
+ * @package SunLyvo_Nexus
+ */
+
+/* ─── 选区菜单 ────────────────────────────────────────── */
+.slv-selection-menu {
+    position: absolute;
+    display: none;
+    z-index: 1100;
+    padding: 4px;
+    background: var(--slv-seed-neutral-9);
+    border-radius: var(--slv-radius-md);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+.slv-selection-menu.is-visible { display: flex; gap: 2px; }
+.slv-selection-menu button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border: none;
+    background: transparent;
+    color: var(--slv-seed-neutral-1);
+    border-radius: var(--slv-radius-sm);
+    cursor: pointer;
+    transition: background var(--slv-duration-fast) var(--slv-ease-natural);
+}
+.slv-selection-menu button:hover { background: rgba(255,255,255,0.12); }
+
+/* 引用格式选择面板 */
+.slv-cite-panel {
+    position: absolute;
+    display: none;
+    z-index: 1101;
+    padding: var(--slv-space-3);
+    background: var(--slv-color-bg-base);
+    border: 1px solid var(--slv-color-border-base);
+    border-radius: var(--slv-radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    min-width: 220px;
+}
+.slv-cite-panel.is-visible { display: block; }
+.slv-cite-panel__title {
+    font-size: var(--slv-font-size-sm);
+    font-weight: 600;
+    margin-bottom: var(--slv-space-2);
+    color: var(--slv-color-text-secondary);
+}
+.slv-cite-panel__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.slv-cite-panel__list button {
+    width: 100%;
+    text-align: left;
+    padding: var(--slv-space-2);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--slv-radius-sm);
+    color: var(--slv-color-text-primary);
+    font-size: var(--slv-font-size-sm);
+    transition: background var(--slv-duration-fast) var(--slv-ease-natural);
+}
+.slv-cite-panel__list button:hover { background: var(--slv-color-primary-subtle); color: var(--slv-color-primary); }
+
+/* ─── Toast ───────────────────────────────────────────── */
+.slv-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 80px;
+    transform: translate(-50%, 20px);
+    padding: var(--slv-space-3) var(--slv-space-6);
+    background: var(--slv-seed-neutral-9);
+    color: var(--slv-seed-neutral-1);
+    border-radius: var(--slv-radius-md);
+    font-size: var(--slv-font-size-sm);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--slv-duration-normal) var(--slv-ease-natural),
+                transform var(--slv-duration-normal) var(--slv-ease-natural);
+    z-index: 1200;
+}
+.slv-toast.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* ─── 二维码弹窗 ──────────────────────────────────────── */
+.slv-qr-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+}
+.slv-qr-modal__box {
+    background: var(--slv-color-bg-base);
+    padding: var(--slv-space-6);
+    border-radius: var(--slv-radius-lg);
+    text-align: center;
+    max-width: 320px;
+}
+.slv-qr-modal__canvas {
+    display: inline-block;
+    padding: var(--slv-space-3);
+    background: #fff;
+    border-radius: var(--slv-radius-md);
+}
+.slv-qr-modal__tip { margin: var(--slv-space-3) 0 0; color: var(--slv-color-text-secondary); font-size: var(--slv-font-size-sm); }
+.slv-qr-modal__close {
+    margin-top: var(--slv-space-3);
+    padding: var(--slv-space-2) var(--slv-space-4);
+    border: 1px solid var(--slv-color-border-strong);
+    background: var(--slv-color-bg-base);
+    border-radius: var(--slv-radius-md);
+    cursor: pointer;
+}
+
+/* ─── 续读提示 ────────────────────────────────────────── */
+.slv-continue-prompt {
+    position: fixed;
+    left: 50%;
+    bottom: var(--slv-space-6);
+    transform: translateX(-50%);
+    padding: var(--slv-space-3) var(--slv-space-4);
+    background: var(--slv-color-bg-base);
+    border: 1px solid var(--slv-color-border-base);
+    border-radius: var(--slv-radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    gap: var(--slv-space-3);
+    z-index: 950;
+    max-width: 90vw;
+}
+.slv-continue-prompt__text { font-size: var(--slv-font-size-sm); color: var(--slv-color-text-secondary); }
+.slv-continue-prompt__actions { display: flex; gap: var(--slv-space-2); }
+.slv-continue-prompt__btn {
+    padding: var(--slv-space-1) var(--slv-space-3);
+    border-radius: var(--slv-radius-sm);
+    font-size: var(--slv-font-size-sm);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.slv-continue-prompt__btn--primary {
+    background: var(--slv-color-primary);
+    color: var(--slv-color-text-inverse);
+}
+.slv-continue-prompt__btn--text {
+    background: transparent;
+    color: var(--slv-color-text-secondary);
+}
+
+/* ─── 打印 ────────────────────────────────────────────── */
+@media print {
+    .slv-toc__fab,
+    .slv-toc__drawer,
+    .slv-selection-menu,
+    .slv-reader-progress,
+    .slv-continue-prompt,
+    .slv-toast { display: none !important; }
+    .slv-toc { position: static; max-height: none; page-break-after: always; border: none; background: transparent; }
+    .slv-reader__content { font-size: 12pt; }
+    .slv-reader__content a { color: inherit; text-decoration: none; }
+    .slv-reader__content a::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #666; }
+}

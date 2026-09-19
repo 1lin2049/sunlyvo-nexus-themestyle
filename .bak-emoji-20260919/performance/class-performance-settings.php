@@ -56,14 +56,14 @@ class SLV_Performance_Settings {
                     <tr>
                         <th><?php esc_html_e( 'PHP Redis 扩展', 'sunlyvo-nexus' ); ?></th>
                         <td><?php echo $redis_ext
-                            ? '<span style="color:#00a854"> 已安装（版本 ' . esc_html( phpversion( 'redis' ) ) . '）</span>'
-                            : '<span style="color:#f5222d"> 未安装</span>（请到 1Panel → PHP → 安装扩展 → 勾选 redis）'; ?></td>
+                            ? '<span style="color:#00a854">✅ 已安装（版本 ' . esc_html( phpversion( 'redis' ) ) . '）</span>'
+                            : '<span style="color:#f5222d">❌ 未安装</span>（请到 1Panel → PHP → 安装扩展 → 勾选 redis）'; ?></td>
                     </tr>
                     <tr>
                         <th><?php esc_html_e( '对象缓存', 'sunlyvo-nexus' ); ?></th>
                         <td><?php echo $enabled
-                            ? '<span style="color:#00a854"> 已启用</span>'
-                            : '<span style="color:#fa8c16"> 未启用</span>'; ?></td>
+                            ? '<span style="color:#00a854">✅ 已启用</span>'
+                            : '<span style="color:#fa8c16">⚠️ 未启用</span>'; ?></td>
                     </tr>
                     <tr>
                         <th><?php esc_html_e( '配置文件', 'sunlyvo-nexus' ); ?></th>
@@ -122,10 +122,10 @@ class SLV_Performance_Settings {
 
                 <p>
                     <button type="submit" name="slv_action" value="save" class="button button-primary button-hero">
-                         <?php esc_html_e( '保存并启用', 'sunlyvo-nexus' ); ?>
+                        💾 <?php esc_html_e( '保存并启用', 'sunlyvo-nexus' ); ?>
                     </button>
                     <button type="submit" name="slv_action" value="test" class="button">
-                         <?php esc_html_e( '测试连接', 'sunlyvo-nexus' ); ?>
+                        🔍 <?php esc_html_e( '测试连接', 'sunlyvo-nexus' ); ?>
                     </button>
                     <?php if ( $enabled ) : ?>
                         <button type="submit" name="slv_action" value="uninstall" class="button button-link-delete"

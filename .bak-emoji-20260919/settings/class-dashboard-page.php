@@ -41,9 +41,9 @@ class SLV_Dashboard_Page {
                 <p>
                     <strong><?php esc_html_e( '数据说明', 'sunlyvo-nexus' ); ?></strong><br>
                     <?php esc_html_e( '本仪表盘严格区分三类数据：', 'sunlyvo-nexus' ); ?>
-                    <br> <?php esc_html_e( '真实数据 — 来自数据库实际统计', 'sunlyvo-nexus' ); ?>
+                    <br>✅ <?php esc_html_e( '真实数据 — 来自数据库实际统计', 'sunlyvo-nexus' ); ?>
                     <br>— <?php esc_html_e( '无数据 — 埋点未触发或分母为 0，不显示虚假数字', 'sunlyvo-nexus' ); ?>
-                    <br> <?php esc_html_e( '未接入 — 需要外部 API，请到 服务配置 中启用', 'sunlyvo-nexus' ); ?>
+                    <br>⚙️ <?php esc_html_e( '未接入 — 需要外部 API，请到 服务配置 中启用', 'sunlyvo-nexus' ); ?>
                 </p>
             </div>
 
@@ -75,7 +75,7 @@ class SLV_Dashboard_Page {
             </div>
 
             <!-- AI 爬虫访问 -->
-            <h2><?php esc_html_e( ' AI 引擎引用', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '🤖 AI 引擎引用', 'sunlyvo-nexus' ); ?></h2>
             <?php if ( empty( $data['ai_crawlers'] ) ) : ?>
                 <p><?php esc_html_e( '暂无 AI 爬虫访问记录。（这是真实数据：17 个 AI 爬虫均未访问本站）', 'sunlyvo-nexus' ); ?></p>
             <?php else : ?>
@@ -100,7 +100,7 @@ class SLV_Dashboard_Page {
             <?php endif; ?>
 
             <!-- 阅读行为 -->
-            <h2><?php esc_html_e( ' 阅读行为', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '📖 阅读行为', 'sunlyvo-nexus' ); ?></h2>
             <table class="widefat striped">
                 <thead><tr>
                     <th><?php esc_html_e( '事件', 'sunlyvo-nexus' ); ?></th>
@@ -129,9 +129,9 @@ class SLV_Dashboard_Page {
                             <td><?php echo esc_html( $meta['label'] ); ?></td>
                             <td>
                                 <?php if ( $meta['tracked'] ) : ?>
-                                    <span style="color:#00a854"> 已埋点</span>
+                                    <span style="color:#00a854">✅ 已埋点</span>
                                 <?php else : ?>
-                                    <span style="color:#fa8c16"> 未埋点（阶段二实现）</span>
+                                    <span style="color:#fa8c16">⚙️ 未埋点（阶段二实现）</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -140,7 +140,7 @@ class SLV_Dashboard_Page {
             </table>
 
             <!-- 分享事件 -->
-            <h2><?php esc_html_e( ' 分享事件', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '🔗 分享事件', 'sunlyvo-nexus' ); ?></h2>
             <?php if ( empty( $data['shares'] ) ) : ?>
                 <p><?php esc_html_e( '暂无分享记录。（真实数据：无用户使用分享功能）', 'sunlyvo-nexus' ); ?></p>
             <?php else : ?>
@@ -161,7 +161,7 @@ class SLV_Dashboard_Page {
             <?php endif; ?>
 
             <!-- 询盘统计 -->
-            <h2><?php esc_html_e( ' 询盘统计', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '📨 询盘统计', 'sunlyvo-nexus' ); ?></h2>
             <table class="widefat striped">
                 <thead><tr>
                     <th><?php esc_html_e( '指标', 'sunlyvo-nexus' ); ?></th>
@@ -175,7 +175,7 @@ class SLV_Dashboard_Page {
             </table>
 
             <!-- 商品卡片 -->
-            <h2><?php esc_html_e( ' 商品卡片', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '🛍️ 商品卡片', 'sunlyvo-nexus' ); ?></h2>
             <table class="widefat striped">
                 <thead><tr>
                     <th><?php esc_html_e( '指标', 'sunlyvo-nexus' ); ?></th>
@@ -200,7 +200,7 @@ class SLV_Dashboard_Page {
             </table>
 
             <!-- 上线部署检查 -->
-            <h2><?php esc_html_e( ' 上线前置检查', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '🚀 上线前置检查', 'sunlyvo-nexus' ); ?></h2>
             <?php if ( class_exists( 'SLV_Deployer' ) ) :
                 $deployer = new SLV_Deployer();
                 $check = $deployer->check_all();
@@ -214,7 +214,7 @@ class SLV_Dashboard_Page {
                     <tbody>
                         <?php foreach ( $check['items'] as $item ) : ?>
                             <tr>
-                                <td><?php echo $item['passed'] ? '' : ''; ?></td>
+                                <td><?php echo $item['passed'] ? '✅' : '❌'; ?></td>
                                 <td><?php echo esc_html( $item['label'] ); ?></td>
                                 <td><?php echo esc_html( $item['value'] ); ?></td>
                             </tr>
@@ -449,13 +449,13 @@ class SLV_Dashboard_Page {
     private static function build_card( string $label, string $value, string $target_text, float $target, float $actual ): array {
         if ( $actual >= $target ) {
             $status = 'pass';
-            $badge  = ' 达标';
+            $badge  = '✅ 达标';
         } elseif ( $actual >= $target * 0.7 ) {
             $status = 'warn';
-            $badge  = ' 接近';
+            $badge  = '⚠️ 接近';
         } else {
             $status = 'fail';
-            $badge  = ' 未达标';
+            $badge  = '❌ 未达标';
         }
 
         return [
@@ -501,7 +501,7 @@ class SLV_Dashboard_Page {
             'value'       => $value,
             'target_text' => $target_text,
             'status'      => 'not_configured',
-            'badge'       => ' 未接入',
+            'badge'       => '⚙️ 未接入',
             'hint'        => $hint,
         ];
     }

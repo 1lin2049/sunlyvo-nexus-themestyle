@@ -1,0 +1,37 @@
+/**
+ * SunLyvo Nexus — Accessibility
+ *
+ * @package SunLyvo_Nexus
+ */
+
+.slv-sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.slv-skip-link {
+    position: absolute;
+    top: -100px;
+    left: var(--slv-space-4);
+    z-index: 9999;
+    padding: var(--slv-space-2) var(--slv-space-4);
+    background: var(--slv-color-primary);
+    color: var(--slv-color-text-inverse);
+    border-radius: var(--slv-radius-md);
+}
+.slv-skip-link:focus { top: var(--slv-space-4); }
+
+/* 尊重 prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

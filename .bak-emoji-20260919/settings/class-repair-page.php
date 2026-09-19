@@ -62,10 +62,10 @@ class SLV_Repair_Page {
                 <tbody>
                     <?php foreach ( $diag['modules'] as $m ) : ?>
                         <tr>
-                            <td><?php echo $m['loaded'] ? '' : ''; ?></td>
+                            <td><?php echo $m['loaded'] ? '✅' : '❌'; ?></td>
                             <td><strong><?php echo esc_html( $m['name'] ); ?></strong></td>
                             <td><code><?php echo esc_html( $m['symbol'] ); ?></code></td>
-                            <td><code><?php echo esc_html( $m['path'] ); ?></code> <?php echo $m['file_exists'] ? '' : '<span style="color:#fa8c16">文件不在预期位置</span>'; ?></td>
+                            <td><code><?php echo esc_html( $m['path'] ); ?></code> <?php echo $m['file_exists'] ? '✅' : '<span style="color:#fa8c16">文件不在预期位置</span>'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -74,12 +74,12 @@ class SLV_Repair_Page {
             <h2><?php esc_html_e( '环境状态', 'sunlyvo-nexus' ); ?></h2>
             <table class="widefat striped">
                 <tbody>
-                    <tr><td>重写规则（sitemap）</td><td><?php echo $diag['rewrite']['sitemap'] ? '' : ''; ?></td></tr>
-                    <tr><td>重写规则（llms）</td><td><?php echo $diag['rewrite']['llms'] ? '' : ''; ?></td></tr>
+                    <tr><td>重写规则（sitemap）</td><td><?php echo $diag['rewrite']['sitemap'] ? '✅' : '❌'; ?></td></tr>
+                    <tr><td>重写规则（llms）</td><td><?php echo $diag['rewrite']['llms'] ? '✅' : '❌'; ?></td></tr>
                     <tr><td>加密密钥</td><td><?php echo esc_html( $diag['encryption']['source'] ); ?></td></tr>
-                    <tr><td>私有目录保护</td><td><?php echo $diag['private_dir'] ? '' : ''; ?></td></tr>
-                    <tr><td>对象缓存</td><td><?php echo $diag['object_cache'] ? ' 已启用' : ' 未启用（建议在 性能 页开启）'; ?></td></tr>
-                    <tr><td>HTTPS</td><td><?php echo $diag['https'] ? ' 已启用' : ' 未启用（本地/内网可忽略）'; ?></td></tr>
+                    <tr><td>私有目录保护</td><td><?php echo $diag['private_dir'] ? '✅' : '❌'; ?></td></tr>
+                    <tr><td>对象缓存</td><td><?php echo $diag['object_cache'] ? '✅ 已启用' : '⚠️ 未启用（建议在 性能 页开启）'; ?></td></tr>
+                    <tr><td>HTTPS</td><td><?php echo $diag['https'] ? '✅ 已启用' : '⚠️ 未启用（本地/内网可忽略）'; ?></td></tr>
                     <tr><td>主题</td><td><?php echo esc_html( $diag['theme'] ); ?></td></tr>
                 </tbody>
             </table>
@@ -88,7 +88,7 @@ class SLV_Repair_Page {
             <p><?php esc_html_e( '将执行：刷新重写规则、生成密钥、保护私有目录、清理缓存。', 'sunlyvo-nexus' ); ?></p>
             <form method="post">
                 <?php wp_nonce_field( 'slv_repair', 'slv_repair_nonce' ); ?>
-                <button type="submit" class="button button-primary button-hero"> <?php esc_html_e( '一键修复', 'sunlyvo-nexus' ); ?></button>
+                <button type="submit" class="button button-primary button-hero">🔧 <?php esc_html_e( '一键修复', 'sunlyvo-nexus' ); ?></button>
             </form>
         </div>
         <?php
@@ -172,10 +172,10 @@ class SLV_Repair_Page {
         if ( class_exists( 'SLV_Encryption_Manager' ) ) {
             $src = SLV_Encryption_Manager::get_source();
             $encryption_source = [
-                'environment' => ' 环境变量',
-                'constant'    => ' wp-config.php 常量',
-                'file'        => ' 密钥文件（自动生成）',
-                'none'        => ' 未配置',
+                'environment' => '✅ 环境变量',
+                'constant'    => '✅ wp-config.php 常量',
+                'file'        => '✅ 密钥文件（自动生成）',
+                'none'        => '⚠️ 未配置',
             ][ $src ] ?? $src;
         }
 
@@ -194,16 +194,16 @@ class SLV_Repair_Page {
         $messages = [];
 
         flush_rewrite_rules( true );
-        $messages[] = ' 重写规则已刷新';
+        $messages[] = '✅ 重写规则已刷新';
 
         if ( class_exists( 'SLV_Encryption_Manager' ) ) {
             SLV_Encryption_Manager::get_key();
-            $messages[] = ' 加密密钥已就绪：' . SLV_Encryption_Manager::get_source();
+            $messages[] = '✅ 加密密钥已就绪：' . SLV_Encryption_Manager::get_source();
         }
 
         if ( function_exists( 'slv_protect_private_uploads' ) ) {
             slv_protect_private_uploads();
-            $messages[] = ' 私有目录已保护';
+            $messages[] = '✅ 私有目录已保护';
         } else {
             $upload = wp_upload_dir();
             $dir = $upload['basedir'] . '/slv-private';
@@ -216,11 +216,11 @@ class SLV_Repair_Page {
             if ( ! file_exists( $dir . '/index.php' ) ) {
                 file_put_contents( $dir . '/index.php', "<?php\n// Silence is golden.\n" );
             }
-            $messages[] = ' 私有目录已保护';
+            $messages[] = '✅ 私有目录已保护';
         }
 
         wp_cache_flush();
-        $messages[] = ' 对象缓存已清理';
+        $messages[] = '✅ 对象缓存已清理';
 
         return $messages;
     }

@@ -1,0 +1,102 @@
+/**
+ * SunLyvo Nexus — 布局系统
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+/* 容器 */
+.slv-container {
+    width: 100%;
+    max-width: var(--slv-container-2xl);
+    margin: 0 auto;
+    padding: 0 var(--slv-space-6);
+}
+
+.slv-container--sm { max-width: var(--slv-container-sm); }
+.slv-container--md { max-width: var(--slv-container-md); }
+.slv-container--lg { max-width: var(--slv-container-lg); }
+.slv-container--xl { max-width: var(--slv-container-xl); }
+.slv-container--fluid { max-width: none; }
+
+/* 栅格 */
+.slv-grid {
+    display: grid;
+    gap: var(--slv-space-6);
+}
+
+.slv-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.slv-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.slv-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.slv-grid--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.slv-grid--6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+/* 双栏 */
+.slv-layout-sidebar-right,
+.slv-layout-sidebar-left {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: var(--slv-space-16);
+    align-items: start;
+    max-width: var(--slv-container-xl);
+    margin: 0 auto;
+    padding: var(--slv-space-12) var(--slv-space-6) var(--slv-space-20);
+}
+
+.slv-layout-sidebar-left {
+    grid-template-columns: 320px minmax(0, 1fr);
+}
+
+.slv-layout-main { min-width: 0; }
+
+.slv-layout-sidebar {
+    position: sticky;
+    top: 88px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--slv-space-6);
+}
+
+/* 页面 */
+.slv-page {
+    max-width: var(--slv-container-2xl);
+    margin: 0 auto;
+    padding: var(--slv-space-12) var(--slv-space-6) var(--slv-space-24);
+}
+
+.slv-page--narrow { max-width: var(--slv-container-md); }
+.slv-page--wide { max-width: var(--slv-container-3xl); }
+
+/* Section */
+.slv-section { padding: var(--slv-space-20) 0; }
+.slv-section--sm { padding: var(--slv-space-12) 0; }
+.slv-section--lg { padding: var(--slv-space-24) 0; }
+
+/* 响应式 */
+@media (max-width: 1024px) {
+    .slv-layout-sidebar-right,
+    .slv-layout-sidebar-left {
+        grid-template-columns: 1fr;
+        gap: var(--slv-space-8);
+        padding: var(--slv-space-8) var(--slv-space-5) var(--slv-space-12);
+    }
+    .slv-layout-sidebar { position: static; }
+    .slv-grid--4,
+    .slv-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    .slv-container { padding: 0 var(--slv-space-4); }
+    .slv-page {
+        padding: var(--slv-space-8) var(--slv-space-4) var(--slv-space-12);
+    }
+    .slv-section { padding: var(--slv-space-12) 0; }
+    .slv-grid,
+    .slv-grid--2,
+    .slv-grid--3,
+    .slv-grid--4,
+    .slv-grid--5,
+    .slv-grid--6 {
+        grid-template-columns: 1fr;
+    }
+}

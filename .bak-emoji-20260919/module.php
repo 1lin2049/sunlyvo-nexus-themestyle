@@ -211,7 +211,7 @@ function slv_setup_render_step( int $step, array $data ): void {
             break;
         case 5:
             ?>
-            <h2> 配置完成</h2>
+            <h2>🎉 配置完成</h2>
             <p>SunLyvo Nexus 已配置完成。接下来：</p>
             <ol class="slv-setup__checklist">
                 <li>构建中台：<code>cd src && pnpm build</code></li>

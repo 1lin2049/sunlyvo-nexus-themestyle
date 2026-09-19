@@ -72,17 +72,17 @@ class SLV_Settings_Page {
             <?php self::render_notice(); ?>
 
             <div class="card" style="max-width:100%;margin-bottom:20px">
-                <h2><?php esc_html_e( ' 加密密钥状态', 'sunlyvo-nexus' ); ?></h2>
+                <h2><?php esc_html_e( '🔐 加密密钥状态', 'sunlyvo-nexus' ); ?></h2>
                 <table class="form-table">
                     <tr>
                         <th><?php esc_html_e( '密钥来源', 'sunlyvo-nexus' ); ?></th>
                         <td>
                             <?php
                             $labels = [
-                                'environment' => '<span style="color:#00a854"> 环境变量（最安全）</span>',
-                                'constant'    => '<span style="color:#00a854"> wp-config.php 常量</span>',
-                                'file'        => '<span style="color:#00a854"> 密钥文件（自动生成）</span>',
-                                'none'        => '<span style="color:#fa8c16"> 未配置（首次访问将自动生成）</span>',
+                                'environment' => '<span style="color:#00a854">✅ 环境变量（最安全）</span>',
+                                'constant'    => '<span style="color:#00a854">✅ wp-config.php 常量</span>',
+                                'file'        => '<span style="color:#00a854">✅ 密钥文件（自动生成）</span>',
+                                'none'        => '<span style="color:#fa8c16">⚠️ 未配置（首次访问将自动生成）</span>',
                             ];
                             echo wp_kses_post( $labels[ $source ] ?? $source );
                             ?>
@@ -95,8 +95,8 @@ class SLV_Settings_Page {
                     <tr>
                         <th><?php esc_html_e( '文件可写', 'sunlyvo-nexus' ); ?></th>
                         <td><?php echo $writable
-                            ? '<span style="color:#00a854"> 是</span>'
-                            : '<span style="color:#f5222d"> 否（请检查目录权限）</span>'; ?></td>
+                            ? '<span style="color:#00a854">✅ 是</span>'
+                            : '<span style="color:#f5222d">❌ 否（请检查目录权限）</span>'; ?></td>
                     </tr>
                 </table>
                 <p><strong><?php esc_html_e( '为什么后台不显示密钥明文？', 'sunlyvo-nexus' ); ?></strong><br>
@@ -107,12 +107,12 @@ class SLV_Settings_Page {
                     <input type="hidden" name="slv_action" value="rotate_key">
                     <button type="submit" class="button"
                             onclick="return confirm('<?php echo esc_js( __( '轮换密钥将用新密钥重新加密所有已保存的 API Key。确定继续？', 'sunlyvo-nexus' ) ); ?>')">
-                         <?php esc_html_e( '轮换密钥', 'sunlyvo-nexus' ); ?>
+                        🔄 <?php esc_html_e( '轮换密钥', 'sunlyvo-nexus' ); ?>
                     </button>
                 </form>
             </div>
 
-            <h2><?php esc_html_e( ' 外部服务配置', 'sunlyvo-nexus' ); ?></h2>
+            <h2><?php esc_html_e( '🌐 外部服务配置', 'sunlyvo-nexus' ); ?></h2>
             <p class="description"><?php esc_html_e( '所有 API Key 使用 AES-256-CBC 加密后存储。留空保持不变。', 'sunlyvo-nexus' ); ?></p>
 
             <form method="post">
@@ -132,7 +132,7 @@ class SLV_Settings_Page {
                                 <span style="background:#0066ff;color:#fff;padding:2px 6px;border-radius:3px;font-size:11px">国际</span>
                             <?php endif; ?>
                             <?php if ( $existing ) : ?>
-                                <span style="color:#00a854;font-size:13px;margin-left:6px"> 已配置</span>
+                                <span style="color:#00a854;font-size:13px;margin-left:6px">✅ 已配置</span>
                             <?php endif; ?>
                         </h3>
 
@@ -177,7 +177,7 @@ class SLV_Settings_Page {
                     </div>
                 <?php endforeach; ?>
 
-                <p><button type="submit" class="button button-primary button-hero"> <?php esc_html_e( '保存所有配置', 'sunlyvo-nexus' ); ?></button></p>
+                <p><button type="submit" class="button button-primary button-hero">💾 <?php esc_html_e( '保存所有配置', 'sunlyvo-nexus' ); ?></button></p>
             </form>
         </div>
         <?php

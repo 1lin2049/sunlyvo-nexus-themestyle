@@ -1,0 +1,192 @@
+/**
+ * SunLyvo Nexus — 基础元素样式
+ *
+ * 依赖：01-tokens.css
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: var(--slv-font-sans);
+    font-size: var(--slv-font-size-base);
+    line-height: var(--slv-line-height-normal);
+    color: var(--slv-color-text);
+    background: var(--slv-color-bg);
+}
+
+/* 标题 */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 var(--slv-space-4);
+    font-weight: var(--slv-font-weight-bold);
+    line-height: var(--slv-line-height-tight);
+    color: var(--slv-color-text);
+    letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--slv-font-size-3xl); }
+h2 { font-size: var(--slv-font-size-2xl); }
+h3 { font-size: var(--slv-font-size-xl); }
+h4 { font-size: var(--slv-font-size-lg); }
+h5 { font-size: var(--slv-font-size-md); }
+h6 { font-size: var(--slv-font-size-base); }
+
+/* 段落 / 列表 */
+p { margin: 0 0 var(--slv-space-4); }
+
+ul, ol {
+    margin: 0 0 var(--slv-space-4);
+    padding-left: var(--slv-space-6);
+}
+
+li { margin-bottom: var(--slv-space-2); }
+
+/* 链接 */
+a {
+    color: var(--slv-color-text-link);
+    text-decoration: none;
+    transition: color var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+a:hover { color: var(--slv-color-primary-hover); }
+
+a:focus-visible {
+    outline: 2px solid var(--slv-color-primary);
+    outline-offset: 2px;
+    border-radius: var(--slv-radius-sm);
+}
+
+/* 图片 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 按钮 reset */
+button {
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+/* 表单 reset */
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* 代码 */
+code, pre, kbd, samp {
+    font-family: var(--slv-font-mono);
+}
+
+code {
+    font-size: 0.9em;
+    padding: 2px 6px;
+    background: var(--slv-color-bg-muted);
+    border-radius: var(--slv-radius-sm);
+    color: var(--slv-color-error);
+}
+
+pre {
+    margin: var(--slv-space-4) 0;
+    padding: var(--slv-space-5) var(--slv-space-6);
+    background: var(--slv-seed-gray-10);
+    color: var(--slv-seed-gray-1);
+    border-radius: var(--slv-radius-lg);
+    overflow-x: auto;
+    font-size: var(--slv-font-size-sm);
+    line-height: var(--slv-line-height-normal);
+}
+
+pre code {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+}
+
+/* 引用 */
+blockquote {
+    margin: var(--slv-space-4) 0;
+    padding: var(--slv-space-4) var(--slv-space-6);
+    border-left: 3px solid var(--slv-color-primary);
+    background: var(--slv-color-bg-soft);
+    color: var(--slv-color-text-muted);
+    border-radius: 0 var(--slv-radius-md) var(--slv-radius-md) 0;
+}
+
+/* 表格 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--slv-space-4) 0;
+    font-size: var(--slv-font-size-sm);
+}
+
+th, td {
+    padding: var(--slv-space-3) var(--slv-space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--slv-color-border-soft);
+}
+
+th {
+    background: var(--slv-color-bg-soft);
+    font-weight: var(--slv-font-weight-semibold);
+    color: var(--slv-color-text);
+}
+
+/* 分割线 */
+hr {
+    margin: var(--slv-space-8) 0;
+    border: none;
+    border-top: 1px solid var(--slv-color-border);
+}
+
+/* 选区 */
+::selection {
+    background: var(--slv-color-primary);
+    color: var(--slv-color-text-inverse);
+}
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--slv-color-bg-soft); }
+::-webkit-scrollbar-thumb {
+    background: var(--slv-color-border-strong);
+    border-radius: var(--slv-radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--slv-color-text-faint); }
+
+/* 工具类 */
+.slv-visually-hidden,
+.slv-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

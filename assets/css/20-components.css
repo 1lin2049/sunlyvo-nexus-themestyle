@@ -1,0 +1,321 @@
+/**
+ * SunLyvo Nexus — 通用组件
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+/* ═══════════════════════════════════════════════
+   按钮
+   ═══════════════════════════════════════════════ */
+
+.slv-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--slv-button-gap);
+    padding: var(--slv-button-padding-y) var(--slv-button-padding-x);
+    font-family: inherit;
+    font-size: var(--slv-button-font-size);
+    font-weight: var(--slv-button-font-weight);
+    line-height: var(--slv-line-height-snug);
+    color: var(--slv-button-text);
+    background: var(--slv-button-bg);
+    border: 1px solid transparent;
+    border-radius: var(--slv-button-radius);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background var(--slv-duration-fast) var(--slv-ease-natural),
+                border-color var(--slv-duration-fast) var(--slv-ease-natural),
+                color var(--slv-duration-fast) var(--slv-ease-natural),
+                transform var(--slv-duration-fast) var(--slv-ease-natural),
+                box-shadow var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-button:hover {
+    background: var(--slv-button-bg-hover);
+    color: var(--slv-button-text);
+    transform: translateY(-1px);
+    box-shadow: var(--slv-shadow-sm);
+}
+
+.slv-button:active {
+    background: var(--slv-button-bg-active);
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.slv-button:focus-visible {
+    outline: none;
+    box-shadow: var(--slv-button-ring-focus);
+}
+
+.slv-button:disabled,
+.slv-button.is-disabled {
+    background: var(--slv-button-bg-disabled);
+    color: var(--slv-button-text-disabled);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.slv-button--sm {
+    padding: var(--slv-space-2) var(--slv-space-4);
+    font-size: var(--slv-font-size-sm);
+}
+
+.slv-button--lg {
+    padding: var(--slv-space-4) var(--slv-space-8);
+    font-size: var(--slv-font-size-md);
+}
+
+.slv-button--block { width: 100%; }
+
+.slv-button--secondary {
+    background: var(--slv-color-bg);
+    color: var(--slv-color-text);
+    border-color: var(--slv-color-border);
+}
+
+.slv-button--secondary:hover {
+    background: var(--slv-color-bg-soft);
+    border-color: var(--slv-color-primary);
+    color: var(--slv-color-primary);
+}
+
+.slv-button--ghost {
+    background: transparent;
+    color: var(--slv-color-text);
+}
+
+.slv-button--ghost:hover {
+    background: var(--slv-color-bg-soft);
+    color: var(--slv-color-primary);
+}
+
+.slv-button--inverse {
+    background: var(--slv-color-bg);
+    color: var(--slv-color-primary);
+}
+
+.slv-button--inverse:hover {
+    background: var(--slv-color-bg-soft);
+    color: var(--slv-color-primary-hover);
+}
+
+/* ═══════════════════════════════════════════════
+   卡片
+   ═══════════════════════════════════════════════ */
+
+.slv-card {
+    background: var(--slv-card-bg);
+    border: 1px solid var(--slv-card-border);
+    border-radius: var(--slv-card-radius);
+    padding: var(--slv-card-padding);
+    box-shadow: var(--slv-card-shadow);
+    transition: border-color var(--slv-duration-normal) var(--slv-ease-natural),
+                box-shadow var(--slv-duration-normal) var(--slv-ease-natural);
+}
+
+.slv-card--hoverable { cursor: pointer; }
+
+.slv-card--hoverable:hover {
+    border-color: var(--slv-card-border-hover);
+    box-shadow: var(--slv-card-shadow-hover);
+}
+
+.slv-card--flat {
+    border: none;
+    box-shadow: none;
+    background: var(--slv-color-bg-soft);
+}
+
+/* ═══════════════════════════════════════════════
+   输入框
+   ═══════════════════════════════════════════════ */
+
+.slv-input,
+.slv-textarea,
+.slv-select {
+    display: block;
+    width: 100%;
+    padding: var(--slv-input-padding-y) var(--slv-input-padding-x);
+    font-family: inherit;
+    font-size: var(--slv-font-size-base);
+    line-height: var(--slv-line-height-snug);
+    color: var(--slv-color-text);
+    background: var(--slv-input-bg);
+    border: 1px solid var(--slv-input-border);
+    border-radius: var(--slv-input-radius);
+    transition: border-color var(--slv-duration-fast) var(--slv-ease-natural),
+                box-shadow var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-input:focus,
+.slv-textarea:focus,
+.slv-select:focus {
+    outline: none;
+    border-color: var(--slv-input-border-focus);
+    box-shadow: var(--slv-input-ring-focus);
+}
+
+.slv-input::placeholder,
+.slv-textarea::placeholder {
+    color: var(--slv-color-text-faint);
+}
+
+/* ═══════════════════════════════════════════════
+   徽章
+   ═══════════════════════════════════════════════ */
+
+.slv-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--slv-badge-padding-y) var(--slv-badge-padding-x);
+    font-size: var(--slv-badge-font-size);
+    font-weight: var(--slv-font-weight-medium);
+    line-height: 1;
+    color: var(--slv-color-text-muted);
+    background: var(--slv-color-bg-muted);
+    border-radius: var(--slv-badge-radius);
+}
+
+.slv-badge--primary {
+    color: var(--slv-color-primary);
+    background: var(--slv-color-primary-subtle);
+}
+
+.slv-badge--success {
+    color: var(--slv-color-success);
+    background: color-mix(in srgb, var(--slv-color-success) 12%, transparent);
+}
+
+.slv-badge--warning {
+    color: var(--slv-color-warning);
+    background: color-mix(in srgb, var(--slv-color-warning) 12%, transparent);
+}
+
+.slv-badge--error {
+    color: var(--slv-color-error);
+    background: color-mix(in srgb, var(--slv-color-error) 12%, transparent);
+}
+
+/* ═══════════════════════════════════════════════
+   图标基线
+   ═══════════════════════════════════════════════ */
+
+.slv-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.slv-icon--14 { width: 14px; height: 14px; }
+.slv-icon--16 { width: 16px; height: 16px; }
+.slv-icon--18 { width: 18px; height: 18px; }
+.slv-icon--20 { width: 20px; height: 20px; }
+.slv-icon--24 { width: 24px; height: 24px; }
+.slv-icon--32 { width: 32px; height: 32px; }
+.slv-icon--48 { width: 48px; height: 48px; }
+
+/* ═══════════════════════════════════════════════
+   分页
+   ═══════════════════════════════════════════════ */
+
+.slv-pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--slv-space-2);
+    margin-top: var(--slv-space-12);
+}
+
+.slv-pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 var(--slv-space-3);
+    font-size: var(--slv-font-size-sm);
+    font-weight: var(--slv-font-weight-medium);
+    color: var(--slv-color-text);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-md);
+    text-decoration: none;
+    transition: all var(--slv-duration-fast) var(--slv-ease-natural);
+}
+
+.slv-pagination .page-numbers:hover {
+    border-color: var(--slv-color-primary);
+    color: var(--slv-color-primary);
+}
+
+.slv-pagination .page-numbers.current {
+    background: var(--slv-color-primary);
+    border-color: var(--slv-color-primary);
+    color: var(--slv-color-text-inverse);
+}
+
+/* ═══════════════════════════════════════════════
+   侧栏卡片
+   ═══════════════════════════════════════════════ */
+
+.slv-sidebar-card {
+    background: var(--slv-color-bg-soft);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-lg);
+    padding: var(--slv-space-5);
+}
+
+.slv-sidebar-card__title {
+    font-size: var(--slv-font-size-xs);
+    font-weight: var(--slv-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--slv-color-text-faint);
+    margin: 0 0 var(--slv-space-4);
+    padding-bottom: var(--slv-space-3);
+    border-bottom: 1px solid var(--slv-color-border-soft);
+}
+
+.slv-sidebar-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--slv-space-3);
+}
+
+.slv-sidebar-card a {
+    color: var(--slv-color-text-muted);
+    font-size: var(--slv-font-size-sm);
+    line-height: var(--slv-line-height-snug);
+}
+
+.slv-sidebar-card a:hover { color: var(--slv-color-primary); }
+
+/* ═══════════════════════════════════════════════
+   工具类
+   ═══════════════════════════════════════════════ */
+
+.slv-text-center { text-align: center; }
+.slv-text-left { text-align: left; }
+.slv-text-right { text-align: right; }
+.slv-text-muted { color: var(--slv-color-text-muted); }
+.slv-text-faint { color: var(--slv-color-text-faint); }
+.slv-mt-0 { margin-top: 0; }
+.slv-mb-0 { margin-bottom: 0; }
+.slv-mt-4 { margin-top: var(--slv-space-4); }
+.slv-mb-4 { margin-bottom: var(--slv-space-4); }
+.slv-mt-8 { margin-top: var(--slv-space-8); }
+.slv-mb-8 { margin-bottom: var(--slv-space-8); }
