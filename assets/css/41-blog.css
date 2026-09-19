@@ -1,0 +1,187 @@
+/**
+ * SunLyvo Nexus — 博客域
+ *
+ * 参考基准：掘金 / CSDN
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+/* 归档列表 */
+.slv-archive--blog {
+    max-width: var(--slv-container-xl);
+    margin: 0 auto;
+    padding: var(--slv-space-12) var(--slv-space-6) var(--slv-space-20);
+}
+
+.slv-archive__header {
+    padding-bottom: var(--slv-space-6);
+    margin-bottom: var(--slv-space-8);
+    border-bottom: 1px solid var(--slv-color-border);
+}
+
+.slv-archive__title {
+    font-size: var(--slv-font-size-3xl);
+    font-weight: var(--slv-font-weight-black);
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--slv-space-2);
+    color: var(--slv-color-text);
+}
+
+.slv-archive__desc {
+    font-size: var(--slv-font-size-sm);
+    color: var(--slv-color-text-muted);
+    margin: 0;
+}
+
+/* 博客卡片网格 */
+.slv-post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--slv-space-6);
+}
+
+/* 博客卡 */
+.slv-post-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-lg);
+    overflow: hidden;
+    transition: all var(--slv-duration-normal);
+    min-width: 0;
+}
+
+.slv-post-card:hover {
+    border-color: var(--slv-color-primary);
+    box-shadow: var(--slv-shadow-md);
+    transform: translateY(-2px);
+}
+
+.slv-post-card__media {
+    aspect-ratio: 16 / 9;
+    background: var(--slv-color-bg-soft);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: block;
+    text-decoration: none;
+}
+
+.slv-post-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.slv-post-card__media--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--slv-color-text-faint);
+}
+
+.slv-post-card__media--placeholder svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.4;
+}
+
+.slv-post-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--slv-space-5);
+    gap: var(--slv-space-2);
+    min-width: 0;
+}
+
+.slv-post-card__category {
+    display: inline-block;
+    font-size: var(--slv-font-size-xs);
+    color: var(--slv-color-primary);
+    font-weight: var(--slv-font-weight-medium);
+    margin-bottom: var(--slv-space-1);
+    text-decoration: none;
+}
+
+.slv-post-card__category:hover { color: var(--slv-color-primary-hover); }
+
+.slv-post-card__title {
+    margin: 0;
+    font-size: var(--slv-font-size-md);
+    font-weight: var(--slv-font-weight-semibold);
+    line-height: 1.4;
+    color: var(--slv-color-text);
+    letter-spacing: -0.01em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.8em;
+}
+
+.slv-post-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.slv-post-card__title a:hover { color: var(--slv-color-primary); }
+
+.slv-post-card__excerpt {
+    margin: 0;
+    font-size: var(--slv-font-size-sm);
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.slv-post-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--slv-space-3);
+    margin-top: auto;
+    padding-top: var(--slv-space-3);
+    border-top: 1px solid var(--slv-color-border-soft);
+    font-size: var(--slv-font-size-xs);
+    color: var(--slv-color-text-faint);
+}
+
+.slv-post-card__author {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--slv-space-2);
+    min-width: 0;
+}
+
+.slv-post-card__author img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.slv-post-card__author-name {
+    color: var(--slv-color-text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80px;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+    .slv-post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    .slv-archive--blog { padding: var(--slv-space-8) var(--slv-space-4) var(--slv-space-12); }
+    .slv-post-grid { grid-template-columns: 1fr; gap: var(--slv-space-4); }
+    .slv-archive__title { font-size: var(--slv-font-size-2xl); }
+}

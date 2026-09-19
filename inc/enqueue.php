@@ -3,7 +3,7 @@
  * SunLyvo Nexus — 资源条件加载
  *
  * @package SunLyvo_Nexus
- * @since 1.0.0
+ * @since 5.0.0
  */
 
 declare( strict_types=1 );
@@ -24,17 +24,18 @@ function slv_enqueue_assets(): void {
     $css = SLV_ASSETS_URL . '/css';
     $js  = SLV_ASSETS_URL . '/js';
 
-    // ── 基础链
-    wp_enqueue_style( 'slv-reset',      "{$css}/reset.css",      [], slv_asset_version( 'css/reset.css' ) );
-    wp_enqueue_style( 'slv-tokens',     "{$css}/tokens.css",     [ 'slv-reset' ], slv_asset_version( 'css/tokens.css' ) );
-    wp_enqueue_style( 'slv-icons',      "{$css}/icons.css",      [ 'slv-tokens' ], slv_asset_version( 'css/icons.css' ) );
-    wp_enqueue_style( 'slv-components', "{$css}/components.css", [ 'slv-icons' ], slv_asset_version( 'css/components.css' ) );
-    wp_enqueue_style( 'slv-a11y',       "{$css}/a11y.css",       [ 'slv-components' ], slv_asset_version( 'css/a11y.css' ) );
+    // ── 基础链（所有环境共用）
+    wp_enqueue_style( 'slv-reset',      "{$css}/reset.css",       [], slv_asset_version( 'css/reset.css' ) );
+    wp_enqueue_style( 'slv-tokens',     "{$css}/01-tokens.css",   [ 'slv-reset' ], slv_asset_version( 'css/01-tokens.css' ) );
+    wp_enqueue_style( 'slv-base',       "{$css}/02-base.css",     [ 'slv-tokens' ], slv_asset_version( 'css/02-base.css' ) );
+    wp_enqueue_style( 'slv-a11y',       "{$css}/05-a11y.css",     [ 'slv-base' ], slv_asset_version( 'css/05-a11y.css' ) );
+    wp_enqueue_style( 'slv-icons',      "{$css}/06-icons.css",    [ 'slv-a11y' ], slv_asset_version( 'css/06-icons.css' ) );
+    wp_enqueue_style( 'slv-layout',     "{$css}/10-layout.css",   [ 'slv-icons' ], slv_asset_version( 'css/10-layout.css' ) );
+    wp_enqueue_style( 'slv-components', "{$css}/20-components.css", [ 'slv-layout' ], slv_asset_version( 'css/20-components.css' ) );
 
     if ( slv_reader_is_environment() ) {
-        wp_enqueue_style( 'slv-reader',           "{$css}/reader.css",           [ 'slv-a11y' ], slv_asset_version( 'css/reader.css' ) );
-        wp_enqueue_style( 'slv-reader-extras',    "{$css}/reader-extras.css",    [ 'slv-reader' ], slv_asset_version( 'css/reader-extras.css' ) );
-        wp_enqueue_style( 'slv-chapter-comments', "{$css}/chapter-comments.css", [ 'slv-reader' ], slv_asset_version( 'css/chapter-comments.css' ) );
+        // ── Reader 环境（隔离）
+        wp_enqueue_style( 'slv-reader',           "{$css}/60-reader.css",           [ 'slv-components' ], slv_asset_version( 'css/60-reader.css' ) );
 
         wp_enqueue_script( 'slv-reader',           "{$js}/reader.js",           [], slv_asset_version( 'js/reader.js' ), true );
         wp_enqueue_script( 'slv-toc',              "{$js}/toc.js",              [ 'slv-reader' ], slv_asset_version( 'js/toc.js' ), true );
@@ -43,73 +44,75 @@ function slv_enqueue_assets(): void {
         wp_enqueue_script( 'slv-share',            "{$js}/share.js",            [ 'slv-reader' ], slv_asset_version( 'js/share.js' ), true );
     } else {
         // ── 主站环境
-        wp_enqueue_style( 'slv-main',          "{$css}/main.css",          [ 'slv-a11y' ], slv_asset_version( 'css/main.css' ) );
-        wp_enqueue_style( 'slv-header-footer', "{$css}/header-footer.css", [ 'slv-main' ], slv_asset_version( 'css/header-footer.css' ) );
-        wp_enqueue_style( 'slv-motion',        "{$css}/motion.css",        [ 'slv-main' ], slv_asset_version( 'css/motion.css' ) );
-        wp_enqueue_style( 'slv-mobile',        "{$css}/mobile.css",        [ 'slv-main' ], slv_asset_version( 'css/mobile.css' ) );
-        wp_enqueue_style( 'slv-dark-fix', "{$css}/dark-fix.css", [ 'slv-main' ], slv_asset_version( 'css/dark-fix.css' ) );
-
-        $sticky = SLV_THEME_DIR . '/assets/css/sticky-fix.css';
-        if ( file_exists( $sticky ) ) {
-            wp_enqueue_style( 'slv-sticky-fix', "{$css}/sticky-fix.css", [ 'slv-main' ], (string) filemtime( $sticky ) );
-        }
+        wp_enqueue_style( 'slv-header', "{$css}/30-header.css", [ 'slv-components' ], slv_asset_version( 'css/30-header.css' ) );
+        wp_enqueue_style( 'slv-footer', "{$css}/31-footer.css", [ 'slv-header' ], slv_asset_version( 'css/31-footer.css' ) );
 
         wp_enqueue_script( 'slv-header', "{$js}/header.js", [], slv_asset_version( 'js/header.js' ), true );
         wp_enqueue_script( 'slv-main',   "{$js}/main.js",   [ 'slv-header' ], slv_asset_version( 'js/main.js' ), true );
 
         // 首页
         if ( is_front_page() ) {
-            $home_css = SLV_THEME_DIR . '/assets/css/home.css';
-            if ( file_exists( $home_css ) ) {
-                wp_enqueue_style( 'slv-home', "{$css}/home.css", [ 'slv-main' ], (string) filemtime( $home_css ) );
+            $f = SLV_THEME_DIR . '/assets/css/32-home.css';
+            if ( file_exists( $f ) ) {
+                wp_enqueue_style( 'slv-home', "{$css}/32-home.css", [ 'slv-footer' ], (string) filemtime( $f ) );
             }
-            $home_js = SLV_THEME_DIR . '/assets/js/home.js';
-            if ( file_exists( $home_js ) ) {
-                wp_enqueue_script( 'slv-home', "{$js}/home.js", [ 'slv-main' ], (string) filemtime( $home_js ), true );
+            $fjs = SLV_THEME_DIR . '/assets/js/home.js';
+            if ( file_exists( $fjs ) ) {
+                wp_enqueue_script( 'slv-home', "{$js}/home.js", [ 'slv-main' ], (string) filemtime( $fjs ), true );
             }
         }
 
         // 商品列表
         if ( is_post_type_archive( 'product' ) || is_tax( [ 'product_cat', 'product_tag' ] ) ) {
-            $pl_css = SLV_THEME_DIR . '/assets/css/product-list.css';
-            if ( file_exists( $pl_css ) ) {
-                wp_enqueue_style( 'slv-product-list', "{$css}/product-list.css", [ 'slv-main' ], (string) filemtime( $pl_css ) );
+            $f = SLV_THEME_DIR . '/assets/css/40-product-list.css';
+            if ( file_exists( $f ) ) {
+                wp_enqueue_style( 'slv-product-list', "{$css}/40-product-list.css", [ 'slv-footer' ], (string) filemtime( $f ) );
             }
-            $pl_js = SLV_THEME_DIR . '/assets/js/product-list.js';
-            if ( file_exists( $pl_js ) ) {
-                wp_enqueue_script( 'slv-product-list', "{$js}/product-list.js", [ 'slv-main' ], (string) filemtime( $pl_js ), true );
+            $fjs = SLV_THEME_DIR . '/assets/js/product-list.js';
+            if ( file_exists( $fjs ) ) {
+                wp_enqueue_script( 'slv-product-list', "{$js}/product-list.js", [ 'slv-main' ], (string) filemtime( $fjs ), true );
             }
         }
 
         // 商品详情
         if ( is_singular( 'product' ) ) {
-            $pd_css = SLV_THEME_DIR . '/assets/css/product-detail.css';
-            if ( file_exists( $pd_css ) ) {
-                wp_enqueue_style( 'slv-product-detail', "{$css}/product-detail.css", [ 'slv-main' ], (string) filemtime( $pd_css ) );
+            $f = SLV_THEME_DIR . '/assets/css/40-product-detail.css';
+            if ( file_exists( $f ) ) {
+                wp_enqueue_style( 'slv-product-detail', "{$css}/40-product-detail.css", [ 'slv-footer' ], (string) filemtime( $f ) );
             }
-            $pd_js = SLV_THEME_DIR . '/assets/js/product-detail.js';
-            if ( file_exists( $pd_js ) ) {
-                wp_enqueue_script( 'slv-product-detail', "{$js}/product-detail.js", [ 'slv-main' ], (string) filemtime( $pd_js ), true );
+            $fjs = SLV_THEME_DIR . '/assets/js/product-detail.js';
+            if ( file_exists( $fjs ) ) {
+                wp_enqueue_script( 'slv-product-detail', "{$js}/product-detail.js", [ 'slv-main' ], (string) filemtime( $fjs ), true );
             }
         }
 
-        // 单篇类型专属 CSS
-        if ( is_singular( 'post' ) ) {
-            $f = SLV_THEME_DIR . '/assets/css/single-post.css';
-            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-post', "{$css}/single-post.css", [ 'slv-main' ], (string) filemtime( $f ) );
+        // 博客
+        if ( is_singular( 'post' ) || is_home() || is_category() || is_tag() || is_author() || is_date() ) {
+            wp_enqueue_style( 'slv-blog', "{$css}/41-blog.css", [ 'slv-footer' ], slv_asset_version( 'css/41-blog.css' ) );
         }
-        if ( is_singular( 'wiki' ) ) {
-            $f = SLV_THEME_DIR . '/assets/css/single-wiki.css';
-            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-wiki', "{$css}/single-wiki.css", [ 'slv-main' ], (string) filemtime( $f ) );
+
+        // FAQ
+        if ( is_singular( 'faq' ) || is_post_type_archive( 'faq' ) || is_tax( 'faq_cat' ) ) {
+            wp_enqueue_style( 'slv-faq', "{$css}/42-faq.css", [ 'slv-footer' ], slv_asset_version( 'css/42-faq.css' ) );
         }
-        if ( is_singular( 'faq' ) ) {
-            $f = SLV_THEME_DIR . '/assets/css/single-faq.css';
-            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-faq', "{$css}/single-faq.css", [ 'slv-main' ], (string) filemtime( $f ) );
+
+        // 百科
+        if ( is_singular( 'wiki' ) || is_post_type_archive( 'wiki' ) || is_tax( 'wiki_cat' ) ) {
+            wp_enqueue_style( 'slv-wiki', "{$css}/43-wiki.css", [ 'slv-footer' ], slv_asset_version( 'css/43-wiki.css' ) );
         }
-        if ( is_singular( 'collection' ) ) {
-            $f = SLV_THEME_DIR . '/assets/css/single-collection.css';
-            if ( file_exists( $f ) ) wp_enqueue_style( 'slv-single-collection', "{$css}/single-collection.css", [ 'slv-main' ], (string) filemtime( $f ) );
+
+        // 合集
+        if ( is_singular( 'collection' ) || is_post_type_archive( 'collection' ) || is_tax( 'collection_cat' ) ) {
+            wp_enqueue_style( 'slv-collection', "{$css}/44-collection.css", [ 'slv-footer' ], slv_asset_version( 'css/44-collection.css' ) );
         }
+
+        // 通用单页
+        if ( is_singular() ) {
+            wp_enqueue_style( 'slv-single', "{$css}/50-single.css", [ 'slv-footer' ], slv_asset_version( 'css/50-single.css' ) );
+        }
+
+        // 深色模式（Token 覆盖，全站）
+        wp_enqueue_style( 'slv-dark', "{$css}/70-dark.css", [ 'slv-components' ], slv_asset_version( 'css/70-dark.css' ) );
     }
 }
 add_action( 'wp_enqueue_scripts', 'slv_enqueue_assets' );
@@ -134,9 +137,9 @@ function slv_enqueue_inline_config(): void {
             'url'         => $post_id ? get_permalink( $post_id ) : home_url(),
             'author'      => $post_id ? get_the_author_meta( 'display_name', (int) get_post_field( 'post_author', $post_id ) ) : '',
             'publishedAt' => $post_id ? get_the_date( 'c', $post_id ) : '',
-        'adminUrl'  => esc_url_raw( get_option( 'slv_admin_url', home_url( '/admin/' ) ) ),
-        'adminMode' => get_option( 'slv_admin_deploy_mode', 'subdir' ),
         ],
+        'adminUrl'  => esc_url_raw( get_option( 'slv_admin_url', home_url( '/app/' ) ) ),
+        'adminMode' => get_option( 'slv_admin_deploy_mode', 'subdir' ),
     ];
 
     $config = (array) apply_filters( 'slv_frontend_config', $config );

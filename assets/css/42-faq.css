@@ -1,0 +1,187 @@
+/**
+ * SunLyvo Nexus — FAQ 域
+ *
+ * 参考基准：百度知道 / Stack Overflow
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+/* 归档 */
+.slv-archive--faq {
+    max-width: var(--slv-container-md);
+    margin: 0 auto;
+    padding: var(--slv-space-12) var(--slv-space-6) var(--slv-space-20);
+}
+
+.slv-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slv-space-3);
+    margin-top: var(--slv-space-6);
+}
+
+.slv-faq-list__item {
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-lg);
+    padding: var(--slv-space-5) var(--slv-space-6);
+    transition: all var(--slv-duration-fast);
+}
+
+.slv-faq-list__item:hover {
+    border-color: var(--slv-color-primary);
+    box-shadow: var(--slv-shadow-sm);
+}
+
+.slv-faq-list__item h3,
+.slv-faq-list__item .slv-faq-list__title {
+    margin: 0 0 var(--slv-space-2);
+    font-size: var(--slv-font-size-md);
+    font-weight: var(--slv-font-weight-semibold);
+    line-height: 1.4;
+}
+
+.slv-faq-list__item h3 a,
+.slv-faq-list__item .slv-faq-list__title a {
+    color: var(--slv-color-text);
+    text-decoration: none;
+}
+
+.slv-faq-list__item h3 a:hover { color: var(--slv-color-primary); }
+
+.slv-faq-list__item p,
+.slv-faq-list__item .slv-faq-list__excerpt {
+    margin: 0;
+    font-size: var(--slv-font-size-sm);
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 单条详情 */
+.slv-single-faq {
+    max-width: var(--slv-container-md);
+    margin: 0 auto;
+    padding: var(--slv-space-12) var(--slv-space-6) var(--slv-space-20);
+}
+
+.slv-faq-hero {
+    margin-bottom: var(--slv-space-8);
+}
+
+.slv-faq-hero__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--slv-color-primary-subtle);
+    color: var(--slv-color-primary);
+    border-radius: var(--slv-radius-lg);
+    margin-bottom: var(--slv-space-4);
+    font-size: var(--slv-font-size-2xl);
+    font-weight: var(--slv-font-weight-black);
+}
+
+.slv-faq-hero__title {
+    font-size: var(--slv-font-size-3xl);
+    font-weight: var(--slv-font-weight-black);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+/* 答案 */
+.slv-faq-answer {
+    background: var(--slv-color-bg-soft);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-lg);
+    padding: var(--slv-space-6);
+    margin-bottom: var(--slv-space-6);
+}
+
+.slv-faq-answer__label {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--slv-color-primary);
+    color: #ffffff;
+    font-size: var(--slv-font-size-xs);
+    font-weight: var(--slv-font-weight-semibold);
+    border-radius: var(--slv-radius-sm);
+    margin-bottom: var(--slv-space-4);
+}
+
+.slv-faq-answer__content {
+    font-size: var(--slv-font-size-md);
+    line-height: 1.75;
+    color: var(--slv-color-text);
+}
+
+/* 相关 FAQ */
+.slv-faq-related {
+    margin-top: var(--slv-space-12);
+}
+
+.slv-faq-related__title {
+    font-size: var(--slv-font-size-lg);
+    font-weight: var(--slv-font-weight-bold);
+    margin: 0 0 var(--slv-space-4);
+}
+
+.slv-faq-related__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slv-space-2);
+}
+
+.slv-faq-related-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--slv-space-3);
+    padding: var(--slv-space-3) var(--slv-space-4);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-md);
+    transition: all var(--slv-duration-fast);
+}
+
+.slv-faq-related-item:hover {
+    border-color: var(--slv-color-primary);
+    background: var(--slv-color-bg-soft);
+}
+
+.slv-faq-related-item__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--slv-color-primary-subtle);
+    color: var(--slv-color-primary);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: var(--slv-font-weight-bold);
+    flex-shrink: 0;
+}
+
+.slv-faq-related-item h3 {
+    margin: 0;
+    font-size: var(--slv-font-size-sm);
+    font-weight: var(--slv-font-weight-medium);
+    line-height: 1.4;
+}
+
+.slv-faq-related-item h3 a {
+    color: var(--slv-color-text);
+    text-decoration: none;
+}
+
+@media (max-width: 640px) {
+    .slv-archive--faq,
+    .slv-single-faq { padding: var(--slv-space-8) var(--slv-space-4) var(--slv-space-12); }
+    .slv-faq-hero__title { font-size: var(--slv-font-size-2xl); }
+}

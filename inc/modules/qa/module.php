@@ -107,7 +107,7 @@ function slv_cli_deploy_check( array $args, array $assoc_args ): void {
     foreach ( $result['items'] as $item ) {
         $table[] = [
             '项'   => $item['label'],
-            '状态' => $item['passed'] ? '✅' : '❌',
+            '状态' => $item['passed'] ? '' : '',
             '值'   => $item['value'],
         ];
     }

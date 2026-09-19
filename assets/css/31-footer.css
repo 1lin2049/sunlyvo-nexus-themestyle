@@ -1,0 +1,207 @@
+/**
+ * SunLyvo Nexus — 页脚
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+.slv-footer {
+    background: var(--slv-color-bg-soft);
+    border-top: 1px solid var(--slv-color-border-soft);
+    padding: var(--slv-space-16) 0 var(--slv-space-8);
+    margin-top: var(--slv-space-20);
+}
+
+.slv-footer__inner {
+    max-width: var(--slv-container-2xl);
+    margin: 0 auto;
+    padding: 0 var(--slv-space-6);
+}
+
+.slv-footer__cols {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: var(--slv-space-12);
+    margin-bottom: var(--slv-space-12);
+}
+
+.slv-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slv-space-4);
+}
+
+.slv-footer__brand-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--slv-space-3);
+}
+
+.slv-footer__brand-logo img {
+    max-height: 32px;
+    width: auto;
+}
+
+.slv-footer__brand-name {
+    font-size: var(--slv-font-size-md);
+    font-weight: var(--slv-font-weight-bold);
+    color: var(--slv-color-text);
+    margin: 0;
+}
+
+.slv-footer__brand-desc {
+    font-size: var(--slv-font-size-sm);
+    line-height: var(--slv-line-height-normal);
+    color: var(--slv-color-text-muted);
+    margin: 0;
+    max-width: 320px;
+}
+
+.slv-footer__social {
+    display: flex;
+    gap: var(--slv-space-2);
+    margin-top: var(--slv-space-2);
+}
+
+.slv-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-md);
+    color: var(--slv-color-text-muted);
+    text-decoration: none;
+    transition: all var(--slv-duration-fast);
+}
+
+.slv-footer__social-link:hover {
+    color: var(--slv-color-primary);
+    border-color: var(--slv-color-primary);
+    background: var(--slv-color-primary-subtle);
+}
+
+.slv-footer__social-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+.slv-footer__col h4 {
+    font-size: var(--slv-font-size-sm);
+    font-weight: var(--slv-font-weight-semibold);
+    margin: 0 0 var(--slv-space-4);
+    color: var(--slv-color-text);
+}
+
+.slv-footer__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--slv-space-3);
+}
+
+.slv-footer__col a {
+    color: var(--slv-color-text-muted);
+    font-size: var(--slv-font-size-sm);
+    text-decoration: none;
+    transition: color var(--slv-duration-fast);
+}
+
+.slv-footer__col a:hover { color: var(--slv-color-primary); }
+
+/* 订阅 */
+.slv-footer__subscribe-form {
+    display: flex;
+    gap: var(--slv-space-2);
+    margin-top: var(--slv-space-3);
+}
+
+.slv-footer__subscribe-form input[type="email"] {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 14px;
+    font-size: var(--slv-font-size-sm);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-md);
+    color: var(--slv-color-text);
+    outline: none;
+    transition: all var(--slv-duration-fast);
+}
+
+.slv-footer__subscribe-form input[type="email"]:focus {
+    border-color: var(--slv-color-primary);
+    box-shadow: 0 0 0 3px var(--slv-color-primary-alpha);
+}
+
+.slv-footer__subscribe-form button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: var(--slv-color-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--slv-radius-md);
+    cursor: pointer;
+    transition: background var(--slv-duration-fast);
+    flex-shrink: 0;
+}
+
+.slv-footer__subscribe-form button:hover {
+    background: var(--slv-color-primary-hover);
+}
+
+.slv-footer__subscribe-form button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.slv-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--slv-space-4);
+    padding-top: var(--slv-space-6);
+    border-top: 1px solid var(--slv-color-border);
+    font-size: var(--slv-font-size-xs);
+    color: var(--slv-color-text-faint);
+    flex-wrap: wrap;
+}
+
+.slv-footer__bottom-links {
+    display: flex;
+    align-items: center;
+    gap: var(--slv-space-4);
+}
+
+.slv-footer__bottom-links a {
+    color: var(--slv-color-text-faint);
+    text-decoration: none;
+    transition: color var(--slv-duration-fast);
+}
+
+.slv-footer__bottom-links a:hover { color: var(--slv-color-primary); }
+
+/* 响应式 */
+@media (max-width: 1024px) {
+    .slv-footer { padding: var(--slv-space-12) 0 var(--slv-space-6); }
+    .slv-footer__cols {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--slv-space-8);
+    }
+}
+
+@media (max-width: 640px) {
+    .slv-footer__cols { grid-template-columns: 1fr; }
+    .slv-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--slv-space-3);
+    }
+}

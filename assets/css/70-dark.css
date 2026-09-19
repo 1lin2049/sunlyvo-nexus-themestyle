@@ -1,0 +1,89 @@
+/**
+ * SunLyvo Nexus — 深色模式（Token 层覆盖）
+ *
+ * 只覆盖 Alias 层，业务 CSS 自动跟随
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.0.0
+ */
+
+html[data-theme="dark"] {
+    /* 背景 */
+    --slv-color-bg:          #0a0c10;
+    --slv-color-bg-soft:     #12151b;
+    --slv-color-bg-muted:    #1a1e26;
+    --slv-color-bg-elevated: #12151b;
+    --slv-color-bg-inverse:  #e8ecf1;
+
+    /* 文字 */
+    --slv-color-text:         #e8ecf1;
+    --slv-color-text-muted:   #9ba3b0;
+    --slv-color-text-faint:   #6b7280;
+    --slv-color-text-inverse: #0a0c10;
+
+    /* 边框 */
+    --slv-color-border:        #262c36;
+    --slv-color-border-soft:   #1a1e26;
+    --slv-color-border-strong: #3a4250;
+
+    /* 品牌 */
+    --slv-color-primary:        #4d94ff;
+    --slv-color-primary-hover:  #7eb0ff;
+    --slv-color-primary-active: #3d84ef;
+    --slv-color-primary-subtle: #14243d;
+    --slv-color-primary-alpha:  rgba(77, 148, 255, 0.2);
+
+    /* 状态 */
+    --slv-color-success: #3fb950;
+    --slv-color-warning: #d29922;
+    --slv-color-error:   #f85149;
+    --slv-color-price:   #ff7a5c;
+
+    /* 阴影加深 */
+    --slv-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --slv-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --slv-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --slv-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+    --slv-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.7);
+
+    /* Map 层暗色 */
+    --slv-map-blue-hover:  color-mix(in srgb, var(--slv-seed-blue-6) 80%, white);
+    --slv-map-blue-active: color-mix(in srgb, var(--slv-seed-blue-6) 90%, white);
+    --slv-map-blue-subtle: color-mix(in srgb, var(--slv-seed-blue-6) 15%, black);
+
+    color-scheme: dark;
+}
+
+/* 深色模式下 code 颜色调整 */
+html[data-theme="dark"] code {
+    background: var(--slv-color-bg-muted);
+    color: #ff7b92;
+}
+
+html[data-theme="dark"] pre {
+    background: #05070a;
+    color: #e8ecf1;
+    border: 1px solid var(--slv-color-border);
+}
+
+/* 深色模式下图片默认轻微降亮 */
+html[data-theme="dark"] img:not([data-slv-no-dim]) {
+    filter: brightness(0.92);
+}
+
+/* 滚动条 */
+html[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: #0a0c10;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #262c36;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #3a4250;
+}
+
+/* 浅色模式标记 */
+html[data-theme="light"],
+:root[data-theme="light"] {
+    color-scheme: light;
+}

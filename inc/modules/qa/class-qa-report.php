@@ -39,8 +39,8 @@ class SLV_QA_Report {
             $rows = [];
             foreach ( $group['items'] as $item ) {
                 $icon = match ( $item['status'] ) {
-                    'pass' => '✅',
-                    'fail' => '❌',
+                    'pass' => '',
+                    'fail' => '',
                     default => '⏭️',
                 };
                 $rows[] = [
@@ -89,8 +89,8 @@ class SLV_QA_Report {
             $out .= "| 状态 | 项 | 值 |\n|---|---|---|\n";
             foreach ( $group['items'] as $item ) {
                 $icon = match ( $item['status'] ) {
-                    'pass' => '✅',
-                    'fail' => '❌',
+                    'pass' => '',
+                    'fail' => '',
                     default => '⏭️',
                 };
                 $out .= "| {$icon} | {$item['label']} | {$item['value']} |\n";
@@ -154,8 +154,8 @@ class SLV_QA_Report {
             foreach ( $group['items'] as $item ) {
                 $class = esc_attr( $item['status'] );
                 $icon = match ( $item['status'] ) {
-                    'pass' => '✅',
-                    'fail' => '❌',
+                    'pass' => '',
+                    'fail' => '',
                     default => '⏭️',
                 };
                 $html .= '<tr>';
@@ -199,8 +199,8 @@ class SLV_QA_Report {
 
             foreach ( $group['items'] as $item ) {
                 $icon = match ( $item['status'] ) {
-                    'pass' => '✅',
-                    'fail' => '❌',
+                    'pass' => '',
+                    'fail' => '',
                     default => '⏭️',
                 };
                 echo '<tr>';
