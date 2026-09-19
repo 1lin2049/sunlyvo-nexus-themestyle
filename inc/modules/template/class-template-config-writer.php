@@ -1,6 +1,9 @@
 <?php
 /**
- * SunLyvo Nexus — 中台 config.js 生成器
+ * SunLyvo Nexus — 中台运行时配置生成器
+ *
+ * 生成 /app/config.js，注入 window.SLV_ADMIN_CONFIG。
+ * 避免中台硬编码域名，支持多站点/多域名部署。
  *
  * @package SunLyvo_Nexus
  * @since 1.0.0
@@ -13,77 +16,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 生成 admin/config.js。
+ * 生成中台 config.js。
  */
 function slv_write_admin_config_js(): bool {
-    $admin_url = (string) get_option( 'slv_admin_url', home_url( '/app/' ) );
-    $admin_dir = slv_get_admin_deploy_dir();
+    $config = [
+        'apiBase'  => home_url( '/wp-json/slv/v1' ),
+        'homeUrl'  => home_url( '/' ),
+        'adminUrl' => home_url( '/app/' ),
+        'locale'   => get_locale(),
+        'siteName' => get_bloginfo( 'name' ),
+        'wpNonce'  => wp_create_nonce( 'wp_rest' ),
+    ];
 
-    if ( ! $admin_dir ) {
-        return false;
-    }
+    $js = 'window.SLV_ADMIN_CONFIG = ' . wp_json_encode( $config, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ';';
 
-    if ( ! is_dir( $admin_dir ) ) {
-        wp_mkdir_p( $admin_dir );
-    }
-
-    $admin_parsed = wp_parse_url( $admin_url );
-    $home_parsed  = wp_parse_url( home_url() );
-    $same_domain  = ( $admin_parsed['host'] ?? '' ) === ( $home_parsed['host'] ?? '' );
-
-    $api_base = $same_domain
-        ? '/wp-json/slv/v1'
-        : untrailingslashit( home_url() ) . '/wp-json/slv/v1';
-
-    // 从 WordPress 读取 Logo
-    $logo_url = '';
-    $custom_logo_id = (int) get_theme_mod( 'custom_logo' );
-    if ( $custom_logo_id ) {
-        $logo_url = (string) wp_get_attachment_image_url( $custom_logo_id, 'full' );
-    } else {
-        $site_icon_id = (int) get_option( 'site_icon' );
-        if ( $site_icon_id ) {
-            $logo_url = (string) wp_get_attachment_image_url( $site_icon_id, 'full' );
+    $target_dir = ABSPATH . 'app';
+    if ( ! is_dir( $target_dir ) ) {
+        if ( ! wp_mkdir_p( $target_dir ) ) {
+            error_log( '[SLV] Cannot create /app/ directory' );
+            return false;
         }
     }
 
-    $config = [
-        'apiBase'  => $api_base,
-        'adminUrl' => $admin_url,
-        'homeUrl'  => untrailingslashit( home_url() ),
-        'locale'   => get_locale(),
-        'logoUrl'  => $logo_url,
-        'siteName' => get_bloginfo( 'name' ),
-    ];
+    $target = $target_dir . '/config.js';
+    $result = file_put_contents( $target, $js, LOCK_EX );
 
-    $content  = "// SunLyvo Nexus 中台配置\n";
-    $content .= "// 由 WordPress 动态生成，请勿手动编辑\n";
-    $content .= "// 生成时间：" . current_time( 'mysql' ) . "\n";
-    $content .= "window.SLV_ADMIN_CONFIG = " . wp_json_encode( $config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ";\n";
-
-    $path = trailingslashit( $admin_dir ) . 'config.js';
-    return false !== file_put_contents( $path, $content, LOCK_EX );
-}
-
-function slv_get_admin_deploy_dir(): ?string {
-    $admin_url = (string) get_option( 'slv_admin_url', home_url( '/app/' ) );
-    $path      = wp_parse_url( $admin_url, PHP_URL_PATH );
-
-    if ( ! $path || '/' === $path ) {
-        return null;
+    if ( $result === false ) {
+        error_log( "[SLV] Cannot write {$target}" );
+        return false;
     }
 
-    return rtrim( ABSPATH, '/' ) . untrailingslashit( $path );
+    return true;
 }
 
-add_action( 'update_option_slv_admin_url', 'slv_write_admin_config_js', 10, 0 );
-add_action( 'update_option_slv_admin_deploy_mode', 'slv_write_admin_config_js', 10, 0 );
-add_action( 'update_option_site_icon', 'slv_write_admin_config_js', 10, 0 );
-add_action( 'customize_save_after', 'slv_write_admin_config_js', 10, 0 );
+/**
+ * 主题切换 / 站点 URL 变更时重新生成。
+ */
+add_action( 'update_option_home', 'slv_write_admin_config_js' );
+add_action( 'update_option_siteurl', 'slv_write_admin_config_js' );
+add_action( 'switch_theme', 'slv_write_admin_config_js' );
 
-add_action( 'init', static function () {
-    if ( ! wp_next_scheduled( 'slv_regenerate_admin_config' ) ) {
-        wp_schedule_event( time(), 'daily', 'slv_regenerate_admin_config' );
-    }
-} );
-add_action( 'slv_regenerate_admin_config', 'slv_write_admin_config_js' );
+/**
+ * WP-CLI 命令：wp slv write-admin-config
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+    WP_CLI::add_command( 'slv write-admin-config', function () {
+        if ( slv_write_admin_config_js() ) {
+            WP_CLI::success( 'Admin config.js written.' );
+        } else {
+            WP_CLI::error( 'Failed to write admin config.js.' );
+        }
+    } );
+}

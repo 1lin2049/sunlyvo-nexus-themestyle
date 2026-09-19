@@ -223,3 +223,23 @@
     --slv-input-border-focus: 1px solid var(--slv-color-primary);
     --slv-input-ring-focus:   0 0 0 3px var(--slv-map-primary-ring);
 }
+
+/* ═══════════════════════════════════════════════
+   深色模式
+   ═══════════════════════════════════════════════ */
+html[data-theme="dark"] {
+    --slv-color-bg-base:      #0d1117;
+    --slv-color-bg-subtle:    #161b22;
+    --slv-color-bg-muted:     #21262d;
+    --slv-color-text-primary: #e6edf3;
+    --slv-color-text-secondary: #8b949e;
+    --slv-color-text-tertiary: #6e7681;
+    --slv-color-border-base:  #30363d;
+    --slv-color-primary:      #4096ff;
+    --slv-color-primary-hover:#69b1ff;
+    color-scheme: dark;
+}
+
+html[data-theme="light"] {
+    color-scheme: light;
+}

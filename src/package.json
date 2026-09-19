@@ -1,35 +1,39 @@
 {
-    "name": "sunlyvo-nexus-admin",
-    "version": "1.0.0",
-    "private": true,
-    "description": "SunLyvo Nexus 中台管理端",
-    "scripts": {
-        "dev": "max dev",
-        "build": "cross-env NODE_ENV=production max build",
-        "postinstall": "max setup",
-        "setup": "max setup",
-        "tsc": "tsc --noEmit"
-    },
-    "dependencies": {
-        "@ant-design/icons": "^6.3.4",
-        "@ant-design/pro-components": "3.1.14-7",
-        "@umijs/max": "^4.6.51",
-        "antd": "^6.6.4",
-        "dayjs": "^1.11.13",
-        "react": "^19.3.0",
-        "react-dom": "^19.3.0"
-    },
-    "devDependencies": {
-        "@types/react": "^19.3.0",
-        "@types/react-dom": "^19.3.0",
-        "cross-env": "^7.0.3",
-        "typescript": "^5.9.3"
-    },
-    "engines": {
-        "node": ">=20.0.0",
-        "pnpm": ">=9.0.0"
-    },
-    "pnpm": {
-        "onlyBuiltDependencies": ["core-js", "core-js-pure", "es5-ext", "esbuild"]
-    }
+  "name": "sunlyvo-nexus-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SunLyvo Nexus 中台管理端",
+  "scripts": {
+    "dev": "max dev",
+    "build": "cross-env NODE_ENV=production max build",
+    "build:subdir": "cross-env NODE_ENV=production PUBLIC_PATH=/app/ max build",
+    "build:subdomain": "cross-env NODE_ENV=production PUBLIC_PATH=/ max build",
+    "postinstall": "max setup",
+    "setup": "max setup",
+    "tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.3.4",
+    "@ant-design/pro-components": "3.1.14-7",
+    "@ant-design/x": "^2.0.0",
+    "@ant-design/web3": "^1.0.0",
+    "@umijs/max": "^4.6.51",
+    "ahooks": "^3.8.0",
+    "antd": "^5.27.0",
+    "antd-style": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "rc-motion": "^2.9.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "cross-env": "^7.0.3",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
 }

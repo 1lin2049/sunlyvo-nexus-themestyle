@@ -1,10 +1,18 @@
 allowBuilds:
-  core-js: set this to true or false
-  core-js-pure: set this to true or false
-  es5-ext: set this to true or false
-  esbuild: set this to true or false
-onlyBuiltDependencies:
+  - '@parcel/watcher'
   - core-js
   - core-js-pure
   - es5-ext
   - esbuild
+  - sharp
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - core-js
+  - core-js-pure
+  - es5-ext
+  - esbuild
+  - sharp
+
+auto-install-peers: true
+strict-peer-dependencies: false
