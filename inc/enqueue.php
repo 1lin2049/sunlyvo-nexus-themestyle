@@ -1,9 +1,9 @@
 <?php
 /**
- * SunLyvo Nexus — 资源条件加载 v5.2
+ * SunLyvo Nexus — 资源条件加载 v5.3
  *
  * @package SunLyvo_Nexus
- * @since 5.2.0
+ * @since 5.3.0
  */
 
 declare( strict_types=1 );
@@ -20,9 +20,6 @@ function slv_asset_version( string $relative ): string {
     return SLV_VERSION;
 }
 
-/**
- * 安全入队 —— 文件不存在则跳过，不打断整个链。
- */
 function slv_enqueue_style_if_exists( string $handle, string $file, array $deps = [] ): void {
     $path = SLV_THEME_DIR . '/assets/css/' . $file;
     if ( ! file_exists( $path ) ) {
@@ -39,7 +36,7 @@ function slv_enqueue_style_if_exists( string $handle, string $file, array $deps 
 function slv_enqueue_assets(): void {
     $js = SLV_ASSETS_URL . '/js';
 
-    // ── 基础链（顺序入队，不互相依赖，避免断链）
+    // 基础链
     slv_enqueue_style_if_exists( 'slv-reset',      'reset.css' );
     slv_enqueue_style_if_exists( 'slv-tokens',     '01-tokens.css' );
     slv_enqueue_style_if_exists( 'slv-base',       '02-base.css' );
@@ -49,72 +46,51 @@ function slv_enqueue_assets(): void {
     slv_enqueue_style_if_exists( 'slv-components', '20-components.css' );
 
     if ( function_exists( 'slv_reader_is_environment' ) && slv_reader_is_environment() ) {
-        // Reader 环境
         slv_enqueue_style_if_exists( 'slv-reader', '60-reader.css' );
-
         wp_enqueue_script( 'slv-reader',           "{$js}/reader.js",           [], slv_asset_version( 'js/reader.js' ), true );
         wp_enqueue_script( 'slv-toc',              "{$js}/toc.js",              [ 'slv-reader' ], slv_asset_version( 'js/toc.js' ), true );
         wp_enqueue_script( 'slv-selection-menu',   "{$js}/selection-menu.js",   [ 'slv-reader' ], slv_asset_version( 'js/selection-menu.js' ), true );
         wp_enqueue_script( 'slv-reading-position', "{$js}/reading-position.js", [ 'slv-reader' ], slv_asset_version( 'js/reading-position.js' ), true );
         wp_enqueue_script( 'slv-share',            "{$js}/share.js",            [ 'slv-reader' ], slv_asset_version( 'js/share.js' ), true );
     } else {
-        // 主站环境
         slv_enqueue_style_if_exists( 'slv-header', '30-header.css' );
         slv_enqueue_style_if_exists( 'slv-footer', '31-footer.css' );
 
         wp_enqueue_script( 'slv-header', "{$js}/header.js", [], slv_asset_version( 'js/header.js' ), true );
         wp_enqueue_script( 'slv-main',   "{$js}/main.js",   [ 'slv-header' ], slv_asset_version( 'js/main.js' ), true );
 
-        // 首页
         if ( is_front_page() ) {
             slv_enqueue_style_if_exists( 'slv-home', '32-home.css' );
-            if ( file_exists( SLV_THEME_DIR . '/assets/js/home.js' ) ) {
-                wp_enqueue_script( 'slv-home', "{$js}/home.js", [ 'slv-main' ], slv_asset_version( 'js/home.js' ), true );
-            }
         }
 
-        // 商品列表
         if ( is_post_type_archive( 'product' ) || is_tax( [ 'product_cat', 'product_tag' ] ) ) {
             slv_enqueue_style_if_exists( 'slv-product-list', '40-product-list.css' );
-            if ( file_exists( SLV_THEME_DIR . '/assets/js/product-list.js' ) ) {
-                wp_enqueue_script( 'slv-product-list', "{$js}/product-list.js", [ 'slv-main' ], slv_asset_version( 'js/product-list.js' ), true );
-            }
         }
 
-        // 商品详情
         if ( is_singular( 'product' ) ) {
             slv_enqueue_style_if_exists( 'slv-product-detail', '40-product-detail.css' );
-            if ( file_exists( SLV_THEME_DIR . '/assets/js/product-detail.js' ) ) {
-                wp_enqueue_script( 'slv-product-detail', "{$js}/product-detail.js", [ 'slv-main' ], slv_asset_version( 'js/product-detail.js' ), true );
-            }
         }
 
-        // 博客
         if ( is_singular( 'post' ) || is_home() || is_category() || is_tag() || is_author() || is_date() ) {
             slv_enqueue_style_if_exists( 'slv-blog', '41-blog.css' );
         }
 
-        // FAQ
         if ( is_singular( 'faq' ) || is_post_type_archive( 'faq' ) || is_tax( 'faq_cat' ) ) {
             slv_enqueue_style_if_exists( 'slv-faq', '42-faq.css' );
         }
 
-        // 百科
         if ( is_singular( 'wiki' ) || is_post_type_archive( 'wiki' ) || is_tax( 'wiki_cat' ) ) {
             slv_enqueue_style_if_exists( 'slv-wiki', '43-wiki.css' );
         }
 
-        // 合集
         if ( is_singular( 'collection' ) || is_post_type_archive( 'collection' ) || is_tax( 'collection_cat' ) ) {
             slv_enqueue_style_if_exists( 'slv-collection', '44-collection.css' );
         }
 
-        // 通用单页
         if ( is_singular() ) {
             slv_enqueue_style_if_exists( 'slv-single', '50-single.css' );
         }
 
-        // 深色模式 —— 一定最后加载
         slv_enqueue_style_if_exists( 'slv-dark', '70-dark.css' );
     }
 }
