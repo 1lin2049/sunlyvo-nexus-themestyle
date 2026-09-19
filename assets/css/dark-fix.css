@@ -1,8 +1,10 @@
 /**
- * SunLyvo Nexus — 深色模式完整修复
+ * SunLyvo Nexus — 深色模式设计系统
+ *
+ * v2.0 · 与 layout-fix.css 完整对齐
  *
  * @package SunLyvo_Nexus
- * @since 1.1.0
+ * @since 2.0.0
  */
 
 /* ═══════════════════════════════════════════════
@@ -38,203 +40,164 @@ html[data-theme="dark"] .slv-theme-toggle__icon--light {
 }
 
 /* ═══════════════════════════════════════════════
-   2. 深色模式 — 全局变量（覆盖 layout-fix 的 :root）
+   2. 深色模式变量
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] {
-    --slv-color-bg-base:         #0d1117;
-    --slv-color-bg-subtle:       #161b22;
-    --slv-color-bg-muted:        #21262d;
-    --slv-color-bg-elevated:     #1c2128;
-    --slv-color-bg-inverse:      #f6f8fa;
+    --slv-color-bg:          #0a0c10;
+    --slv-color-bg-soft:     #12151b;
+    --slv-color-bg-muted:    #1a1e26;
+    --slv-color-bg-elevated: #12151b;
+    --slv-color-border:      #262c36;
+    --slv-color-border-soft: #1a1e26;
+    --slv-color-text:        #e8ecf1;
+    --slv-color-text-muted:  #9ba3b0;
+    --slv-color-text-faint:  #6b7280;
+    --slv-color-brand:       #4d94ff;
+    --slv-color-brand-hover: #7eb0ff;
+    --slv-color-brand-soft:  #14243d;
+    --slv-color-accent:      #ff7a5c;
 
-    --slv-color-text-primary:    #e6edf3;
-    --slv-color-text-secondary:  #a5b1c2;
-    --slv-color-text-tertiary:   #7d8590;
-    --slv-color-text-inverse:    #0d1117;
-
-    --slv-color-border-base:     #30363d;
-    --slv-color-border-subtle:   #21262d;
-    --slv-color-border-strong:   #484f58;
-
-    --slv-color-primary:         #4096ff;
-    --slv-color-primary-hover:   #69b1ff;
-    --slv-color-primary-active:  #1677ff;
-    --slv-color-primary-subtle:  #112a4e;
+    --slv-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --slv-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --slv-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --slv-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
 
     color-scheme: dark;
 }
 
 html[data-theme="dark"] body {
-    background-color: #0d1117 !important;
-    color: #e6edf3 !important;
+    background: var(--slv-color-bg) !important;
+    color: var(--slv-color-text) !important;
 }
 
-html[data-theme="dark"] a { color: #4096ff; }
-html[data-theme="dark"] a:hover { color: #69b1ff; }
+html[data-theme="dark"] a { color: var(--slv-color-brand); }
+html[data-theme="dark"] a:hover { color: var(--slv-color-brand-hover); }
 
 /* ═══════════════════════════════════════════════
-   3. Header / Footer
+   3. Header
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] .slv-header,
-html[data-theme="dark"] header.site-header {
-    background: #161b22 !important;
-    border-bottom-color: #30363d !important;
+html[data-theme="dark"] .slv-header {
+    background: rgba(10, 12, 16, 0.85) !important;
+    border-bottom-color: var(--slv-color-border-soft) !important;
 }
 
-html[data-theme="dark"] .slv-header *,
-html[data-theme="dark"] header.site-header * {
-    color: #e6edf3;
+html[data-theme="dark"] .slv-header__nav a {
+    color: var(--slv-color-text-muted);
 }
 
-html[data-theme="dark"] .slv-header__nav .wp-block-navigation-item__content {
-    color: #e6edf3;
+html[data-theme="dark"] .slv-header__nav a:hover {
+    color: var(--slv-color-text);
+    background: var(--slv-color-bg-muted);
 }
 
-html[data-theme="dark"] .slv-header__nav .wp-block-navigation-item__content:hover,
-html[data-theme="dark"] .slv-header__nav .current-menu-item .wp-block-navigation-item__content {
-    color: #4096ff;
+html[data-theme="dark"] .slv-header__nav .current-menu-item a {
+    color: var(--slv-color-brand);
+    background: var(--slv-color-brand-soft);
+}
+
+html[data-theme="dark"] .slv-header__icon-btn {
+    color: var(--slv-color-text-muted);
 }
 
 html[data-theme="dark"] .slv-header__icon-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #4096ff;
-}
-
-html[data-theme="dark"] .slv-footer,
-html[data-theme="dark"] footer.site-footer {
-    background: #0a0d12 !important;
-    border-top-color: #30363d !important;
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .slv-footer *,
-html[data-theme="dark"] footer.site-footer * { color: #a5b1c2; }
-html[data-theme="dark"] .slv-footer a,
-html[data-theme="dark"] footer.site-footer a { color: #e6edf3; }
-html[data-theme="dark"] .slv-footer a:hover,
-html[data-theme="dark"] footer.site-footer a:hover { color: #4096ff; }
-
-html[data-theme="dark"] .slv-footer__newsletter input,
-html[data-theme="dark"] footer.site-footer input {
-    background: #21262d;
-    color: #e6edf3;
-    border-color: #30363d;
+    color: var(--slv-color-text);
+    background: var(--slv-color-bg-muted);
 }
 
 /* ═══════════════════════════════════════════════
-   4. Logo 云
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-logo-cloud__item,
-html[data-theme="dark"] [class*="logo-cloud"] [class*="item"] {
-    color: #a5b1c2;
-    opacity: 0.85;
-}
-
-html[data-theme="dark"] .slv-logo-cloud__item:hover,
-html[data-theme="dark"] [class*="logo-cloud"] [class*="item"]:hover {
-    color: #e6edf3;
-    opacity: 1;
-}
-
-html[data-theme="dark"] .slv-logo-cloud__title,
-html[data-theme="dark"] [class*="logo-cloud"] h3 {
-    color: #7d8590;
-}
-
-/* ═══════════════════════════════════════════════
-   5. 卡片 / 内容块
+   4. 卡片
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] .slv-card,
-html[data-theme="dark"] .slv-faq-item,
+html[data-theme="dark"] .slv-post-card,
+html[data-theme="dark"] .slv-product-card,
 html[data-theme="dark"] .slv-faq-list__item,
-html[data-theme="dark"] .slv-archive__item,
-html[data-theme="dark"] .slv-collection-card,
-html[data-theme="dark"] .slv-related__item,
-html[data-theme="dark"] .slv-wiki-infobox,
-html[data-theme="dark"] .slv-author-box,
 html[data-theme="dark"] .slv-collection-cta,
-html[data-theme="dark"] .slv-feature-card,
-html[data-theme="dark"] .slv-stat-card,
-html[data-theme="dark"] .slv-testimonial,
-html[data-theme="dark"] .slv-pricing-card,
-html[data-theme="dark"] .slv-step,
-html[data-theme="dark"] .slv-team-card {
-    background: #161b22 !important;
-    border-color: #30363d !important;
-    color: #e6edf3 !important;
+html[data-theme="dark"] .slv-collection-chapters__item {
+    background: var(--slv-color-bg-elevated) !important;
+    border-color: var(--slv-color-border) !important;
+    color: var(--slv-color-text) !important;
 }
 
-html[data-theme="dark"] .slv-card:hover,
-html[data-theme="dark"] .slv-archive__item:hover,
-html[data-theme="dark"] .slv-collection-card:hover,
-html[data-theme="dark"] .slv-faq-list__item:hover {
-    border-color: #4096ff !important;
-    box-shadow: 0 8px 24px rgba(64, 150, 255, 0.15) !important;
+html[data-theme="dark"] .slv-post-card:hover,
+html[data-theme="dark"] .slv-product-card:hover,
+html[data-theme="dark"] .slv-faq-list__item:hover,
+html[data-theme="dark"] .slv-collection-chapters__item:hover {
+    border-color: var(--slv-color-brand) !important;
+    background: var(--slv-color-bg-soft) !important;
 }
 
-/* 移除深色模式下的 WP 默认灰底 */
+/* ═══════════════════════════════════════════════
+   5. 图片占位（关键：深色模式下不再白块）
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-post-card__media,
+html[data-theme="dark"] .slv-product-card__media,
+html[data-theme="dark"] .slv-product-gallery,
+html[data-theme="dark"] .slv-placeholder {
+    background: linear-gradient(135deg, #12151b 0%, #1a1e26 100%) !important;
+}
+
+html[data-theme="dark"] .slv-post-card__media:empty::before,
+html[data-theme="dark"] .slv-product-card__media:empty::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════
+   6. 正文
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-prose { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-prose h2,
+html[data-theme="dark"] .slv-prose h3,
+html[data-theme="dark"] .slv-prose h4 { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-prose strong { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-prose a { color: var(--slv-color-brand); }
+
+html[data-theme="dark"] .slv-prose code {
+    background: var(--slv-color-bg-muted);
+    color: #ff7b92;
+}
+
+html[data-theme="dark"] .slv-prose pre {
+    background: #05070a;
+    color: #e8ecf1;
+    border: 1px solid var(--slv-color-border);
+}
+
+html[data-theme="dark"] .slv-prose blockquote {
+    background: transparent;
+    border-left-color: var(--slv-color-brand);
+    color: var(--slv-color-text-muted);
+}
+
+html[data-theme="dark"] .slv-prose table {
+    border-color: var(--slv-color-border);
+    background: var(--slv-color-bg-elevated);
+}
+
+html[data-theme="dark"] .slv-prose thead { background: var(--slv-color-bg-muted); }
+html[data-theme="dark"] .slv-prose th {
+    color: var(--slv-color-text);
+    border-bottom-color: var(--slv-color-border);
+}
+html[data-theme="dark"] .slv-prose td {
+    color: var(--slv-color-text-muted);
+    border-bottom-color: var(--slv-color-border-soft);
+}
+html[data-theme="dark"] .slv-prose tbody tr:hover { background: var(--slv-color-bg-soft); }
+
+/* 移除 WP 默认灰底 */
 html[data-theme="dark"] .wp-block-post-content .has-background,
-html[data-theme="dark"] .wp-block-post-content > .wp-block-group.has-background,
-html[data-theme="dark"] .slv-single-page .has-background {
+html[data-theme="dark"] .wp-block-post-content > .wp-block-group.has-background {
     background: transparent !important;
+    padding: 0 !important;
 }
 
 /* ═══════════════════════════════════════════════
-   6. Hero / 首页
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-hero {
-    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-}
-
-html[data-theme="dark"] .slv-hero__title { color: #e6edf3; }
-html[data-theme="dark"] .slv-hero__subtitle { color: #a5b1c2; }
-
-html[data-theme="dark"] .slv-hero__badge {
-    background: #21262d;
-    color: #a5b1c2;
-    border-color: #30363d;
-}
-
-html[data-theme="dark"] .slv-hero__trust { color: #a5b1c2; }
-html[data-theme="dark"] .slv-hero__trust strong { color: #e6edf3; }
-html[data-theme="dark"] .slv-section__title { color: #e6edf3; }
-html[data-theme="dark"] .slv-section__subtitle { color: #a5b1c2; }
-
-/* ═══════════════════════════════════════════════
-   7. 按钮
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-button {
-    background: #4096ff;
-    border-color: #4096ff;
-    color: #ffffff !important;
-}
-
-html[data-theme="dark"] .slv-button:hover {
-    background: #69b1ff;
-    border-color: #69b1ff;
-    color: #0d1117 !important;
-}
-
-html[data-theme="dark"] .slv-button--secondary {
-    background: #21262d;
-    border-color: #30363d;
-    color: #e6edf3 !important;
-}
-
-html[data-theme="dark"] .slv-button--secondary:hover {
-    background: #30363d;
-    border-color: #4096ff;
-    color: #4096ff !important;
-}
-
-/* ═══════════════════════════════════════════════
-   8. 表单
+   7. 表单
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] input[type="text"],
@@ -246,347 +209,230 @@ html[data-theme="dark"] input[type="password"],
 html[data-theme="dark"] input[type="number"],
 html[data-theme="dark"] textarea,
 html[data-theme="dark"] select {
-    background: #161b22 !important;
-    color: #e6edf3 !important;
-    border-color: #30363d !important;
+    background: var(--slv-color-bg-muted) !important;
+    color: var(--slv-color-text) !important;
+    border-color: var(--slv-color-border) !important;
 }
 
 html[data-theme="dark"] input::placeholder,
 html[data-theme="dark"] textarea::placeholder {
-    color: #7d8590 !important;
+    color: var(--slv-color-text-faint) !important;
 }
 
 html[data-theme="dark"] input:focus,
 html[data-theme="dark"] textarea:focus,
 html[data-theme="dark"] select:focus {
-    border-color: #4096ff !important;
-    box-shadow: 0 0 0 3px rgba(64, 150, 255, 0.2) !important;
+    border-color: var(--slv-color-brand) !important;
+    box-shadow: 0 0 0 3px rgba(77, 148, 255, 0.15) !important;
 }
 
 /* ═══════════════════════════════════════════════
-   9. 表格
+   8. 按钮
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] table {
-    background: #161b22;
-    color: #e6edf3;
-    border-color: #30363d;
-}
-
-html[data-theme="dark"] thead,
-html[data-theme="dark"] thead th {
-    background: #21262d !important;
-    color: #e6edf3 !important;
-    border-color: #30363d !important;
-}
-
-html[data-theme="dark"] tbody tr:nth-child(even) {
-    background: #1c2128;
-}
-
-html[data-theme="dark"] tbody tr:hover {
-    background: #21262d;
-}
-
-html[data-theme="dark"] td,
-html[data-theme="dark"] th {
-    border-color: #30363d !important;
-    color: #e6edf3;
-}
-
-/* ═══════════════════════════════════════════════
-   10. 代码 / 引用
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] code {
-    background: #21262d !important;
-    color: #ff7b72 !important;
-    border-color: #30363d !important;
-}
-
-html[data-theme="dark"] pre {
-    background: #161b22 !important;
-    border-color: #30363d !important;
-    color: #e6edf3 !important;
-}
-
-html[data-theme="dark"] pre code {
-    background: transparent !important;
-    color: #e6edf3 !important;
-}
-
-html[data-theme="dark"] blockquote {
-    background: #161b22 !important;
-    border-left-color: #4096ff !important;
-    color: #a5b1c2 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   11. 标签 / 徽章
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-badge,
-html[data-theme="dark"] .wp-block-post-terms a,
-html[data-theme="dark"] .wp-block-tag-cloud a,
-html[data-theme="dark"] .taxonomy-post_tag a {
-    background: #21262d !important;
-    color: #a5b1c2 !important;
-    border-color: #30363d !important;
-}
-
-html[data-theme="dark"] .slv-badge:hover,
-html[data-theme="dark"] .wp-block-post-terms a:hover {
-    background: #30363d !important;
-    color: #4096ff !important;
-}
-
-html[data-theme="dark"] .slv-badge--knowledge {
-    background: #112a4e !important;
-    color: #69b1ff !important;
-}
-
-/* ═══════════════════════════════════════════════
-   12. 详情页
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-single-post,
-html[data-theme="dark"] .slv-single-wiki,
-html[data-theme="dark"] .slv-single-faq,
-html[data-theme="dark"] .slv-single-collection,
-html[data-theme="dark"] .slv-archive {
-    background: #0d1117;
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .wp-block-post-title,
-html[data-theme="dark"] .wp-block-post-title a,
-html[data-theme="dark"] .slv-post-title {
-    color: #e6edf3 !important;
-}
-
-html[data-theme="dark"] .wp-block-post-content,
-html[data-theme="dark"] .wp-block-post-content p,
-html[data-theme="dark"] .wp-block-post-content li,
-html[data-theme="dark"] .wp-block-post-content strong {
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .wp-block-post-content h2,
-html[data-theme="dark"] .wp-block-post-content h3,
-html[data-theme="dark"] .wp-block-post-content h4 {
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .slv-post-meta,
-html[data-theme="dark"] .slv-post-meta *,
-html[data-theme="dark"] .wp-block-post-date,
-html[data-theme="dark"] .wp-block-post-author,
-html[data-theme="dark"] .wp-block-post-terms,
-html[data-theme="dark"] .wp-block-post-excerpt,
-html[data-theme="dark"] .wp-block-post-excerpt * {
-    color: #a5b1c2 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   13. FAQ
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-faq-item__question {
-    color: #e6edf3;
-    background: #161b22;
-}
-
-html[data-theme="dark"] .slv-faq-item[open] { border-color: #4096ff; }
-html[data-theme="dark"] .slv-faq-item__answer,
-html[data-theme="dark"] .slv-faq-answer {
-    color: #a5b1c2;
-    background: #161b22;
-}
-html[data-theme="dark"] .slv-faq-item__answer *,
-html[data-theme="dark"] .slv-faq-answer * { color: #a5b1c2; }
-
-html[data-theme="dark"] .slv-bluf-summary,
-html[data-theme="dark"] [class*="slv-faq"] [class*="summary"] {
-    background: #161b22 !important;
-    color: #e6edf3 !important;
-    border-color: #30363d !important;
-}
-html[data-theme="dark"] .slv-bluf-summary * { color: #e6edf3; }
-
-/* ═══════════════════════════════════════════════
-   14. 百科
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-wiki-definition {
-    background: linear-gradient(135deg, #112a4e, #0d1e38) !important;
-    border-left-color: #4096ff !important;
-}
-html[data-theme="dark"] .slv-wiki-definition * { color: #e6edf3; }
-html[data-theme="dark"] .slv-wiki-definition strong { color: #69b1ff; }
-
-html[data-theme="dark"] .slv-wiki-infobox__title {
-    border-bottom-color: #30363d;
-    color: #e6edf3;
-}
-html[data-theme="dark"] .slv-wiki-infobox__list dt { color: #7d8590; }
-html[data-theme="dark"] .slv-wiki-infobox__list dd { color: #e6edf3; }
-
-/* ═══════════════════════════════════════════════
-   15. 合集
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-collection-chapters__item {
-    background: #161b22;
-    color: #e6edf3;
-}
-html[data-theme="dark"] .slv-collection-chapters__item:hover { background: #21262d; }
-html[data-theme="dark"] .slv-collection-chapters__num {
-    background: #21262d;
-    color: #a5b1c2;
-}
-html[data-theme="dark"] .slv-collection-chapters__link { color: #e6edf3; }
-html[data-theme="dark"] .slv-collection-chapters__link:hover { color: #4096ff; }
-html[data-theme="dark"] .slv-collection-chapters__title-text { color: #7d8590; }
-html[data-theme="dark"] .slv-collection-cta__price { color: #4096ff; }
-
-/* ═══════════════════════════════════════════════
-   16. 归档页
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-archive__title { color: #e6edf3 !important; }
-html[data-theme="dark"] .slv-archive__desc,
-html[data-theme="dark"] .slv-archive__term { color: #a5b1c2; }
-
-html[data-theme="dark"] .slv-archive__item a,
-html[data-theme="dark"] .slv-archive__item h3 a,
-html[data-theme="dark"] .slv-archive__item .wp-block-post-title a {
-    color: #e6edf3 !important;
-}
-
-html[data-theme="dark"] .slv-archive__item a:hover {
-    color: #4096ff !important;
-}
-
-html[data-theme="dark"] .slv-archive__item p,
-html[data-theme="dark"] .slv-archive__item .wp-block-post-excerpt * {
-    color: #a5b1c2 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   17. 分页
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .wp-block-query-pagination a,
-html[data-theme="dark"] .page-numbers {
-    background: #161b22 !important;
-    color: #e6edf3 !important;
-    border-color: #30363d !important;
-}
-
-html[data-theme="dark"] .page-numbers.current {
-    background: #4096ff !important;
+html[data-theme="dark"] .slv-btn {
+    background: var(--slv-color-brand);
+    border-color: var(--slv-color-brand);
     color: #ffffff !important;
-    border-color: #4096ff !important;
+}
+
+html[data-theme="dark"] .slv-btn:hover {
+    background: var(--slv-color-brand-hover);
+    border-color: var(--slv-color-brand-hover);
+}
+
+html[data-theme="dark"] .slv-btn--ghost {
+    background: transparent;
+    color: var(--slv-color-text) !important;
+    border-color: var(--slv-color-border);
+}
+
+html[data-theme="dark"] .slv-btn--ghost:hover {
+    background: var(--slv-color-bg-muted);
+    border-color: var(--slv-color-text-muted);
 }
 
 /* ═══════════════════════════════════════════════
-   18. 阅读体验
+   9. 徽章
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] .slv-toc {
-    background: #161b22;
-    border-color: #30363d;
+html[data-theme="dark"] .slv-badge {
+    background: var(--slv-color-bg-muted);
+    color: var(--slv-color-text-muted);
 }
+
+html[data-theme="dark"] .slv-badge--brand {
+    background: var(--slv-color-brand-soft);
+    color: var(--slv-color-brand);
+}
+
+html[data-theme="dark"] .slv-badge--accent {
+    background: #2a1310;
+    color: var(--slv-color-accent);
+}
+
+/* ═══════════════════════════════════════════════
+   10. TOC / 信息框
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-toc,
+html[data-theme="dark"] .slv-infobox {
+    background: var(--slv-color-bg-soft);
+    border-color: var(--slv-color-border);
+}
+
 html[data-theme="dark"] .slv-toc__title,
-html[data-theme="dark"] .slv-toc a { color: #e6edf3; }
-html[data-theme="dark"] .slv-toc a:hover,
-html[data-theme="dark"] .slv-toc-item.slv-toc-active a { color: #4096ff; }
-html[data-theme="dark"] .slv-reader-progress { background: #21262d; }
-html[data-theme="dark"] .slv-reader-progress__bar { background: #4096ff; }
+html[data-theme="dark"] .slv-infobox__title {
+    color: var(--slv-color-text-faint);
+    border-bottom-color: var(--slv-color-border-soft);
+}
+
+html[data-theme="dark"] .slv-toc a { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-toc a:hover { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-toc a.slv-toc-active {
+    color: var(--slv-color-brand);
+    border-left-color: var(--slv-color-brand);
+}
+
+html[data-theme="dark"] .slv-infobox dt { color: var(--slv-color-text-faint); }
+html[data-theme="dark"] .slv-infobox dd { color: var(--slv-color-text); }
 
 /* ═══════════════════════════════════════════════
-   19. 作者卡片 / 相关阅读
+   11. 标题 / Meta
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] .slv-author-box__name { color: #e6edf3; }
-html[data-theme="dark"] .slv-author-box__bio { color: #a5b1c2; }
-html[data-theme="dark"] .slv-author-box__link { color: #4096ff; }
-html[data-theme="dark"] .slv-related__title { color: #e6edf3; }
-html[data-theme="dark"] .slv-related__heading { color: #e6edf3; }
-html[data-theme="dark"] .slv-related__excerpt { color: #a5b1c2; }
+html[data-theme="dark"] .slv-title { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-meta { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-meta a { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-meta a:hover { color: var(--slv-color-brand); }
+
+html[data-theme="dark"] .slv-breadcrumb,
+html[data-theme="dark"] .slv-breadcrumb a { color: var(--slv-color-text-faint); }
+html[data-theme="dark"] .slv-breadcrumb a:hover { color: var(--slv-color-brand); }
 
 /* ═══════════════════════════════════════════════
-   20. React 嵌页（结账/购物车/用户中心）
+   12. 归档页头
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-archive-header {
+    border-bottom-color: var(--slv-color-border-soft);
+}
+
+html[data-theme="dark"] .slv-archive-header__title { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-archive-header__desc { color: var(--slv-color-text-muted); }
+
+/* ═══════════════════════════════════════════════
+   13. 商品详情
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-product-info__title { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-product-info__desc { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-product-info__price {
+    border-top-color: var(--slv-color-border-soft);
+    border-bottom-color: var(--slv-color-border-soft);
+}
+html[data-theme="dark"] .slv-product-info__perk { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-product-info__perks { border-top-color: var(--slv-color-border-soft); }
+
+html[data-theme="dark"] .slv-tabs-nav {
+    border-bottom-color: var(--slv-color-border);
+}
+html[data-theme="dark"] .slv-tabs-nav a { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-tabs-nav a:hover { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-tabs-nav a.is-active {
+    color: var(--slv-color-brand);
+    border-bottom-color: var(--slv-color-brand);
+}
+
+/* ═══════════════════════════════════════════════
+   14. 合集
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-collection-detail__hero {
+    background: linear-gradient(135deg, #12151b, #1a1e26);
+    border-color: var(--slv-color-border);
+}
+
+html[data-theme="dark"] .slv-collection-detail__title { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-collection-detail__desc { color: var(--slv-color-text-muted); }
+
+html[data-theme="dark"] .slv-collection-chapters__title {
+    color: var(--slv-color-text);
+    border-bottom-color: var(--slv-color-border-soft);
+}
+
+html[data-theme="dark"] .slv-collection-chapters__num {
+    background: var(--slv-color-bg-muted);
+    color: var(--slv-color-text-muted);
+}
+
+html[data-theme="dark"] .slv-collection-chapters__link { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-collection-chapters__link:hover { color: var(--slv-color-brand); }
+
+/* ═══════════════════════════════════════════════
+   15. Footer
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-footer {
+    background: #05070a;
+    border-top-color: var(--slv-color-border-soft);
+}
+
+html[data-theme="dark"] .slv-footer__col h4 { color: var(--slv-color-text); }
+html[data-theme="dark"] .slv-footer__col a { color: var(--slv-color-text-muted); }
+html[data-theme="dark"] .slv-footer__col a:hover { color: var(--slv-color-brand); }
+
+html[data-theme="dark"] .slv-footer__bottom {
+    border-top-color: var(--slv-color-border);
+    color: var(--slv-color-text-faint);
+}
+
+/* ═══════════════════════════════════════════════
+   16. 表单卡片（React 嵌页）
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] [id^="slv-"][id$="-root"] {
-    color: #e6edf3;
+    color: var(--slv-color-text);
 }
 
 html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-card,
 html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-empty,
-html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-form-item,
-html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="card"],
-html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="Card"] {
-    background: #161b22 !important;
-    color: #e6edf3 !important;
-    border-color: #30363d !important;
+html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="card"] {
+    background: var(--slv-color-bg-elevated) !important;
+    color: var(--slv-color-text) !important;
+    border-color: var(--slv-color-border) !important;
 }
 
-html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-empty-description,
-html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="empty"] {
-    color: #7d8590 !important;
+html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-empty-description {
+    color: var(--slv-color-text-faint) !important;
 }
 
 html[data-theme="dark"] [id^="slv-"][id$="-root"] input,
 html[data-theme="dark"] [id^="slv-"][id$="-root"] textarea,
 html[data-theme="dark"] [id^="slv-"][id$="-root"] select {
-    background: #21262d !important;
-    color: #e6edf3 !important;
-    border-color: #30363d !important;
+    background: var(--slv-color-bg-muted) !important;
+    color: var(--slv-color-text) !important;
+    border-color: var(--slv-color-border) !important;
 }
 
-html[data-theme="dark"] [id^="slv-"][id$="-root"] label,
-html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-form-item-label > label {
-    color: #a5b1c2 !important;
-}
-
-/* 结账页步骤条 */
-html[data-theme="dark"] .ant-steps .ant-steps-item-title {
-    color: #e6edf3 !important;
-}
-html[data-theme="dark"] .ant-steps .ant-steps-item-wait .ant-steps-item-title {
-    color: #7d8590 !important;
+html[data-theme="dark"] [id^="slv-"][id$="-root"] label {
+    color: var(--slv-color-text-muted) !important;
 }
 
 /* ═══════════════════════════════════════════════
-   21. 滚动条 / 分割线
+   17. 滚动条
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] ::-webkit-scrollbar { width: 10px; height: 10px; }
-html[data-theme="dark"] ::-webkit-scrollbar-track { background: #161b22; }
+html[data-theme="dark"] ::-webkit-scrollbar-track { background: #0a0c10; }
 html[data-theme="dark"] ::-webkit-scrollbar-thumb {
-    background: #30363d;
+    background: #262c36;
     border-radius: 5px;
 }
-html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #3a4250; }
 
 html[data-theme="dark"] hr,
 html[data-theme="dark"] .wp-block-separator {
-    border-color: #30363d;
-    background-color: #30363d;
-}
-
-html[data-theme="dark"] .slv-card,
-html[data-theme="dark"] .slv-archive__item {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* ═══════════════════════════════════════════════
-   22. 浅色模式基色
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="light"],
-:root[data-theme="light"] {
-    color-scheme: light;
+    border-color: var(--slv-color-border);
+    background-color: var(--slv-color-border);
 }
