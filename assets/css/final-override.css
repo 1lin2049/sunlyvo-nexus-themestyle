@@ -2029,3 +2029,209 @@ html[data-theme="dark"] .slv-product-card .wp-block-post-featured-image {
         gap: 8px !important;
     }
 }
+
+/* ═══════════════════════════════════════════════
+   17. 彻底修复 —— 覆盖 WP 默认约束
+   ═══════════════════════════════════════════════ */
+
+/* 1. 解除 WP 对 query 的宽度约束 */
+.slv-product-grid,
+.slv-product-grid *,
+.slv-product-grid .wp-block-query,
+.slv-product-grid .wp-block-query.is-layout-constrained,
+.slv-product-grid .wp-block-query.is-layout-flow,
+.slv-product-grid .wp-block-post-template,
+.slv-product-grid .wp-block-post-template.is-layout-grid,
+.slv-product-grid .wp-block-post-template.is-layout-flow,
+.slv-product-grid .wp-block-post-template.is-layout-constrained,
+.slv-product-recommend .wp-block-query,
+.slv-product-recommend .wp-block-query.is-layout-constrained,
+.slv-product-recommend .wp-block-query.is-layout-flow,
+.slv-product-recommend .wp-block-post-template,
+.slv-product-recommend .wp-block-post-template.is-layout-grid,
+.slv-product-recommend .wp-block-post-template.is-layout-flow,
+.slv-product-recommend .wp-block-post-template.is-layout-constrained {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* 2. 3 列网格 —— 用最高优先级 */
+.slv-product-grid .wp-block-post-template,
+.slv-product-grid ul.wp-block-post-template,
+.slv-product-grid ol.wp-block-post-template,
+.slv-product-grid .wp-block-query > .wp-block-post-template {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-rows: auto !important;
+    gap: 24px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.slv-product-grid .wp-block-post-template > li,
+.slv-product-grid ul.wp-block-post-template > li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+}
+
+.slv-product-grid .wp-block-post-template > li > *,
+.slv-product-grid ul.wp-block-post-template > li > * {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+}
+
+/* 3. 商品卡片 —— 撑满 */
+.slv-product-card,
+.slv-product-card.wp-block-group,
+.slv-product-card.wp-block-group-is-layout-flow,
+.slv-product-card.wp-block-group-is-layout-constrained {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* 4. 排序按钮 —— 彻底去掉我上轮的 data URI */
+.slv-product-toolbar__sort,
+select.slv-product-toolbar__sort {
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+    background-image: none !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    padding: 8px 14px !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    color: #1a1d21 !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    min-width: 130px !important;
+    max-width: 100% !important;
+    cursor: pointer !important;
+    text-indent: 0 !important;
+}
+
+html[data-theme="dark"] .slv-product-toolbar__sort {
+    background: #1a1e26 !important;
+    background-image: none !important;
+    color: #e8ecf1 !important;
+    border-color: #262c36 !important;
+}
+
+/* 5. 视图按钮区（去掉我上轮多余的 padding 和边框） */
+.slv-product-toolbar__view {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.slv-view-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    color: #5c6370 !important;
+    cursor: pointer !important;
+    transition: all 0.15s !important;
+}
+
+.slv-view-btn + .slv-view-btn {
+    margin-left: 4px !important;
+}
+
+.slv-view-btn:hover {
+    color: #0056d6 !important;
+    border-color: #0056d6 !important;
+}
+
+.slv-view-btn.is-active {
+    background: #0056d6 !important;
+    border-color: #0056d6 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .slv-view-btn {
+    background: #1a1e26 !important;
+    border-color: #262c36 !important;
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-view-btn.is-active {
+    background: #4d94ff !important;
+    border-color: #4d94ff !important;
+    color: #ffffff !important;
+}
+
+/* 6. 商品卡片内部 —— 全部撑满 */
+.slv-product-card__body,
+.slv-product-card__media,
+.slv-product-card__footer,
+.slv-product-card__title,
+.slv-product-card__desc,
+.slv-product-card .wp-block-post-title,
+.slv-product-card .wp-block-post-excerpt,
+.slv-product-card .wp-block-post-featured-image {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 7. 底部推荐 4 列 */
+.slv-product-recommend .wp-block-post-template,
+.slv-product-recommend ul.wp-block-post-template {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.slv-product-recommend .wp-block-post-template > li {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.slv-product-recommend .wp-block-post-template > li > * {
+    width: 100% !important;
+    flex: 1 !important;
+}
