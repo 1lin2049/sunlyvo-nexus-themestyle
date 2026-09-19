@@ -1,0 +1,334 @@
+/**
+ * SunLyvo Nexus — 深色模式修复 + 主题切换按钮
+ *
+ * 覆盖：
+ *   1. 主题切换按钮的显示/隐藏逻辑
+ *   2. 深色模式下所有卡片、内容块、表单的颜色
+ *   3. 深色模式下归档页、FAQ、合集、百科、博客的配色
+ *
+ * @package SunLyvo_Nexus
+ * @since 1.0.2
+ */
+
+/* ═══════════════════════════════════════════════
+   1. 主题切换按钮
+   ═══════════════════════════════════════════════ */
+
+.slv-theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+}
+
+.slv-theme-toggle__icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+/* 默认（浅色）模式：显示月亮图标（提示可切换到深色） */
+html[data-theme="light"] .slv-theme-toggle__icon--dark,
+html:not([data-theme]) .slv-theme-toggle__icon--dark {
+    display: inline-flex;
+}
+
+/* 深色模式：显示太阳图标（提示可切换到浅色） */
+html[data-theme="dark"] .slv-theme-toggle__icon--light {
+    display: inline-flex;
+}
+
+/* ═══════════════════════════════════════════════
+   2. 深色模式 — 全局基色
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] {
+    --slv-color-bg-base:         #0d1117;
+    --slv-color-bg-subtle:       #161b22;
+    --slv-color-bg-muted:        #21262d;
+    --slv-color-bg-elevated:     #1c2128;
+    --slv-color-bg-inverse:      #f6f8fa;
+
+    --slv-color-text-primary:    #e6edf3;
+    --slv-color-text-secondary:  #a5b1c2;
+    --slv-color-text-tertiary:   #7d8590;
+    --slv-color-text-inverse:    #0d1117;
+
+    --slv-color-border-base:     #30363d;
+    --slv-color-border-subtle:   #21262d;
+    --slv-color-border-strong:   #484f58;
+
+    --slv-color-primary:         #4096ff;
+    --slv-color-primary-hover:   #69b1ff;
+    --slv-color-primary-active:  #1677ff;
+    --slv-color-primary-subtle:  #112a4e;
+
+    color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+    background-color: #0d1117 !important;
+    color: #e6edf3 !important;
+}
+
+html[data-theme="dark"] a {
+    color: #4096ff;
+}
+
+html[data-theme="dark"] a:hover {
+    color: #69b1ff;
+}
+
+/* ═══════════════════════════════════════════════
+   3. 深色模式 — Header / Footer
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-header,
+html[data-theme="dark"] header.site-header {
+    background: #161b22 !important;
+    border-bottom-color: #30363d !important;
+}
+
+html[data-theme="dark"] .slv-header *,
+html[data-theme="dark"] header.site-header * {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-header a,
+html[data-theme="dark"] header.site-header a {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-footer,
+html[data-theme="dark"] footer.site-footer {
+    background: #0a0d12 !important;
+    border-top-color: #30363d !important;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-footer *,
+html[data-theme="dark"] footer.site-footer * {
+    color: #a5b1c2;
+}
+
+html[data-theme="dark"] .slv-footer a,
+html[data-theme="dark"] footer.site-footer a {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-footer a:hover,
+html[data-theme="dark"] footer.site-footer a:hover {
+    color: #4096ff;
+}
+
+/* ═══════════════════════════════════════════════
+   4. 深色模式 — 通用卡片 / 内容块
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-card,
+html[data-theme="dark"] .slv-faq-item,
+html[data-theme="dark"] .slv-faq-list__item,
+html[data-theme="dark"] .slv-archive__item,
+html[data-theme="dark"] .slv-collection-card,
+html[data-theme="dark"] .slv-related__item,
+html[data-theme="dark"] .slv-wiki-infobox,
+html[data-theme="dark"] .slv-author-box,
+html[data-theme="dark"] .slv-collection-cta {
+    background: #161b22 !important;
+    border-color: #30363d !important;
+    color: #e6edf3 !important;
+}
+
+html[data-theme="dark"] .slv-card *,
+html[data-theme="dark"] .slv-faq-item *,
+html[data-theme="dark"] .slv-faq-list__item *,
+html[data-theme="dark"] .slv-archive__item *,
+html[data-theme="dark"] .slv-collection-card *,
+html[data-theme="dark"] .slv-related__item * {
+    color: #e6edf3;
+}
+
+/* ═══════════════════════════════════════════════
+   5. 深色模式 — FAQ 专属
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-single-faq,
+html[data-theme="dark"] .slv-archive-faq {
+    background: #0d1117;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-faq-item__question {
+    color: #e6edf3;
+    background: #161b22;
+}
+
+html[data-theme="dark"] .slv-faq-item[open] {
+    border-color: #4096ff;
+}
+
+html[data-theme="dark"] .slv-faq-item__answer,
+html[data-theme="dark"] .slv-faq-answer {
+    color: #a5b1c2;
+    background: #161b22;
+}
+
+html[data-theme="dark"] .slv-faq-item__answer *,
+html[data-theme="dark"] .slv-faq-answer * {
+    color: #a5b1c2;
+}
+
+/* FAQ 详情页的大卡片 */
+html[data-theme="dark"] .slv-bluf-summary,
+html[data-theme="dark"] [class*="slv-faq"] [class*="summary"] {
+    background: #161b22 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+
+/* ═══════════════════════════════════════════════
+   6. 深色模式 — 百科
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-wiki-definition {
+    background: linear-gradient(135deg, #112a4e, #0d1e38) !important;
+    border-left-color: #4096ff !important;
+}
+
+html[data-theme="dark"] .slv-wiki-definition * {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-wiki-definition strong {
+    color: #69b1ff;
+}
+
+html[data-theme="dark"] .slv-wiki-infobox__title {
+    border-bottom-color: #30363d;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-wiki-infobox__list dt {
+    color: #7d8590;
+}
+
+html[data-theme="dark"] .slv-wiki-infobox__list dd {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-badge {
+    background: #21262d;
+    color: #a5b1c2;
+}
+
+/* ═══════════════════════════════════════════════
+   7. 深色模式 — 合集
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-collection-chapters__item {
+    background: #161b22;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-collection-chapters__item:hover {
+    background: #21262d;
+}
+
+html[data-theme="dark"] .slv-collection-chapters__num {
+    background: #21262d;
+    color: #a5b1c2;
+}
+
+html[data-theme="dark"] .slv-collection-chapters__link {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-collection-chapters__link:hover {
+    color: #4096ff;
+}
+
+html[data-theme="dark"] .slv-collection-chapters__title-text {
+    color: #7d8590;
+}
+
+html[data-theme="dark"] .slv-collection-cta__price {
+    color: #4096ff;
+}
+
+/* ═══════════════════════════════════════════════
+   8. 深色模式 — 归档页
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-archive {
+    background: #0d1117;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-archive__title {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-archive__desc,
+html[data-theme="dark"] .slv-archive__term {
+    color: #a5b1c2;
+}
+
+html[data-theme="dark"] .slv-archive__item .wp-block-post-title a,
+html[data-theme="dark"] .slv-archive__item h3 a,
+html[data-theme="dark"] .slv-archive__item a {
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .slv-archive__item a:hover {
+    color: #4096ff;
+}
+
+html[data-theme="dark"] .slv-archive__item p {
+    color: #a5b1c2;
+}
+
+/* ═══════════════════════════════════════════════
+   9. 深色模式 — 表单 / 输入框
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="email"],
+html[data-theme="dark"] input[type="search"],
+html[data-theme="dark"] input[type="url"],
+html[data-theme="dark"] input[type="tel"],
+html[data-theme="dark"] input[type="password"],
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+    background: #161b22;
+    color: #e6edf3;
+    border-color: #30363d;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+    color: #7d8590;
+}
+
+/* ═══════════════════════════════════════════════
+   10. 深色模式 — 按钮
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-button--ghost,
+html[data-theme="dark"] .slv-button--outline {
+    background: transparent;
+    color: #e6edf3;
+    border-color: #30363d;
+}
+
+html[data-theme="dark"] .slv-button--ghost:hover,
+html[data-theme="dark"] .slv-button--outline:hover {
+    background: #161b22;
+    border-color: #4096ff;
+    color: #4096ff;
+}

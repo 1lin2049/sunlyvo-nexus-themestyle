@@ -4,7 +4,7 @@
  * 包含：深色/浅色模式切换、移动端菜单、搜索框展开、粘性头部
  *
  * @package SunLyvo_Nexus
- * @since 1.0.1
+ * @since 1.0.2
  */
 
 (function () {
@@ -29,17 +29,6 @@
         var root = document.documentElement;
         root.dataset.theme = theme;
         if (mode) root.dataset.themeMode = mode;
-        updateToggleUI(theme);
-    }
-
-    function updateToggleUI(theme) {
-        var btns = document.querySelectorAll(
-            '[data-theme-toggle], .slv-theme-toggle, .theme-toggle, button[aria-label*="主题"], button[aria-label*="模式"], button[aria-label*="深色"], button[aria-label*="浅色"]'
-        );
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-            btns[i].setAttribute('title', theme === 'dark' ? '切换到浅色模式' : '切换到深色模式');
-        }
     }
 
     function toggleTheme() {
@@ -57,12 +46,24 @@
         document.dispatchEvent(new CustomEvent('slv:theme-change', { detail: { theme: next } }));
     }
 
+    // 事件委托：覆盖所有已知的选择器
+    var TOGGLE_SELECTOR = [
+        '[data-slv-theme-toggle]',
+        '[data-theme-toggle]',
+        '.slv-theme-toggle',
+        '.theme-toggle',
+        'button[aria-label*="主题"]',
+        'button[aria-label*="模式"]',
+        'button[aria-label*="深色"]',
+        'button[aria-label*="浅色"]',
+        'button[title*="主题"]',
+        'button[title*="模式"]'
+    ].join(',');
+
     document.addEventListener('click', function (e) {
         var el = e.target;
         while (el && el !== document) {
-            if (el.matches && el.matches(
-                '[data-theme-toggle], .slv-theme-toggle, .theme-toggle, button[aria-label*="主题"], button[aria-label*="模式"], button[aria-label*="深色"], button[aria-label*="浅色"]'
-            )) {
+            if (el.matches && el.matches(TOGGLE_SELECTOR)) {
                 e.preventDefault();
                 toggleTheme();
                 return;
@@ -86,13 +87,16 @@
         }
 
         try {
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            var mq = window.matchMedia('(prefers-color-scheme: dark)');
+            var handler = function (e) {
                 var m = 'auto';
                 try { m = localStorage.getItem(MODE_KEY) || 'auto'; } catch (_) {}
                 if (m === 'auto') {
                     applyTheme(e.matches ? 'dark' : 'light', 'auto');
                 }
-            });
+            };
+            if (mq.addEventListener) mq.addEventListener('change', handler);
+            else if (mq.addListener) mq.addListener(handler);
         } catch (e) {}
     })();
 

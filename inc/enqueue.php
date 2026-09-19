@@ -47,6 +47,7 @@ function slv_enqueue_assets(): void {
         wp_enqueue_style( 'slv-header-footer', "{$css}/header-footer.css", [ 'slv-main' ], slv_asset_version( 'css/header-footer.css' ) );
         wp_enqueue_style( 'slv-motion',        "{$css}/motion.css",        [ 'slv-main' ], slv_asset_version( 'css/motion.css' ) );
         wp_enqueue_style( 'slv-mobile',        "{$css}/mobile.css",        [ 'slv-main' ], slv_asset_version( 'css/mobile.css' ) );
+        wp_enqueue_style( 'slv-dark-fix', "{$css}/dark-fix.css", [ 'slv-main' ], slv_asset_version( 'css/dark-fix.css' ) );
 
         $sticky = SLV_THEME_DIR . '/assets/css/sticky-fix.css';
         if ( file_exists( $sticky ) ) {
