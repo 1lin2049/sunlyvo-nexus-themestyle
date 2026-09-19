@@ -53,6 +53,10 @@ $slv_core_files = [
     'inc/react-mounts.php',
     'inc/template-loader.php',
     'inc/modules/template/class-template-config-writer.php',
+    'inc/slv-icon.php',
+    'inc/slv-product-card.php',
+    'inc/modules/product-images/module.php',
+    'inc/final-fixes.php',
 ];
 
 foreach ( $slv_core_files as $slv_file ) {

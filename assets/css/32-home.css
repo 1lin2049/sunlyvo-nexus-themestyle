@@ -1,0 +1,335 @@
+/**
+ * SunLyvo Nexus — 首页
+ *
+ * @package SunLyvo_Nexus
+ * @since 5.1.0
+ */
+
+/* Hero */
+.slv-hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--slv-space-24) var(--slv-space-6) var(--slv-space-20);
+    text-align: center;
+    background: var(--slv-color-bg);
+    border-bottom: 1px solid var(--slv-color-border-soft);
+}
+
+.slv-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.slv-hero__blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+}
+
+.slv-hero__blob--1 {
+    top: -200px;
+    left: -100px;
+    background: var(--slv-color-primary);
+}
+
+.slv-hero__blob--2 {
+    bottom: -200px;
+    right: -100px;
+    background: var(--slv-seed-purple);
+    opacity: 0.25;
+}
+
+.slv-hero__inner {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.slv-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--slv-space-2);
+    padding: 6px 14px;
+    background: var(--slv-color-bg-muted);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-full);
+    font-size: var(--slv-font-size-xs);
+    font-weight: var(--slv-font-weight-medium);
+    color: var(--slv-color-text-muted);
+    margin-bottom: var(--slv-space-6);
+}
+
+.slv-hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--slv-color-success);
+    animation: slv-pulse 2s ease-in-out infinite;
+}
+
+@keyframes slv-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.slv-hero__title {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: var(--slv-font-weight-black);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 var(--slv-space-6);
+    color: var(--slv-color-text);
+}
+
+.slv-hero__title-accent {
+    color: var(--slv-color-primary);
+}
+
+.slv-hero__subtitle {
+    font-size: var(--slv-font-size-lg);
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
+    margin: 0 auto var(--slv-space-8);
+    max-width: 640px;
+}
+
+.slv-hero__actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--slv-space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--slv-space-8);
+}
+
+.slv-hero__trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--slv-space-4);
+    flex-wrap: wrap;
+    font-size: var(--slv-font-size-sm);
+    color: var(--slv-color-text-muted);
+}
+
+.slv-hero__trust strong { color: var(--slv-color-text); font-weight: var(--slv-font-weight-bold); }
+
+.slv-hero__trust-divider {
+    width: 1px;
+    height: 16px;
+    background: var(--slv-color-border);
+}
+
+/* Logo 云 */
+.slv-logo-cloud {
+    padding: var(--slv-space-12) var(--slv-space-6);
+    border-bottom: 1px solid var(--slv-color-border-soft);
+    text-align: center;
+}
+
+.slv-logo-cloud__title {
+    font-size: var(--slv-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--slv-color-text-faint);
+    margin: 0 0 var(--slv-space-6);
+}
+
+.slv-logo-cloud__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--slv-space-8) var(--slv-space-12);
+    max-width: var(--slv-container-xl);
+    margin: 0 auto;
+}
+
+.slv-logo-cloud__item {
+    font-size: var(--slv-font-size-lg);
+    font-weight: var(--slv-font-weight-semibold);
+    color: var(--slv-color-text-faint);
+    transition: color var(--slv-duration-normal);
+}
+
+.slv-logo-cloud__item:hover { color: var(--slv-color-text); }
+
+/* 核心能力 */
+.slv-home-section {
+    padding: var(--slv-space-24) var(--slv-space-6);
+}
+
+.slv-home-section--soft {
+    background: var(--slv-color-bg-soft);
+}
+
+.slv-home-section__inner {
+    max-width: var(--slv-container-xl);
+    margin: 0 auto;
+}
+
+.slv-home-section__head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--slv-space-12);
+}
+
+.slv-home-section__badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--slv-color-primary-subtle);
+    color: var(--slv-color-primary);
+    font-size: var(--slv-font-size-xs);
+    font-weight: var(--slv-font-weight-semibold);
+    border-radius: var(--slv-radius-full);
+    margin-bottom: var(--slv-space-4);
+}
+
+.slv-home-section__title {
+    font-size: var(--slv-font-size-4xl);
+    font-weight: var(--slv-font-weight-black);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 var(--slv-space-3);
+    color: var(--slv-color-text);
+}
+
+.slv-home-section__subtitle {
+    font-size: var(--slv-font-size-base);
+    color: var(--slv-color-text-muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* 特色卡 */
+.slv-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--slv-space-5);
+}
+
+.slv-feature-card {
+    padding: var(--slv-space-8) var(--slv-space-6);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: var(--slv-radius-xl);
+    transition: all var(--slv-duration-normal);
+}
+
+.slv-feature-card:hover {
+    border-color: var(--slv-color-primary);
+    box-shadow: var(--slv-shadow-md);
+    transform: translateY(-3px);
+}
+
+.slv-feature-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--slv-color-primary-subtle);
+    color: var(--slv-color-primary);
+    border-radius: var(--slv-radius-lg);
+    margin-bottom: var(--slv-space-5);
+}
+
+.slv-feature-card__icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.slv-feature-card__title {
+    font-size: var(--slv-font-size-lg);
+    font-weight: var(--slv-font-weight-bold);
+    margin: 0 0 var(--slv-space-2);
+    color: var(--slv-color-text);
+}
+
+.slv-feature-card__desc {
+    font-size: var(--slv-font-size-sm);
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
+    margin: 0;
+}
+
+/* 三步闭环 */
+.slv-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--slv-space-6);
+    position: relative;
+}
+
+.slv-step {
+    text-align: center;
+    position: relative;
+}
+
+.slv-step__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--slv-color-primary);
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: var(--slv-font-size-lg);
+    font-weight: var(--slv-font-weight-black);
+    margin: 0 auto var(--slv-space-5);
+}
+
+.slv-step__title {
+    font-size: var(--slv-font-size-lg);
+    font-weight: var(--slv-font-weight-bold);
+    margin: 0 0 var(--slv-space-2);
+    color: var(--slv-color-text);
+}
+
+.slv-step__desc {
+    font-size: var(--slv-font-size-sm);
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
+    margin: 0;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* CTA */
+.slv-home-cta {
+    padding: var(--slv-space-20) var(--slv-space-6);
+    background: var(--slv-color-primary);
+    color: #ffffff;
+    text-align: center;
+}
+
+.slv-home-cta__title {
+    font-size: var(--slv-font-size-4xl);
+    font-weight: var(--slv-font-weight-black);
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--slv-space-4);
+    color: #ffffff;
+}
+
+.slv-home-cta__subtitle {
+    font-size: var(--slv-font-size-lg);
+    opacity: 0.9;
+    margin: 0 0 var(--slv-space-8);
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+    .slv-feature-grid,
+    .slv-steps { grid-template-columns: 1fr; }
+    .slv-hero { padding: var(--slv-space-16) var(--slv-space-5) var(--slv-space-12); }
+}
+
+@media (max-width: 640px) {
+    .slv-home-section { padding: var(--slv-space-16) var(--slv-space-4); }
+    .slv-home-section__title { font-size: var(--slv-font-size-2xl); }
+}

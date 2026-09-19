@@ -2,7 +2,6 @@
 
 <main class="slv-product-list">
 
-    <!-- ═══ 页面头 ═══ -->
     <section class="slv-page-hero">
         <div class="slv-page-hero__inner">
             <nav class="slv-breadcrumb" aria-label="面包屑">
@@ -15,17 +14,13 @@
         </div>
     </section>
 
-    <!-- ═══ 主体 ═══ -->
     <div class="slv-product-list__body">
 
-        <!-- 筛选栏 -->
         <aside class="slv-product-filter" data-slv-filter>
             <div class="slv-product-filter__header">
                 <h2 class="slv-product-filter__title">筛选</h2>
                 <button type="button" class="slv-product-filter__clear" data-slv-filter-clear>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M18 6 6 18M6 6l12 12"/>
-                    </svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
                     清空
                 </button>
             </div>
@@ -33,7 +28,7 @@
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>分类</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <ul class="slv-product-filter__list" data-slv-filter-categories>
@@ -45,7 +40,7 @@
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>价格</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__price">
@@ -60,20 +55,18 @@
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>标签</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__tags">
                         <button type="button" class="slv-tag-chip" data-tag="hot">热销</button>
                         <button type="button" class="slv-tag-chip" data-tag="new">新品</button>
                         <button type="button" class="slv-tag-chip" data-tag="sale">促销</button>
-                        <button type="button" class="slv-tag-chip" data-tag="featured">推荐</button>
                     </div>
                 </div>
             </div>
         </aside>
 
-        <!-- 商品区 -->
         <div class="slv-product-list__main">
             <div class="slv-product-toolbar">
                 <div class="slv-product-toolbar__left">
@@ -88,36 +81,22 @@
                     </select>
                     <div class="slv-product-toolbar__view">
                         <button type="button" class="slv-view-btn is-active" data-slv-view="grid" aria-label="网格视图">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <rect width="7" height="7" x="3" y="3" rx="1"/>
-                                <rect width="7" height="7" x="14" y="3" rx="1"/>
-                                <rect width="7" height="7" x="14" y="14" rx="1"/>
-                                <rect width="7" height="7" x="3" y="14" rx="1"/>
-                            </svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
                         </button>
                         <button type="button" class="slv-view-btn" data-slv-view="list" aria-label="列表视图">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <line x1="8" x2="21" y1="6" y2="6"/>
-                                <line x1="8" x2="21" y1="12" y2="12"/>
-                                <line x1="8" x2="21" y1="18" y2="18"/>
-                                <line x1="3" x2="3.01" y1="6" y2="6"/>
-                                <line x1="3" x2="3.01" y1="12" y2="12"/>
-                                <line x1="3" x2="3.01" y1="18" y2="18"/>
-                            </svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 商品网格 —— 由 shortcode 输出 -->
             <!-- wp:shortcode -->
             [slv_product_grid]
             <!-- /wp:shortcode -->
 
-            <!-- 底部推荐 -->
             <section class="slv-product-recommend">
-                <h2 class="slv-section__title">你可能还喜欢</h2>
-                <p class="slv-section__subtitle">基于你的浏览历史和兴趣推荐</p>
+                <h2 class="slv-product-recommend__title">你可能还喜欢</h2>
+                <p class="slv-product-recommend__subtitle">基于你的浏览历史和兴趣推荐</p>
                 <!-- wp:shortcode -->
                 [slv_product_recommend]
                 <!-- /wp:shortcode -->
