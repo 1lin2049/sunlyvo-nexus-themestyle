@@ -49,3 +49,17 @@ add_action( 'wp_enqueue_scripts', function (): void {
         );
     }
 }, 50 );
+add_action( 'wp_enqueue_scripts', function (): void {
+    if ( is_admin() ) return;
+    $css = get_template_directory_uri() . '/assets/css';
+    $dir = get_template_directory() . '/assets/css';
+    $file = $dir . '/final-override.css';
+    if ( file_exists( $file ) ) {
+        wp_enqueue_style(
+            'slv-final-override',
+            $css . '/final-override.css',
+            [ 'slv-main' ],
+            (string) filemtime( $file )
+        );
+    }
+}, 100 );
