@@ -1,0 +1,314 @@
+/**
+ * SunLyvo Nexus — Header 版式（独立，最高优先级）
+ *
+ * 三列 Grid：品牌 | 导航（居中）| 图标
+ *
+ * @package SunLyvo_Nexus
+ * @since 2.1.0
+ */
+
+/* ═══════════════════════════════════════════════
+   Header 容器
+   ═══════════════════════════════════════════════ */
+
+.slv-header {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid #f0f2f5 !important;
+}
+
+/* ═══════════════════════════════════════════════
+   三列 Grid（关键修复：导航真正居中）
+   ═══════════════════════════════════════════════ */
+
+.slv-header__inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    gap: 32px !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 0 32px !important;
+    height: 64px !important;
+    box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════
+   品牌区（Logo + 网站名）
+   ═══════════════════════════════════════════════ */
+
+.slv-header__brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    justify-self: start !important;
+    min-width: 0;
+    flex-wrap: nowrap !important;
+}
+
+.slv-header__brand .wp-block-site-logo {
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
+.slv-header__brand .wp-block-site-logo img {
+    max-height: 32px !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+}
+
+.slv-header__title,
+.slv-header__brand .wp-block-site-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    color: #1a1d21 !important;
+    white-space: nowrap;
+}
+
+.slv-header__title a,
+.slv-header__brand .wp-block-site-title a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.slv-header__title a:hover,
+.slv-header__brand .wp-block-site-title a:hover {
+    color: #0056d6 !important;
+}
+
+/* 隐藏网站副标题（不要） */
+.slv-header__brand .wp-block-site-tagline {
+    display: none !important;
+}
+
+/* ═══════════════════════════════════════════════
+   导航（居中）
+   ═══════════════════════════════════════════════ */
+
+.slv-header__nav {
+    justify-self: center !important;
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0;
+}
+
+.slv-header__nav .wp-block-navigation__container,
+.slv-header__nav ul.wp-block-navigation__container,
+.slv-header__nav ul.wp-block-page-list {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-wrap: nowrap !important;
+}
+
+.slv-header__nav li,
+.slv-header__nav .wp-block-navigation-item {
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0;
+}
+
+.slv-header__nav a,
+.slv-header__nav .wp-block-navigation-item__content {
+    display: inline-block !important;
+    padding: 8px 14px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    color: #5c6370 !important;
+    text-decoration: none !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    transition: color 0.15s, background 0.15s;
+}
+
+.slv-header__nav a:hover,
+.slv-header__nav .wp-block-navigation-item__content:hover {
+    color: #1a1d21 !important;
+    background: #f0f2f5 !important;
+}
+
+.slv-header__nav .current-menu-item > a,
+.slv-header__nav .current-menu-item > .wp-block-navigation-item__content,
+.slv-header__nav .current_page_item > a {
+    color: #0056d6 !important;
+    background: #e8f1ff !important;
+}
+
+/* 折叠汉堡菜单（移动端） */
+.slv-header__nav .wp-block-navigation__responsive-container-open {
+    display: none !important;
+}
+
+/* ═══════════════════════════════════════════════
+   右侧图标操作区
+   ═══════════════════════════════════════════════ */
+
+.slv-header__actions {
+    justify-self: end !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    flex-wrap: nowrap !important;
+}
+
+.slv-header__icon-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 6px !important;
+    color: #5c6370 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+}
+
+.slv-header__icon-btn:hover {
+    color: #1a1d21 !important;
+    background: #f0f2f5 !important;
+}
+
+.slv-header__icon-btn .slv-icon {
+    width: 18px !important;
+    height: 18px !important;
+    display: block;
+}
+
+/* ═══════════════════════════════════════════════
+   主题切换按钮
+   ═══════════════════════════════════════════════ */
+
+.slv-theme-toggle {
+    position: relative;
+}
+
+.slv-theme-toggle__icon {
+    display: none !important;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+html[data-theme="light"] .slv-theme-toggle__icon--dark,
+html:not([data-theme]) .slv-theme-toggle__icon--dark {
+    display: inline-flex !important;
+}
+
+html[data-theme="dark"] .slv-theme-toggle__icon--light {
+    display: inline-flex !important;
+}
+
+/* ═══════════════════════════════════════════════
+   深色模式
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-header {
+    background: rgba(10, 12, 16, 0.85) !important;
+    border-bottom-color: #1a1e26 !important;
+}
+
+html[data-theme="dark"] .slv-header__title,
+html[data-theme="dark"] .slv-header__brand .wp-block-site-title {
+    color: #e8ecf1 !important;
+}
+
+html[data-theme="dark"] .slv-header__title a:hover {
+    color: #4d94ff !important;
+}
+
+html[data-theme="dark"] .slv-header__nav a,
+html[data-theme="dark"] .slv-header__nav .wp-block-navigation-item__content {
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-header__nav a:hover {
+    color: #e8ecf1 !important;
+    background: #1a1e26 !important;
+}
+
+html[data-theme="dark"] .slv-header__nav .current-menu-item > a {
+    color: #4d94ff !important;
+    background: #14243d !important;
+}
+
+html[data-theme="dark"] .slv-header__icon-btn {
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-header__icon-btn:hover {
+    color: #e8ecf1 !important;
+    background: #1a1e26 !important;
+}
+
+/* ═══════════════════════════════════════════════
+   响应式
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .slv-header__inner {
+        grid-template-columns: auto 1fr auto !important;
+        gap: 16px !important;
+        padding: 0 20px !important;
+    }
+
+    .slv-header__nav .wp-block-navigation__container {
+        gap: 0 !important;
+    }
+
+    .slv-header__nav a {
+        padding: 8px 10px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .slv-header__inner {
+        grid-template-columns: auto 1fr !important;
+        gap: 12px !important;
+        height: 60px !important;
+    }
+
+    .slv-header__nav {
+        display: none !important;
+    }
+
+    .slv-header__brand {
+        justify-self: start;
+    }
+
+    .slv-header__actions {
+        justify-self: end;
+    }
+}
+
+@media (max-width: 640px) {
+    .slv-header__inner {
+        padding: 0 16px !important;
+    }
+
+    .slv-header__title {
+        font-size: 15px !important;
+    }
+
+    .slv-header__icon-btn {
+        width: 32px !important;
+        height: 32px !important;
+    }
+}

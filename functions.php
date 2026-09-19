@@ -44,6 +44,7 @@ $slv_core_files = [
     'inc/helpers.php',
     'inc/helpers-icon.php',
     'inc/enqueue-extras.php',
+    'inc/assets-header.php',
     'inc/sprite-inject.php',
     'inc/security.php',
     'inc/performance.php',
