@@ -3,7 +3,7 @@
  * SunLyvo Nexus — 商品列表（PHP 经典模板）
  *
  * @package SunLyvo_Nexus
- * @since 5.3.0
+ * @since 5.5.0
  */
 
 declare( strict_types=1 );
@@ -19,7 +19,7 @@ get_header();
 
     <section class="slv-page-hero">
         <div class="slv-page-hero__inner">
-            <nav class="slv-breadcrumb" aria-label="<?php esc_attr_e( '面包屑', 'sunlyvo-nexus' ); ?>">
+            <nav class="slv-breadcrumb" aria-label="面包屑">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>">首页</a>
                 <span aria-hidden="true">/</span>
                 <span>商品</span>
@@ -31,21 +31,19 @@ get_header();
 
     <div class="slv-product-list__body">
 
-        <!-- 筛选栏 -->
         <aside class="slv-product-filter" data-slv-filter>
             <div class="slv-product-filter__header">
                 <h2 class="slv-product-filter__title">筛选</h2>
                 <button type="button" class="slv-product-filter__clear" data-slv-filter-clear>
-                    <?php echo slv_icon( 'x', 12 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo slv_svg_inline( 'x', 12 ); ?>
                     清空
                 </button>
             </div>
 
-            <!-- 分类 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>分类</span>
-                    <?php echo slv_icon( 'chevron-down', 14 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo slv_svg_inline( 'chevron-down', 14 ); ?>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <ul class="slv-product-filter__list">
@@ -71,11 +69,10 @@ get_header();
                 </div>
             </div>
 
-            <!-- 价格 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>价格</span>
-                    <?php echo slv_icon( 'chevron-down', 14 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo slv_svg_inline( 'chevron-down', 14 ); ?>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__price">
@@ -87,11 +84,10 @@ get_header();
                 </div>
             </div>
 
-            <!-- 标签 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>标签</span>
-                    <?php echo slv_icon( 'chevron-down', 14 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo slv_svg_inline( 'chevron-down', 14 ); ?>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__tags">
@@ -103,13 +99,12 @@ get_header();
             </div>
         </aside>
 
-        <!-- 商品区 -->
         <div class="slv-product-list__main">
 
             <div class="slv-product-toolbar">
                 <div class="slv-product-toolbar__left">
                     <span class="slv-product-toolbar__count">
-                        共 <strong data-slv-total><?php echo (int) $GLOBALS['wp_query']->found_posts; ?></strong> 件商品
+                        共 <strong><?php echo (int) $GLOBALS['wp_query']->found_posts; ?></strong> 件商品
                     </span>
                 </div>
                 <div class="slv-product-toolbar__right">
@@ -119,18 +114,17 @@ get_header();
                         <option value="price-asc">价格从低到高</option>
                         <option value="price-desc">价格从高到低</option>
                     </select>
-                    <div class="slv-product-toolbar__view">
+                    <div class="slv-product-toolbar__view" data-slv-view-wrap>
                         <button type="button" class="slv-view-btn is-active" data-slv-view="grid" aria-label="网格视图">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                            <?php echo slv_svg_inline( 'grid', 15 ); ?>
                         </button>
                         <button type="button" class="slv-view-btn" data-slv-view="list" aria-label="列表视图">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+                            <?php echo slv_svg_inline( 'list', 15 ); ?>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 商品网格 -->
             <div class="slv-product-grid" data-slv-grid>
                 <?php if ( have_posts() ) : ?>
                     <?php while ( have_posts() ) : the_post(); ?>
@@ -138,13 +132,12 @@ get_header();
                     <?php endwhile; ?>
                 <?php else : ?>
                     <div class="slv-product-empty">
-                        <?php echo slv_icon( 'package', 64 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        <?php echo slv_svg_inline( 'package', 64 ); ?>
                         <p>暂无商品</p>
                     </div>
                 <?php endif; ?>
             </div>
 
-            <!-- 推荐 -->
             <?php
             $recommend = new WP_Query( [
                 'post_type'      => 'product',
@@ -170,6 +163,37 @@ get_header();
     </div>
 
 </main>
+
+<!-- 视图切换 JS —— 内联保证执行 -->
+<script>
+(function(){
+    var wrap = document.querySelector('[data-slv-view-wrap]');
+    var grid = document.querySelector('[data-slv-grid]');
+    if (!wrap || !grid) return;
+
+    wrap.addEventListener('click', function(e){
+        var btn = e.target.closest('[data-slv-view]');
+        if (!btn) return;
+        var view = btn.getAttribute('data-slv-view');
+
+        wrap.querySelectorAll('[data-slv-view]').forEach(function(b){
+            b.classList.toggle('is-active', b === btn);
+        });
+
+        grid.classList.toggle('is-list-view', view === 'list');
+        grid.classList.toggle('is-grid-view', view === 'grid');
+    });
+})();
+
+(function(){
+    document.querySelectorAll('[data-slv-filter-toggle]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            var expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        });
+    });
+})();
+</script>
 
 <?php
 get_footer();
