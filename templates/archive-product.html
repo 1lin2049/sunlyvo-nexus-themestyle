@@ -14,6 +14,7 @@
         </div>
     </section>
 
+    <!-- wp:html -->
     <div class="slv-product-list__body">
 
         <aside class="slv-product-filter" data-slv-filter>
@@ -90,19 +91,16 @@
                 </div>
             </div>
 
-            <!-- wp:shortcode -->
-            [slv_product_grid]
-            <!-- /wp:shortcode -->
+            <?php echo do_shortcode( '[slv_product_grid]' ); ?>
 
             <section class="slv-product-recommend">
                 <h2 class="slv-product-recommend__title">你可能还喜欢</h2>
                 <p class="slv-product-recommend__subtitle">基于你的浏览历史和兴趣推荐</p>
-                <!-- wp:shortcode -->
-                [slv_product_recommend]
-                <!-- /wp:shortcode -->
+                <?php echo do_shortcode( '[slv_product_recommend]' ); ?>
             </section>
         </div>
     </div>
+    <!-- /wp:html -->
 
 </main>
 
