@@ -1,0 +1,25 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="slv-archive slv-archive-faq">
+    <!-- wp:query-title {"type":"archive","className":"slv-archive__title"} /-->
+
+    <!-- wp:group {"className":"slv-faq-list","layout":{"type":"default"}} -->
+    <div class="wp-block-group slv-faq-list">
+        <!-- wp:query {"queryId":2101,"query":{"postType":"faq","perPage":20,"order":"desc","orderBy":"date"},"layout":{"type":"default"}} -->
+        <div class="wp-block-query">
+            <!-- wp:post-template -->
+                <!-- wp:group {"className":"slv-faq-list__item","layout":{"type":"default"}} -->
+                <div class="wp-block-group slv-faq-list__item">
+                    <!-- wp:post-title {"level":3,"isLink":true} /-->
+                    <!-- wp:post-excerpt {"excerptLength":30} /-->
+                </div>
+                <!-- /wp:group -->
+            <!-- /wp:post-template -->
+            <!-- wp:query-pagination /-->
+        </div>
+        <!-- /wp:query -->
+    </div>
+    <!-- /wp:group -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

@@ -225,21 +225,69 @@
 }
 
 /* ═══════════════════════════════════════════════
-   深色模式
+   深色模式（完整覆盖）
    ═══════════════════════════════════════════════ */
-html[data-theme="dark"] {
-    --slv-color-bg-base:      #0d1117;
-    --slv-color-bg-subtle:    #161b22;
-    --slv-color-bg-muted:     #21262d;
-    --slv-color-text-primary: #e6edf3;
-    --slv-color-text-secondary: #8b949e;
-    --slv-color-text-tertiary: #6e7681;
-    --slv-color-border-base:  #30363d;
-    --slv-color-primary:      #4096ff;
-    --slv-color-primary-hover:#69b1ff;
+
+html[data-theme="dark"],
+:root[data-theme="dark"] {
+    --slv-color-bg-base:         #0d1117;
+    --slv-color-bg-subtle:       #161b22;
+    --slv-color-bg-muted:        #21262d;
+    --slv-color-bg-elevated:     #1c2128;
+    --slv-color-bg-inverse:      #f6f8fa;
+
+    --slv-color-text-primary:    #e6edf3;
+    --slv-color-text-secondary:  #8b949e;
+    --slv-color-text-tertiary:   #6e7681;
+    --slv-color-text-inverse:    #0d1117;
+
+    --slv-color-border-base:     #30363d;
+    --slv-color-border-subtle:   #21262d;
+    --slv-color-border-strong:   #484f58;
+
+    --slv-color-primary:         #4096ff;
+    --slv-color-primary-hover:   #69b1ff;
+    --slv-color-primary-active:  #1677ff;
+    --slv-color-primary-subtle:  #112a4e;
+
+    --slv-color-success:         #3fb950;
+    --slv-color-warning:         #d29922;
+    --slv-color-error:           #f85149;
+
     color-scheme: dark;
 }
 
-html[data-theme="light"] {
+html[data-theme="dark"] body {
+    background-color: var(--slv-color-bg-base);
+    color: var(--slv-color-text-primary);
+}
+
+html[data-theme="dark"] a {
+    color: var(--slv-color-primary);
+}
+
+html[data-theme="dark"] a:hover {
+    color: var(--slv-color-primary-hover);
+}
+
+html[data-theme="dark"] .slv-header,
+html[data-theme="dark"] header.site-header {
+    background: #161b22;
+    border-bottom-color: #30363d;
+}
+
+html[data-theme="dark"] .slv-card {
+    background: #161b22;
+    border-color: #30363d;
+}
+
+html[data-theme="dark"] .slv-faq-list__item,
+html[data-theme="dark"] .slv-archive__item {
+    background: #161b22;
+    border-color: #30363d;
+}
+
+html[data-theme="light"],
+:root[data-theme="light"] {
     color-scheme: light;
 }

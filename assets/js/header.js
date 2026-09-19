@@ -34,7 +34,7 @@
 
     function updateToggleUI(theme) {
         var btns = document.querySelectorAll(
-            '[data-theme-toggle], .slv-theme-toggle, .theme-toggle, button[aria-label*="主题"], button[aria-label*="模式"]'
+            '[data-theme-toggle], .slv-theme-toggle, .theme-toggle, button[aria-label*="主题"], button[aria-label*="模式"], button[aria-label*="深色"], button[aria-label*="浅色"]'
         );
         for (var i = 0; i < btns.length; i++) {
             btns[i].setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
@@ -57,12 +57,11 @@
         document.dispatchEvent(new CustomEvent('slv:theme-change', { detail: { theme: next } }));
     }
 
-    // 事件委托，捕获任何匹配的点击
     document.addEventListener('click', function (e) {
         var el = e.target;
         while (el && el !== document) {
             if (el.matches && el.matches(
-                '[data-theme-toggle], .slv-theme-toggle, .theme-toggle, button[aria-label*="主题"], button[aria-label*="模式"]'
+                '[data-theme-toggle], .slv-theme-toggle, .theme-toggle, button[aria-label*="主题"], button[aria-label*="模式"], button[aria-label*="深色"], button[aria-label*="浅色"]'
             )) {
                 e.preventDefault();
                 toggleTheme();
@@ -72,7 +71,6 @@
         }
     });
 
-    // 初始化
     (function initTheme() {
         var stored = null;
         var mode = 'auto';
@@ -87,14 +85,15 @@
             applyTheme(getPreferredTheme(), 'auto');
         }
 
-        // 系统变化跟随
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-            var m = 'auto';
-            try { m = localStorage.getItem(MODE_KEY) || 'auto'; } catch (_) {}
-            if (m === 'auto') {
-                applyTheme(e.matches ? 'dark' : 'light', 'auto');
-            }
-        });
+        try {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+                var m = 'auto';
+                try { m = localStorage.getItem(MODE_KEY) || 'auto'; } catch (_) {}
+                if (m === 'auto') {
+                    applyTheme(e.matches ? 'dark' : 'light', 'auto');
+                }
+            });
+        } catch (e) {}
     })();
 
     /* ═══════════════════════════════════════════════
@@ -128,8 +127,8 @@
                 var input = form.querySelector('input[type="search"]');
                 if (input && form.classList.contains('is-open')) input.focus();
             }
+            return;
         }
-        // 点击外部关闭
         if (!e.target.closest || !e.target.closest('[data-search-form], .slv-search-form, .search-form, [data-search-toggle], .slv-search-toggle, .search-toggle')) {
             var openForms = document.querySelectorAll('.slv-search-form.is-open, .search-form.is-open, [data-search-form].is-open');
             for (var i = 0; i < openForms.length; i++) openForms[i].classList.remove('is-open');
