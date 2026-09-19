@@ -1,11 +1,9 @@
 <?php
 /**
- * SunLyvo Nexus — 全站头部（PHP 经典模板）
- *
- * FSE 模板会自动 fallback 到这里
+ * SunLyvo Nexus — 全站头部
  *
  * @package SunLyvo_Nexus
- * @since 5.3.0
+ * @since 6.0.0
  */
 
 declare( strict_types=1 );
@@ -14,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$current_url = home_url( add_query_arg( [], $GLOBALS['wp']->request ?? '' ) );
+$current_path = trailingslashit( wp_parse_url( $_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH ) ?: '/' );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> data-theme="light">
@@ -30,7 +28,6 @@ $current_url = home_url( add_query_arg( [], $GLOBALS['wp']->request ?? '' ) );
 <header class="slv-header" role="banner">
     <div class="slv-header__inner">
 
-        <!-- 品牌 -->
         <div class="slv-header__brand">
             <?php
             $logo_id = (int) get_theme_mod( 'custom_logo' );
@@ -52,18 +49,16 @@ $current_url = home_url( add_query_arg( [], $GLOBALS['wp']->request ?? '' ) );
             </a>
         </div>
 
-        <!-- 导航 -->
         <nav class="slv-header__nav" aria-label="<?php esc_attr_e( '主导航', 'sunlyvo-nexus' ); ?>">
             <?php
             $menu_items = [
-                [ '首页',   '/' ],
-                [ '博客',   '/blog/' ],
-                [ '百科',   '/wiki/' ],
-                [ 'FAQ',    '/faq/' ],
-                [ '商品',   '/products/' ],
-                [ '合集',   '/collections/' ],
+                [ '首页', '/' ],
+                [ '博客', '/blog/' ],
+                [ '百科', '/wiki/' ],
+                [ 'FAQ',  '/faq/' ],
+                [ '商品', '/products/' ],
+                [ '合集', '/collections/' ],
             ];
-            $current_path = trailingslashit( wp_parse_url( $current_url, PHP_URL_PATH ) ?: '/' );
             echo '<ul>';
             foreach ( $menu_items as $item ) {
                 $label = $item[0];
@@ -81,25 +76,24 @@ $current_url = home_url( add_query_arg( [], $GLOBALS['wp']->request ?? '' ) );
             ?>
         </nav>
 
-        <!-- 操作 -->
         <div class="slv-header__actions">
-            <button type="button" class="slv-header__icon-btn" aria-label="<?php esc_attr_e( '搜索', 'sunlyvo-nexus' ); ?>" data-slv-search-toggle>
-                <?php echo slv_icon( 'search', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            <button type="button" class="slv-header__icon-btn" aria-label="搜索" data-slv-search-toggle>
+                <?php slv_icon_e( 'search', 18 ); ?>
             </button>
-            <button type="button" class="slv-header__icon-btn slv-theme-toggle" aria-label="<?php esc_attr_e( '切换主题', 'sunlyvo-nexus' ); ?>" data-slv-theme-toggle>
+            <button type="button" class="slv-header__icon-btn slv-theme-toggle" aria-label="切换主题" data-slv-theme-toggle>
                 <span class="slv-theme-toggle__icon slv-theme-toggle__icon--light">
-                    <?php echo slv_icon( 'sun', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php slv_icon_e( 'sun', 18 ); ?>
                 </span>
                 <span class="slv-theme-toggle__icon slv-theme-toggle__icon--dark">
-                    <?php echo slv_icon( 'moon', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php slv_icon_e( 'moon', 18 ); ?>
                 </span>
             </button>
-            <a href="<?php echo esc_url( home_url( '/cart/' ) ); ?>" class="slv-header__icon-btn" aria-label="<?php esc_attr_e( '购物车', 'sunlyvo-nexus' ); ?>">
-                <?php echo slv_icon( 'cart', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            <a href="<?php echo esc_url( home_url( '/cart/' ) ); ?>" class="slv-header__icon-btn" aria-label="购物车">
+                <?php slv_icon_e( 'cart', 18 ); ?>
                 <span class="slv-header__cart-count" data-slv-cart-count></span>
             </a>
-            <a href="<?php echo esc_url( home_url( '/my-account/' ) ); ?>" class="slv-header__icon-btn" aria-label="<?php esc_attr_e( '我的账户', 'sunlyvo-nexus' ); ?>">
-                <?php echo slv_icon( 'user', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            <a href="<?php echo esc_url( home_url( '/my-account/' ) ); ?>" class="slv-header__icon-btn" aria-label="我的账户">
+                <?php slv_icon_e( 'user', 18 ); ?>
             </a>
         </div>
 

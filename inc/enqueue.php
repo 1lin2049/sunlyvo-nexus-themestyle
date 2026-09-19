@@ -63,6 +63,7 @@ function slv_enqueue_assets(): void {
             slv_enqueue_style_if_exists( 'slv-home', '32-home.css' );
         }
 
+        wp_enqueue_script( 'slv-product-carousel', "{$js}/product-carousel.js", [], slv_asset_version( 'js/product-carousel.js' ), true );
         if ( is_post_type_archive( 'product' ) || is_tax( [ 'product_cat', 'product_tag' ] ) ) {
             slv_enqueue_style_if_exists( 'slv-product-list', '40-product-list.css' );
         }
