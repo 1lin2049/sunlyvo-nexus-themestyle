@@ -42,7 +42,6 @@ $slv_core_files = [
     'inc/layout.php',
     'inc/enqueue.php',
     'inc/helpers.php',
-    'inc/helpers-icon.php',
     'inc/enqueue-extras.php',
     'inc/assets-header.php',
     'inc/final-fixes.php',
