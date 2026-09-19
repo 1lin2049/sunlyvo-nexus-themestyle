@@ -1,884 +1,149 @@
 /**
- * SunLyvo Nexus — 最终覆盖（优先级最高）
- *
- * 一次性修复：
- *   1. slv-button / slv-btn class 双支持
- *   2. 归档网格 3 列 + 卡片等高
- *   3. 商品占位图优雅
- *   4. 侧栏系统
- *   5. 区块间距节奏
- *   6. 相关阅读卡片
- *   7. 所有页面宽度统一
+ * SunLyvo Nexus — 最终覆盖 v4.0
  *
  * @package SunLyvo_Nexus
- * @since 3.0.0
+ * @since 4.0.0
  */
 
 /* ═══════════════════════════════════════════════
-   1. 按钮 — 双 class 支持
+   1. 基础变量
    ═══════════════════════════════════════════════ */
 
-.slv-button,
-.slv-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    padding: 12px 24px !important;
-    font-family: inherit !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    line-height: 1.4 !important;
-    letter-spacing: -0.005em !important;
-    text-decoration: none !important;
-    border-radius: 8px !important;
-    border: 1px solid transparent !important;
-    cursor: pointer !important;
-    white-space: nowrap !important;
-    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s, box-shadow 0.15s !important;
-    background: var(--slv-color-brand, #0056d6) !important;
-    color: #ffffff !important;
-    box-shadow: 0 1px 2px rgba(0, 86, 214, 0.15) !important;
+:root {
+    --slv-color-brand:       #0056d6;
+    --slv-color-brand-hover: #0047b3;
+    --slv-color-text:        #1a1d21;
+    --slv-color-text-muted:  #5c6370;
+    --slv-color-text-faint:  #8b919d;
+    --slv-color-bg:          #ffffff;
+    --slv-color-bg-soft:     #f8f9fa;
+    --slv-color-bg-muted:    #f0f2f5;
+    --slv-color-border:      #e5e7eb;
+    --slv-color-border-soft: #f0f2f5;
+    --slv-color-price:       #ff5c33;
 }
 
-.slv-button:hover,
-.slv-btn:hover {
-    background: var(--slv-color-brand-hover, #0047b3) !important;
-    color: #ffffff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(0, 86, 214, 0.2) !important;
-}
-
-.slv-button:active,
-.slv-btn:active {
-    transform: translateY(0) !important;
-}
-
-.slv-button--lg,
-.slv-btn--lg {
-    padding: 14px 28px !important;
-    font-size: 16px !important;
-}
-
-.slv-button--sm,
-.slv-btn--sm {
-    padding: 8px 16px !important;
-    font-size: 13px !important;
-}
-
-.slv-button--secondary,
-.slv-btn--ghost {
-    background: #ffffff !important;
-    color: var(--slv-color-text, #1a1d21) !important;
-    border: 1px solid var(--slv-color-border, #e5e7eb) !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-}
-
-.slv-button--secondary:hover,
-.slv-btn--ghost:hover {
-    background: var(--slv-color-bg-soft, #f8f9fa) !important;
-    color: var(--slv-color-text, #1a1d21) !important;
-    border-color: var(--slv-color-brand, #0056d6) !important;
-}
-
-.slv-button--block,
-.slv-btn--block {
-    width: 100% !important;
-}
-
-.slv-button--ghost-inverse {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-shadow: none !important;
-}
-
-.slv-button--ghost-inverse:hover {
-    background: rgba(255, 255, 255, 0.18) !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-}
-
-.slv-button--inverse {
-    background: #ffffff !important;
-    color: var(--slv-color-brand, #0056d6) !important;
-    border: 1px solid #ffffff !important;
-}
-
-.slv-button--inverse:hover {
-    background: #f0f2f5 !important;
-    color: var(--slv-color-brand, #0056d6) !important;
+html[data-theme="dark"] {
+    --slv-color-brand:       #4d94ff;
+    --slv-color-brand-hover: #7eb0ff;
+    --slv-color-text:        #e8ecf1;
+    --slv-color-text-muted:  #9ba3b0;
+    --slv-color-text-faint:  #6b7280;
+    --slv-color-bg:          #0a0c10;
+    --slv-color-bg-soft:     #12151b;
+    --slv-color-bg-muted:    #1a1e26;
+    --slv-color-border:      #262c36;
+    --slv-color-border-soft: #1a1e26;
+    --slv-color-price:       #ff7a5c;
 }
 
 /* ═══════════════════════════════════════════════
-   2. 归档网格系统
+   2. 按钮
    ═══════════════════════════════════════════════ */
 
-.slv-archive,
-.slv-post-list,
-.slv-wiki-list,
-.slv-collection-list {
-    max-width: 1200px;
+.slv-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    background: var(--slv-color-brand);
+    color: #ffffff;
+}
+
+.slv-button:hover {
+    background: var(--slv-color-brand-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.slv-button--block { width: 100%; }
+.slv-button--lg { padding: 14px 28px; font-size: 16px; }
+
+.slv-button--secondary {
+    background: var(--slv-color-bg);
+    color: var(--slv-color-text);
+    border-color: var(--slv-color-border);
+}
+
+.slv-button--secondary:hover {
+    background: var(--slv-color-bg-soft);
+    border-color: var(--slv-color-brand);
+    color: var(--slv-color-brand);
+}
+
+/* ═══════════════════════════════════════════════
+   3. 页面头
+   ═══════════════════════════════════════════════ */
+
+.slv-page-hero {
+    padding: 48px 32px 32px;
+    background: var(--slv-color-bg-soft);
+    border-bottom: 1px solid var(--slv-color-border-soft);
+}
+
+.slv-page-hero__inner {
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 48px 32px 96px;
 }
 
-.slv-archive__header,
-.slv-post-list__header {
-    padding-bottom: 32px;
-    margin-bottom: 32px;
-    border-bottom: 1px solid var(--slv-color-border, #e5e7eb);
+.slv-page-hero__title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 12px 0 8px;
+    color: var(--slv-color-text);
 }
 
-.slv-archive__title {
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.02em !important;
-    margin: 0 0 8px !important;
-    color: var(--slv-color-text, #1a1d21) !important;
-}
-
-.slv-archive__desc {
+.slv-page-hero__desc {
     font-size: 15px;
-    color: var(--slv-color-text-muted, #5c6370);
+    color: var(--slv-color-text-muted);
     margin: 0;
 }
 
-/* WP post-template 默认 grid 化 */
-.slv-archive .wp-block-post-template,
-.slv-post-list .wp-block-post-template,
-.slv-wiki-list .wp-block-post-template,
-.slv-collection-list .wp-block-post-template,
-ul.wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.slv-archive .wp-block-post-template > li,
-ul.wp-block-post-template > li {
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-    display: flex !important;
-    min-width: 0;
-}
-
-.slv-archive .wp-block-post-template > li > *,
-ul.wp-block-post-template > li > * {
-    width: 100% !important;
-}
-
-/* 合集归档：2 列 */
-.slv-archive-collection .wp-block-post-template {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-}
-
-/* FAQ 归档：单列窄容器 */
-.slv-archive-faq .wp-block-post-template {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    max-width: 820px !important;
-    margin: 0 auto !important;
-}
-
-/* ═══════════════════════════════════════════════
-   3. 卡片统一风格
-   ═══════════════════════════════════════════════ */
-
-.slv-card,
-.slv-archive__item,
-.slv-post-card,
-.slv-collection-card,
-.slv-faq-list__item,
-.slv-wiki-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: var(--slv-color-bg, #ffffff) !important;
-    border: 1px solid var(--slv-color-border, #e5e7eb) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s !important;
-    padding: 0 !important;
-}
-
-.slv-card:hover,
-.slv-archive__item:hover,
-.slv-post-card:hover,
-.slv-collection-card:hover,
-.slv-wiki-card:hover {
-    border-color: var(--slv-color-brand, #0056d6) !important;
-    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.1) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* 卡片内部间距 */
-.slv-archive__item .wp-block-post-title,
-.slv-post-card .wp-block-post-title,
-.slv-collection-card .wp-block-post-title,
-.slv-wiki-card .wp-block-post-title {
-    margin: 20px 22px 10px !important;
-    font-size: 17px !important;
-    font-weight: 600 !important;
-    line-height: 1.4 !important;
-    letter-spacing: -0.01em !important;
-}
-
-.slv-archive__item .wp-block-post-title a,
-.slv-post-card .wp-block-post-title a,
-.slv-collection-card .wp-block-post-title a,
-.slv-wiki-card .wp-block-post-title a {
-    color: var(--slv-color-text, #1a1d21) !important;
-    text-decoration: none !important;
-}
-
-.slv-archive__item .wp-block-post-title a:hover,
-.slv-post-card .wp-block-post-title a:hover,
-.slv-collection-card .wp-block-post-title a:hover,
-.slv-wiki-card .wp-block-post-title a:hover {
-    color: var(--slv-color-brand, #0056d6) !important;
-}
-
-.slv-archive__item .wp-block-post-excerpt,
-.slv-post-card .wp-block-post-excerpt,
-.slv-collection-card .wp-block-post-excerpt,
-.slv-wiki-card .wp-block-post-excerpt {
-    margin: 0 22px 16px !important;
-    font-size: 14px !important;
-    line-height: 1.65 !important;
-    color: var(--slv-color-text-muted, #5c6370) !important;
-    flex-grow: 1 !important;
-}
-
-.slv-archive__item .wp-block-post-excerpt p,
-.slv-post-card .wp-block-post-excerpt p {
-    margin: 0 !important;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    color: inherit !important;
-}
-
-.slv-archive__item .wp-block-post-date,
-.slv-post-card .wp-block-post-date,
-.slv-collection-card .wp-block-post-date {
-    margin: 0 22px 20px !important;
-    font-size: 12px !important;
-    color: var(--slv-color-text-faint, #8b919d) !important;
-    padding-top: 12px !important;
-    border-top: 1px solid var(--slv-color-border-soft, #f0f2f5) !important;
-}
-
-/* 卡片特色图 */
-.slv-archive__item .wp-block-post-featured-image,
-.slv-post-card .wp-block-post-featured-image,
-.slv-collection-card .wp-block-post-featured-image {
-    margin: 0 !important;
-    aspect-ratio: 16 / 9 !important;
-    overflow: hidden !important;
-    background: linear-gradient(135deg, #f8f9fa, #f0f2f5) !important;
-    flex-shrink: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.slv-archive__item .wp-block-post-featured-image img,
-.slv-post-card .wp-block-post-featured-image img,
-.slv-collection-card .wp-block-post-featured-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    transition: transform 0.4s !important;
-}
-
-.slv-card:hover .wp-block-post-featured-image img {
-    transform: scale(1.03) !important;
-}
-
-/* 无特色图占位 */
-.slv-archive__item .wp-block-post-featured-image:empty::before,
-.slv-post-card .wp-block-post-featured-image:empty::before {
-    content: "" !important;
-    width: 48px !important;
-    height: 48px !important;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b919d' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-    opacity: 0.4 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   4. FAQ 归档列表
-   ═══════════════════════════════════════════════ */
-
-.slv-faq-list__item {
-    padding: 20px 24px !important;
-    border-radius: 10px !important;
-    flex-direction: column !important;
-    height: auto !important;
-}
-
-.slv-faq-list__item .wp-block-post-title {
-    margin: 0 0 8px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    padding: 0 !important;
-    border: none !important;
-}
-
-.slv-faq-list__item .wp-block-post-excerpt {
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    font-size: 14px !important;
-    color: var(--slv-color-text-muted, #5c6370) !important;
-}
-
-/* ═══════════════════════════════════════════════
-   5. 侧栏系统
-   ═══════════════════════════════════════════════ */
-
-.slv-post-layout,
-.slv-wiki-layout,
-.slv-layout-with-sidebar {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 320px !important;
-    gap: 64px !important;
-    align-items: start !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding: 48px 32px 96px !important;
-}
-
-.slv-post-sidebar,
-.slv-wiki-sidebar,
-.slv-layout-sidebar {
-    position: sticky !important;
-    top: 88px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
-}
-
-/* 侧栏卡片 */
-.slv-sidebar-card {
-    background: var(--slv-color-bg-soft, #f8f9fa);
-    border: 1px solid var(--slv-color-border, #e5e7eb);
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.slv-sidebar-card__title {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--slv-color-text-faint, #8b919d);
-    margin: 0 0 14px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--slv-color-border-soft, #f0f2f5);
-}
-
-.slv-sidebar-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* 面包屑 */
+.slv-breadcrumb {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.slv-sidebar-card a {
-    color: var(--slv-color-text-muted, #5c6370);
-    text-decoration: none;
-    font-size: 14px;
-    line-height: 1.5;
-    transition: color 0.15s;
-}
-
-.slv-sidebar-card a:hover {
-    color: var(--slv-color-brand, #0056d6);
-}
-
-.slv-sidebar-card__post {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-}
-
-.slv-sidebar-card__post-thumb {
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, #f0f2f5, #e5e7eb);
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.slv-sidebar-card__post-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.slv-sidebar-card__post-body {
-    min-width: 0;
-    flex: 1;
-}
-
-.slv-sidebar-card__post-title {
+    align-items: center;
+    gap: 8px;
     font-size: 13px;
-    font-weight: 600;
-    line-height: 1.4;
-    margin: 0 0 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: var(--slv-color-text-faint);
 }
 
-.slv-sidebar-card__post-meta {
-    font-size: 11px;
-    color: var(--slv-color-text-faint, #8b919d);
-}
-
-/* ═══════════════════════════════════════════════
-   6. 相关阅读
-   ═══════════════════════════════════════════════ */
-
-.slv-related,
-.slv-related-posts {
-    max-width: 1200px !important;
-    margin: 64px auto 0 !important;
-    padding: 0 32px !important;
-}
-
-.slv-related__title,
-.slv-related-posts .slv-section__title {
-    font-size: 22px !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.01em !important;
-    margin: 0 0 24px !important;
-    padding-bottom: 16px !important;
-    border-bottom: 1px solid var(--slv-color-border, #e5e7eb) !important;
-}
-
-.slv-related__grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-}
-
-.slv-related__item {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: #ffffff !important;
-    border: 1px solid var(--slv-color-border, #e5e7eb) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s !important;
-}
-
-.slv-related__item:hover {
-    border-color: var(--slv-color-brand, #0056d6) !important;
-    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.1) !important;
-    transform: translateY(-2px) !important;
-}
-
-.slv-related__link {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    color: inherit !important;
-    text-decoration: none !important;
-}
-
-.slv-related__media {
-    aspect-ratio: 16 / 9 !important;
-    background: linear-gradient(135deg, #f8f9fa, #f0f2f5) !important;
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.slv-related__media img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-}
-
-.slv-related__media:empty::before {
-    content: "" !important;
-    width: 40px !important;
-    height: 40px !important;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b919d' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-    opacity: 0.4 !important;
-}
-
-.slv-related__heading {
-    margin: 16px 20px 8px !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    line-height: 1.4 !important;
-    color: var(--slv-color-text, #1a1d21) !important;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.slv-related__excerpt {
-    margin: 0 20px 16px !important;
-    font-size: 13px !important;
-    line-height: 1.6 !important;
-    color: var(--slv-color-text-muted, #5c6370) !important;
-    flex-grow: 1 !important;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.slv-related__meta {
-    margin: 0 20px 16px !important;
-    padding-top: 10px !important;
-    border-top: 1px solid var(--slv-color-border-soft, #f0f2f5) !important;
-    font-size: 12px !important;
-    color: var(--slv-color-text-faint, #8b919d) !important;
-}
-
-/* WP query 输出的相关阅读卡片 */
-.slv-related-posts .slv-related-card,
-.slv-related-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: #ffffff !important;
-    border: 1px solid var(--slv-color-border, #e5e7eb) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s !important;
-}
-
-.slv-related-card:hover {
-    border-color: var(--slv-color-brand, #0056d6) !important;
-    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.1) !important;
-    transform: translateY(-2px) !important;
-}
-
-.slv-related-card .wp-block-post-featured-image {
-    aspect-ratio: 16 / 9;
-    background: linear-gradient(135deg, #f8f9fa, #f0f2f5);
-    margin: 0;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.slv-related-card .wp-block-post-featured-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.slv-related-card .wp-block-post-title {
-    margin: 16px 20px 8px;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.slv-related-card .wp-block-post-title a {
-    color: var(--slv-color-text, #1a1d21);
+.slv-breadcrumb a {
+    color: var(--slv-color-text-muted);
     text-decoration: none;
 }
 
-.slv-related-card .wp-block-post-date {
-    margin: auto 20px 16px;
-    padding-top: 10px;
-    border-top: 1px solid var(--slv-color-border-soft, #f0f2f5);
-    font-size: 12px;
-    color: var(--slv-color-text-faint, #8b919d);
-}
-
-.slv-related-posts .wp-block-post-template,
-.slv-related-card + .wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    list-style: none !important;
+.slv-breadcrumb a:hover {
+    color: var(--slv-color-brand);
 }
 
 /* ═══════════════════════════════════════════════
-   7. 区块间距节奏（首页）
-   ═══════════════════════════════════════════════ */
-
-.slv-home > section,
-.slv-home > .wp-block-group {
-    padding: 96px 32px !important;
-}
-
-.slv-home > section:first-child,
-.slv-home > .wp-block-group:first-child {
-    padding-top: 80px !important;
-}
-
-.slv-home > section + section,
-.slv-home > .wp-block-group + .wp-block-group {
-    padding-top: 96px !important;
-}
-
-.slv-home .slv-featured-products {
-    padding: 96px 32px !important;
-    background: var(--slv-color-bg-soft, #f8f9fa);
-}
-
-.slv-home .slv-featured-products__grid,
-.slv-featured-products__grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 32px !important;
-    max-width: 1200px !important;
-    margin: 48px auto 0 !important;
-    list-style: none !important;
-    padding: 0 !important;
-}
-
-.slv-featured-products__grid > li {
-    list-style: none !important;
-    display: flex !important;
-    margin: 0 !important;
-}
-
-.slv-featured-products__grid > li > * {
-    width: 100% !important;
-}
-
-.slv-home .slv-section__title,
-.slv-section__title {
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.02em !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
-    margin: 0 0 12px !important;
-    color: var(--slv-color-text, #1a1d21) !important;
-}
-
-.slv-section__subtitle {
-    font-size: 15px !important;
-    text-align: center !important;
-    color: var(--slv-color-text-muted, #5c6370) !important;
-    margin: 0 0 48px !important;
-}
-
-/* ═══════════════════════════════════════════════
-   8. 商品卡片（含占位图）
-   ═══════════════════════════════════════════════ */
-
-.slv-product-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: #ffffff !important;
-    border: 1px solid var(--slv-color-border, #e5e7eb) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s !important;
-    position: relative !important;
-}
-
-.slv-product-card:hover {
-    border-color: var(--slv-color-brand, #0056d6) !important;
-    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.1) !important;
-    transform: translateY(-2px) !important;
-}
-
-.slv-product-card__media,
-.slv-product-card .wp-block-post-featured-image {
-    aspect-ratio: 1 / 1 !important;
-    background: linear-gradient(135deg, #f8f9fa, #f0f2f5) !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-}
-
-.slv-product-card__media img,
-.slv-product-card .wp-block-post-featured-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-}
-
-.slv-product-card__media:empty::before,
-.slv-product-card .wp-block-post-featured-image:empty::before {
-    content: "" !important;
-    width: 64px !important;
-    height: 64px !important;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b919d' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7'/%3E%3Cpath d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-    opacity: 0.3 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   9. 深色模式覆盖
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-card,
-html[data-theme="dark"] .slv-archive__item,
-html[data-theme="dark"] .slv-post-card,
-html[data-theme="dark"] .slv-collection-card,
-html[data-theme="dark"] .slv-faq-list__item,
-html[data-theme="dark"] .slv-wiki-card,
-html[data-theme="dark"] .slv-related__item,
-html[data-theme="dark"] .slv-related-card,
-html[data-theme="dark"] .slv-product-card,
-html[data-theme="dark"] .slv-sidebar-card {
-    background: #12151b !important;
-    border-color: #262c36 !important;
-    color: #e8ecf1 !important;
-}
-
-html[data-theme="dark"] .slv-archive__item .wp-block-post-title a,
-html[data-theme="dark"] .slv-related__heading,
-html[data-theme="dark"] .slv-related-card .wp-block-post-title a {
-    color: #e8ecf1 !important;
-}
-
-html[data-theme="dark"] .slv-archive__item .wp-block-post-excerpt,
-html[data-theme="dark"] .slv-related__excerpt {
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-archive__item .wp-block-post-featured-image,
-html[data-theme="dark"] .slv-product-card .wp-block-post-featured-image,
-html[data-theme="dark"] .slv-related__media {
-    background: linear-gradient(135deg, #12151b, #1a1e26) !important;
-}
-
-html[data-theme="dark"] .slv-button--secondary {
-    background: #1a1e26 !important;
-    color: #e8ecf1 !important;
-    border-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-button--secondary:hover {
-    background: #262c36 !important;
-    border-color: #4d94ff !important;
-}
-
-html[data-theme="dark"] .slv-sidebar-card {
-    background: #12151b !important;
-}
-
-html[data-theme="dark"] .slv-sidebar-card__title {
-    color: #6b7280 !important;
-    border-bottom-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-sidebar-card a {
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-sidebar-card a:hover {
-    color: #4d94ff !important;
-}
-
-html[data-theme="dark"] .slv-featured-products {
-    background: #0a0c10 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   10. 响应式
-   ═══════════════════════════════════════════════ */
-
-@media (max-width: 1024px) {
-    .slv-archive .wp-block-post-template,
-    ul.wp-block-post-template,
-    .slv-related__grid,
-    .slv-related-posts .wp-block-post-template,
-    .slv-featured-products__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-    .slv-post-layout,
-    .slv-wiki-layout,
-    .slv-layout-with-sidebar {
-        grid-template-columns: 1fr !important;
-        gap: 32px !important;
-        padding: 32px 20px 64px !important;
-    }
-    .slv-post-sidebar,
-    .slv-wiki-sidebar,
-    .slv-layout-sidebar {
-        position: static !important;
-    }
-}
-
-@media (max-width: 640px) {
-    .slv-archive,
-    .slv-post-list,
-    .slv-wiki-list,
-    .slv-collection-list {
-        padding: 24px 16px 64px;
-    }
-    .slv-archive .wp-block-post-template,
-    ul.wp-block-post-template,
-    .slv-archive-collection .wp-block-post-template,
-    .slv-related__grid,
-    .slv-related-posts .wp-block-post-template,
-    .slv-featured-products__grid {
-        grid-template-columns: 1fr !important;
-    }
-    .slv-archive__title {
-        font-size: 24px !important;
-    }
-    .slv-home > section,
-    .slv-home > .wp-block-group,
-    .slv-home .slv-featured-products {
-        padding: 64px 20px !important;
-    }
-}
-
-/* ═══════════════════════════════════════════════
-   11. 商品归档页专项修正
+   4. 商品列表布局
    ═══════════════════════════════════════════════ */
 
 .slv-product-list {
-    max-width: 100%;
-    background: var(--slv-color-bg, #ffffff);
+    background: var(--slv-color-bg);
 }
 
 .slv-product-list__body {
-    display: grid !important;
-    grid-template-columns: 260px minmax(0, 1fr) !important;
-    gap: 32px !important;
-    max-width: 1280px !important;
-    margin: 0 auto !important;
-    padding: 40px 32px 96px !important;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 32px 96px;
     align-items: start;
 }
 
@@ -886,12 +151,15 @@ html[data-theme="dark"] .slv-featured-products {
     min-width: 0;
 }
 
-/* 筛选栏 */
+/* ═══════════════════════════════════════════════
+   5. 筛选栏
+   ═══════════════════════════════════════════════ */
+
 .slv-product-filter {
     position: sticky;
     top: 88px;
-    background: #ffffff;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
     border-radius: 12px;
     padding: 20px;
     align-self: start;
@@ -902,7 +170,7 @@ html[data-theme="dark"] .slv-featured-products {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--slv-color-border-soft, #f0f2f5);
+    border-bottom: 1px solid var(--slv-color-border-soft);
     margin-bottom: 4px;
 }
 
@@ -910,7 +178,7 @@ html[data-theme="dark"] .slv-featured-products {
     font-size: 15px;
     font-weight: 700;
     margin: 0;
-    color: var(--slv-color-text, #1a1d21);
+    color: var(--slv-color-text);
 }
 
 .slv-product-filter__clear {
@@ -919,7 +187,7 @@ html[data-theme="dark"] .slv-featured-products {
     gap: 4px;
     background: none;
     border: none;
-    color: var(--slv-color-text-muted, #5c6370);
+    color: var(--slv-color-text-muted);
     font-size: 12px;
     cursor: pointer;
     padding: 4px 8px;
@@ -927,13 +195,13 @@ html[data-theme="dark"] .slv-featured-products {
 }
 
 .slv-product-filter__clear:hover {
-    color: var(--slv-color-brand, #0056d6);
-    background: var(--slv-color-bg-soft, #f8f9fa);
+    color: var(--slv-color-brand);
+    background: var(--slv-color-bg-soft);
 }
 
 .slv-product-filter__group {
     padding: 16px 0;
-    border-bottom: 1px solid var(--slv-color-border-soft, #f0f2f5);
+    border-bottom: 1px solid var(--slv-color-border-soft);
 }
 
 .slv-product-filter__group:last-child {
@@ -948,18 +216,15 @@ html[data-theme="dark"] .slv-featured-products {
     padding: 0;
     background: none;
     border: none;
+    font-family: inherit;
     font-size: 13px;
     font-weight: 600;
-    color: var(--slv-color-text, #1a1d21);
+    color: var(--slv-color-text);
     cursor: pointer;
     margin-bottom: 12px;
 }
 
-.slv-product-filter__group-title .slv-icon {
-    transition: transform 0.2s;
-}
-
-.slv-product-filter__group-title[aria-expanded="false"] .slv-icon {
+.slv-product-filter__group-title[aria-expanded="false"] svg {
     transform: rotate(-90deg);
 }
 
@@ -981,27 +246,24 @@ html[data-theme="dark"] .slv-featured-products {
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: var(--slv-color-text-muted, #5c6370);
+    color: var(--slv-color-text-muted);
     cursor: pointer;
-    line-height: 1.4;
 }
 
-.slv-product-filter__list input[type="checkbox"],
-.slv-product-filter__list input[type="radio"] {
+.slv-product-filter__list input[type="checkbox"] {
     width: 14px;
     height: 14px;
     flex-shrink: 0;
-    cursor: pointer;
 }
 
 .slv-product-filter__count {
     margin-left: auto;
-    color: var(--slv-color-text-faint, #8b919d);
+    color: var(--slv-color-text-faint);
     font-size: 12px;
 }
 
 .slv-product-filter__loading {
-    color: var(--slv-color-text-faint, #8b919d);
+    color: var(--slv-color-text-faint);
     font-size: 13px;
     list-style: none;
 }
@@ -1018,13 +280,10 @@ html[data-theme="dark"] .slv-featured-products {
     min-width: 0;
     padding: 6px 10px;
     font-size: 13px;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
+    border: 1px solid var(--slv-color-border);
     border-radius: 6px;
-    background: #ffffff;
-}
-
-.slv-product-filter__price span {
-    color: var(--slv-color-text-faint, #8b919d);
+    background: var(--slv-color-bg);
+    color: var(--slv-color-text);
 }
 
 .slv-product-filter__tags {
@@ -1036,42 +295,34 @@ html[data-theme="dark"] .slv-featured-products {
 .slv-tag-chip {
     display: inline-block;
     padding: 4px 12px;
-    background: #ffffff;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
     border-radius: 999px;
     font-size: 12px;
-    color: var(--slv-color-text-muted, #5c6370);
+    color: var(--slv-color-text-muted);
     cursor: pointer;
+    font-family: inherit;
     transition: all 0.15s;
 }
 
 .slv-tag-chip:hover,
 .slv-tag-chip.is-active {
-    border-color: var(--slv-color-brand, #0056d6);
-    color: var(--slv-color-brand, #0056d6);
-    background: #e8f1ff;
+    border-color: var(--slv-color-brand);
+    color: var(--slv-color-brand);
+    background: var(--slv-color-bg-soft);
 }
 
-.slv-stars {
-    display: inline-flex;
-    gap: 1px;
-    color: #ff9500;
-    align-items: center;
-}
+/* ═══════════════════════════════════════════════
+   6. 工具栏
+   ═══════════════════════════════════════════════ */
 
-.slv-stars .slv-icon {
-    fill: currentColor;
-    stroke: currentColor;
-}
-
-/* 工具栏 */
 .slv-product-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px;
-    background: var(--slv-color-bg-soft, #f8f9fa);
-    border: 1px solid var(--slv-color-border, #e5e7eb);
+    padding: 12px 18px;
+    background: var(--slv-color-bg-soft);
+    border: 1px solid var(--slv-color-border);
     border-radius: 10px;
     margin-bottom: 24px;
     gap: 16px;
@@ -1086,184 +337,215 @@ html[data-theme="dark"] .slv-featured-products {
 
 .slv-product-toolbar__count {
     font-size: 13px;
-    color: var(--slv-color-text-muted, #5c6370);
+    color: var(--slv-color-text-muted);
 }
 
 .slv-product-toolbar__count strong {
-    color: var(--slv-color-text, #1a1d21);
+    color: var(--slv-color-text);
     font-weight: 700;
+    font-size: 15px;
+    margin: 0 2px;
 }
 
 .slv-product-toolbar__sort {
-    padding: 6px 12px;
+    padding: 8px 14px;
+    font-family: inherit;
     font-size: 13px;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
-    border-radius: 6px;
-    background: #ffffff;
-    color: var(--slv-color-text, #1a1d21);
+    line-height: 1.4;
+    color: var(--slv-color-text);
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: 8px;
+    min-width: 130px;
     cursor: pointer;
 }
 
-.slv-product-toolbar__filter-btn {
-    display: none;
+.slv-product-toolbar__view {
+    display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 6px 12px;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
-    border-radius: 6px;
-    background: #ffffff;
-    color: var(--slv-color-text, #1a1d21);
-    font-size: 13px;
-    cursor: pointer;
 }
 
 .slv-view-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     padding: 0;
-    background: #ffffff;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
-    border-radius: 6px;
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: 8px;
+    color: var(--slv-color-text-muted);
     cursor: pointer;
-    color: var(--slv-color-text-muted, #5c6370);
     transition: all 0.15s;
 }
 
+.slv-view-btn svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.slv-view-btn:hover {
+    color: var(--slv-color-brand);
+    border-color: var(--slv-color-brand);
+}
+
 .slv-view-btn.is-active {
-    background: var(--slv-color-brand, #0056d6);
-    border-color: var(--slv-color-brand, #0056d6);
+    background: var(--slv-color-brand);
+    border-color: var(--slv-color-brand);
     color: #ffffff;
 }
 
-.slv-product-toolbar__view {
-    display: flex;
-    gap: 4px;
+/* ═══════════════════════════════════════════════
+   7. 商品网格
+   ═══════════════════════════════════════════════ */
+
+.slv-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-/* 商品网格 —— 3 列 */
-.slv-product-grid .wp-block-query,
-.slv-product-grid .wp-block-post-template,
-.slv-product-grid ul.wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+.slv-product-grid--mini {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
 }
 
-.slv-product-grid ul.wp-block-post-template > li {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+/* 列表视图 */
+.slv-product-grid.is-list-view {
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.slv-product-grid.is-list-view .slv-product-card {
+    flex-direction: row;
+}
+
+.slv-product-grid.is-list-view .slv-product-card__media {
+    width: 180px;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+}
+
+.slv-product-grid.is-list-view .slv-product-card__body {
+    flex: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   8. 商品卡片
+   ═══════════════════════════════════════════════ */
+
+.slv-product-card {
     display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
     min-width: 0;
 }
 
-.slv-product-grid ul.wp-block-post-template > li > * {
-    width: 100% !important;
-}
-
-/* 商品卡片 */
-.slv-product-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: #ffffff !important;
-    border: 1px solid var(--slv-color-border, #e5e7eb) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    transition: all 0.2s !important;
-}
-
 .slv-product-card:hover {
-    border-color: var(--slv-color-brand, #0056d6) !important;
-    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.1) !important;
-    transform: translateY(-2px) !important;
+    border-color: var(--slv-color-brand);
+    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.12);
+    transform: translateY(-3px);
 }
 
-.slv-product-card__media,
-.slv-product-card .wp-block-post-featured-image {
-    aspect-ratio: 1 / 1 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-    background: linear-gradient(135deg, #f8f9fa, #f0f2f5) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+.slv-product-card__media {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--slv-color-bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
-.slv-product-card__media img,
-.slv-product-card .wp-block-post-featured-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
+.slv-product-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-/* 占位图（居中，不铺满） */
-.slv-product-placeholder {
+/* 占位图 —— Logo 居中，不铺满 */
+.slv-product-card__placeholder {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--slv-color-bg-soft);
 }
 
-.slv-product-placeholder svg {
-    width: 55%;
-    height: 55%;
-    max-width: 120px;
-    max-height: 120px;
+.slv-product-card__placeholder img {
+    max-width: 50%;
+    max-height: 50%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.4;
+    filter: grayscale(0.3);
+}
+
+html[data-theme="dark"] .slv-product-card__placeholder img {
+    filter: invert(1) brightness(0.9);
+    opacity: 0.5;
 }
 
 .slv-product-card__body {
-    padding: 16px 18px 18px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
     flex: 1;
+    padding: 18px 20px 20px;
+    gap: 10px;
+    min-width: 0;
 }
 
-.slv-product-card__title,
-.slv-product-card .wp-block-post-title {
-    margin: 0 !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    line-height: 1.4 !important;
-    color: var(--slv-color-text, #1a1d21) !important;
+.slv-product-card__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--slv-color-text);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    min-height: 2.9em;
+    word-break: break-word;
 }
 
-.slv-product-card__title a,
-.slv-product-card .wp-block-post-title a {
-    color: inherit !important;
-    text-decoration: none !important;
+.slv-product-card__title a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.slv-product-card__title a:hover,
-.slv-product-card .wp-block-post-title a:hover {
-    color: var(--slv-color-brand, #0056d6) !important;
+.slv-product-card__title a:hover {
+    color: var(--slv-color-brand);
 }
 
-.slv-product-card__desc,
-.slv-product-card .wp-block-post-excerpt {
-    margin: 0 !important;
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-    color: var(--slv-color-text-muted, #5c6370) !important;
+.slv-product-card__desc {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    flex: 1;
+    min-height: 3.2em;
+    flex-grow: 1;
 }
 
 .slv-product-card__footer {
@@ -1272,18 +554,18 @@ html[data-theme="dark"] .slv-featured-products {
     justify-content: space-between;
     gap: 12px;
     margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid var(--slv-color-border-soft, #f0f2f5);
+    padding-top: 14px;
+    border-top: 1px solid var(--slv-color-border-soft);
 }
 
 .slv-product-card__price {
     display: flex;
     align-items: baseline;
     gap: 2px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    color: #ff5c33;
-    letter-spacing: -0.01em;
+    color: var(--slv-color-price);
+    font-variant-numeric: tabular-nums;
 }
 
 .slv-product-card__currency {
@@ -1291,235 +573,274 @@ html[data-theme="dark"] .slv-featured-products {
 }
 
 .slv-product-card__amount {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .slv-product-card__cart-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: var(--slv-color-brand, #0056d6);
+    width: 38px;
+    height: 38px;
+    background: var(--slv-color-brand);
     color: #ffffff;
     border-radius: 8px;
-    text-decoration: none;
+    border: none;
+    cursor: pointer;
     flex-shrink: 0;
     transition: all 0.15s;
 }
 
 .slv-product-card__cart-btn:hover {
-    background: var(--slv-color-brand-hover, #0047b3);
-    transform: scale(1.05);
+    background: var(--slv-color-brand-hover);
+    transform: scale(1.06);
 }
 
-/* 底部推荐 —— 4 列 */
-.slv-product-recommend {
-    margin-top: 96px;
-    padding-top: 64px;
-    border-top: 1px solid var(--slv-color-border, #e5e7eb);
-}
-
-.slv-product-recommend .slv-section__title {
-    text-align: left;
-    font-size: 22px !important;
-    margin-bottom: 8px !important;
-}
-
-.slv-product-recommend .slv-section__subtitle {
-    text-align: left;
-    font-size: 14px !important;
-    margin-bottom: 32px !important;
-}
-
-.slv-product-recommend .wp-block-post-template,
-.slv-product-recommend ul.wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 20px !important;
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.slv-product-recommend ul.wp-block-post-template > li {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: flex;
-}
-
-.slv-product-recommend ul.wp-block-post-template > li > * {
-    width: 100% !important;
-}
-
-.slv-product-card--mini {
-    border-radius: 10px !important;
-}
-
+/* mini 卡片 */
 .slv-product-card--mini .slv-product-card__body {
-    padding: 12px 14px 14px;
+    padding: 14px 16px 16px;
+    gap: 8px;
 }
 
 .slv-product-card--mini .slv-product-card__title {
-    font-size: 13px !important;
+    font-size: 14px;
     -webkit-line-clamp: 2;
-}
-
-/* 分页（如有） */
-.slv-product-pagination .wp-block-query-pagination {
-    margin-top: 48px;
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-}
-
-.slv-product-pagination .page-numbers {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 36px;
-    height: 36px;
-    padding: 0 10px;
-    border: 1px solid var(--slv-color-border, #e5e7eb);
-    border-radius: 6px;
-    background: #ffffff;
-    color: var(--slv-color-text, #1a1d21);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.15s;
-}
-
-.slv-product-pagination .page-numbers:hover {
-    border-color: var(--slv-color-brand, #0056d6);
-    color: var(--slv-color-brand, #0056d6);
-}
-
-.slv-product-pagination .page-numbers.current {
-    background: var(--slv-color-brand, #0056d6);
-    border-color: var(--slv-color-brand, #0056d6);
-    color: #ffffff;
 }
 
 /* 空状态 */
 .slv-product-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
     padding: 80px 24px;
     text-align: center;
-    color: var(--slv-color-text-muted, #5c6370);
+    color: var(--slv-color-text-muted);
 }
 
-.slv-product-empty .slv-icon {
-    color: var(--slv-color-text-faint, #8b919d);
-    opacity: 0.5;
+/* ═══════════════════════════════════════════════
+   9. 底部推荐
+   ═══════════════════════════════════════════════ */
+
+.slv-product-recommend {
+    margin-top: 80px;
+    padding-top: 56px;
+    border-top: 1px solid var(--slv-color-border);
 }
 
-/* 页面头 */
-.slv-page-hero {
-    padding: 48px 32px 32px;
-    background: var(--slv-color-bg-soft, #f8f9fa);
-    border-bottom: 1px solid var(--slv-color-border-soft, #f0f2f5);
+.slv-section__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--slv-color-text);
+    letter-spacing: -0.01em;
 }
 
-.slv-page-hero__inner {
-    max-width: 1280px;
+.slv-section__subtitle {
+    font-size: 14px;
+    color: var(--slv-color-text-muted);
+    margin: 0 0 28px;
+}
+
+/* ═══════════════════════════════════════════════
+   10. 侧栏 / 相关阅读 / 归档（通用）
+   ═══════════════════════════════════════════════ */
+
+.slv-post-layout,
+.slv-wiki-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 64px;
+    align-items: start;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 48px 32px 96px;
 }
 
-.slv-page-hero__title {
-    font-size: 36px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin: 12px 0 8px;
-    color: var(--slv-color-text, #1a1d21);
+.slv-post-sidebar,
+.slv-wiki-sidebar {
+    position: sticky;
+    top: 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.slv-page-hero__desc {
-    font-size: 15px;
-    color: var(--slv-color-text-muted, #5c6370);
+.slv-sidebar-card {
+    background: var(--slv-color-bg-soft);
+    border: 1px solid var(--slv-color-border);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.slv-sidebar-card__title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slv-color-text-faint);
+    margin: 0 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--slv-color-border-soft);
+}
+
+.slv-sidebar-card ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* 深色模式 */
-html[data-theme="dark"] .slv-product-filter,
-html[data-theme="dark"] .slv-product-card,
-html[data-theme="dark"] .slv-product-toolbar,
-html[data-theme="dark"] .slv-product-toolbar__sort,
-html[data-theme="dark"] .slv-tag-chip,
-html[data-theme="dark"] .slv-view-btn {
-    background: #12151b !important;
-    border-color: #262c36 !important;
-    color: #e8ecf1 !important;
+.slv-sidebar-card a {
+    color: var(--slv-color-text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-html[data-theme="dark"] .slv-product-filter__group-title,
-html[data-theme="dark"] .slv-product-card__title,
-html[data-theme="dark"] .slv-product-card .wp-block-post-title {
-    color: #e8ecf1 !important;
+.slv-sidebar-card a:hover {
+    color: var(--slv-color-brand);
 }
 
-html[data-theme="dark"] .slv-product-filter__list label,
-html[data-theme="dark"] .slv-product-card__desc,
-html[data-theme="dark"] .slv-product-card .wp-block-post-excerpt {
-    color: #9ba3b0 !important;
+/* 相关阅读 */
+.slv-related {
+    max-width: 1200px;
+    margin: 64px auto 0;
+    padding: 0 32px;
 }
 
-html[data-theme="dark"] .slv-product-filter__price input {
-    background: #1a1e26;
-    border-color: #262c36;
-    color: #e8ecf1;
+.slv-related__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--slv-color-border);
 }
 
-html[data-theme="dark"] .slv-page-hero {
-    background: #0a0c10;
-    border-bottom-color: #262c36;
+.slv-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
 }
 
-html[data-theme="dark"] .slv-page-hero__title {
-    color: #e8ecf1;
+.slv-related__item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--slv-color-bg);
+    border: 1px solid var(--slv-color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
 }
 
-html[data-theme="dark"] .slv-product-card__footer {
-    border-top-color: #262c36;
+.slv-related__item:hover {
+    border-color: var(--slv-color-brand);
+    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.1);
+    transform: translateY(-2px);
 }
 
-html[data-theme="dark"] .slv-product-recommend {
-    border-top-color: #262c36;
+.slv-related__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
 }
 
-/* 响应式 */
+.slv-related__media {
+    aspect-ratio: 16 / 9;
+    background: var(--slv-color-bg-soft);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.slv-related__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slv-related__heading {
+    margin: 16px 20px 8px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--slv-color-text);
+}
+
+.slv-related__excerpt {
+    margin: 0 20px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--slv-color-text-muted);
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.slv-related__meta {
+    margin: 0 20px 16px;
+    padding-top: 10px;
+    border-top: 1px solid var(--slv-color-border-soft);
+    font-size: 12px;
+    color: var(--slv-color-text-faint);
+}
+
+/* 通用归档 */
+.slv-archive {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+}
+
+.slv-archive__title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    color: var(--slv-color-text);
+}
+
+/* ═══════════════════════════════════════════════
+   11. 响应式
+   ═══════════════════════════════════════════════ */
+
 @media (max-width: 1024px) {
     .slv-product-list__body {
-        grid-template-columns: 1fr !important;
-        gap: 24px !important;
-        padding: 24px 20px 64px !important;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 24px 20px 64px;
     }
     .slv-product-filter {
         position: static;
-        display: none;
     }
-    .slv-product-filter.is-open {
-        display: block;
+    .slv-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .slv-product-toolbar__filter-btn {
-        display: inline-flex !important;
+    .slv-product-grid--mini {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .slv-product-grid .wp-block-post-template {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    .slv-post-layout,
+    .slv-wiki-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 32px 20px 64px;
     }
-    .slv-product-recommend .wp-block-post-template {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    .slv-post-sidebar,
+    .slv-wiki-sidebar {
+        position: static;
+    }
+    .slv-related__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 640px) {
-    .slv-product-grid .wp-block-post-template,
-    .slv-product-recommend .wp-block-post-template {
-        grid-template-columns: 1fr !important;
+    .slv-product-grid,
+    .slv-product-grid--mini,
+    .slv-related__grid {
+        grid-template-columns: 1fr;
     }
     .slv-page-hero {
         padding: 32px 20px 24px;
@@ -1531,707 +852,4 @@ html[data-theme="dark"] .slv-product-recommend {
         padding: 10px 14px;
         flex-wrap: wrap;
     }
-}
-
-/* ═══════════════════════════════════════════════
-   12. 商品归档 v3 —— 强制修复
-   ═══════════════════════════════════════════════ */
-
-/* 关键：解除 WP is-layout-constrained 对卡片内元素的宽度限制 */
-.slv-product-grid .wp-block-post-template > li,
-.slv-product-recommend .wp-block-post-template > li,
-.slv-product-card,
-.slv-product-card__body,
-.slv-product-card__title,
-.slv-product-card__desc,
-.slv-product-card__footer {
-    max-width: none !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-/* 商品网格 3 列 */
-.slv-product-list__main .slv-product-grid > .wp-block-query,
-.slv-product-list__main .slv-product-grid .wp-block-post-template,
-.slv-product-list__main .slv-product-grid ul.wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.slv-product-list__main .slv-product-grid .wp-block-post-template > li {
-    display: flex !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-}
-
-.slv-product-list__main .slv-product-grid .wp-block-post-template > li > * {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-/* 商品卡片 */
-.slv-product-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: #ffffff !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-    transition: all 0.2s !important;
-}
-
-.slv-product-card:hover {
-    border-color: #0056d6 !important;
-    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.12) !important;
-    transform: translateY(-3px) !important;
-}
-
-/* 商品卡片媒体区 */
-.slv-product-card__media,
-.slv-product-card .wp-block-post-featured-image {
-    aspect-ratio: 1 / 1 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-    background: linear-gradient(135deg, #f8f9fa, #f0f2f5) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-}
-
-.slv-product-card__media img,
-.slv-product-card .wp-block-post-featured-image img {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-}
-
-/* 商品卡片 body —— 关键修复 */
-.slv-product-card__body {
-    display: flex !important;
-    flex-direction: column !important;
-    flex: 1 !important;
-    padding: 18px 20px 20px !important;
-    gap: 10px !important;
-    min-width: 0 !important;
-}
-
-/* 商品标题 —— 关键修复：清晰可见 */
-.slv-product-card__title,
-.slv-product-card .wp-block-post-title {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.45 !important;
-    letter-spacing: -0.01em !important;
-    color: #1a1d21 !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    max-height: 2.9em !important;
-    min-height: 2.9em !important;
-}
-
-.slv-product-card__title a,
-.slv-product-card .wp-block-post-title a {
-    color: inherit !important;
-    text-decoration: none !important;
-    display: block !important;
-    width: 100% !important;
-}
-
-.slv-product-card__title a:hover,
-.slv-product-card .wp-block-post-title a:hover {
-    color: #0056d6 !important;
-}
-
-/* 商品描述 */
-.slv-product-card__desc,
-.slv-product-card .wp-block-post-excerpt {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 13px !important;
-    line-height: 1.6 !important;
-    color: #5c6370 !important;
-    word-break: break-word !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    max-height: 3.2em !important;
-    min-height: 3.2em !important;
-    flex-grow: 0 !important;
-}
-
-.slv-product-card__desc p,
-.slv-product-card .wp-block-post-excerpt p {
-    margin: 0 !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    color: inherit !important;
-}
-
-/* 商品卡片底部 —— 价格 + 加购 */
-.slv-product-card__footer {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 12px !important;
-    margin-top: auto !important;
-    padding-top: 14px !important;
-    border-top: 1px solid #f0f2f5 !important;
-}
-
-.slv-product-card__price {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 2px !important;
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    color: #ff5c33 !important;
-    letter-spacing: -0.01em !important;
-    font-variant-numeric: tabular-nums;
-}
-
-.slv-product-card__currency {
-    font-size: 14px !important;
-}
-
-.slv-product-card__amount {
-    font-size: 20px !important;
-}
-
-.slv-product-card__cart-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    height: 38px !important;
-    background: #0056d6 !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
-    text-decoration: none !important;
-    flex-shrink: 0 !important;
-    transition: all 0.15s !important;
-    border: none !important;
-}
-
-.slv-product-card__cart-btn:hover {
-    background: #0047b3 !important;
-    transform: scale(1.06) !important;
-}
-
-/* 商品卡片占位图 —— 居中 */
-.slv-product-placeholder {
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.slv-product-placeholder svg {
-    width: 55% !important;
-    height: 55% !important;
-    max-width: 120px !important;
-    max-height: 120px !important;
-}
-
-/* ═══════════════════════════════════════════════
-   13. 工具栏视图按钮 —— 修复
-   ═══════════════════════════════════════════════ */
-
-.slv-product-toolbar {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 12px 18px !important;
-    background: #f8f9fa !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 10px !important;
-    margin-bottom: 24px !important;
-    gap: 16px !important;
-    flex-wrap: wrap !important;
-}
-
-.slv-product-toolbar__left,
-.slv-product-toolbar__right {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-}
-
-.slv-product-toolbar__view {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-    padding: 2px !important;
-    background: #ffffff !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 8px !important;
-}
-
-.slv-view-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 32px !important;
-    height: 32px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    border-radius: 6px !important;
-    color: #5c6370 !important;
-    cursor: pointer !important;
-    transition: all 0.15s !important;
-    flex-shrink: 0 !important;
-}
-
-.slv-view-btn svg {
-    display: block !important;
-    width: 16px !important;
-    height: 16px !important;
-    pointer-events: none !important;
-}
-
-.slv-view-btn:hover {
-    color: #1a1d21 !important;
-    background: #f0f2f5 !important;
-}
-
-.slv-view-btn.is-active {
-    background: #0056d6 !important;
-    color: #ffffff !important;
-}
-
-.slv-view-btn.is-active:hover {
-    background: #0047b3 !important;
-    color: #ffffff !important;
-}
-
-/* 排序下拉 */
-.slv-product-toolbar__sort {
-    padding: 8px 32px 8px 14px !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 8px !important;
-    background-color: #ffffff !important;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235c6370' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: right 10px center !important;
-    background-size: 12px !important;
-    color: #1a1d21 !important;
-    cursor: pointer !important;
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    min-width: 130px !important;
-}
-
-.slv-product-toolbar__count {
-    font-size: 13px !important;
-    color: #5c6370 !important;
-}
-
-.slv-product-toolbar__count strong {
-    color: #1a1d21 !important;
-    font-weight: 700 !important;
-    font-size: 15px !important;
-    margin: 0 2px !important;
-}
-
-/* ═══════════════════════════════════════════════
-   14. 底部推荐 —— 4 列 mini 卡
-   ═══════════════════════════════════════════════ */
-
-.slv-product-recommend {
-    margin-top: 80px !important;
-    padding-top: 56px !important;
-    border-top: 1px solid #e5e7eb !important;
-}
-
-.slv-product-recommend .slv-section__title {
-    text-align: left !important;
-    font-size: 22px !important;
-    font-weight: 700 !important;
-    margin: 0 0 6px !important;
-    color: #1a1d21 !important;
-    letter-spacing: -0.01em !important;
-}
-
-.slv-product-recommend .slv-section__subtitle {
-    text-align: left !important;
-    font-size: 14px !important;
-    color: #5c6370 !important;
-    margin: 0 0 28px !important;
-}
-
-.slv-product-recommend .wp-block-query,
-.slv-product-recommend .wp-block-post-template,
-.slv-product-recommend ul.wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 20px !important;
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.slv-product-recommend .wp-block-post-template > li {
-    display: flex !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-}
-
-.slv-product-recommend .wp-block-post-template > li > * {
-    width: 100% !important;
-}
-
-.slv-product-card--mini .slv-product-card__body {
-    padding: 14px 16px 16px !important;
-    gap: 8px !important;
-}
-
-.slv-product-card--mini .slv-product-card__title,
-.slv-product-card--mini .wp-block-post-title {
-    font-size: 14px !important;
-    -webkit-line-clamp: 2 !important;
-    max-height: 2.9em !important;
-    min-height: 2.9em !important;
-    font-weight: 600 !important;
-}
-
-/* ═══════════════════════════════════════════════
-   15. 深色模式
-   ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .slv-product-card {
-    background: #12151b !important;
-    border-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-product-card__title,
-html[data-theme="dark"] .slv-product-card .wp-block-post-title {
-    color: #e8ecf1 !important;
-}
-
-html[data-theme="dark"] .slv-product-card__title a:hover {
-    color: #4d94ff !important;
-}
-
-html[data-theme="dark"] .slv-product-card__desc,
-html[data-theme="dark"] .slv-product-card .wp-block-post-excerpt {
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-product-card__footer {
-    border-top-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-product-toolbar {
-    background: #12151b !important;
-    border-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-product-toolbar__view {
-    background: #1a1e26 !important;
-    border-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-view-btn {
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-view-btn:hover {
-    color: #e8ecf1 !important;
-    background: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-view-btn.is-active {
-    background: #4d94ff !important;
-    color: #ffffff !important;
-}
-
-html[data-theme="dark"] .slv-product-toolbar__sort {
-    background-color: #1a1e26 !important;
-    border-color: #262c36 !important;
-    color: #e8ecf1 !important;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ba3b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
-}
-
-html[data-theme="dark"] .slv-product-toolbar__count {
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-product-toolbar__count strong {
-    color: #e8ecf1 !important;
-}
-
-html[data-theme="dark"] .slv-product-recommend {
-    border-top-color: #262c36 !important;
-}
-
-html[data-theme="dark"] .slv-product-recommend .slv-section__title {
-    color: #e8ecf1 !important;
-}
-
-html[data-theme="dark"] .slv-product-recommend .slv-section__subtitle {
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-product-card__media,
-html[data-theme="dark"] .slv-product-card .wp-block-post-featured-image {
-    background: linear-gradient(135deg, #12151b, #1a1e26) !important;
-}
-
-/* ═══════════════════════════════════════════════
-   16. 响应式
-   ═══════════════════════════════════════════════ */
-
-@media (max-width: 1024px) {
-    .slv-product-list__main .slv-product-grid .wp-block-post-template {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-    .slv-product-recommend .wp-block-post-template {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 640px) {
-    .slv-product-list__main .slv-product-grid .wp-block-post-template,
-    .slv-product-recommend .wp-block-post-template {
-        grid-template-columns: 1fr !important;
-    }
-    .slv-product-toolbar {
-        padding: 10px 12px !important;
-    }
-    .slv-product-toolbar__right {
-        gap: 8px !important;
-    }
-}
-
-/* ═══════════════════════════════════════════════
-   17. 彻底修复 —— 覆盖 WP 默认约束
-   ═══════════════════════════════════════════════ */
-
-/* 1. 解除 WP 对 query 的宽度约束 */
-.slv-product-grid,
-.slv-product-grid *,
-.slv-product-grid .wp-block-query,
-.slv-product-grid .wp-block-query.is-layout-constrained,
-.slv-product-grid .wp-block-query.is-layout-flow,
-.slv-product-grid .wp-block-post-template,
-.slv-product-grid .wp-block-post-template.is-layout-grid,
-.slv-product-grid .wp-block-post-template.is-layout-flow,
-.slv-product-grid .wp-block-post-template.is-layout-constrained,
-.slv-product-recommend .wp-block-query,
-.slv-product-recommend .wp-block-query.is-layout-constrained,
-.slv-product-recommend .wp-block-query.is-layout-flow,
-.slv-product-recommend .wp-block-post-template,
-.slv-product-recommend .wp-block-post-template.is-layout-grid,
-.slv-product-recommend .wp-block-post-template.is-layout-flow,
-.slv-product-recommend .wp-block-post-template.is-layout-constrained {
-    width: 100% !important;
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* 2. 3 列网格 —— 用最高优先级 */
-.slv-product-grid .wp-block-post-template,
-.slv-product-grid ul.wp-block-post-template,
-.slv-product-grid ol.wp-block-post-template,
-.slv-product-grid .wp-block-query > .wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    grid-auto-rows: auto !important;
-    gap: 24px !important;
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: none !important;
-}
-
-.slv-product-grid .wp-block-post-template > li,
-.slv-product-grid ul.wp-block-post-template > li {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-}
-
-.slv-product-grid .wp-block-post-template > li > *,
-.slv-product-grid ul.wp-block-post-template > li > * {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-}
-
-/* 3. 商品卡片 —— 撑满 */
-.slv-product-card,
-.slv-product-card.wp-block-group,
-.slv-product-card.wp-block-group-is-layout-flow,
-.slv-product-card.wp-block-group-is-layout-constrained {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-/* 4. 排序按钮 —— 彻底去掉我上轮的 data URI */
-.slv-product-toolbar__sort,
-select.slv-product-toolbar__sort {
-    appearance: auto !important;
-    -webkit-appearance: auto !important;
-    -moz-appearance: auto !important;
-    background-image: none !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    padding: 8px 14px !important;
-    font-family: inherit !important;
-    font-size: 13px !important;
-    line-height: 1.4 !important;
-    color: #1a1d21 !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 8px !important;
-    min-width: 130px !important;
-    max-width: 100% !important;
-    cursor: pointer !important;
-    text-indent: 0 !important;
-}
-
-html[data-theme="dark"] .slv-product-toolbar__sort {
-    background: #1a1e26 !important;
-    background-image: none !important;
-    color: #e8ecf1 !important;
-    border-color: #262c36 !important;
-}
-
-/* 5. 视图按钮区（去掉我上轮多余的 padding 和边框） */
-.slv-product-toolbar__view {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-}
-
-.slv-view-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 36px !important;
-    height: 36px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: #ffffff !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 8px !important;
-    color: #5c6370 !important;
-    cursor: pointer !important;
-    transition: all 0.15s !important;
-}
-
-.slv-view-btn + .slv-view-btn {
-    margin-left: 4px !important;
-}
-
-.slv-view-btn:hover {
-    color: #0056d6 !important;
-    border-color: #0056d6 !important;
-}
-
-.slv-view-btn.is-active {
-    background: #0056d6 !important;
-    border-color: #0056d6 !important;
-    color: #ffffff !important;
-}
-
-html[data-theme="dark"] .slv-view-btn {
-    background: #1a1e26 !important;
-    border-color: #262c36 !important;
-    color: #9ba3b0 !important;
-}
-
-html[data-theme="dark"] .slv-view-btn.is-active {
-    background: #4d94ff !important;
-    border-color: #4d94ff !important;
-    color: #ffffff !important;
-}
-
-/* 6. 商品卡片内部 —— 全部撑满 */
-.slv-product-card__body,
-.slv-product-card__media,
-.slv-product-card__footer,
-.slv-product-card__title,
-.slv-product-card__desc,
-.slv-product-card .wp-block-post-title,
-.slv-product-card .wp-block-post-excerpt,
-.slv-product-card .wp-block-post-featured-image {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-}
-
-/* 7. 底部推荐 4 列 */
-.slv-product-recommend .wp-block-post-template,
-.slv-product-recommend ul.wp-block-post-template {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 20px !important;
-    width: 100% !important;
-    max-width: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.slv-product-recommend .wp-block-post-template > li {
-    display: flex !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.slv-product-recommend .wp-block-post-template > li > * {
-    width: 100% !important;
-    flex: 1 !important;
 }

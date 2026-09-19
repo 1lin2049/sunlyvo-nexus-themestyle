@@ -15,7 +15,7 @@
         </div>
     </section>
 
-    <!-- ═══ 主体：左筛选 + 右网格 ═══ -->
+    <!-- ═══ 主体 ═══ -->
     <div class="slv-product-list__body">
 
         <!-- 筛选栏 -->
@@ -23,20 +23,17 @@
             <div class="slv-product-filter__header">
                 <h2 class="slv-product-filter__title">筛选</h2>
                 <button type="button" class="slv-product-filter__clear" data-slv-filter-clear>
-                    <svg class="slv-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M18 6 6 18M6 6l12 12"/>
                     </svg>
                     清空
                 </button>
             </div>
 
-            <!-- 分类 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>分类</span>
-                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <ul class="slv-product-filter__list" data-slv-filter-categories>
@@ -45,13 +42,10 @@
                 </div>
             </div>
 
-            <!-- 价格 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>价格</span>
-                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__price">
@@ -63,13 +57,10 @@
                 </div>
             </div>
 
-            <!-- 标签 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>标签</span>
-                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__tags">
@@ -80,60 +71,12 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 评分 -->
-            <div class="slv-product-filter__group">
-                <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
-                    <span>评分</span>
-                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
-                </button>
-                <div class="slv-product-filter__group-body">
-                    <ul class="slv-product-filter__list slv-product-filter__list--rating">
-                        <li>
-                            <label>
-                                <input type="radio" name="rating" value="4" />
-                                <span class="slv-stars" aria-hidden="true">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                </span>
-                                4 星以上
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="radio" name="rating" value="3" />
-                                <span class="slv-stars" aria-hidden="true">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
-                                </span>
-                                3 星以上
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </aside>
 
-        <!-- 商品网格区 -->
+        <!-- 商品区 -->
         <div class="slv-product-list__main">
-
-            <!-- 工具栏 -->
             <div class="slv-product-toolbar">
                 <div class="slv-product-toolbar__left">
-                    <button type="button" class="slv-product-toolbar__filter-btn" data-slv-filter-open>
-                        <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-                        </svg>
-                        筛选
-                    </button>
                     <span class="slv-product-toolbar__count">共 <strong data-slv-total>5</strong> 件商品</span>
                 </div>
                 <div class="slv-product-toolbar__right">
@@ -142,8 +85,6 @@
                         <option value="latest">最新上架</option>
                         <option value="price-asc">价格从低到高</option>
                         <option value="price-desc">价格从高到低</option>
-                        <option value="popular">销量优先</option>
-                        <option value="rating">评分优先</option>
                     </select>
                     <div class="slv-product-toolbar__view">
                         <button type="button" class="slv-view-btn is-active" data-slv-view="grid" aria-label="网格视图">
@@ -168,62 +109,19 @@
                 </div>
             </div>
 
-            <!-- 商品网格 -->
-            <div class="slv-product-grid">
-                <!-- wp:query {"queryId":10,"query":{"inherit":true},"layout":{"type":"default"}} -->
-                <div class="wp-block-query">
-                    <!-- wp:post-template -->
-                        <!-- wp:group {"className":"slv-product-card","layout":{"type":"default"}} -->
-                        <div class="wp-block-group slv-product-card">
-                            <div class="slv-product-card__media">
-                                <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
-                            </div>
-                            <div class="slv-product-card__body">
-                                <!-- wp:post-title {"level":3,"isLink":true,"className":"slv-product-card__title"} /-->
-                                <!-- wp:post-excerpt {"excerptLength":20,"className":"slv-product-card__desc"} /-->
-                                <div class="slv-product-card__footer">
-                                    <div class="slv-product-card__price">
-                                        <span class="slv-product-card__currency">¥</span>
-                                        <span class="slv-product-card__amount">—</span>
-                                    </div>
-                                    <a href="#" class="slv-product-card__cart-btn" aria-label="加入购物车" data-slv-quick-add>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="8" cy="21" r="1"/>
-                                            <circle cx="19" cy="21" r="1"/>
-                                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /wp:group -->
-                    <!-- /wp:post-template -->
-                </div>
-                <!-- /wp:query -->
-            </div>
+            <!-- 商品网格 —— 由 shortcode 输出 -->
+            <!-- wp:shortcode -->
+            [slv_product_grid]
+            <!-- /wp:shortcode -->
 
             <!-- 底部推荐 -->
             <section class="slv-product-recommend">
                 <h2 class="slv-section__title">你可能还喜欢</h2>
                 <p class="slv-section__subtitle">基于你的浏览历史和兴趣推荐</p>
-                <!-- wp:query {"queryId":11,"query":{"postType":"product","perPage":4,"order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
-                <div class="wp-block-query">
-                    <!-- wp:post-template -->
-                        <!-- wp:group {"className":"slv-product-card slv-product-card--mini","layout":{"type":"default"}} -->
-                        <div class="wp-block-group slv-product-card slv-product-card--mini">
-                            <div class="slv-product-card__media">
-                                <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
-                            </div>
-                            <div class="slv-product-card__body">
-                                <!-- wp:post-title {"level":3,"isLink":true,"className":"slv-product-card__title"} /-->
-                            </div>
-                        </div>
-                        <!-- /wp:group -->
-                    <!-- /wp:post-template -->
-                </div>
-                <!-- /wp:query -->
+                <!-- wp:shortcode -->
+                [slv_product_recommend]
+                <!-- /wp:shortcode -->
             </section>
-
         </div>
     </div>
 

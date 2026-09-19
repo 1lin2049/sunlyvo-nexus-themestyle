@@ -1,18 +1,9 @@
 <?php
 /**
- * SunLyvo Nexus — 最终修复集合 v2.0
- *
- * 修复：
- *   1. 商品归档主查询 —— 所有商品一页显示（无分页）
- *   2. 商品列表计数 —— 用主查询的 found_posts
- *   3. 商品无图占位 —— 居中 SVG，不铺满
- *   4. 单页侧栏 —— 自动注入
- *   5. 相关阅读 —— 修正 HTML 结构
- *   6. Emoji 全局清理
- *   7. 商品分类 REST 端点（供筛选栏 JS 加载）
+ * SunLyvo Nexus — 修复集合 v4.0
  *
  * @package SunLyvo_Nexus
- * @since 3.1.0
+ * @since 4.0.0
  */
 
 declare( strict_types=1 );
@@ -22,14 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ═══════════════════════════════════════════════
-   1. 商品归档 —— 强制一页显示所有商品
+   1. 商品归档 —— 一页显示所有商品
    ═══════════════════════════════════════════════ */
 
 add_action( 'pre_get_posts', function ( $query ) {
     if ( is_admin() || ! $query->is_main_query() ) {
         return;
     }
-
     if ( $query->is_post_type_archive( 'product' ) || $query->is_tax( 'product_cat' ) ) {
         $query->set( 'posts_per_page', 100 );
         $query->set( 'orderby', 'date' );
@@ -38,7 +28,7 @@ add_action( 'pre_get_posts', function ( $query ) {
 }, 5 );
 
 /* ═══════════════════════════════════════════════
-   2. 商品分类 REST 端点（供筛选栏 JS 使用）
+   2. 商品分类 REST 端点
    ═══════════════════════════════════════════════ */
 
 add_action( 'rest_api_init', function (): void {
@@ -46,10 +36,7 @@ add_action( 'rest_api_init', function (): void {
         'methods'             => 'GET',
         'permission_callback' => '__return_true',
         'callback'            => function () {
-            $terms = get_terms( [
-                'taxonomy'   => 'product_cat',
-                'hide_empty' => false,
-            ] );
+            $terms = get_terms( [ 'taxonomy' => 'product_cat', 'hide_empty' => false ] );
             if ( is_wp_error( $terms ) ) {
                 return new WP_REST_Response( [], 200 );
             }
@@ -67,83 +54,299 @@ add_action( 'rest_api_init', function (): void {
 } );
 
 /* ═══════════════════════════════════════════════
-   3. 商品无图占位 —— 居中 SVG，不铺满卡片
+   3. 占位图 —— 网站 Logo 或固定占位图
    ═══════════════════════════════════════════════ */
 
-add_filter( 'post_thumbnail_html', function ( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
-    if ( $html ) {
-        return $html;
+if ( ! function_exists( 'slv_get_placeholder_image_url' ) ) {
+    function slv_get_placeholder_image_url(): string {
+        // 1. 站点 Logo
+        $logo_id = (int) get_theme_mod( 'custom_logo' );
+        if ( $logo_id > 0 ) {
+            $url = wp_get_attachment_image_url( $logo_id, 'medium' );
+            if ( $url ) {
+                return (string) $url;
+            }
+        }
+        // 2. 站点 Icon
+        $icon = get_site_icon_url( 512 );
+        if ( $icon ) {
+            return (string) $icon;
+        }
+        // 3. 主题固定占位图
+        $default = get_template_directory() . '/assets/images/placeholder.svg';
+        if ( file_exists( $default ) ) {
+            return get_template_directory_uri() . '/assets/images/placeholder.svg';
+        }
+        return '';
     }
-    if ( get_post_type( $post_id ) !== 'product' ) {
-        return $html;
+}
+
+if ( ! function_exists( 'slv_render_placeholder_image' ) ) {
+    function slv_render_placeholder_image( string $alt = '' ): string {
+        $url = slv_get_placeholder_image_url();
+        if ( $url === '' ) {
+            return '';
+        }
+        return sprintf(
+            '<div class="slv-product-card__placeholder"><img src="%s" alt="%s" loading="lazy" /></div>',
+            esc_url( $url ),
+            esc_attr( $alt )
+        );
     }
-
-    $product_name = get_the_title( $post_id );
-    $first_char   = mb_substr( wp_strip_all_tags( $product_name ), 0, 1, 'UTF-8' );
-    if ( $first_char === '' ) {
-        $first_char = 'P';
-    }
-
-    // 稳定哈希颜色
-    $hue = abs( crc32( (string) $post_id ) ) % 360;
-
-    // 尺寸：卡片中央小图标，不铺满
-    $svg = '<div class="slv-product-placeholder" style="'
-         . 'display:flex;align-items:center;justify-content:center;'
-         . 'width:100%;height:100%;'
-         . 'background:linear-gradient(135deg,hsl(' . $hue . ',60%,55%),hsl(' . ( ( $hue + 40 ) % 360 ) . ',55%,42%));'
-         . '">';
-    $svg .= '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" style="width:60%;height:60%;max-width:120px;max-height:120px;display:block;opacity:0.95;">';
-    $svg .= '<text x="60" y="80" font-family="-apple-system, PingFang SC, sans-serif" font-size="72" font-weight="800" fill="rgba(255,255,255,0.95)" text-anchor="middle">' . esc_html( $first_char ) . '</text>';
-    $svg .= '</svg>';
-    $svg .= '</div>';
-
-    return $svg;
-}, 10, 5 );
+}
 
 /* ═══════════════════════════════════════════════
-   4. 商品计数 —— 用主查询 found_posts
+   4. 商品卡片渲染
    ═══════════════════════════════════════════════ */
 
-add_action( 'template_redirect', function () {
-    if ( is_admin() ) {
-        return;
+if ( ! function_exists( 'slv_render_product_card' ) ) {
+    function slv_render_product_card( int $post_id, bool $mini = false ): string {
+        $title     = get_the_title( $post_id );
+        $permalink = get_permalink( $post_id );
+        $excerpt   = get_the_excerpt( $post_id );
+        $price     = get_post_meta( $post_id, '_slv_price', true );
+        if ( $price === '' ) {
+            $price = '—';
+        }
+
+        $thumb = get_the_post_thumbnail( $post_id, 'medium', [ 'loading' => 'lazy' ] );
+        if ( ! $thumb ) {
+            $thumb = slv_render_placeholder_image( $title );
+        }
+
+        $card_class = 'slv-product-card' . ( $mini ? ' slv-product-card--mini' : '' );
+
+        ob_start();
+        ?>
+        <article class="<?php echo esc_attr( $card_class ); ?>">
+            <a href="<?php echo esc_url( $permalink ); ?>" class="slv-product-card__media" aria-label="<?php echo esc_attr( $title ); ?>">
+                <?php echo $thumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            </a>
+            <div class="slv-product-card__body">
+                <h3 class="slv-product-card__title">
+                    <a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a>
+                </h3>
+                <?php if ( ! $mini ) : ?>
+                    <p class="slv-product-card__desc"><?php echo esc_html( wp_trim_words( $excerpt, 20 ) ); ?></p>
+                <?php endif; ?>
+                <div class="slv-product-card__footer">
+                    <span class="slv-product-card__price">
+                        <span class="slv-product-card__currency">¥</span>
+                        <span class="slv-product-card__amount"><?php echo esc_html( $price ); ?></span>
+                    </span>
+                    <?php if ( ! $mini ) : ?>
+                        <button type="button" class="slv-product-card__cart-btn" data-slv-quick-add="<?php echo (int) $post_id; ?>" aria-label="加入购物车">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="8" cy="21" r="1"/>
+                                <circle cx="19" cy="21" r="1"/>
+                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                            </svg>
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </article>
+        <?php
+        return ob_get_clean();
     }
-    if ( ! is_post_type_archive( 'product' ) && ! is_tax( 'product_cat' ) ) {
-        return;
+}
+
+/* ═══════════════════════════════════════════════
+   5. Shortcode —— 商品网格
+   ═══════════════════════════════════════════════ */
+
+add_shortcode( 'slv_product_grid', function (): string {
+    global $wp_query;
+
+    if ( ! $wp_query->have_posts() ) {
+        return '<div class="slv-product-empty"><p>暂无商品</p></div>';
     }
 
-    ob_start( function ( $html ) {
-        if ( strpos( $html, 'data-slv-total>—' ) === false ) {
-            return $html;
+    ob_start();
+    echo '<div class="slv-product-grid" data-slv-grid>';
+
+    while ( $wp_query->have_posts() ) {
+        $wp_query->the_post();
+        echo slv_render_product_card( get_the_ID(), false ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+
+    echo '</div>';
+
+    wp_reset_postdata();
+    return ob_get_clean();
+} );
+
+/* ═══════════════════════════════════════════════
+   6. Shortcode —— 推荐商品
+   ═══════════════════════════════════════════════ */
+
+add_shortcode( 'slv_product_recommend', function (): string {
+    $query = new WP_Query( [
+        'post_type'      => 'product',
+        'posts_per_page' => 4,
+        'orderby'        => 'rand',
+        'post_status'    => 'publish',
+        'no_found_rows'  => true,
+    ] );
+
+    if ( ! $query->have_posts() ) {
+        return '';
+    }
+
+    ob_start();
+    echo '<div class="slv-product-grid slv-product-grid--mini">';
+
+    while ( $query->have_posts() ) {
+        $query->the_post();
+        echo slv_render_product_card( get_the_ID(), true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+
+    echo '</div>';
+
+    wp_reset_postdata();
+    return ob_get_clean();
+} );
+
+/* ═══════════════════════════════════════════════
+   7. <title> 修正 —— 移除"归档："前缀
+   ═══════════════════════════════════════════════ */
+
+add_filter( 'document_title_parts', function ( $title ) {
+    if ( is_post_type_archive( 'product' ) ) {
+        $title['title'] = '全部商品';
+    } elseif ( is_post_type_archive() ) {
+        $pt = get_query_var( 'post_type' );
+        if ( $pt ) {
+            $obj = get_post_type_object( $pt );
+            if ( $obj ) {
+                $title['title'] = $obj->labels->name;
+            }
         }
-        global $wp_query;
-        $total = (int) $wp_query->found_posts;
-        return str_replace(
-            'data-slv-total>—<',
-            'data-slv-total>' . $total . '<',
-            $html
-        );
-    } );
+    } elseif ( is_category() || is_tag() || is_tax() ) {
+        $title['title'] = single_term_title( '', false );
+    } elseif ( is_author() ) {
+        $title['title'] = get_the_author();
+    } elseif ( is_post_type_archive() ) {
+        $title['title'] = post_type_archive_title( '', false );
+    }
+    return $title;
+}, PHP_INT_MAX );
+
+/**
+ * JS 兜底 —— 万一 filter 被其它插件覆盖
+ */
+add_action( 'wp_head', function (): void {
+    if ( ! is_archive() ) {
+        return;
+    }
+    ?>
+    <script>
+    (function(){
+        function fix(){
+            var t = document.title;
+            t = t.replace(/^归档[：:]\s*/, '');
+            t = t.replace(/^分类[：:]\s*/, '');
+            t = t.replace(/^标签[：:]\s*/, '');
+            t = t.replace(/^作者[：:]\s*/, '');
+            t = t.replace(/^日期[：:]\s*/, '');
+            t = t.replace(/^Archives?[：:]\s*/i, '');
+            t = t.replace(/^Category[：:]\s*/i, '');
+            t = t.replace(/^Tag[：:]\s*/i, '');
+            t = t.replace(/^Author[：:]\s*/i, '');
+            if (t !== document.title) {
+                document.title = t;
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fix);
+        } else {
+            fix();
+        }
+    })();
+    </script>
+    <?php
 }, 1 );
 
 /* ═══════════════════════════════════════════════
-   5. 单页侧栏 —— 完整侧栏
+   8. 分类筛选 + 视图切换 JS
+   ═══════════════════════════════════════════════ */
+
+add_action( 'wp_footer', function (): void {
+    if ( ! is_post_type_archive( 'product' ) && ! is_tax( 'product_cat' ) ) {
+        return;
+    }
+    $rest_url = esc_url_raw( rest_url( 'slv/v1/product-categories' ) );
+    ?>
+    <script>
+    (function(){
+        /* 分类动态加载 */
+        var list = document.querySelector('[data-slv-filter-categories]');
+        if (list) {
+            fetch(<?php echo wp_json_encode( $rest_url ); ?>)
+                .then(function(r){ return r.json(); })
+                .then(function(cats){
+                    if (!Array.isArray(cats) || cats.length === 0) {
+                        list.innerHTML = '<li class="slv-product-filter__loading">暂无分类</li>';
+                        return;
+                    }
+                    list.innerHTML = cats.map(function(c){
+                        return '<li><label>'
+                            + '<input type="checkbox" name="category" value="' + c.slug + '" /> '
+                            + c.name
+                            + ' <span class="slv-product-filter__count">' + c.count + '</span>'
+                            + '</label></li>';
+                    }).join('');
+                })
+                .catch(function(){
+                    list.innerHTML = '<li class="slv-product-filter__loading">加载失败</li>';
+                });
+        }
+
+        /* 视图切换 */
+        var toolbar = document.querySelector('.slv-product-toolbar__view');
+        var grid    = document.querySelector('[data-slv-grid]');
+        if (toolbar && grid) {
+            toolbar.addEventListener('click', function(e){
+                var btn = e.target.closest('[data-slv-view]');
+                if (!btn) return;
+                var view = btn.getAttribute('data-slv-view');
+
+                toolbar.querySelectorAll('[data-slv-view]').forEach(function(b){
+                    b.classList.toggle('is-active', b === btn);
+                });
+
+                grid.classList.toggle('is-list-view', view === 'list');
+                grid.classList.toggle('is-grid-view', view === 'grid');
+            });
+        }
+
+        /* 筛选组折叠 */
+        document.querySelectorAll('[data-slv-filter-toggle]').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            });
+        });
+    })();
+    </script>
+    <?php
+}, 99 );
+
+/* ═══════════════════════════════════════════════
+   9. 单页侧栏
    ═══════════════════════════════════════════════ */
 
 if ( ! function_exists( 'slv_render_full_sidebar' ) ) {
     function slv_render_full_sidebar( int $post_id, string $type = 'post' ): void {
-        // TOC
         echo '<div class="slv-sidebar-card"><div class="slv-toc" data-slv-toc></div></div>';
 
-        // 作者卡
         if ( $type === 'post' ) {
             $author_id = (int) get_post_field( 'post_author', $post_id );
             $user      = get_userdata( $author_id );
             if ( $user ) {
                 $bio = get_user_meta( $author_id, 'description', true );
                 ?>
-                <div class="slv-sidebar-card slv-author-mini">
+                <div class="slv-sidebar-card">
                     <div class="slv-sidebar-card__title">作者</div>
                     <div style="display:flex;gap:12px;align-items:flex-start;">
                         <div style="width:48px;height:48px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#e5e7eb;">
@@ -165,7 +368,6 @@ if ( ! function_exists( 'slv_render_full_sidebar' ) ) {
             }
         }
 
-        // 热门文章
         $hot = new WP_Query( [
             'post_type'      => $type,
             'posts_per_page' => 5,
@@ -173,6 +375,7 @@ if ( ! function_exists( 'slv_render_full_sidebar' ) ) {
             'order'          => 'DESC',
             'post__not_in'   => [ $post_id ],
             'post_status'    => 'publish',
+            'no_found_rows'  => true,
         ] );
         if ( $hot->have_posts() ) {
             ?>
@@ -180,31 +383,9 @@ if ( ! function_exists( 'slv_render_full_sidebar' ) ) {
                 <div class="slv-sidebar-card__title">热门阅读</div>
                 <ul>
                     <?php while ( $hot->have_posts() ) : $hot->the_post(); ?>
-                        <li>
-                            <a href="<?php the_permalink(); ?>">
-                                <?php echo esc_html( get_the_title() ); ?>
-                            </a>
-                        </li>
+                        <li><a href="<?php the_permalink(); ?>"><?php echo esc_html( get_the_title() ); ?></a></li>
                     <?php endwhile; wp_reset_postdata(); ?>
                 </ul>
-            </div>
-            <?php
-        }
-
-        // 标签
-        $taxonomy = ( $type === 'post' ) ? 'post_tag' : ( ( $type === 'wiki' ) ? 'wiki_cat' : 'post_tag' );
-        $tags     = get_the_terms( $post_id, $taxonomy );
-        if ( $tags && ! is_wp_error( $tags ) ) {
-            ?>
-            <div class="slv-sidebar-card">
-                <div class="slv-sidebar-card__title">标签</div>
-                <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                    <?php foreach ( $tags as $tag ) : ?>
-                        <a href="<?php echo esc_url( get_term_link( $tag ) ); ?>" style="display:inline-block;padding:3px 10px;background:#ffffff;border:1px solid var(--slv-color-border);border-radius:999px;font-size:12px;color:var(--slv-color-text-muted);text-decoration:none;">
-                            <?php echo esc_html( $tag->name ); ?>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
             </div>
             <?php
         }
@@ -212,7 +393,7 @@ if ( ! function_exists( 'slv_render_full_sidebar' ) ) {
 }
 
 /* ═══════════════════════════════════════════════
-   6. 相关阅读 —— 修正 HTML 结构
+   10. 相关阅读
    ═══════════════════════════════════════════════ */
 
 if ( ! function_exists( 'slv_render_related_posts_v2' ) ) {
@@ -237,6 +418,7 @@ if ( ! function_exists( 'slv_render_related_posts_v2' ) ) {
             'post__not_in'   => [ $post_id ],
             'orderby'        => 'rand',
             'post_status'    => 'publish',
+            'no_found_rows'  => true,
         ];
         if ( ! empty( $terms ) ) {
             $args['tax_query'] = [
@@ -250,7 +432,7 @@ if ( ! function_exists( 'slv_render_related_posts_v2' ) ) {
         }
         ?>
         <section class="slv-related">
-            <h2 class="slv-related__title"><?php esc_html_e( '相关阅读', 'sunlyvo-nexus' ); ?></h2>
+            <h2 class="slv-related__title">相关阅读</h2>
             <div class="slv-related__grid">
                 <?php while ( $query->have_posts() ) : $query->the_post(); ?>
                     <article class="slv-related__item">
@@ -273,136 +455,30 @@ if ( ! function_exists( 'slv_render_related_posts_v2' ) ) {
 }
 
 /* ═══════════════════════════════════════════════
-   7. Emoji 全局清理
+   11. Emoji 清理
    ═══════════════════════════════════════════════ */
 
 add_action( 'template_redirect', function () {
     if ( is_admin() ) {
         return;
     }
-
     ob_start( function ( $html ) {
-        $replace_map = [
-            '✅' => '',
-            '❌' => '',
-            '⚠️' => '',
-            '🎉' => '',
-            '🔧' => '',
-            '🔐' => '',
-            '🔄' => '',
-            '🌐' => '',
-            '💾' => '',
-            '🤖' => '',
-            '📖' => '',
-            '🔗' => '',
-            '📨' => '',
-            '🛍️' => '',
-            '🚀' => '',
-            '🔍' => '',
-            '⚙️' => '',
-            '📝' => '',
-            '💡' => '',
-            '⭐' => '',
-            '✨' => '',
-            '👉' => '',
-            '👈' => '',
-            '🎯' => '',
+        $replace = [
+            '✅' => '', '❌' => '', '⚠️' => '', '🎉' => '', '🔧' => '',
+            '🔐' => '', '🔄' => '', '🌐' => '', '💾' => '', '🤖' => '',
+            '📖' => '', '🔗' => '', '📨' => '', '🛍️' => '', '🚀' => '',
+            '🔍' => '', '⚙️' => '', '📝' => '', '💡' => '',
         ];
-
-        // 跳过 script/style 内容
         $parts = preg_split( '/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>)/i', $html, -1, PREG_SPLIT_DELIM_CAPTURE );
         if ( is_array( $parts ) ) {
             foreach ( $parts as $i => $part ) {
                 if ( preg_match( '/^<(script|style)/i', $part ) ) {
                     continue;
                 }
-                $parts[ $i ] = str_replace( array_keys( $replace_map ), array_values( $replace_map ), $part );
+                $parts[ $i ] = str_replace( array_keys( $replace ), array_values( $replace ), $part );
             }
             $html = implode( '', $parts );
         }
-
         return $html;
     } );
 }, 1 );
-
-/* ═══════════════════════════════════════════════
-   8. 筛选栏 JS —— 动态加载分类
-   ═══════════════════════════════════════════════ */
-
-add_action( 'wp_footer', function (): void {
-    if ( ! is_post_type_archive( 'product' ) && ! is_tax( 'product_cat' ) ) {
-        return;
-    }
-    $rest_url = esc_url_raw( rest_url( 'slv/v1/product-categories' ) );
-    ?>
-    <script>
-    (function(){
-        var list = document.querySelector('[data-slv-filter-categories]');
-        if (!list) return;
-        fetch(<?php echo wp_json_encode( $rest_url ); ?>)
-            .then(function(r){ return r.json(); })
-            .then(function(cats){
-                if (!Array.isArray(cats) || cats.length === 0) {
-                    list.innerHTML = '<li style="color:#8b919d;font-size:13px;">暂无分类</li>';
-                    return;
-                }
-                list.innerHTML = cats.map(function(c){
-                    return '<li><label>'
-                        + '<input type="checkbox" name="category" value="' + c.slug + '" /> '
-                        + c.name
-                        + ' <span class="slv-product-filter__count">' + c.count + '</span>'
-                        + '</label></li>';
-                }).join('');
-            })
-            .catch(function(){
-                list.innerHTML = '<li style="color:#8b919d;font-size:13px;">加载失败</li>';
-            });
-    })();
-    </script>
-    <?php
-}, 99 );
-
-/* ═══════════════════════════════════════════════
-   9. 移除归档标题的"归档："前缀
-   ═══════════════════════════════════════════════ */
-
-add_filter( 'document_title_parts', function ( $title ) {
-    // 商品归档
-    if ( is_post_type_archive( 'product' ) ) {
-        $title['title'] = '全部商品';
-    }
-    // 其它 CPT 归档
-    elseif ( is_post_type_archive() ) {
-        $pt = get_query_var( 'post_type' );
-        if ( $pt ) {
-            $obj = get_post_type_object( $pt );
-            if ( $obj ) {
-                $title['title'] = $obj->labels->name;
-            }
-        }
-    }
-    // 分类/标签归档去掉"归档："前缀
-    elseif ( is_category() || is_tag() || is_tax() ) {
-        $title['title'] = single_term_title( '', false );
-    }
-    // 作者归档
-    elseif ( is_author() ) {
-        $title['title'] = get_the_author();
-    }
-    // 日期归档
-    elseif ( is_date() ) {
-        $title['title'] = get_the_archive_title();
-    }
-
-    return $title;
-}, 20 );
-
-/**
- * 兜底：某些主题会直接拼 title，用 pre_get_document_title 更彻底。
- */
-add_filter( 'pre_get_document_title', function ( $title ) {
-    if ( is_post_type_archive( 'product' ) ) {
-        return '全部商品 - ' . get_bloginfo( 'name' );
-    }
-    return $title;
-}, 20 );
