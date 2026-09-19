@@ -1532,3 +1532,500 @@ html[data-theme="dark"] .slv-product-recommend {
         flex-wrap: wrap;
     }
 }
+
+/* ═══════════════════════════════════════════════
+   12. 商品归档 v3 —— 强制修复
+   ═══════════════════════════════════════════════ */
+
+/* 关键：解除 WP is-layout-constrained 对卡片内元素的宽度限制 */
+.slv-product-grid .wp-block-post-template > li,
+.slv-product-recommend .wp-block-post-template > li,
+.slv-product-card,
+.slv-product-card__body,
+.slv-product-card__title,
+.slv-product-card__desc,
+.slv-product-card__footer {
+    max-width: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 商品网格 3 列 */
+.slv-product-list__main .slv-product-grid > .wp-block-query,
+.slv-product-list__main .slv-product-grid .wp-block-post-template,
+.slv-product-list__main .slv-product-grid ul.wp-block-post-template {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.slv-product-list__main .slv-product-grid .wp-block-post-template > li {
+    display: flex !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.slv-product-list__main .slv-product-grid .wp-block-post-template > li > * {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* 商品卡片 */
+.slv-product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.2s !important;
+}
+
+.slv-product-card:hover {
+    border-color: #0056d6 !important;
+    box-shadow: 0 8px 24px rgba(0, 86, 214, 0.12) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* 商品卡片媒体区 */
+.slv-product-card__media,
+.slv-product-card .wp-block-post-featured-image {
+    aspect-ratio: 1 / 1 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    background: linear-gradient(135deg, #f8f9fa, #f0f2f5) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}
+
+.slv-product-card__media img,
+.slv-product-card .wp-block-post-featured-image img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+/* 商品卡片 body —— 关键修复 */
+.slv-product-card__body {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    padding: 18px 20px 20px !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+}
+
+/* 商品标题 —— 关键修复：清晰可见 */
+.slv-product-card__title,
+.slv-product-card .wp-block-post-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.45 !important;
+    letter-spacing: -0.01em !important;
+    color: #1a1d21 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    max-height: 2.9em !important;
+    min-height: 2.9em !important;
+}
+
+.slv-product-card__title a,
+.slv-product-card .wp-block-post-title a {
+    color: inherit !important;
+    text-decoration: none !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.slv-product-card__title a:hover,
+.slv-product-card .wp-block-post-title a:hover {
+    color: #0056d6 !important;
+}
+
+/* 商品描述 */
+.slv-product-card__desc,
+.slv-product-card .wp-block-post-excerpt {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    color: #5c6370 !important;
+    word-break: break-word !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    max-height: 3.2em !important;
+    min-height: 3.2em !important;
+    flex-grow: 0 !important;
+}
+
+.slv-product-card__desc p,
+.slv-product-card .wp-block-post-excerpt p {
+    margin: 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+}
+
+/* 商品卡片底部 —— 价格 + 加购 */
+.slv-product-card__footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    margin-top: auto !important;
+    padding-top: 14px !important;
+    border-top: 1px solid #f0f2f5 !important;
+}
+
+.slv-product-card__price {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 2px !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #ff5c33 !important;
+    letter-spacing: -0.01em !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.slv-product-card__currency {
+    font-size: 14px !important;
+}
+
+.slv-product-card__amount {
+    font-size: 20px !important;
+}
+
+.slv-product-card__cart-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    background: #0056d6 !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    flex-shrink: 0 !important;
+    transition: all 0.15s !important;
+    border: none !important;
+}
+
+.slv-product-card__cart-btn:hover {
+    background: #0047b3 !important;
+    transform: scale(1.06) !important;
+}
+
+/* 商品卡片占位图 —— 居中 */
+.slv-product-placeholder {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.slv-product-placeholder svg {
+    width: 55% !important;
+    height: 55% !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+}
+
+/* ═══════════════════════════════════════════════
+   13. 工具栏视图按钮 —— 修复
+   ═══════════════════════════════════════════════ */
+
+.slv-product-toolbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 18px !important;
+    background: #f8f9fa !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 10px !important;
+    margin-bottom: 24px !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+}
+
+.slv-product-toolbar__left,
+.slv-product-toolbar__right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.slv-product-toolbar__view {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 2px !important;
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+}
+
+.slv-view-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 6px !important;
+    color: #5c6370 !important;
+    cursor: pointer !important;
+    transition: all 0.15s !important;
+    flex-shrink: 0 !important;
+}
+
+.slv-view-btn svg {
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    pointer-events: none !important;
+}
+
+.slv-view-btn:hover {
+    color: #1a1d21 !important;
+    background: #f0f2f5 !important;
+}
+
+.slv-view-btn.is-active {
+    background: #0056d6 !important;
+    color: #ffffff !important;
+}
+
+.slv-view-btn.is-active:hover {
+    background: #0047b3 !important;
+    color: #ffffff !important;
+}
+
+/* 排序下拉 */
+.slv-product-toolbar__sort {
+    padding: 8px 32px 8px 14px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    background-color: #ffffff !important;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235c6370' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    background-size: 12px !important;
+    color: #1a1d21 !important;
+    cursor: pointer !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    min-width: 130px !important;
+}
+
+.slv-product-toolbar__count {
+    font-size: 13px !important;
+    color: #5c6370 !important;
+}
+
+.slv-product-toolbar__count strong {
+    color: #1a1d21 !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    margin: 0 2px !important;
+}
+
+/* ═══════════════════════════════════════════════
+   14. 底部推荐 —— 4 列 mini 卡
+   ═══════════════════════════════════════════════ */
+
+.slv-product-recommend {
+    margin-top: 80px !important;
+    padding-top: 56px !important;
+    border-top: 1px solid #e5e7eb !important;
+}
+
+.slv-product-recommend .slv-section__title {
+    text-align: left !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    margin: 0 0 6px !important;
+    color: #1a1d21 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.slv-product-recommend .slv-section__subtitle {
+    text-align: left !important;
+    font-size: 14px !important;
+    color: #5c6370 !important;
+    margin: 0 0 28px !important;
+}
+
+.slv-product-recommend .wp-block-query,
+.slv-product-recommend .wp-block-post-template,
+.slv-product-recommend ul.wp-block-post-template {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.slv-product-recommend .wp-block-post-template > li {
+    display: flex !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.slv-product-recommend .wp-block-post-template > li > * {
+    width: 100% !important;
+}
+
+.slv-product-card--mini .slv-product-card__body {
+    padding: 14px 16px 16px !important;
+    gap: 8px !important;
+}
+
+.slv-product-card--mini .slv-product-card__title,
+.slv-product-card--mini .wp-block-post-title {
+    font-size: 14px !important;
+    -webkit-line-clamp: 2 !important;
+    max-height: 2.9em !important;
+    min-height: 2.9em !important;
+    font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════════════
+   15. 深色模式
+   ═══════════════════════════════════════════════ */
+
+html[data-theme="dark"] .slv-product-card {
+    background: #12151b !important;
+    border-color: #262c36 !important;
+}
+
+html[data-theme="dark"] .slv-product-card__title,
+html[data-theme="dark"] .slv-product-card .wp-block-post-title {
+    color: #e8ecf1 !important;
+}
+
+html[data-theme="dark"] .slv-product-card__title a:hover {
+    color: #4d94ff !important;
+}
+
+html[data-theme="dark"] .slv-product-card__desc,
+html[data-theme="dark"] .slv-product-card .wp-block-post-excerpt {
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-product-card__footer {
+    border-top-color: #262c36 !important;
+}
+
+html[data-theme="dark"] .slv-product-toolbar {
+    background: #12151b !important;
+    border-color: #262c36 !important;
+}
+
+html[data-theme="dark"] .slv-product-toolbar__view {
+    background: #1a1e26 !important;
+    border-color: #262c36 !important;
+}
+
+html[data-theme="dark"] .slv-view-btn {
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-view-btn:hover {
+    color: #e8ecf1 !important;
+    background: #262c36 !important;
+}
+
+html[data-theme="dark"] .slv-view-btn.is-active {
+    background: #4d94ff !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .slv-product-toolbar__sort {
+    background-color: #1a1e26 !important;
+    border-color: #262c36 !important;
+    color: #e8ecf1 !important;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ba3b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+}
+
+html[data-theme="dark"] .slv-product-toolbar__count {
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-product-toolbar__count strong {
+    color: #e8ecf1 !important;
+}
+
+html[data-theme="dark"] .slv-product-recommend {
+    border-top-color: #262c36 !important;
+}
+
+html[data-theme="dark"] .slv-product-recommend .slv-section__title {
+    color: #e8ecf1 !important;
+}
+
+html[data-theme="dark"] .slv-product-recommend .slv-section__subtitle {
+    color: #9ba3b0 !important;
+}
+
+html[data-theme="dark"] .slv-product-card__media,
+html[data-theme="dark"] .slv-product-card .wp-block-post-featured-image {
+    background: linear-gradient(135deg, #12151b, #1a1e26) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   16. 响应式
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .slv-product-list__main .slv-product-grid .wp-block-post-template {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    .slv-product-recommend .wp-block-post-template {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .slv-product-list__main .slv-product-grid .wp-block-post-template,
+    .slv-product-recommend .wp-block-post-template {
+        grid-template-columns: 1fr !important;
+    }
+    .slv-product-toolbar {
+        padding: 10px 12px !important;
+    }
+    .slv-product-toolbar__right {
+        gap: 8px !important;
+    }
+}

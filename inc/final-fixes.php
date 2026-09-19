@@ -361,3 +361,48 @@ add_action( 'wp_footer', function (): void {
     </script>
     <?php
 }, 99 );
+
+/* ═══════════════════════════════════════════════
+   9. 移除归档标题的"归档："前缀
+   ═══════════════════════════════════════════════ */
+
+add_filter( 'document_title_parts', function ( $title ) {
+    // 商品归档
+    if ( is_post_type_archive( 'product' ) ) {
+        $title['title'] = '全部商品';
+    }
+    // 其它 CPT 归档
+    elseif ( is_post_type_archive() ) {
+        $pt = get_query_var( 'post_type' );
+        if ( $pt ) {
+            $obj = get_post_type_object( $pt );
+            if ( $obj ) {
+                $title['title'] = $obj->labels->name;
+            }
+        }
+    }
+    // 分类/标签归档去掉"归档："前缀
+    elseif ( is_category() || is_tag() || is_tax() ) {
+        $title['title'] = single_term_title( '', false );
+    }
+    // 作者归档
+    elseif ( is_author() ) {
+        $title['title'] = get_the_author();
+    }
+    // 日期归档
+    elseif ( is_date() ) {
+        $title['title'] = get_the_archive_title();
+    }
+
+    return $title;
+}, 20 );
+
+/**
+ * 兜底：某些主题会直接拼 title，用 pre_get_document_title 更彻底。
+ */
+add_filter( 'pre_get_document_title', function ( $title ) {
+    if ( is_post_type_archive( 'product' ) ) {
+        return '全部商品 - ' . get_bloginfo( 'name' );
+    }
+    return $title;
+}, 20 );

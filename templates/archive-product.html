@@ -23,16 +23,20 @@
             <div class="slv-product-filter__header">
                 <h2 class="slv-product-filter__title">筛选</h2>
                 <button type="button" class="slv-product-filter__clear" data-slv-filter-clear>
-                    <svg class="slv-icon" width="14" height="14" aria-hidden="true"><use href="#slv-icon-x"></use></svg>
+                    <svg class="slv-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M18 6 6 18M6 6l12 12"/>
+                    </svg>
                     清空
                 </button>
             </div>
 
-            <!-- 分类（JS 动态加载） -->
+            <!-- 分类 -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>分类</span>
-                    <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-chevron-down"></use></svg>
+                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <ul class="slv-product-filter__list" data-slv-filter-categories>
@@ -45,7 +49,9 @@
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>价格</span>
-                    <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-chevron-down"></use></svg>
+                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__price">
@@ -61,7 +67,9 @@
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>标签</span>
-                    <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-chevron-down"></use></svg>
+                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <div class="slv-product-filter__tags">
@@ -77,19 +85,21 @@
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>评分</span>
-                    <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-chevron-down"></use></svg>
+                    <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
                 </button>
                 <div class="slv-product-filter__group-body">
                     <ul class="slv-product-filter__list slv-product-filter__list--rating">
                         <li>
                             <label>
                                 <input type="radio" name="rating" value="4" />
-                                <span class="slv-stars">
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon" width="12" height="12"><use href="#slv-icon-star"></use></svg>
+                                <span class="slv-stars" aria-hidden="true">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
                                 </span>
                                 4 星以上
                             </label>
@@ -97,12 +107,12 @@
                         <li>
                             <label>
                                 <input type="radio" name="rating" value="3" />
-                                <span class="slv-stars">
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon slv-icon--filled" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon" width="12" height="12"><use href="#slv-icon-star"></use></svg>
-                                    <svg class="slv-icon" width="12" height="12"><use href="#slv-icon-star"></use></svg>
+                                <span class="slv-stars" aria-hidden="true">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7c.1.2.3.4.6.4l5.2.8c.5 0 .7.6.3.9l-3.7 3.6c-.2.2-.3.4-.2.7l.9 5.1c.1.5-.4.8-.8.6l-4.6-2.4a.7.7 0 0 0-.7 0l-4.6 2.4c-.4.2-.9-.1-.8-.6l.9-5.1c0-.3 0-.5-.2-.7L2.2 9.1c-.4-.3-.2-.9.3-.9l5.2-.8c.2 0 .4-.2.6-.4z"/></svg>
                                 </span>
                                 3 星以上
                             </label>
@@ -119,7 +129,9 @@
             <div class="slv-product-toolbar">
                 <div class="slv-product-toolbar__left">
                     <button type="button" class="slv-product-toolbar__filter-btn" data-slv-filter-open>
-                        <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-filter"></use></svg>
+                        <svg class="slv-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                        </svg>
                         筛选
                     </button>
                     <span class="slv-product-toolbar__count">共 <strong data-slv-total>5</strong> 件商品</span>
@@ -135,16 +147,28 @@
                     </select>
                     <div class="slv-product-toolbar__view">
                         <button type="button" class="slv-view-btn is-active" data-slv-view="grid" aria-label="网格视图">
-                            <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-grid"></use></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect width="7" height="7" x="3" y="3" rx="1"/>
+                                <rect width="7" height="7" x="14" y="3" rx="1"/>
+                                <rect width="7" height="7" x="14" y="14" rx="1"/>
+                                <rect width="7" height="7" x="3" y="14" rx="1"/>
+                            </svg>
                         </button>
                         <button type="button" class="slv-view-btn" data-slv-view="list" aria-label="列表视图">
-                            <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-list"></use></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="8" x2="21" y1="6" y2="6"/>
+                                <line x1="8" x2="21" y1="12" y2="12"/>
+                                <line x1="8" x2="21" y1="18" y2="18"/>
+                                <line x1="3" x2="3.01" y1="6" y2="6"/>
+                                <line x1="3" x2="3.01" y1="12" y2="12"/>
+                                <line x1="3" x2="3.01" y1="18" y2="18"/>
+                            </svg>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 商品网格（继承主查询，不再单独分页） -->
+            <!-- 商品网格 -->
             <div class="slv-product-grid">
                 <!-- wp:query {"queryId":10,"query":{"inherit":true},"layout":{"type":"default"}} -->
                 <div class="wp-block-query">
@@ -163,7 +187,11 @@
                                         <span class="slv-product-card__amount">—</span>
                                     </div>
                                     <a href="#" class="slv-product-card__cart-btn" aria-label="加入购物车" data-slv-quick-add>
-                                        <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-shopping-cart"></use></svg>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="8" cy="21" r="1"/>
+                                            <circle cx="19" cy="21" r="1"/>
+                                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                                        </svg>
                                     </a>
                                 </div>
                             </div>
