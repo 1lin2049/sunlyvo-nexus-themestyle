@@ -1,8 +1,14 @@
 <!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
 
 <main class="slv-archive">
-    <!-- wp:query-title {"type":"archive","className":"slv-archive__title"} /-->
-    <!-- wp:term-description /-->
+    <!-- wp:group {"className":"slv-archive__header","layout":{"type":"default"}} -->
+    <div class="wp-block-group slv-archive__header">
+        <!-- wp:heading {"level":1,"className":"slv-archive__title"} -->
+        <h1 class="slv-archive__title">分类：<span class="slv-archive__term"><!-- wp:query-title {"type":"archive","showPrefix":false} /--></span></h1>
+        <!-- /wp:heading -->
+        <!-- wp:term-description {"className":"slv-archive__desc"} /-->
+    </div>
+    <!-- /wp:group -->
 
     <!-- wp:group {"className":"slv-archive__grid","layout":{"type":"default"}} -->
     <div class="wp-block-group slv-archive__grid">
