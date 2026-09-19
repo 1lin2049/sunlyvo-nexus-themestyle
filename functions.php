@@ -43,6 +43,7 @@ $slv_core_files = [
     'inc/enqueue.php',
     'inc/helpers.php',
     'inc/helpers-icon.php',
+    'inc/sprite-inject.php',
     'inc/security.php',
     'inc/performance.php',
     'inc/admin-bar.php',

@@ -1,0 +1,29 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<main class="slv-archive slv-archive-post">
+    <!-- wp:heading {"level":1,"className":"slv-archive__title"} -->
+    <h1 class="slv-archive__title">博客</h1>
+    <!-- /wp:heading -->
+
+    <!-- wp:group {"className":"slv-archive__grid","layout":{"type":"default"}} -->
+    <div class="wp-block-group slv-archive__grid">
+        <!-- wp:query {"queryId":2201,"query":{"postType":"post","perPage":12,"order":"desc","orderBy":"date"},"layout":{"type":"default"}} -->
+        <div class="wp-block-query">
+            <!-- wp:post-template -->
+                <!-- wp:group {"className":"slv-card slv-archive__item","layout":{"type":"default"}} -->
+                <div class="wp-block-group slv-card slv-archive__item">
+                    <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9"} /-->
+                    <!-- wp:post-title {"level":3,"isLink":true} /-->
+                    <!-- wp:post-excerpt {"excerptLength":24} /-->
+                    <!-- wp:post-date {"format":"Y-m-d"} /-->
+                </div>
+                <!-- /wp:group -->
+            <!-- /wp:post-template -->
+            <!-- wp:query-pagination /-->
+        </div>
+        <!-- /wp:query -->
+    </div>
+    <!-- /wp:group -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->
