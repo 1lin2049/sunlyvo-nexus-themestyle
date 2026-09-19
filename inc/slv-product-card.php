@@ -1,9 +1,9 @@
 <?php
 /**
- * SunLyvo Nexus — 商品卡片（多图轮播）
+ * SunLyvo Nexus — 商品卡片（Swiper 集成）
  *
  * @package SunLyvo_Nexus
- * @since 6.0.0
+ * @since 7.0.0
  */
 
 declare( strict_types=1 );
@@ -55,60 +55,56 @@ if ( ! function_exists( 'slv_render_product_card' ) ) {
         $price     = ( $price === '' || $price === false ) ? '0.00' : number_format( (float) $price, 2, '.', '' );
 
         $images = slv_get_product_images( $post_id );
-        $has_multiple = count( $images ) > 1;
+        $image_count = count( $images );
+        $has_multiple = $image_count > 1;
+
+        // Swiper 唯一 ID
+        $swiper_id = 'slv-swiper-' . $post_id . '-' . wp_rand( 1000, 9999 );
 
         ob_start();
         ?>
-        <article class="slv-product-card<?php echo $has_multiple ? ' has-multiple-images' : ''; ?>" data-product-id="<?php echo (int) $post_id; ?>">
+        <article class="slv-product-card<?php echo $has_multiple ? ' has-multiple-images' : ''; ?>"
+                 data-product-id="<?php echo (int) $post_id; ?>">
 
             <div class="slv-product-card__media-wrap">
-                <a href="<?php echo esc_url( $permalink ); ?>" class="slv-product-card__media" aria-label="<?php echo esc_attr( $title ); ?>" data-slv-carousel>
-                    <?php if ( ! empty( $images ) ) : ?>
-                        <?php foreach ( $images as $i => $img_id ) : ?>
-                            <?php
-                            $img_url = wp_get_attachment_image_url( $img_id, 'large' );
-                            if ( ! $img_url ) continue;
-                            ?>
-                            <div class="slv-product-card__slide<?php echo $i === 0 ? ' is-active' : ''; ?>" data-slv-slide="<?php echo (int) $i; ?>">
-                                <img src="<?php echo esc_url( $img_url ); ?>"
-                                     alt="<?php echo esc_attr( $title ); ?>"
-                                     loading="<?php echo $i === 0 ? 'eager' : 'lazy'; ?>"
-                                     data-slv-img />
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else : ?>
-                        <?php $placeholder = slv_get_product_placeholder_url(); ?>
-                        <?php if ( $placeholder ) : ?>
-                            <div class="slv-product-card__slide is-active">
-                                <div class="slv-product-card__placeholder">
-                                    <img src="<?php echo esc_url( $placeholder ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy" />
+
+                <?php if ( $image_count > 0 ) : ?>
+                    <!-- Swiper 容器 -->
+                    <div class="swiper slv-product-card__swiper" id="<?php echo esc_attr( $swiper_id ); ?>">
+                        <div class="swiper-wrapper">
+                            <?php foreach ( $images as $i => $img_id ) : ?>
+                                <?php
+                                $img_url = wp_get_attachment_image_url( $img_id, 'large' );
+                                if ( ! $img_url ) continue;
+                                ?>
+                                <div class="swiper-slide slv-product-card__slide">
+                                    <a href="<?php echo esc_url( $permalink ); ?>" class="slv-product-card__slide-link" aria-label="<?php echo esc_attr( $title ); ?>">
+                                        <img src="<?php echo esc_url( $img_url ); ?>"
+                                             alt="<?php echo esc_attr( $title ); ?>"
+                                             loading="<?php echo $i === 0 ? 'eager' : 'lazy'; ?>" />
+                                    </a>
                                 </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <?php if ( $has_multiple ) : ?>
+                            <div class="swiper-pagination slv-product-card__pagination"></div>
+                            <button type="button" class="swiper-button-prev slv-product-card__nav slv-product-card__nav--prev" aria-label="上一张"></button>
+                            <button type="button" class="swiper-button-next slv-product-card__nav slv-product-card__nav--next" aria-label="下一张"></button>
+                        <?php endif; ?>
+                    </div>
+
+                <?php else : ?>
+                    <?php $placeholder = slv_get_product_placeholder_url(); ?>
+                    <a href="<?php echo esc_url( $permalink ); ?>" class="slv-product-card__media" aria-label="<?php echo esc_attr( $title ); ?>">
+                        <?php if ( $placeholder ) : ?>
+                            <div class="slv-product-card__placeholder">
+                                <img src="<?php echo esc_url( $placeholder ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy" />
                             </div>
                         <?php endif; ?>
-                    <?php endif; ?>
-                </a>
-
-                <?php if ( $has_multiple ) : ?>
-                    <!-- 左箭头 -->
-                    <button type="button" class="slv-product-card__nav slv-product-card__nav--prev" aria-label="上一张" data-slv-carousel-prev>
-                        <?php echo slv_icon( 'chevron-left', 16 ); ?>
-                    </button>
-
-                    <!-- 右箭头 -->
-                    <button type="button" class="slv-product-card__nav slv-product-card__nav--next" aria-label="下一张" data-slv-carousel-next>
-                        <?php echo slv_icon( 'chevron-right', 16 ); ?>
-                    </button>
-
-                    <!-- 圆点 -->
-                    <div class="slv-product-card__dots" data-slv-carousel-dots>
-                        <?php foreach ( $images as $i => $img_id ) : ?>
-                            <button type="button"
-                                    class="slv-product-card__dot<?php echo $i === 0 ? ' is-active' : ''; ?>"
-                                    data-slv-dot="<?php echo (int) $i; ?>"
-                                    aria-label="第 <?php echo (int) ( $i + 1 ); ?> 张"></button>
-                        <?php endforeach; ?>
-                    </div>
+                    </a>
                 <?php endif; ?>
+
             </div>
 
             <div class="slv-product-card__body">
@@ -127,7 +123,7 @@ if ( ! function_exists( 'slv_render_product_card' ) ) {
                     </span>
                     <?php if ( ! $mini ) : ?>
                         <button type="button" class="slv-product-card__cart-btn" data-slv-quick-add="<?php echo (int) $post_id; ?>" aria-label="加入购物车">
-                            <?php echo slv_icon( 'cart', 16 ); ?>
+                            <?php slv_icon_e( 'cart', 16 ); ?>
                         </button>
                     <?php endif; ?>
                 </div>

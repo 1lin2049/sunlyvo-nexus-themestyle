@@ -1,110 +1,84 @@
 /**
- * SunLyvo Nexus — 商品卡多图轮播
+ * SunLyvo Nexus — 商品卡多图轮播（Swiper 封装）
  *
- * 参考 Ant Design Carousel 交互规范：
- *   1. 悬停显示左右箭头 + 圆点
- *   2. 点击箭头/圆点切换
- *   3. 移动端支持滑动
+ * 依赖：Swiper 11（由 enqueue.php 加载）
  *
  * @package SunLyvo_Nexus
- * @since 6.0.0
+ * @since 7.0.0
  */
 
 (function () {
     'use strict';
 
-    function initCarousel(card) {
-        var slides = card.querySelectorAll('[data-slv-slide]');
-        var dots = card.querySelectorAll('[data-slv-dot]');
-        var prev = card.querySelector('[data-slv-carousel-prev]');
-        var next = card.querySelector('[data-slv-carousel-next]');
-        if (slides.length <= 1) return;
-
-        var current = 0;
-
-        function goTo(index) {
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
-            current = index;
-
-            slides.forEach(function (slide, i) {
-                slide.classList.toggle('is-active', i === current);
-            });
-            dots.forEach(function (dot, i) {
-                dot.classList.toggle('is-active', i === current);
-            });
+    function initProductSwipers() {
+        if (typeof Swiper === 'undefined') {
+            console.warn('[SunLyvo] Swiper 未加载');
+            return;
         }
 
-        if (prev) {
-            prev.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                goTo(current - 1);
-            });
-        }
-        if (next) {
-            next.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                goTo(current + 1);
-            });
-        }
-        dots.forEach(function (dot, i) {
-            dot.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                goTo(i);
+        document.querySelectorAll('.slv-product-card__swiper').forEach(function (el) {
+            // 避免重复初始化
+            if (el.dataset.swiperInitialized === '1') return;
+            el.dataset.swiperInitialized = '1';
+
+            var slideCount = el.querySelectorAll('.swiper-slide').length;
+            if (slideCount <= 1) return;
+
+            new Swiper(el, {
+                loop: false,
+                speed: 300,
+                spaceBetween: 0,
+                watchSlidesProgress: true,
+                // 圆点
+                pagination: {
+                    el: el.querySelector('.slv-product-card__pagination'),
+                    clickable: true,
+                    bulletClass: 'slv-product-card__dot',
+                    bulletActiveClass: 'slv-product-card__dot--active',
+                },
+                // 箭头
+                navigation: {
+                    nextEl: el.querySelector('.slv-product-card__nav--next'),
+                    prevEl: el.querySelector('.slv-product-card__nav--prev'),
+                    disabledClass: 'slv-product-card__nav--disabled',
+                },
+                // 移动端滑动
+                touchRatio: 1,
+                simulateTouch: true,
+                grabCursor: false,
+                // 阻止卡片的 <a> 链接在滑动时被误触
+                preventClicks: true,
+                preventClicksPropagation: true,
+                // 无障碍
+                a11y: {
+                    enabled: true,
+                    prevSlideMessage: '上一张',
+                    nextSlideMessage: '下一张',
+                },
             });
         });
-
-        // 移动端滑动
-        var startX = 0, startY = 0, isDown = false;
-        var media = card.querySelector('.slv-product-card__media');
-        if (media) {
-            media.addEventListener('touchstart', function (e) {
-                if (e.touches.length !== 1) return;
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                isDown = true;
-            }, { passive: true });
-
-            media.addEventListener('touchend', function (e) {
-                if (!isDown) return;
-                isDown = false;
-                var endX = e.changedTouches[0].clientX;
-                var endY = e.changedTouches[0].clientY;
-                var dx = endX - startX;
-                var dy = endY - startY;
-                if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-                    if (dx < 0) goTo(current + 1);
-                    else goTo(current - 1);
-                }
-            }, { passive: true });
-        }
-    }
-
-    function initAll() {
-        document.querySelectorAll('.slv-product-card.has-multiple-images').forEach(initCarousel);
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
+        document.addEventListener('DOMContentLoaded', initProductSwipers);
     } else {
-        initAll();
+        initProductSwipers();
     }
 
-    // 兼容动态插入（如筛选后重新渲染）
+    // 动态插入时重新初始化
     var observer = new MutationObserver(function (mutations) {
+        var shouldInit = false;
         mutations.forEach(function (m) {
             m.addedNodes.forEach(function (node) {
-                if (node.nodeType === 1) {
-                    if (node.classList && node.classList.contains('slv-product-card')) {
-                        initCarousel(node);
-                    }
-                    node.querySelectorAll && node.querySelectorAll('.slv-product-card.has-multiple-images').forEach(initCarousel);
+                if (node.nodeType === 1 && (
+                    node.classList?.contains('slv-product-card__swiper') ||
+                    node.querySelector?.('.slv-product-card__swiper')
+                )) {
+                    shouldInit = true;
                 }
             });
         });
+        if (shouldInit) initProductSwipers();
     });
     observer.observe(document.body, { childList: true, subtree: true });
 })();
