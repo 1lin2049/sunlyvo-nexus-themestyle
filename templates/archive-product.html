@@ -28,55 +28,15 @@
                 </button>
             </div>
 
-            <!-- 分类 -->
+            <!-- 分类（JS 动态加载） -->
             <div class="slv-product-filter__group">
                 <button type="button" class="slv-product-filter__group-title" data-slv-filter-toggle aria-expanded="true">
                     <span>分类</span>
                     <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-chevron-down"></use></svg>
                 </button>
                 <div class="slv-product-filter__group-body">
-                    <ul class="slv-product-filter__list">
-                        <?php
-                        $product_cats = get_terms( [
-                            'taxonomy'   => 'product_cat',
-                            'hide_empty' => false,
-                        ] );
-                        if ( ! is_wp_error( $product_cats ) && ! empty( $product_cats ) ) :
-                            foreach ( $product_cats as $cat ) :
-                        ?>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="<?php echo esc_attr( $cat->slug ); ?>" />
-                                    <?php echo esc_html( $cat->name ); ?>
-                                    <span class="slv-product-filter__count"><?php echo (int) $cat->count; ?></span>
-                                </label>
-                            </li>
-                        <?php
-                            endforeach;
-                        else :
-                        ?>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="software" />
-                                    软件产品
-                                    <span class="slv-product-filter__count">3</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="plugin" />
-                                    插件工具
-                                    <span class="slv-product-filter__count">2</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="service" />
-                                    服务
-                                    <span class="slv-product-filter__count">1</span>
-                                </label>
-                            </li>
-                        <?php endif; ?>
+                    <ul class="slv-product-filter__list" data-slv-filter-categories>
+                        <li class="slv-product-filter__loading">加载中...</li>
                     </ul>
                 </div>
             </div>
@@ -150,11 +110,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- 移动端关闭按钮 -->
-            <button type="button" class="slv-product-filter__mobile-close" data-slv-filter-close aria-label="关闭筛选">
-                <svg class="slv-icon" width="20" height="20" aria-hidden="true"><use href="#slv-icon-x"></use></svg>
-            </button>
         </aside>
 
         <!-- 商品网格区 -->
@@ -167,7 +122,7 @@
                         <svg class="slv-icon" width="16" height="16" aria-hidden="true"><use href="#slv-icon-filter"></use></svg>
                         筛选
                     </button>
-                    <span class="slv-product-toolbar__count">共 <strong data-slv-total>—</strong> 件商品</span>
+                    <span class="slv-product-toolbar__count">共 <strong data-slv-total>5</strong> 件商品</span>
                 </div>
                 <div class="slv-product-toolbar__right">
                     <select class="slv-product-toolbar__sort" data-slv-sort aria-label="排序">
@@ -189,18 +144,15 @@
                 </div>
             </div>
 
-            <!-- 商品网格 -->
+            <!-- 商品网格（继承主查询，不再单独分页） -->
             <div class="slv-product-grid">
-                <!-- wp:query {"queryId":10,"query":{"postType":"product","perPage":12,"order":"desc","orderBy":"date"},"layout":{"type":"default"}} -->
+                <!-- wp:query {"queryId":10,"query":{"inherit":true},"layout":{"type":"default"}} -->
                 <div class="wp-block-query">
                     <!-- wp:post-template -->
                         <!-- wp:group {"className":"slv-product-card","layout":{"type":"default"}} -->
                         <div class="wp-block-group slv-product-card">
                             <div class="slv-product-card__media">
                                 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
-                                <div class="slv-product-card__badges">
-                                    <span class="slv-product-card__badge slv-product-card__badge--hot">热销</span>
-                                </div>
                             </div>
                             <div class="slv-product-card__body">
                                 <!-- wp:post-title {"level":3,"isLink":true,"className":"slv-product-card__title"} /-->
@@ -222,54 +174,30 @@
                 <!-- /wp:query -->
             </div>
 
-            <!-- 无结果状态 -->
-            <div class="slv-product-empty" data-slv-empty hidden>
-                <svg class="slv-icon" width="64" height="64" aria-hidden="true"><use href="#slv-icon-package"></use></svg>
-                <p>没有找到符合条件的商品</p>
-                <button type="button" class="slv-button slv-button--secondary" data-slv-filter-clear>清空筛选条件</button>
-            </div>
-
-            <!-- 分页 -->
-            <div class="slv-product-pagination">
-                <!-- wp:query-pagination {"paginationArrow":"chevron","showArrow":true,"layout":{"type":"flex","justifyContent":"center"}} -->
-                    <!-- wp:query-pagination-previous /-->
-                    <!-- wp:query-pagination-numbers /-->
-                    <!-- wp:query-pagination-next /-->
-                <!-- /wp:query-pagination -->
-            </div>
+            <!-- 底部推荐 -->
+            <section class="slv-product-recommend">
+                <h2 class="slv-section__title">你可能还喜欢</h2>
+                <p class="slv-section__subtitle">基于你的浏览历史和兴趣推荐</p>
+                <!-- wp:query {"queryId":11,"query":{"postType":"product","perPage":4,"order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
+                <div class="wp-block-query">
+                    <!-- wp:post-template -->
+                        <!-- wp:group {"className":"slv-product-card slv-product-card--mini","layout":{"type":"default"}} -->
+                        <div class="wp-block-group slv-product-card slv-product-card--mini">
+                            <div class="slv-product-card__media">
+                                <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
+                            </div>
+                            <div class="slv-product-card__body">
+                                <!-- wp:post-title {"level":3,"isLink":true,"className":"slv-product-card__title"} /-->
+                            </div>
+                        </div>
+                        <!-- /wp:group -->
+                    <!-- /wp:post-template -->
+                </div>
+                <!-- /wp:query -->
+            </section>
 
         </div>
     </div>
-
-    <!-- ═══ 底部推荐 ═══ -->
-    <section class="slv-product-recommend">
-        <div class="slv-product-recommend__inner">
-            <h2 class="slv-section__title">你可能还喜欢</h2>
-            <p class="slv-section__subtitle">基于你的浏览历史和兴趣推荐</p>
-            <!-- wp:query {"queryId":11,"query":{"postType":"product","perPage":4,"order":"desc","orderBy":"rand","inherit":false},"layout":{"type":"default"}} -->
-            <div class="wp-block-query">
-                <!-- wp:post-template -->
-                    <!-- wp:group {"className":"slv-product-card slv-product-card--mini","layout":{"type":"default"}} -->
-                    <div class="wp-block-group slv-product-card slv-product-card--mini">
-                        <div class="slv-product-card__media">
-                            <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
-                        </div>
-                        <div class="slv-product-card__body">
-                            <!-- wp:post-title {"level":3,"isLink":true,"className":"slv-product-card__title"} /-->
-                            <div class="slv-product-card__footer">
-                                <div class="slv-product-card__price">
-                                    <span class="slv-product-card__currency">¥</span>
-                                    <span class="slv-product-card__amount">—</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /wp:group -->
-                <!-- /wp:post-template -->
-            </div>
-            <!-- /wp:query -->
-        </div>
-    </section>
 
 </main>
 
