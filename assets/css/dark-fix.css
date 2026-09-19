@@ -1,8 +1,8 @@
 /**
- * SunLyvo Nexus — 深色模式完整修复 + 主题切换按钮
+ * SunLyvo Nexus — 深色模式完整修复
  *
  * @package SunLyvo_Nexus
- * @since 1.0.4
+ * @since 1.1.0
  */
 
 /* ═══════════════════════════════════════════════
@@ -38,7 +38,7 @@ html[data-theme="dark"] .slv-theme-toggle__icon--light {
 }
 
 /* ═══════════════════════════════════════════════
-   2. 深色模式 — 全局变量
+   2. 深色模式 — 全局变量（覆盖 layout-fix 的 :root）
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] {
@@ -88,14 +88,17 @@ html[data-theme="dark"] header.site-header * {
     color: #e6edf3;
 }
 
-html[data-theme="dark"] .slv-header a,
-html[data-theme="dark"] .slv-header__nav a,
-html[data-theme="dark"] header.site-header a {
+html[data-theme="dark"] .slv-header__nav .wp-block-navigation-item__content {
     color: #e6edf3;
 }
 
-html[data-theme="dark"] .slv-header a:hover,
-html[data-theme="dark"] .slv-header__nav a:hover {
+html[data-theme="dark"] .slv-header__nav .wp-block-navigation-item__content:hover,
+html[data-theme="dark"] .slv-header__nav .current-menu-item .wp-block-navigation-item__content {
+    color: #4096ff;
+}
+
+html[data-theme="dark"] .slv-header__icon-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
     color: #4096ff;
 }
 
@@ -107,38 +110,33 @@ html[data-theme="dark"] footer.site-footer {
 }
 
 html[data-theme="dark"] .slv-footer *,
-html[data-theme="dark"] footer.site-footer * {
-    color: #a5b1c2;
-}
-
+html[data-theme="dark"] footer.site-footer * { color: #a5b1c2; }
 html[data-theme="dark"] .slv-footer a,
-html[data-theme="dark"] footer.site-footer a {
-    color: #e6edf3;
-}
-
+html[data-theme="dark"] footer.site-footer a { color: #e6edf3; }
 html[data-theme="dark"] .slv-footer a:hover,
-html[data-theme="dark"] footer.site-footer a:hover {
-    color: #4096ff;
-}
+html[data-theme="dark"] footer.site-footer a:hover { color: #4096ff; }
 
-html[data-theme="dark"] .slv-footer__newsletter input {
+html[data-theme="dark"] .slv-footer__newsletter input,
+html[data-theme="dark"] footer.site-footer input {
     background: #21262d;
     color: #e6edf3;
     border-color: #30363d;
 }
 
-html[data-theme="dark"] .slv-footer__newsletter input::placeholder {
-    color: #7d8590;
-}
-
 /* ═══════════════════════════════════════════════
-   4. Logo 云（客户 Logo 展示区）
+   4. Logo 云
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] .slv-logo-cloud__item,
 html[data-theme="dark"] [class*="logo-cloud"] [class*="item"] {
     color: #a5b1c2;
-    opacity: 0.9;
+    opacity: 0.85;
+}
+
+html[data-theme="dark"] .slv-logo-cloud__item:hover,
+html[data-theme="dark"] [class*="logo-cloud"] [class*="item"]:hover {
+    color: #e6edf3;
+    opacity: 1;
 }
 
 html[data-theme="dark"] .slv-logo-cloud__title,
@@ -146,13 +144,8 @@ html[data-theme="dark"] [class*="logo-cloud"] h3 {
     color: #7d8590;
 }
 
-html[data-theme="dark"] .slv-logo-cloud img {
-    filter: brightness(0.9) invert(0.9);
-    opacity: 0.85;
-}
-
 /* ═══════════════════════════════════════════════
-   5. 通用卡片 / 内容块
+   5. 卡片 / 内容块
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] .slv-card,
@@ -175,27 +168,23 @@ html[data-theme="dark"] .slv-team-card {
     color: #e6edf3 !important;
 }
 
-html[data-theme="dark"] .slv-card *,
-html[data-theme="dark"] .slv-faq-item *,
-html[data-theme="dark"] .slv-faq-list__item *,
-html[data-theme="dark"] .slv-archive__item *,
-html[data-theme="dark"] .slv-collection-card *,
-html[data-theme="dark"] .slv-related__item *,
-html[data-theme="dark"] .slv-feature-card *,
-html[data-theme="dark"] .slv-stat-card *,
-html[data-theme="dark"] .slv-testimonial *,
-html[data-theme="dark"] .slv-pricing-card * {
-    color: inherit;
+html[data-theme="dark"] .slv-card:hover,
+html[data-theme="dark"] .slv-archive__item:hover,
+html[data-theme="dark"] .slv-collection-card:hover,
+html[data-theme="dark"] .slv-faq-list__item:hover {
+    border-color: #4096ff !important;
+    box-shadow: 0 8px 24px rgba(64, 150, 255, 0.15) !important;
 }
 
-/* 卡片 hover */
-html[data-theme="dark"] .slv-card:hover,
-html[data-theme="dark"] .slv-archive__item:hover {
-    border-color: #4096ff !important;
+/* 移除深色模式下的 WP 默认灰底 */
+html[data-theme="dark"] .wp-block-post-content .has-background,
+html[data-theme="dark"] .wp-block-post-content > .wp-block-group.has-background,
+html[data-theme="dark"] .slv-single-page .has-background {
+    background: transparent !important;
 }
 
 /* ═══════════════════════════════════════════════
-   6. Hero / 首页区块
+   6. Hero / 首页
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] .slv-hero {
@@ -213,7 +202,6 @@ html[data-theme="dark"] .slv-hero__badge {
 
 html[data-theme="dark"] .slv-hero__trust { color: #a5b1c2; }
 html[data-theme="dark"] .slv-hero__trust strong { color: #e6edf3; }
-
 html[data-theme="dark"] .slv-section__title { color: #e6edf3; }
 html[data-theme="dark"] .slv-section__subtitle { color: #a5b1c2; }
 
@@ -223,42 +211,30 @@ html[data-theme="dark"] .slv-section__subtitle { color: #a5b1c2; }
 
 html[data-theme="dark"] .slv-button {
     background: #4096ff;
-    color: #ffffff;
+    border-color: #4096ff;
+    color: #ffffff !important;
 }
 
 html[data-theme="dark"] .slv-button:hover {
     background: #69b1ff;
-    color: #0d1117;
+    border-color: #69b1ff;
+    color: #0d1117 !important;
 }
 
 html[data-theme="dark"] .slv-button--secondary {
     background: #21262d;
-    color: #e6edf3;
     border-color: #30363d;
+    color: #e6edf3 !important;
 }
 
 html[data-theme="dark"] .slv-button--secondary:hover {
     background: #30363d;
     border-color: #4096ff;
-    color: #4096ff;
-}
-
-html[data-theme="dark"] .slv-button--ghost,
-html[data-theme="dark"] .slv-button--outline {
-    background: transparent;
-    color: #e6edf3;
-    border-color: #30363d;
-}
-
-html[data-theme="dark"] .slv-button--ghost:hover,
-html[data-theme="dark"] .slv-button--outline:hover {
-    background: #161b22;
-    border-color: #4096ff;
-    color: #4096ff;
+    color: #4096ff !important;
 }
 
 /* ═══════════════════════════════════════════════
-   8. 表单 / 输入框
+   8. 表单
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] input[type="text"],
@@ -270,21 +246,21 @@ html[data-theme="dark"] input[type="password"],
 html[data-theme="dark"] input[type="number"],
 html[data-theme="dark"] textarea,
 html[data-theme="dark"] select {
-    background: #161b22;
-    color: #e6edf3;
-    border-color: #30363d;
+    background: #161b22 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
 }
 
 html[data-theme="dark"] input::placeholder,
 html[data-theme="dark"] textarea::placeholder {
-    color: #7d8590;
+    color: #7d8590 !important;
 }
 
 html[data-theme="dark"] input:focus,
 html[data-theme="dark"] textarea:focus,
 html[data-theme="dark"] select:focus {
-    border-color: #4096ff;
-    box-shadow: 0 0 0 2px rgba(64, 150, 255, 0.2);
+    border-color: #4096ff !important;
+    box-shadow: 0 0 0 3px rgba(64, 150, 255, 0.2) !important;
 }
 
 /* ═══════════════════════════════════════════════
@@ -323,26 +299,26 @@ html[data-theme="dark"] th {
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] code {
-    background: #21262d;
-    color: #ff7b72;
-    border-color: #30363d;
+    background: #21262d !important;
+    color: #ff7b72 !important;
+    border-color: #30363d !important;
 }
 
 html[data-theme="dark"] pre {
-    background: #161b22;
-    border-color: #30363d;
-    color: #e6edf3;
+    background: #161b22 !important;
+    border-color: #30363d !important;
+    color: #e6edf3 !important;
 }
 
 html[data-theme="dark"] pre code {
-    background: transparent;
-    color: #e6edf3;
+    background: transparent !important;
+    color: #e6edf3 !important;
 }
 
 html[data-theme="dark"] blockquote {
-    background: #161b22;
-    border-left-color: #4096ff;
-    color: #a5b1c2;
+    background: #161b22 !important;
+    border-left-color: #4096ff !important;
+    color: #a5b1c2 !important;
 }
 
 /* ═══════════════════════════════════════════════
@@ -359,11 +335,9 @@ html[data-theme="dark"] .taxonomy-post_tag a {
 }
 
 html[data-theme="dark"] .slv-badge:hover,
-html[data-theme="dark"] .wp-block-post-terms a:hover,
-html[data-theme="dark"] .wp-block-tag-cloud a:hover {
+html[data-theme="dark"] .wp-block-post-terms a:hover {
     background: #30363d !important;
     color: #4096ff !important;
-    border-color: #4096ff !important;
 }
 
 html[data-theme="dark"] .slv-badge--knowledge {
@@ -372,7 +346,7 @@ html[data-theme="dark"] .slv-badge--knowledge {
 }
 
 /* ═══════════════════════════════════════════════
-   12. 文章详情页
+   12. 详情页
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] .slv-single-post,
@@ -384,32 +358,16 @@ html[data-theme="dark"] .slv-archive {
     color: #e6edf3;
 }
 
-html[data-theme="dark"] .slv-post-meta,
-html[data-theme="dark"] .slv-post-meta *,
-html[data-theme="dark"] .wp-block-post-date,
-html[data-theme="dark"] .wp-block-post-author,
-html[data-theme="dark"] .wp-block-post-terms {
-    color: #a5b1c2 !important;
-}
-
-html[data-theme="dark"] .wp-block-post-excerpt,
-html[data-theme="dark"] .wp-block-post-excerpt *,
-html[data-theme="dark"] .slv-post-excerpt {
-    color: #a5b1c2 !important;
-}
-
 html[data-theme="dark"] .wp-block-post-title,
 html[data-theme="dark"] .wp-block-post-title a,
 html[data-theme="dark"] .slv-post-title {
     color: #e6edf3 !important;
 }
 
-html[data-theme="dark"] .wp-block-post-content {
-    color: #e6edf3;
-}
-
+html[data-theme="dark"] .wp-block-post-content,
 html[data-theme="dark"] .wp-block-post-content p,
-html[data-theme="dark"] .wp-block-post-content li {
+html[data-theme="dark"] .wp-block-post-content li,
+html[data-theme="dark"] .wp-block-post-content strong {
     color: #e6edf3;
 }
 
@@ -419,8 +377,14 @@ html[data-theme="dark"] .wp-block-post-content h4 {
     color: #e6edf3;
 }
 
-html[data-theme="dark"] .wp-block-post-content strong {
-    color: #e6edf3;
+html[data-theme="dark"] .slv-post-meta,
+html[data-theme="dark"] .slv-post-meta *,
+html[data-theme="dark"] .wp-block-post-date,
+html[data-theme="dark"] .wp-block-post-author,
+html[data-theme="dark"] .wp-block-post-terms,
+html[data-theme="dark"] .wp-block-post-excerpt,
+html[data-theme="dark"] .wp-block-post-excerpt * {
+    color: #a5b1c2 !important;
 }
 
 /* ═══════════════════════════════════════════════
@@ -432,20 +396,14 @@ html[data-theme="dark"] .slv-faq-item__question {
     background: #161b22;
 }
 
-html[data-theme="dark"] .slv-faq-item[open] {
-    border-color: #4096ff;
-}
-
+html[data-theme="dark"] .slv-faq-item[open] { border-color: #4096ff; }
 html[data-theme="dark"] .slv-faq-item__answer,
 html[data-theme="dark"] .slv-faq-answer {
     color: #a5b1c2;
     background: #161b22;
 }
-
 html[data-theme="dark"] .slv-faq-item__answer *,
-html[data-theme="dark"] .slv-faq-answer * {
-    color: #a5b1c2;
-}
+html[data-theme="dark"] .slv-faq-answer * { color: #a5b1c2; }
 
 html[data-theme="dark"] .slv-bluf-summary,
 html[data-theme="dark"] [class*="slv-faq"] [class*="summary"] {
@@ -453,10 +411,7 @@ html[data-theme="dark"] [class*="slv-faq"] [class*="summary"] {
     color: #e6edf3 !important;
     border-color: #30363d !important;
 }
-
-html[data-theme="dark"] .slv-bluf-summary * {
-    color: #e6edf3;
-}
+html[data-theme="dark"] .slv-bluf-summary * { color: #e6edf3; }
 
 /* ═══════════════════════════════════════════════
    14. 百科
@@ -466,20 +421,13 @@ html[data-theme="dark"] .slv-wiki-definition {
     background: linear-gradient(135deg, #112a4e, #0d1e38) !important;
     border-left-color: #4096ff !important;
 }
-
-html[data-theme="dark"] .slv-wiki-definition * {
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .slv-wiki-definition strong {
-    color: #69b1ff;
-}
+html[data-theme="dark"] .slv-wiki-definition * { color: #e6edf3; }
+html[data-theme="dark"] .slv-wiki-definition strong { color: #69b1ff; }
 
 html[data-theme="dark"] .slv-wiki-infobox__title {
     border-bottom-color: #30363d;
     color: #e6edf3;
 }
-
 html[data-theme="dark"] .slv-wiki-infobox__list dt { color: #7d8590; }
 html[data-theme="dark"] .slv-wiki-infobox__list dd { color: #e6edf3; }
 
@@ -491,16 +439,11 @@ html[data-theme="dark"] .slv-collection-chapters__item {
     background: #161b22;
     color: #e6edf3;
 }
-
-html[data-theme="dark"] .slv-collection-chapters__item:hover {
-    background: #21262d;
-}
-
+html[data-theme="dark"] .slv-collection-chapters__item:hover { background: #21262d; }
 html[data-theme="dark"] .slv-collection-chapters__num {
     background: #21262d;
     color: #a5b1c2;
 }
-
 html[data-theme="dark"] .slv-collection-chapters__link { color: #e6edf3; }
 html[data-theme="dark"] .slv-collection-chapters__link:hover { color: #4096ff; }
 html[data-theme="dark"] .slv-collection-chapters__title-text { color: #7d8590; }
@@ -510,158 +453,123 @@ html[data-theme="dark"] .slv-collection-cta__price { color: #4096ff; }
    16. 归档页
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] .slv-archive__title { color: #e6edf3; }
+html[data-theme="dark"] .slv-archive__title { color: #e6edf3 !important; }
 html[data-theme="dark"] .slv-archive__desc,
 html[data-theme="dark"] .slv-archive__term { color: #a5b1c2; }
 
-html[data-theme="dark"] .slv-archive__item .wp-block-post-title a,
+html[data-theme="dark"] .slv-archive__item a,
 html[data-theme="dark"] .slv-archive__item h3 a,
-html[data-theme="dark"] .slv-archive__item a {
-    color: #e6edf3;
+html[data-theme="dark"] .slv-archive__item .wp-block-post-title a {
+    color: #e6edf3 !important;
 }
 
 html[data-theme="dark"] .slv-archive__item a:hover {
-    color: #4096ff;
+    color: #4096ff !important;
 }
 
-html[data-theme="dark"] .slv-archive__item p {
-    color: #a5b1c2;
+html[data-theme="dark"] .slv-archive__item p,
+html[data-theme="dark"] .slv-archive__item .wp-block-post-excerpt * {
+    color: #a5b1c2 !important;
 }
 
 /* ═══════════════════════════════════════════════
-   17. 分页 / 面包屑
+   17. 分页
    ═══════════════════════════════════════════════ */
-
-html[data-theme="dark"] .wp-block-query-pagination,
-html[data-theme="dark"] .slv-pagination {
-    color: #a5b1c2;
-}
 
 html[data-theme="dark"] .wp-block-query-pagination a,
 html[data-theme="dark"] .page-numbers {
-    background: #161b22;
-    color: #e6edf3;
-    border-color: #30363d;
+    background: #161b22 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
 }
 
 html[data-theme="dark"] .page-numbers.current {
-    background: #4096ff;
-    color: #ffffff;
-    border-color: #4096ff;
-}
-
-html[data-theme="dark"] .slv-breadcrumb,
-html[data-theme="dark"] .slv-breadcrumb a {
-    color: #a5b1c2;
+    background: #4096ff !important;
+    color: #ffffff !important;
+    border-color: #4096ff !important;
 }
 
 /* ═══════════════════════════════════════════════
-   18. 阅读体验子系统
+   18. 阅读体验
    ═══════════════════════════════════════════════ */
 
 html[data-theme="dark"] .slv-toc {
     background: #161b22;
     border-color: #30363d;
 }
-
 html[data-theme="dark"] .slv-toc__title,
-html[data-theme="dark"] .slv-toc a {
-    color: #e6edf3;
-}
-
+html[data-theme="dark"] .slv-toc a { color: #e6edf3; }
 html[data-theme="dark"] .slv-toc a:hover,
-html[data-theme="dark"] .slv-toc-item.slv-toc-active a {
-    color: #4096ff;
-}
-
-html[data-theme="dark"] .slv-reader-progress {
-    background: #21262d;
-}
-
-html[data-theme="dark"] .slv-reader-progress__bar {
-    background: #4096ff;
-}
-
-html[data-theme="dark"] .slv-selection-menu {
-    background: #21262d;
-    border-color: #30363d;
-    color: #e6edf3;
-}
+html[data-theme="dark"] .slv-toc-item.slv-toc-active a { color: #4096ff; }
+html[data-theme="dark"] .slv-reader-progress { background: #21262d; }
+html[data-theme="dark"] .slv-reader-progress__bar { background: #4096ff; }
 
 /* ═══════════════════════════════════════════════
    19. 作者卡片 / 相关阅读
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] .slv-author-box__name {
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .slv-author-box__bio {
-    color: #a5b1c2;
-}
-
-html[data-theme="dark"] .slv-author-box__link {
-    color: #4096ff;
-}
-
-html[data-theme="dark"] .slv-related__title {
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .slv-related__heading {
-    color: #e6edf3;
-}
-
-html[data-theme="dark"] .slv-related__excerpt {
-    color: #a5b1c2;
-}
+html[data-theme="dark"] .slv-author-box__name { color: #e6edf3; }
+html[data-theme="dark"] .slv-author-box__bio { color: #a5b1c2; }
+html[data-theme="dark"] .slv-author-box__link { color: #4096ff; }
+html[data-theme="dark"] .slv-related__title { color: #e6edf3; }
+html[data-theme="dark"] .slv-related__heading { color: #e6edf3; }
+html[data-theme="dark"] .slv-related__excerpt { color: #a5b1c2; }
 
 /* ═══════════════════════════════════════════════
-   20. 评论
+   20. React 嵌页（结账/购物车/用户中心）
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] .slv-comments,
-html[data-theme="dark"] .comment-list,
-html[data-theme="dark"] .comment-body {
+html[data-theme="dark"] [id^="slv-"][id$="-root"] {
     color: #e6edf3;
 }
 
-html[data-theme="dark"] .comment-meta,
-html[data-theme="dark"] .comment-metadata,
-html[data-theme="dark"] .comment-meta a,
-html[data-theme="dark"] .comment-metadata a {
+html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-card,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-empty,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-form-item,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="card"],
+html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="Card"] {
+    background: #161b22 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+
+html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-empty-description,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] [class*="empty"] {
     color: #7d8590 !important;
 }
 
-html[data-theme="dark"] .comment-content {
-    color: #e6edf3;
+html[data-theme="dark"] [id^="slv-"][id$="-root"] input,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] textarea,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] select {
+    background: #21262d !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+
+html[data-theme="dark"] [id^="slv-"][id$="-root"] label,
+html[data-theme="dark"] [id^="slv-"][id$="-root"] .ant-form-item-label > label {
+    color: #a5b1c2 !important;
+}
+
+/* 结账页步骤条 */
+html[data-theme="dark"] .ant-steps .ant-steps-item-title {
+    color: #e6edf3 !important;
+}
+html[data-theme="dark"] .ant-steps .ant-steps-item-wait .ant-steps-item-title {
+    color: #7d8590 !important;
 }
 
 /* ═══════════════════════════════════════════════
-   21. 滚动条
+   21. 滚动条 / 分割线
    ═══════════════════════════════════════════════ */
 
-html[data-theme="dark"] ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-html[data-theme="dark"] ::-webkit-scrollbar-track {
-    background: #161b22;
-}
-
+html[data-theme="dark"] ::-webkit-scrollbar { width: 10px; height: 10px; }
+html[data-theme="dark"] ::-webkit-scrollbar-track { background: #161b22; }
 html[data-theme="dark"] ::-webkit-scrollbar-thumb {
     background: #30363d;
     border-radius: 5px;
 }
-
-html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-    background: #484f58;
-}
-
-/* ═══════════════════════════════════════════════
-   22. 分割线 / 阴影
-   ═══════════════════════════════════════════════ */
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #484f58; }
 
 html[data-theme="dark"] hr,
 html[data-theme="dark"] .wp-block-separator {
@@ -675,7 +583,7 @@ html[data-theme="dark"] .slv-archive__item {
 }
 
 /* ═══════════════════════════════════════════════
-   23. 浅色模式基色
+   22. 浅色模式基色
    ═══════════════════════════════════════════════ */
 
 html[data-theme="light"],
